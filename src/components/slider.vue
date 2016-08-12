@@ -135,6 +135,17 @@ export default {
      		 return {'transform': 'translate3D(' + this.basicdata.poswidth + ',0,0)',}
    		    },
      },
+    ready () {
+        this.$on('slideTo', (num) => {
+            this.slide(num)
+        });
+        this.$on('slideNext', () => {
+            this.next()
+        });
+        this.$on('slidePre', () => {
+            this.pre()
+        });
+     },
      methods:{
      	swipeStart (e) {
      		this.basicdata.animation = {

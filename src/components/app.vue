@@ -3,7 +3,10 @@
 	<slider :pages="someList" :sliderinit="sliderinit">
     <!-- slot  -->
   </slider>
+  <button @click="slidePre">上一页</button>
+<button @click="slideNext">下一页</button>
 </template>
+
 <script>
 import slider from './slider'
 export default {
@@ -39,6 +42,18 @@ export default {
     },
     components: {
         slider
-    }
+    },
+    methods: {
+        turnTo (num) {
+            console.log(num)
+            this.$broadcast('slideTo', num)
+        },
+        slideNext () {
+            this.$broadcast('slideNext')
+        },
+        slidePre () {
+            this.$broadcast('slidePre')
+        }
+    },
 }
 </script>
