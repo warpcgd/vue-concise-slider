@@ -1,6 +1,6 @@
 
 <template>
-	<slider class='slider-container' :pages="someList" :sliderinit="sliderinit">
+	<slider :pages="someList" :sliderinit="sliderinit">
     <!-- slot  -->
   </slider>
 </template>

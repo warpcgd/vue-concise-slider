@@ -37,13 +37,62 @@
 		-webkit-transition: -webkit-transform 350ms cubic-bezier(.165, .84, .44, 1);
 		transition: transform 350ms cubic-bezier(.165, .84, .44, 1);
 }
+.slider-pagination {
+    position: absolute;
+    text-align: center;
+    transform: translate3d(0px, 0px, 0px);
+    transition: all 350ms ease 0s;
+    z-index: 10;
+}
+.slider-container > .slider-pagination-bullets{
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+}
+.slider-pagination-bullet{
+    background: #000 none repeat scroll 0 0;
+    border-radius: 100%;
+    display: inline-block;
+    height: 8px;
+    opacity: 0.2;
+    width: 8px;
+    cursor: pointer;
+    margin: 0 5px;
+}
+.slider-pagination-bullet-active {
+    background: #007aff none repeat scroll 0 0;
+    opacity: 1;
+}
+.slider-button-next, .slider-button-prev {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 27px 44px;
+    cursor: pointer;
+    height: 44px;
+    margin-top: -22px;
+    position: absolute;
+    top: 50%;
+    width: 27px;
+    z-index: 10;
+}
+.slider-button-prev{
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D\'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg\'%20viewBox%3D\'0%200%2027%2044\'%3E%3Cpath%20d%3D\'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z\'%20fill%3D\'%23007aff\'%2F%3E%3C%2Fsvg%3E");
+    left: 10px;
+    right: auto;
+}
+
+.slider-button-next{
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D\'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg\'%20viewBox%3D\'0%200%2027%2044\'%3E%3Cpath%20d%3D\'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z\'%20fill%3D\'%23007aff\'%2F%3E%3C%2Fsvg%3E");
+    left: auto;
+    right: 10px;
+}
 </style>
 <template>
-    <div class="slider">
+    <div class='slider-container'>
       <div class="slider-wrapper"
       :style="styleobj"
       :class="basicdata.animation"
-			@touchmove="swipeMove"
+	  @touchmove="swipeMove"
    	  @touchstart="swipeStart"
       @touchend="swipeEnd"
       @mousedown="swipeStart"
@@ -56,7 +105,14 @@
        		{{item.title}}
        		</div>
       	</template>
-    	</div>
+      </div>
+      <div class="slider-pagination slider-pagination-bullets">
+         <template v-for="item in basicdata.pagenum">
+           <span class="slider-pagination-bullet" :class="$index == sliderinit.currentPage ? 'slider-pagination-bullet-active':''"></span>
+        </template>
+      </div>
+      <div class="slider-button-next" @click="next"></div>
+      <div class="slider-button-prev" @click="pre"></div>
     </div>
 </template>
 <script>
@@ -77,7 +133,7 @@ export default {
      		styleobj: function () {
      		 // `this` 指向 vm 实例
      		 return {'transform': 'translate3D(' + this.basicdata.poswidth + ',0,0)',}
-   		 }
+   		    },
      },
      methods:{
      	swipeStart (e) {
