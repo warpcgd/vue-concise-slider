@@ -4,34 +4,41 @@
     <!-- slot  -->
   </slider>
   <button @click="slidePre">上一页</button>
-<button @click="slideNext">下一页</button>
+  <button @click="slideNext">下一页</button>
+  <button @click="appendslider">添加一页</button>
 </template>
 
 <script>
 import slider from './slider'
 export default {
-	 el: '#app',
+	 el: '#slider',
 	 data () {
         return {
             someList:[
                 {
                     title: 'slide1',
                     img: 'testimg-1.jpg',
+                    style:{
+                        background:'#1bbc9b',
+                    },
                 },
                 {
                     title: 'slide2',
                     img: 'testimg-2.jpg',
+                    style:{
+                       background:'#4bbfc3',
+                    },
                 },
                 {
                     title: 'slide3',
                     img: 'testimg-3.jpg',
+                    style:{
+                        background:'#7baabe',
+                    },
                 }
             ],
             sliderinit: {
                 currentPage: 0,
-                contentWidth:500,
-                canPre : false,
-                canNext: true,
                 start: {},
                 end: {},
                 tracking: false,
@@ -53,6 +60,10 @@ export default {
         },
         slidePre () {
             this.$broadcast('slidePre')
+        },
+        appendslider(){
+            this.someList.push({title: 'slidenew',img: 'testimg-4.jpg',});
+            console.log(this.someList);
         }
     },
 }
