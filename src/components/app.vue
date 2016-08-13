@@ -1,11 +1,27 @@
-
+<style>
+.sliderButton{
+    margin-top: 10px
+}
+.sliderButton button{
+    display: inline-block;
+    background: #fff;
+    border-radius: 3px;
+    width: 100px;
+    height: 30px;
+    border: 1px solid #333;
+    line-height: 30px;
+    margin-left: 10px;
+}
+</style>
 <template>
 	<slider :pages="someList" :sliderinit="sliderinit">
     <!-- slot  -->
   </slider>
+  <div class="sliderButton">
   <button @click="slidePre">上一页</button>
   <button @click="slideNext">下一页</button>
   <button @click="appendslider">添加一页</button>
+  </div>
 </template>
 
 <script>

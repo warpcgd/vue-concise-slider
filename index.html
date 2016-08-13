@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>滑动</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>slider</title>
     <style>
     body {
         background: #eee none repeat scroll 0 0;
@@ -12,6 +13,19 @@
         font-size: 14px;
         margin: 0;
         padding: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .main{
+        display: -webkit-flex;
+        display: flex;
+        flex-flow:column nowrap;
+        justify-content:center ;
+        align-items:center;
+        height: 100%
     }
     </style>
 </head>

@@ -98,7 +98,7 @@
 }
 </style>
 <template>
-    <div class='slider-container slider-center-center'>
+    <div class='slider-container'>
       <div class="slider-wrapper"
       :style="styleobj"
       :class="basicdata.animation"
@@ -123,6 +123,7 @@
       </div>
       <div class="slider-button-next" @click="next"></div>
       <div class="slider-button-prev" @click="pre"></div>
+      <slot></slot>
     </div>
 </template>
 <script>
@@ -139,15 +140,18 @@ export default {
      	}
      },
      computed:{
+     		// 动画执行obj
      		styleobj: function () {
-     		 // `this` 指向 vm 实例
-     		 return {'transform': 'translate3D(' + this.basicdata.poswidth + ',0,0)'}
-   		   },
-   		   pagenum: function(){
+     			return {'transform': 'translate3D(' + this.basicdata.poswidth + ',0,0)'}
+   		  },
+   		  // pagenum滑动数
+   		  pagenum: function(){
    		   	return this.pages.length
-   		   },
+   		  },
      },
     ready () {
+    		// 定义contentWidth 为后续滑动做准备
+    		this.sliderinit.contentWidth = this.$el.clientWidth;
     		//定制事件
         this.$on('slideTo', (num) => {
             this.slide(num)
@@ -164,8 +168,6 @@ export default {
      		this.basicdata.animation = {
      			'animation-ease':false,
      		}
-     		this.sliderinit.contentWidth = e.target.clientWidth
-     		console.log(e);
         if (e.type === 'touchstart') {
             if (e.touches.length>1) {
                     this.sliderinit.tracking = false;
@@ -241,9 +243,9 @@ export default {
         },
         slide(pagenum){
         	let poswidth = -pagenum * this.sliderinit.contentWidth + 'px';
-						this.basicdata.animation = {
+					this.basicdata.animation = {
      					'animation-ease':true,
-     				}
+     			}
 					//执行动画
 					this.basicdata.poswidth = poswidth;
         }
