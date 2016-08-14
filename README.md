@@ -115,19 +115,19 @@ export default {
   </tr>
 </thead>
 <tbody>
-  <tr>
+  <tr align="center">
     <td><code>slideTo</code></td>
     <td>(num)</td>
     <td>滑动到(num)页</td>
     <td><code>this.$broadcast('slideTo', num)</code></td>
   </tr>
- <tr>
+ <tr align="center">
     <td><code>slideNext</code></td>
     <td>-</td>
     <td>滑动到下一页</td>
     <td><code>this.$broadcast('slideNext')</code></td>
   </tr>
-  <tr>
+  <tr align="center">
     <td><code>slideTo</code></td>
     <td>-</td>
     <td>滑动到上一页</td>
