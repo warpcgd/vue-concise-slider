@@ -108,10 +108,10 @@ export default {
 <table width="100%" align="center">
 <thead>
   <tr>
-    <th width="12.5%">Method</th>
-    <th width="12.5%">Parameters</th>
-    <th width="35%">Description</th>
-    <th width="40%">Example</th>
+    <th align="center" width="12.5%">Method</th>
+    <th align="center" width="12.5%">Parameters</th>
+    <th align="center" width="35%">Description</th>
+    <th align="center" width="40%">Example</th>
   </tr>
 </thead>
 <tbody>
@@ -119,19 +119,19 @@ export default {
     <td><code>slideTo</code></td>
     <td>(num)</td>
     <td>滑动到(num)页</td>
-    <td>```this.$broadcast('slideTo', num)```</td>
+    <td><code>this.$broadcast('slideTo', num)</code></td>
   </tr>
  <tr>
     <td><code>slideNext</code></td>
     <td>-</td>
     <td>滑动到下一页</td>
-    <td>```this.$broadcast('slideNext')```</td>
+    <td><code>this.$broadcast('slideNext')</code></td>
   </tr>
   <tr>
     <td><code>slideTo</code></td>
     <td>-</td>
     <td>滑动到上一页</td>
-    <td>```this.$broadcast('slidePre')```</td>
+    <td><code>this.$broadcast('slidePre')</code></td>
   </tr>
  </tbody>
 </table>
@@ -139,10 +139,10 @@ export default {
 <table width="100%" align="center">
 <thead>
   <tr>
-    <th width="12.5%">Method</th>
-    <th width="12.5%">Parameters</th>
-    <th width="35%">Description</th>
-    <th width="40%">Example</th>
+    <th align="center" width="12.5%">Method</th>
+    <th align="center" width="12.5%">Parameters</th>
+    <th align="center" width="35%">Description</th>
+    <th align="center" width="40%">Example</th>
   </tr>
 </thead>
 <tbody>
@@ -150,7 +150,7 @@ export default {
     <td><code>slide</code></td>
     <td>(num)</td>
     <td>当前滑动到第(num)页</td>
-    <td>```vm.$on('slide', function(pagenum){console.log(pagenum)})```</td>
+    <td><code>vm.$on('slide', function(pagenum){console.log(pagenum)})</code></td>
   </tr>
  </tbody>
 </table>
