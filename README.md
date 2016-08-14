@@ -84,21 +84,21 @@ export default {
   </tr>
 </thead>
 <tbody>
-  <tr>
+  <tr align="center">
     <td><code>currentPage</code></td>
-    <td>num</td>
+    <td>number</td>
     <td>-</td>
     <td>当前为第几页</td>
   </tr>
-  <tr>
+  <tr align="center">
     <td><code>thresholdTime</code></td>
-    <td>num</td>
+    <td>number</td>
     <td>-</td>
     <td>滑动距离阈值</td>
   </tr>
-  <tr>
+  <tr align="center">
     <td><code>hresholdDistance</code></td>
-    <td>num</td>
+    <td>number</td>
     <td>-</td>
     <td>滑动时间阈值</td>
   </tr>
@@ -117,8 +117,8 @@ export default {
 <tbody>
   <tr align="center">
     <td><code>slideTo</code></td>
-    <td>(num)</td>
-    <td>滑动到(num)页</td>
+    <td>number</td>
+    <td>滑动到(number)页</td>
     <td><code>this.$broadcast('slideTo', num)</code></td>
   </tr>
  <tr align="center">
@@ -146,10 +146,10 @@ export default {
   </tr>
 </thead>
 <tbody>
-  <tr>
+  <tr align="center">
     <td><code>slide</code></td>
-    <td>(num)</td>
-    <td>当前滑动到第(num)页</td>
+    <td>number</td>
+    <td>当前滑动到第(number)页</td>
     <td><code>vm.$on('slide', function(pagenum){console.log(pagenum)})</code></td>
   </tr>
  </tbody>
