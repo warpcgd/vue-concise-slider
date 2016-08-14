@@ -1,71 +1,79 @@
 ##vue-slider.js
-####简单vue的slider滑动组件
+####vue的slider滑动组件
 * * *
 
-播放器DOM及CSS是微信里内置的音频播放器的样式，重新创建了控制层js，方便在在公众号，APP等场景使用。
+vue-slider,一个简单的滑动组件,配置简单,支持自适应/全屏+按钮+分页,同时兼容移动端和PC端
+
+###未来将实现
+- [ ] 定时自动切换
+- [ ] 垂直滚动
+- [ ] 无缝滚动
+- [ ] 渐变滚动
+- [ ] 视差效果
 
 ###例子
 
-<!-- [demo](http://warpcgd.github.io/webchataudio/src/demo.html) -->
+<!-- [基本例子](http://warpcgd.github.io/webchataudio/src/demo.html) -->
 
-###如何使用
+###快速开始使用
 
 通过以下demo来实现
 
-###HTML模板
+###app.vue父级组件
 
 ```html
-<p class="weixinAudo">
-	<audio src="../sound/sound1.mp3" id="media" width="1" height="1" preload></audio>
-	<span id="audio_area" class="db audio_area">
-		<span class="audio_wrp db">
-			<span class="audio_play_area">
-				<i class="icon_audio_default"></i>
-				<i class="icon_audio_playing"></i>
-            </span>
-			<span id="audio_length" class="audio_length tips_global">3:07</span>
-			<span class="db audio_info_area">
-                <strong class="db audio_title">标题1</strong>
-                <span class="audio_source tips_global">来源1</span>
-			</span>
-			<span id="audio_progress" class="progress_bar" style="width: 0%;"></span>
-	 	</span>
-	</span>
-</p>
-<!-- 也可以多音频使用 -->
-<!-- 注意使用同一类名，在js中进行初始化 -->
-<p class="weixinAudo">
-  <audio src="../sound/sound2.mp3" id="media" width="1" height="1" preload></audio>
-  <span id="audio_area" class="db audio_area">
-    <span class="audio_wrp db">
-      <span class="audio_play_area">
-        <i class="icon_audio_default"></i>
-        <i class="icon_audio_playing"></i>
-            </span>
-      <span id="audio_length" class="audio_length tips_global">3:07</span>
-      <span class="db audio_info_area">
-                <strong class="db audio_title">标题2</strong>
-                <span class="audio_source tips_global">来源2</span>
-      </span>
-      <span id="audio_progress" class="progress_bar" style="width: 0%;"></span>
-    </span>
-  </span>
-</p>
-```
+<template>
+  <slider :pages="someList" :sliderinit="sliderinit">
+    <!-- slot  -->
+  </slider>
+</template>
 
-###Js调用
-
-```html
-//你需要先引入一个jQuery
-<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-<script src="js/weixinAudio.js"></script>
 <script>
-   $('.weixinAudo').weixinAudio(options);
+import slider from './slider'// 引入slider组件
+export default {
+   el: '#app',
+   data () {
+      return {
+        //图片列表[arr]
+        someList:[
+          {
+            title: '',
+            style:{
+             background:'url(src/img/testimg-1.jpg)'
+            }
+          },
+          {
+           title: '',
+           style:{
+            background:'url(src/img/testimg-2.jpg)'
+            }
+          },
+          {
+            title: 'slide3',
+            style:{
+              background:'#4bbfc3',
+            },
+          }
+        ],
+        //滑动配置[obj]
+        sliderinit: {
+          currentPage: 0,
+          start: {},
+          end: {},
+          tracking: false,
+          thresholdTime: 500,//滑动判定距离
+          hresholdDistance: 100,//滑动判定时间
+        }
+      }
+    },
+    components: {
+        slider
+    }
+}
 </script>
+
 ```
-
-###options/初始化参数
-
+###sliderinit/初始化参数
 <table width="100%">
 <thead>
   <tr>
@@ -77,45 +85,72 @@
 </thead>
 <tbody>
   <tr>
-    <td><code>autoplay</code></td>
-    <td>Boolean</td>
-    <td>false</td>
-    <td>播放器是否在初始化时自动播放</td>
+    <td><code>currentPage</code></td>
+    <td>num</td>
+    <td>-</td>
+    <td>当前为第几页</td>
   </tr>
   <tr>
-    <td><code>src</code></td>
-    <td>String</td>
-    <td>&mdash;</td>
-    <td>如果audio标签上没设定src属性，可在初始化时设置</td>
+    <td><code>thresholdTime</code></td>
+    <td>num</td>
+    <td>-</td>
+    <td>滑动距离阈值</td>
+  </tr>
+  <tr>
+    <td><code>hresholdDistance</code></td>
+    <td>num</td>
+    <td>-</td>
+    <td>滑动时间阈值</td>
   </tr>
  </tbody>
 </table>
-
-###API/执行方法
-
+###API/父级传递的事件
 <table width="100%" align="center">
 <thead>
   <tr>
     <th width="12.5%">Method</th>
     <th width="12.5%">Parameters</th>
-    <th width="75%">Description</th>
+    <th width="35%">Description</th>
+    <th width="40%">Example</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td><code>play()</code></td>
-    <td>&mdash;</td>
-    <td>播放方法</td>
+    <td><code>slideTo</code></td>
+    <td>(num)</td>
+    <td>滑动到(num)页</td>
+    <td>```this.$broadcast('slideTo', num)```</td>
+  </tr>
+ <tr>
+    <td><code>slideNext</code></td>
+    <td>-</td>
+    <td>滑动到下一页</td>
+    <td>```this.$broadcast('slideNext')```</td>
   </tr>
   <tr>
-    <td><code>pause()</code></td>
-    <td>&mdash;</td>
-    <td>暂停方法</td>
+    <td><code>slideTo</code></td>
+    <td>-</td>
+    <td>滑动到上一页</td>
+    <td>```this.$broadcast('slidePre')```</td>
   </tr>
+ </tbody>
+</table>
+###API/父级监听的事件
+<table width="100%" align="center">
+<thead>
   <tr>
-    <td><code>changsrc()</code></td>
-    <td><code>src,callback</code></td>
-    <td><code>src</code>:播放的地址;<code>callback</code>:回调函数</td>
+    <th width="12.5%">Method</th>
+    <th width="12.5%">Parameters</th>
+    <th width="35%">Description</th>
+    <th width="40%">Example</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><code>slide</code></td>
+    <td>(num)</td>
+    <td>当前滑动到第(num)页</td>
+    <td>```vm.$on('slide', function(pagenum){console.log(pagenum)})```</td>
   </tr>
  </tbody>
 </table>

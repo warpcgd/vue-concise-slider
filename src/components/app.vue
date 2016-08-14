@@ -1,16 +1,19 @@
 <style>
 .sliderButton{
-    margin-top: 10px
+
+    text-align: center;
 }
 .sliderButton button{
     display: inline-block;
     background: #fff;
     border-radius: 3px;
-    width: 100px;
+/*    width: 100px;*/
     height: 30px;
     border: 1px solid #333;
     line-height: 30px;
     margin-left: 10px;
+    padding: 0 15px;
+     margin-top: 10px;
 }
 </style>
 <template>
@@ -21,35 +24,33 @@
   <button @click="slidePre">上一页</button>
   <button @click="slideNext">下一页</button>
   <button @click="appendslider">添加一页</button>
+  <button @click="turnTo(2)">跳转到第三页</button>
   </div>
 </template>
 
 <script>
 import slider from './slider'
 export default {
-	 el: '#slider',
+	 el: '#app',
 	 data () {
         return {
             someList:[
                 {
-                    title: 'slide1',
-                    img: 'testimg-1.jpg',
+                    title: '',
                     style:{
-                        background:'#1bbc9b',
+                        background:'url(src/img/testimg-1.jpg)',
                     },
                 },
                 {
-                    title: 'slide2',
-                    img: 'testimg-2.jpg',
+                    title: '',
                     style:{
-                       background:'#4bbfc3',
+                       background:'url(src/img/testimg-2.jpg)',
                     },
                 },
                 {
                     title: 'slide3',
-                    img: 'testimg-3.jpg',
                     style:{
-                        background:'#7baabe',
+                         background:'#4bbfc3',
                     },
                 }
             ],
@@ -58,8 +59,8 @@ export default {
                 start: {},
                 end: {},
                 tracking: false,
-                thresholdTime: 500,
-                thresholdDistance: 100,
+                thresholdTime: 500,//滑动判定距离
+                thresholdDistance: 100,//滑动判定时间
             }
         }
     },
@@ -68,19 +69,29 @@ export default {
     },
     methods: {
         turnTo (num) {
-            console.log(num)
-            this.$broadcast('slideTo', num)
+            // 传递事件
+            this.$broadcast('slideTo', num);
         },
         slideNext () {
-            this.$broadcast('slideNext')
+            this.$broadcast('slideNext');
         },
         slidePre () {
-            this.$broadcast('slidePre')
+            this.$broadcast('slidePre');
         },
         appendslider(){
-            this.someList.push({title: 'slidenew',img: 'testimg-4.jpg',});
-            console.log(this.someList);
+            this.someList.push({
+                title: 'slidernew',
+                style:{
+                    background:'#333',
+                    color:'#fff'
+                }
+            });
         }
     },
+    events:{
+        slide(pagenum){
+            console.log(pagenum);
+        }
+    }
 }
 </script>

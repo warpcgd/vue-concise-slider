@@ -1,15 +1,11 @@
 <style>
 .slider-container {
-    height: 400px;
-    margin: 20px auto;
-    width: 50%;
-}
-.slider-container {
     margin: 0 auto;
     overflow: hidden;
     position: relative;
     z-index: 1;
 }
+
 .slider-center-center{
 		margin: auto;
     z-index: 1;
@@ -42,6 +38,10 @@
     justify-content: center;
     text-align: center;
     color: #fff;
+}
+.slider-item {
+    background-position: center center!important;
+    background-size: cover!important;
 }
 .animation-ease {
 		-webkit-transition: -webkit-transform 350ms cubic-bezier(.165, .84, .44, 1);
@@ -95,6 +95,14 @@
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D\'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg\'%20viewBox%3D\'0%200%2027%2044\'%3E%3Cpath%20d%3D\'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z\'%20fill%3D\'%23ffffff\'%2F%3E%3C%2Fsvg%3E");
     left: auto;
     right: 10px;
+}
+/*移动端优化*/
+ @media screen and (max-width:414px) {
+    .slider-container {
+    height: 200px;
+    margin: 20px auto;
+    width: 90%;
+    }
 }
 </style>
 <template>
@@ -150,17 +158,17 @@ export default {
    		  },
      },
     ready () {
-    		// 定义contentWidth 为后续滑动做准备
-    		this.sliderinit.contentWidth = this.$el.clientWidth;
-    		//定制事件
+    	// 定义contentWidth 为后续滑动做准备
+    	this.sliderinit.contentWidth = this.$el.clientWidth;
+    	//定制事件
         this.$on('slideTo', (num) => {
-            this.slide(num)
+            this.slide(num);
         });
         this.$on('slideNext', () => {
-            this.next()
+            this.next();
         });
         this.$on('slidePre', () => {
-            this.pre()
+            this.pre();
         });
      },
      methods:{
@@ -226,28 +234,31 @@ export default {
             }
         },
         pre () {
-					if (this.sliderinit.currentPage != 0) {
+			if (this.sliderinit.currentPage != 0) {
 						this.sliderinit.currentPage -= 1;
 				  	this.slide(this.sliderinit.currentPage);
-		      } else {
+		    } else {
 			      this.slide(this.sliderinit.currentPage);
 					}
         },
         next () {
-					if (this.sliderinit.currentPage != this.pagenum - 1) {
+			if (this.sliderinit.currentPage != this.pagenum - 1) {
 						this.sliderinit.currentPage += 1;
 						this.slide(this.sliderinit.currentPage);
-					} else {
+			} else {
 						this.slide(this.sliderinit.currentPage);
-					}
+			}
         },
         slide(pagenum){
         	let poswidth = -pagenum * this.sliderinit.contentWidth + 'px';
-					this.basicdata.animation = {
+			this.basicdata.animation = {
      					'animation-ease':true,
-     			}
-					//执行动画
-					this.basicdata.poswidth = poswidth;
+     		}
+			//执行动画
+			this.basicdata.poswidth = poswidth;
+            this.sliderinit.currentPage = pagenum;
+            // 广播事件
+            this.$dispatch('slide',this.sliderinit.currentPage)
         }
      }
 }
