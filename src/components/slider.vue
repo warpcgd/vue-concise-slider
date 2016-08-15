@@ -5,7 +5,11 @@
     position: relative;
     z-index: 1;
 }
-
+ .slider-container {
+    height: 400px;
+    margin: 20px auto;
+    width: 50%;
+    }
 .slider-center-center{
 		margin: auto;
     z-index: 1;
