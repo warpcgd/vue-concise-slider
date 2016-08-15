@@ -13,7 +13,8 @@ vue-slider,一个简单的滑动组件,配置简单,支持自适应/全屏+按�
 
 ###例子
 
-<!-- [基本例子](http://warpcgd.github.io/webchataudio/src/demo.html) -->
+[基本例子](https://warpcgd.github.io/vue-slider/index.html)
+[完整demo](https://github.com/warpcgd/vue-slider/tree/gh-pages)
 
 ###快速开始使用
 
