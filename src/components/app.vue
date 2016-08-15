@@ -36,21 +36,21 @@ export default {
         return {
             someList:[
                 {
-                    title: '',
+                    title: 'slide1',
                     style:{
-                        background:'url(src/img/testimg-1.jpg)',
+                         background:'#1bbc9b',
                     },
                 },
                 {
-                    title: '',
+                    title: 'slide2',
                     style:{
-                       background:'url(src/img/testimg-2.jpg)',
+                         background:'#4bbfc3',
                     },
                 },
                 {
                     title: 'slide3',
                     style:{
-                         background:'#4bbfc3',
+                         background:'#7baabe',
                     },
                 }
             ],
