@@ -79,9 +79,9 @@ export default {
 <thead>
   <tr>
     <th width="20%">Option</th>
-    <th width="20%">Type</th>
-    <th width="20%">Default</th>
-    <th width="40%">Description</th>
+    <th width="15%">Type</th>
+    <th width="15%">Default</th>
+    <th width="50%">Description</th>
   </tr>
 </thead>
 <tbody>
