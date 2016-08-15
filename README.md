@@ -155,3 +155,9 @@ export default {
   </tr>
  </tbody>
 </table>
+
+###有更好的想法？
+欢迎来留下你的意见:https://github.com/warpcgd/vue-slider/issues/1
+
+###BUG？oh no!
+可以在这里提交,会尽快处理:https://github.com/warpcgd/vue-slider/issues/2
