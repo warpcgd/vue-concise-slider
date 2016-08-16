@@ -13,8 +13,8 @@ vue-slider,一个简单的滑动组件,配置简单,支持自适应/全屏+按�
 
 ###例子
 
-[基本例子](https://warpcgd.github.io/vue-slider/index.html)
-[完整demo](https://github.com/warpcgd/vue-slider/tree/gh-pages)
+[slider效果](https://warpcgd.github.io/vue-slider/index.html)
+[完整文档](https://github.com/warpcgd/vue-slider/tree/gh-pages)
 
 ###快速开始使用
 
@@ -74,6 +74,31 @@ export default {
 </script>
 
 ```
+###pages/初始化参数
+<table width="100%">
+<thead>
+  <tr>
+    <th width="20%">Option</th>
+    <th width="15%">Type</th>
+    <th width="15%">Default</th>
+    <th width="50%">Description</th>
+  </tr>
+</thead>
+<tbody>
+  <tr align="center">
+    <td><code>title</code></td>
+    <td>string</td>
+    <td>-</td>
+    <td>当前设置为每页的标题，未来将直接输出html</td>
+  </tr>
+  <tr align="center">
+    <td><code>style</code></td>
+    <td>obj</td>
+    <td>-</td>
+    <td>直接作用在每个item上的style样式，可以输出背景图，背景色，灵活配置</td>
+  </tr>
+ </tbody>
+</table>
 ###sliderinit/初始化参数
 <table width="100%">
 <thead>
