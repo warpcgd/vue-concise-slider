@@ -4,10 +4,14 @@
 
 vue-slider,一个简单的滑动组件,配置简单,支持自适应/全屏+按钮+分页,同时兼容移动端和PC端
 
-###未来将实现
+###目前已实现
+- [ ] 全屏自适应
+- [ ] 移动端兼容
 - [ ] 定时自动切换
-- [ ] 垂直滚动
+###未来将实现
+- [ ] 不定宽度滚动
 - [ ] 无缝滚动
+- [ ] 垂直滚动
 - [ ] 渐变滚动
 - [ ] 视差效果
 
@@ -127,6 +131,12 @@ export default {
     <td>number</td>
     <td>-</td>
     <td>滑动时间阈值</td>
+  </tr>
+  <tr align="center">
+    <td><code>autoplay</code></td>
+    <td>number[ms]</td>
+    <td>-</td>
+    <td>自动播放:时间[ms]</td>
   </tr>
  </tbody>
 </table>
