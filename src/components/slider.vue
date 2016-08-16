@@ -148,6 +148,7 @@ export default {
      			animation:{
      				'animation-ease':false,
      			},
+          setIntervalid:''
      		}
      	}
      },
@@ -162,18 +163,30 @@ export default {
    		  },
      },
     ready () {
+      let that = this;
     	// 定义contentWidth 为后续滑动做准备
     	this.sliderinit.contentWidth = this.$el.clientWidth;
     	//定制事件
-        this.$on('slideTo', (num) => {
-            this.slide(num);
-        });
-        this.$on('slideNext', () => {
-            this.next();
-        });
-        this.$on('slidePre', () => {
-            this.pre();
-        });
+      this.$on('slideTo', (num) => {
+          this.slide(num);
+      });
+      this.$on('slideNext', () => {
+          this.next();
+      });
+      this.$on('slidePre', () => {
+          this.pre();
+      });
+      // 第一次启动也要向上传递一次事件
+      this.$dispatch('slide',this.sliderinit.currentPage)
+      //自动轮播  暂时不支持无缝滚动
+      if(that.sliderinit.autoplay){
+        that.setIntervalid = setInterval(function(){
+          that.next();
+          if(that.sliderinit.currentPage == that.pagenum - 1){
+            clearInterval(that.setIntervalid)
+          }
+        }, that.sliderinit.autoplay);
+       }
      },
      methods:{
      	swipeStart (e) {
@@ -238,28 +251,28 @@ export default {
             }
         },
         pre () {
-			if (this.sliderinit.currentPage != 0) {
+			     if (this.sliderinit.currentPage != 0) {
 						this.sliderinit.currentPage -= 1;
 				  	this.slide(this.sliderinit.currentPage);
-		    } else {
+		       } else {
 			      this.slide(this.sliderinit.currentPage);
-					}
+					 }
         },
         next () {
-			if (this.sliderinit.currentPage != this.pagenum - 1) {
+			     if (this.sliderinit.currentPage != this.pagenum - 1) {
 						this.sliderinit.currentPage += 1;
 						this.slide(this.sliderinit.currentPage);
-			} else {
+			     } else {
 						this.slide(this.sliderinit.currentPage);
-			}
+			     }
         },
         slide(pagenum){
         	let poswidth = -pagenum * this.sliderinit.contentWidth + 'px';
-			this.basicdata.animation = {
+			    this.basicdata.animation = {
      					'animation-ease':true,
-     		}
-			//执行动画
-			this.basicdata.poswidth = poswidth;
+     		   }
+			     //执行动画
+			     this.basicdata.poswidth = poswidth;
             this.sliderinit.currentPage = pagenum;
             // 广播事件
             this.$dispatch('slide',this.sliderinit.currentPage)

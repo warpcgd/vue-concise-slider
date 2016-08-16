@@ -61,6 +61,7 @@ export default {
                 tracking: false,
                 thresholdTime: 500,//滑动判定距离
                 thresholdDistance: 100,//滑动判定时间
+                //autoplay:1000,//自动播放:时间[ms]
             }
         }
     },
