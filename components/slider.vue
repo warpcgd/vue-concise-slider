@@ -130,7 +130,7 @@
       </div>
       <div class="slider-pagination slider-pagination-bullets">
          <template v-for="item in pagenum">
-           <span class="slider-pagination-bullet" :class="$index == sliderinit.currentPage ? 'slider-pagination-bullet-active':''"></span>
+           <span @click='slide($index)' class="slider-pagination-bullet" :class="$index == sliderinit.currentPage ? 'slider-pagination-bullet-active':''"></span>
         </template>
       </div>
       <div class="slider-button-next" @click="next"></div>
@@ -148,7 +148,7 @@ export default {
      			animation:{
      				'animation-ease':false,
      			},
-          setIntervalid:''
+          setIntervalid:'',
      		}
      	}
      },
@@ -161,23 +161,49 @@ export default {
    		  pagenum: function(){
    		   	return this.pages.length
    		  },
+        currentWidth:function(){
+          console.log('yes');
+          let poswidth = 0;
+          let $slider;
+          let lastPage = this.sliderinit.currentPage-1;
+          // 获取slideritem子集
+          for(let item in this.$el.children){
+            if(/slider-wrapper/ig.test(this.$el.children[item].className)){
+               $slider = this.$el.children[item]
+            }
+          }
+
+           // 遍历子集
+          let $sliderChildren  = $slider.children;
+          for(let item in $sliderChildren){
+            if(item <= lastPage){
+              // 找到实际宽度clientWidth+外边距
+              poswidth += $sliderChildren[item].clientWidth;
+              poswidth += parseInt($sliderChildren[item].style.marginRight.length?$sliderChildren[item].style.marginRight:0);
+              poswidth += parseInt($sliderChildren[item].style.marginLeft.length?$sliderChildren[item].style.marginLeft:0);
+            }
+          }
+
+          return poswidth
+        }
      },
     ready () {
       let that = this;
-    	// 定义contentWidth 为后续滑动做准备
-    	this.sliderinit.contentWidth = this.$el.clientWidth;
+      //起始跳到指定页
+      that.slide(this.sliderinit.currentPage)
     	//定制事件
-      this.$on('slideTo', (num) => {
+      that.$on('slideTo', (num) => {
           this.slide(num);
       });
-      this.$on('slideNext', () => {
+      that.$on('slideNext', () => {
           this.next();
       });
-      this.$on('slidePre', () => {
+      that.$on('slidePre', () => {
           this.pre();
       });
       // 第一次启动也要向上传递一次事件
-      this.$dispatch('slide',this.sliderinit.currentPage)
+      that.$dispatch('slide',this.sliderinit.currentPage);
+
       //自动轮播  暂时不支持无缝滚动
       if(that.sliderinit.autoplay){
         that.setIntervalid = setInterval(function(){
@@ -193,6 +219,7 @@ export default {
      		this.basicdata.animation = {
      			'animation-ease':false,
      		}
+        // console.log(e);
         if (e.type === 'touchstart') {
             if (e.touches.length>1) {
                     this.sliderinit.tracking = false;
@@ -223,7 +250,8 @@ export default {
                     this.sliderinit.end.x = e.clientX;
                     this.sliderinit.end.y = e.clientY;
                 }
-                this.basicdata.poswidth = -(this.sliderinit.currentPage * this.sliderinit.contentWidth) + this.sliderinit.end.x - this.sliderinit.start.x  + 'px';
+                // console.log(this.currentWidth);
+                this.basicdata.poswidth = -(this.currentWidth) + this.sliderinit.end.x - this.sliderinit.start.x  + 'px';
             }
         },
         swipeEnd (e) {
@@ -253,30 +281,35 @@ export default {
         pre () {
 			     if (this.sliderinit.currentPage != 0) {
 						this.sliderinit.currentPage -= 1;
-				  	this.slide(this.sliderinit.currentPage);
+				  	this.slide();
 		       } else {
-			      this.slide(this.sliderinit.currentPage);
+			      this.slide();
 					 }
         },
         next () {
 			     if (this.sliderinit.currentPage != this.pagenum - 1) {
 						this.sliderinit.currentPage += 1;
-						this.slide(this.sliderinit.currentPage);
+						this.slide();
 			     } else {
-						this.slide(this.sliderinit.currentPage);
+						this.slide();
 			     }
         },
         slide(pagenum){
-        	let poswidth = -pagenum * this.sliderinit.contentWidth + 'px';
+          //执行动画
 			    this.basicdata.animation = {
      					'animation-ease':true,
-     		   }
-			     //执行动画
-			     this.basicdata.poswidth = poswidth;
+     		  }
+          //console.log(pagenum);
+			    // this.$set('this.sliderinit.currentPage',pagenum)
+          if(pagenum||pagenum == 0){
             this.sliderinit.currentPage = pagenum;
-            // 广播事件
-            this.$dispatch('slide',this.sliderinit.currentPage)
-        }
+          }
+           console.log(pagenum);
+			    this.basicdata.poswidth = -this.currentWidth + 'px';
+          // console.log(this.styleobj);
+          // 广播事件
+          this.$dispatch('slide',this.sliderinit.currentPage)
+        },
      }
 }
 </script>

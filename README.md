@@ -8,9 +8,9 @@ vue-slider,一个简单的滑动组件,配置简单,支持自适应/全屏+按�
 - [x] 全屏自适应
 - [x] 移动端兼容
 - [x] 定时自动切换
+- [x] 不定宽度滚动
 
 ###未来将实现
-- [ ] 不定宽度滚动
 - [ ] 无缝滚动
 - [ ] 垂直滚动
 - [ ] 渐变滚动
@@ -69,6 +69,7 @@ export default {
           tracking: false,
           thresholdTime: 500,//滑动判定距离
           hresholdDistance: 100,//滑动判定时间
+          autoplay:1000//自动滚动
         }
       }
     },
@@ -100,7 +101,7 @@ export default {
     <td><code>style</code></td>
     <td>obj</td>
     <td>-</td>
-    <td>直接作用在每个item上的style样式，可以输出背景图，背景色，灵活配置</td>
+    <td>直接作用在每个item上的style样式，可以输出背景图，背景色，每项宽度可自定义，自动切换为不定宽滚动</td>
   </tr>
  </tbody>
 </table>

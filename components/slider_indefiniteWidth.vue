@@ -27,35 +27,39 @@
   <button @click="turnTo(2)">跳转到第三页</button>
   </div>
 </template>
-
 <script>
 import slider from './slider'
 export default {
-	 el: '#app',
+	 el: '#sliderindefiniteWidth',
 	 data () {
         return {
             someList:[
                 {
                     title: 'slide1',
                     style:{
-                         background:'#1bbc9b',
+                         'background':'#1bbc9b',
+                         'width':'80%',
+                         'margin-right':'20px'
                     },
                 },
                 {
                     title: 'slide2',
                     style:{
-                         background:'#4bbfc3',
+                         'background':'#4bbfc3',
+                         'width':'60%',
+                         'margin-right':'20px'
                     },
                 },
                 {
                     title: 'slide3',
                     style:{
-                         background:'#7baabe',
+                         'background':'#7baabe',
+                         'width':'40%',
                     },
                 }
             ],
             sliderinit: {
-                currentPage: 0,
+                currentPage: 1,
                 start: {},
                 end: {},
                 tracking: false,
@@ -83,15 +87,16 @@ export default {
             this.someList.push({
                 title: 'slidernew',
                 style:{
-                    background:'#333',
-                    color:'#fff'
+                    'background':'#333',
+                    'color':'#fff',
+                    'margin-left':'20px'
                 }
             });
         }
     },
     events:{
         slide(pagenum){
-            console.log(pagenum);
+            // console.log(pagenum);
         }
     }
 }
