@@ -1,5 +1,8 @@
-import app from './components/app';
+import sliderbasic from './components/slider_basic';
+
+import sliderindefiniteWidth from './components/slider_indefiniteWidth'
 
 Vue.config.debug = true;
 
-new Vue(app);
+new Vue(sliderbasic);
+new Vue(sliderindefiniteWidth);
