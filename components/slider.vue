@@ -8,7 +8,7 @@
  .slider-container {
     height: 400px;
     margin: 20px auto;
-    width: 50%;
+    width: 70%;
     }
 .slider-center-center{
 		margin: auto;
@@ -121,23 +121,30 @@
       @mouseup="swipeEnd"
       @mousemove="swipeMove"
       >
-      	<template v-for="item in pages">
-      		<div class="slider-item" :style="item.style">
-       		<!-- 	<img src="{{item.img}}" alt="{{item.title}}"> -->
-       		{{item.title}}
-       		</div>
-      	</template>
+      <!-- 正常滚动 -->
+       <template  v-if="!sliderinit.loop">
+        <template  v-for="item in pages">
+      	 <div class="slider-item" :style="item.style">
+        	{{item.title}}
+       	  </div>
+        </template>
+       </template>
+      <!-- 无缝滚动 -->
+       <template  v-if="sliderinit.loop">
+        <div class="slider-item" :style="pages[pages.length-1].style">{{pages[pages.length-1].title}}</div>
+         <template  v-for="item in pages">
+          <div class="slider-item" :style="item.style">{{item.title}}</div>
+         </template>
+        <div class="slider-item" :style="pages[0].style">{{pages[0].title}}</div>
+       </template>
       </div>
       <div class="slider-pagination slider-pagination-bullets">
-         <template v-for="item in pagenum">
+         <template v-for="item in pagenums">
            <span @click='slide($index)' class="slider-pagination-bullet" :class="$index == sliderinit.currentPage ? 'slider-pagination-bullet-active':''"></span>
         </template>
       </div>
-      <div class="slider-button-next" @click="next"></div>
-      <div class="slider-button-prev" @click="pre"></div>
-      <slot></slot>
     </div>
-</template>
+  </template>
 <script>
 export default {
      props: ['sliderinit', 'pages'],
@@ -158,39 +165,46 @@ export default {
      			return {'transform': 'translate3D(' + this.basicdata.poswidth + ',0,0)'}
    		  },
    		  // pagenum滑动数
-   		  pagenum: function(){
+   		  pagenums: function(){
    		   	return this.pages.length
    		  },
-        currentWidth:function(){
-          console.log('yes');
+        // 组件的核心，计算当前父级需要进行的偏移,每次要遍历节点,应该直接储存节点，提高性能
+        currentWidth:{
+          get:function(){
           let poswidth = 0;
           let $slider;
           let lastPage = this.sliderinit.currentPage-1;
+          let srollbar = false;
+          if(this.sliderinit.loop){
+            lastPage = this.sliderinit.currentPage;
+          }
           // 获取slideritem子集
           for(let item in this.$el.children){
             if(/slider-wrapper/ig.test(this.$el.children[item].className)){
                $slider = this.$el.children[item]
             }
           }
-
            // 遍历子集
           let $sliderChildren  = $slider.children;
           for(let item in $sliderChildren){
             if(item <= lastPage){
               // 找到实际宽度clientWidth+外边距
-              poswidth += $sliderChildren[item].clientWidth;
+              poswidth += $sliderChildren[item].offsetWidth;
               poswidth += parseInt($sliderChildren[item].style.marginRight.length?$sliderChildren[item].style.marginRight:0);
               poswidth += parseInt($sliderChildren[item].style.marginLeft.length?$sliderChildren[item].style.marginLeft:0);
             }
           }
-
           return poswidth
+         },
+         set:function(value){
+          return value;
+         }
         }
      },
     ready () {
       let that = this;
-      //起始跳到指定页
-      that.slide(this.sliderinit.currentPage)
+      //起始跳到指定页 更新为无样式的了,更符合常理
+      that.slide(this.sliderinit.currentPage,'animationnone')
     	//定制事件
       that.$on('slideTo', (num) => {
           this.slide(num);
@@ -201,35 +215,32 @@ export default {
       that.$on('slidePre', () => {
           this.pre();
       });
-      // 第一次启动也要向上传递一次事件
+      // 第一次的滚动也要向上传递一次事件
       that.$dispatch('slide',this.sliderinit.currentPage);
 
-      //自动轮播  暂时不支持无缝滚动
-      if(that.sliderinit.autoplay){
-        that.setIntervalid = setInterval(function(){
-          that.next();
-          if(that.sliderinit.currentPage == that.pagenum - 1){
-            clearInterval(that.setIntervalid)
-          }
-        }, that.sliderinit.autoplay);
-       }
+      //自动轮播 支持无缝滚动
+      that.clock().begin(that);
      },
      methods:{
      	swipeStart (e) {
      		this.basicdata.animation = {
      			'animation-ease':false,
      		}
-        // console.log(e);
+        // 清除自动滚动
+        if(this.sliderinit.autoplay){
+          let that = this;
+          this.clock().stop(that);
+        }
         if (e.type === 'touchstart') {
             if (e.touches.length>1) {
-                    this.sliderinit.tracking = false;
-                    return;
+              this.sliderinit.tracking = false;
+                return;
             } else {
-                    this.sliderinit.tracking = true;
+              this.sliderinit.tracking = true;
                     /* Hack - would normally use e.timeStamp but it's whack in Fx/Android */
-                    this.sliderinit.start.t = new Date().getTime();
-                    this.sliderinit.start.x = e.targetTouches[0].clientX;
-                    this.sliderinit.start.y = e.targetTouches[0].clientY;
+              this.sliderinit.start.t = new Date().getTime();
+              this.sliderinit.start.x = e.targetTouches[0].clientX;
+              this.sliderinit.start.y = e.targetTouches[0].clientY;
             }
         } else {
                 this.sliderinit.tracking = true;
@@ -250,7 +261,6 @@ export default {
                     this.sliderinit.end.x = e.clientX;
                     this.sliderinit.end.y = e.clientY;
                 }
-                // console.log(this.currentWidth);
                 this.basicdata.poswidth = -(this.currentWidth) + this.sliderinit.end.x - this.sliderinit.start.x  + 'px';
             }
         },
@@ -260,6 +270,13 @@ export default {
             let deltaTime = now - this.sliderinit.start.t;
             let deltaX = this.sliderinit.end.x - this.sliderinit.start.x;
             let deltaY = this.sliderinit.end.y - this.sliderinit.start.y;
+            // 自动滚动重启
+            if(this.sliderinit.autoplay){
+              let that = this;
+              setTimeout(function(){
+              that.clock().begin(that);
+              },350);
+            }
             /* work out what the movement was */
             if (deltaTime > this.sliderinit.thresholdTime) {
             		this.slide(this.sliderinit.currentPage);
@@ -279,37 +296,80 @@ export default {
             }
         },
         pre () {
-			     if (this.sliderinit.currentPage != 0) {
-						this.sliderinit.currentPage -= 1;
-				  	this.slide();
-		       } else {
-			      this.slide();
-					 }
+			       if (this.sliderinit.currentPage != 0) {
+						  this.sliderinit.currentPage -= 1;
+				  	  this.slide();
+		         } else if(this.sliderinit.loop) {
+			         this.sliderinit.currentPage -= 1;
+               this.slide(this.sliderinit.currentPage,'loop');
+					   }else{
+              this.slide();
+             }
+
         },
         next () {
-			     if (this.sliderinit.currentPage != this.pagenum - 1) {
+			     if (this.sliderinit.currentPage != this.pagenums - 1) {
 						this.sliderinit.currentPage += 1;
 						this.slide();
-			     } else {
-						this.slide();
-			     }
+			     } else if(this.sliderinit.loop) {
+						this.sliderinit.currentPage += 1;
+            this.slide(this.sliderinit.currentPage,'loop');
+           }else{
+            this.slide();
+           }
         },
-        slide(pagenum){
+        slide(pagenum,type){
+          let that = this;
+
           //执行动画
 			    this.basicdata.animation = {
      					'animation-ease':true,
      		  }
-          //console.log(pagenum);
-			    // this.$set('this.sliderinit.currentPage',pagenum)
+          // 无样式滚动
+          if(type =='animationnone'){
+            this.basicdata.animation = {
+              'animation-ease':false,
+            }
+          }
           if(pagenum||pagenum == 0){
             this.sliderinit.currentPage = pagenum;
           }
-           console.log(pagenum);
+
 			    this.basicdata.poswidth = -this.currentWidth + 'px';
-          // console.log(this.styleobj);
+          //下面350定时写死了，下次更新会提供API修改
+          if(type == 'loop'){
+            setTimeout(function(){
+              if(that.sliderinit.currentPage == -1){
+                that.slide(that.pagenums-1,'animationnone');
+              }else{
+                that.slide(0,'animationnone');
+              }
+            },350);
+            // 不传递广播事件
+            return
+          }
           // 广播事件
           this.$dispatch('slide',this.sliderinit.currentPage)
         },
+        clock:function(){
+          // 暂时这么写，写了自调用，但是vue不支持，欢迎小伙伴提供新的思路
+          return {
+            begin:function(that){
+             if(that.sliderinit.autoplay){
+              that.setIntervalid = setInterval(function(){
+              that.next();
+              if(that.sliderinit.currentPage == that.pagenums - 1&&!that.sliderinit.loop){
+                clearInterval(that.setIntervalid)
+              }
+              }, that.sliderinit.autoplay);
+              }
+            },
+            stop:function(that){
+              clearInterval(that.setIntervalid)
+            },
+            }
+        },
      }
+
 }
 </script>
