@@ -13,11 +13,14 @@
         font-size: 14px;
         margin: 0;
         padding: 0;
-        position: absolute;
+       /* position: absolute;
         top: 0;
         left: 0;
         right: 0;
-        bottom: 0;
+        bottom: 0;*/
+        width: 100%;
+        /*bug:当内容超过一屏时，滚动条需要默认显示*/
+        overflow-y: scroll;
     }
     .main{
         display: -webkit-flex;
@@ -37,15 +40,15 @@
 </head>
 
 <body>
-    <div class="main" id="main">
+    <div class="main">
         <h3>基本例子</h3>
         <div id="sliderbasic"></div>
         <h3>不定宽度</h3>
         <div id="sliderindefiniteWidth"></div>
+        <h3>无缝循环滚动</h3>
+        <div id="sliderbasicloop"></div>
     </div>
 </body>
 <script src="https://apps.bdimg.com/libs/vue/1.0.14/vue.js"></script>
 <script src="dist/build.js"></script>
-<script>
-</script>
 </html>
