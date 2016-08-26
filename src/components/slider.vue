@@ -28,6 +28,11 @@
     width: 100%;
     z-index: 1;
 }
+/*垂直*/
+.swiper-container-vertical > .slider-wrapper{
+  flex-direction: column;
+}
+
 .slider-item {
     flex-shrink: 0;
     height: 100%;
@@ -55,7 +60,7 @@
     position: absolute;
     text-align: center;
     transform: translate3d(0px, 0px, 0px);
-    transition: all 350ms ease 0s;
+    /*transition: all 350ms ease 0s;*/
     z-index: 10;
 }
 .slider-pagination-bullets{
@@ -72,6 +77,19 @@
     width: 8px;
     cursor: pointer;
     margin: 0 5px;
+}
+/*垂直*/
+.swiper-container-vertical > .slider-pagination-bullets {
+    bottom: auto;
+    left: auto;
+    width: auto;
+    right: 10px;
+    top: 50%;
+    transform: translate3d(0px, -50%, 0px);
+}
+.swiper-container-vertical .slider-pagination-bullet{
+    display: block;
+    margin: 5px 0;
 }
 .slider-pagination-bullet-active {
     background: #fff none repeat scroll 0 0;
@@ -110,7 +128,7 @@
 }
 </style>
 <template>
-    <div class='slider-container'>
+    <div class='slider-container' :class = 'basicdata.containerClass'>
       <div class="slider-wrapper"
       :style="styleobj"
       :class="basicdata.animation"
@@ -152,9 +170,13 @@ export default {
      	return {
      		basicdata:{
      			poswidth:'0',
+          posheight:'0',
      			animation:{
      				'animation-ease':false,
      			},
+          containerClass:{
+            'swiper-container-vertical':false,
+          },
           setIntervalid:'',
      		}
      	}
@@ -162,7 +184,7 @@ export default {
      computed:{
      		// 动画执行obj
      		styleobj: function () {
-     			return {'transform': 'translate3D(' + this.basicdata.poswidth + ',0,0)'}
+     			return {'transform': 'translate3D(' + this.basicdata.poswidth + ',' + this.basicdata.posheight + ',0)'}
    		  },
    		  // pagenum滑动数
    		  pagenums: function(){
@@ -199,6 +221,32 @@ export default {
          set:function(value){
           return value;
          }
+        },
+        currentHeight:function(){
+          let posheight = 0;
+          let $slider;
+          let lastPage = this.sliderinit.currentPage-1;
+          let srollbar = false;
+          if(this.sliderinit.loop){
+            lastPage = this.sliderinit.currentPage;
+          }
+          // 获取slideritem子集
+          for(let item in this.$el.children){
+            if(/slider-wrapper/ig.test(this.$el.children[item].className)){
+               $slider = this.$el.children[item]
+            }
+          }
+           // 遍历子集
+          let $sliderChildren  = $slider.children;
+          for(let item in $sliderChildren){
+            if(item <= lastPage){
+              // 找到实际宽度clientWidth+外边距
+              posheight += $sliderChildren[item].offsetHeight;
+              posheight += parseInt($sliderChildren[item].style.marginTop.length?$sliderChildren[item].style.marginTop:0);
+              posheight += parseInt($sliderChildren[item].style.marginBottom.length?$sliderChildren[item].style.marginBottom:0);
+            }
+          }
+          return posheight
         }
      },
     ready () {
@@ -220,13 +268,15 @@ export default {
 
       //自动轮播 支持无缝滚动
       that.clock().begin(that);
+      // 设定垂直轮播class
+      if(this.sliderinit.direction == 'vertical'){
+        this.basicdata.containerClass['swiper-container-vertical'] = true;
+      }
      },
      methods:{
      	swipeStart (e) {
-     		this.basicdata.animation = {
-     			'animation-ease':false,
-     		}
-        // 清除自动滚动
+     		this.basicdata.animation['animation-ease'] = false;
+        // 暂停自动滚动
         if(this.sliderinit.autoplay){
           let that = this;
           this.clock().stop(that);
@@ -241,6 +291,8 @@ export default {
               this.sliderinit.start.t = new Date().getTime();
               this.sliderinit.start.x = e.targetTouches[0].clientX;
               this.sliderinit.start.y = e.targetTouches[0].clientY;
+              this.sliderinit.end.x = e.targetTouches[0].clientX;
+              this.sliderinit.end.y = e.targetTouches[0].clientY;
             }
         } else {
                 this.sliderinit.tracking = true;
@@ -248,6 +300,8 @@ export default {
                 this.sliderinit.start.t = new Date().getTime();
                 this.sliderinit.start.x = e.clientX;
                 this.sliderinit.start.y = e.clientY;
+                this.sliderinit.end.x = e.clientX;
+                this.sliderinit.end.y = e.clientY;
         		}
         },
         swipeMove (e) {
@@ -260,6 +314,11 @@ export default {
                     e.preventDefault();
                     this.sliderinit.end.x = e.clientX;
                     this.sliderinit.end.y = e.clientY;
+                }
+                if(this.sliderinit.direction == 'vertical'){
+                  console.log('yes');
+                  this.basicdata.posheight = -(this.currentHeight) + this.sliderinit.end.y - this.sliderinit.start.y  + 'px';
+                  return
                 }
                 this.basicdata.poswidth = -(this.currentWidth) + this.sliderinit.end.x - this.sliderinit.start.x  + 'px';
             }
@@ -282,16 +341,32 @@ export default {
             		this.slide(this.sliderinit.currentPage);
                 /* gesture too slow */
                 return;
-            } else {
+            } else if (this.sliderinit.direction != 'vertical'){
                 if ((deltaX > this.sliderinit.thresholdDistance)&&(Math.abs(deltaY) < this.sliderinit.thresholdDistance)) {
                     //swipe right
-                    this.pre()
+                    this.pre();
+                    return
                 } else if ((-deltaX > this.sliderinit.thresholdDistance)&&(Math.abs(deltaY) < this.sliderinit.thresholdDistance)) {
                     //swipe left
-                    this.next()
+                    this.next();
+                    return
                 } else {
                    this.slide(this.sliderinit.currentPage);
-                    return;
+                    return
+                }
+                // 垂直判定
+            }else{
+                if ((deltaY > this.sliderinit.thresholdDistance)&&(Math.abs(deltaX) < this.sliderinit.thresholdDistance)) {
+                    //swipe right
+                    this.pre();
+                    return
+                } else if ((-deltaY > this.sliderinit.thresholdDistance)&&(Math.abs(deltaX) < this.sliderinit.thresholdDistance)) {
+                    //swipe left
+                    this.next();
+                    return
+                } else {
+                   this.slide(this.sliderinit.currentPage);
+                    return
                 }
             }
         },
@@ -322,20 +397,20 @@ export default {
           let that = this;
 
           //执行动画
-			    this.basicdata.animation = {
-     					'animation-ease':true,
-     		  }
+			    this.basicdata.animation['animation-ease'] = true;
           // 无样式滚动
           if(type =='animationnone'){
-            this.basicdata.animation = {
-              'animation-ease':false,
-            }
+            this.basicdata.animation['animation-ease'] = false;
           }
           if(pagenum||pagenum == 0){
             this.sliderinit.currentPage = pagenum;
           }
-
-			    this.basicdata.poswidth = -this.currentWidth + 'px';
+          // 增加垂直滚动判定
+          if(this.sliderinit.direction == 'vertical'){
+            this.basicdata.posheight = -this.currentHeight + 'px';
+          }else{
+			      this.basicdata.poswidth = -this.currentWidth + 'px';
+          }
           //下面350定时写死了，下次更新会提供API修改
           if(type == 'loop'){
             setTimeout(function(){

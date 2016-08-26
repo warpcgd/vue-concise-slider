@@ -30,7 +30,7 @@
 <script>
 import slider from './slider'
 export default {
-	 el: '#sliderbasic',
+	 el: '#slidervertical',
 	 data () {
         return {
             someList:[
@@ -58,9 +58,9 @@ export default {
                 start: {},
                 end: {},
                 tracking: false,
-                thresholdTime: 500,//滑动判定距离
+                thresholdTime: 300,//滑动判定距离
                 thresholdDistance: 100,//滑动判定时间
-                // direction:'vertical',//垂直滚动
+                direction:'vertical',//垂直滚动
                 // loop:true,//无限循环
                 // autoplay:1000,//自动播放:时间[ms]
             }
