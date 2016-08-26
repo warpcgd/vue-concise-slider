@@ -7,12 +7,12 @@ vue-slider,一个简单的滑动组件,配置简单,支持自适应/全屏+按�
 ###目前已实现
 - [x] 全屏自适应
 - [x] 移动端兼容
+- [x] 垂直滚动
 - [x] 定时自动切换
 - [x] 不定宽度滚动
 - [x] 无缝循环滚动
 
 ###未来将实现
-- [ ] 垂直滚动
 - [ ] 渐变滚动
 - [ ] 视差效果
 
@@ -71,6 +71,7 @@ export default {
           hresholdDistance: 100,//滑动判定时间
           autoplay:1000,//自动滚动[ms]
           loop:true//循环滚动
+          direction:'vertical'//方向设置，垂直滚动
         }
       }
     },
@@ -117,6 +118,12 @@ export default {
   </tr>
 </thead>
 <tbody>
+  <tr align="center">
+    <td><code>direction</code></td>
+    <td>string</td>
+    <td>'horizontal'</td>
+    <td>方向设置，默认为水平滚动('horizontal'),可设置为垂直滚动('vertical')</td>
+  </tr>
   <tr align="center">
     <td><code>currentPage</code></td>
     <td>number</td>
