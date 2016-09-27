@@ -333,7 +333,7 @@ export default {
             if(this.sliderinit.autoplay){
               let that = this;
               setTimeout(function(){
-              that.clock().begin(that);
+                that.clock().begin(that);
               },350);
             }
             /* work out what the movement was */
@@ -440,7 +440,7 @@ export default {
               }
             },
             stop:function(that){
-              clearInterval(that.setIntervalid)
+              clearInterval(that.setIntervalid);
             },
             }
         },

@@ -41,7 +41,7 @@ export default {
    data () {
       return {
         //图片列表[arr]
-        someList:[
+        pages:[
           {
             title: '',
             style:{
@@ -63,12 +63,13 @@ export default {
         ],
         //滑动配置[obj]
         sliderinit: {
-          currentPage: 0,
-          start: {},
-          end: {},
-          tracking: false,
-          thresholdTime: 500,//滑动判定距离
-          hresholdDistance: 100,//滑动判定时间
+          // 写了一些无需配置的项，下个版本会放到slider设定默认值
+          currentPage: 0,//当前页码
+          start: {},//默认需要书写,存放点击位置
+          end: {},//默认需要书写,存放点击位置
+          tracking: false,//swipestart状态判断
+          thresholdDistance: 500,//滑动判定距离
+          thresholdTime: 100,//滑动判定时间
           autoplay:1000,//自动滚动[ms]
           loop:true//循环滚动
           direction:'vertical'//方向设置，垂直滚动
