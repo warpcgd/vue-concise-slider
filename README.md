@@ -131,13 +131,13 @@ export default {
     <td>当前为第几页</td>
   </tr>
   <tr align="center">
-    <td><code>thresholdTime</code></td>
+    <td><code>thresholdDistance</code></td>
     <td>number</td>
     <td>-</td>
     <td>滑动距离阈值</td>
   </tr>
   <tr align="center">
-    <td><code>hresholdDistance</code></td>
+    <td><code>thresholdTime</code></td>
     <td>number</td>
     <td>-</td>
     <td>滑动时间阈值</td>
