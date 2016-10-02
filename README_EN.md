@@ -27,7 +27,7 @@ vue-slider,A simple sliding component,has easy configuration,support self-adapti
 
 Follow like this demo
 
-###app.vue parent component
+###app.vue / parent component
 
 ```html
 <template>
@@ -85,7 +85,7 @@ export default {
 </script>
 
 ```
-###Pages/Initialize parameter
+###Pages / Initialize parameter
 <table width="100%">
 <thead>
   <tr>
@@ -110,7 +110,7 @@ export default {
   </tr>
  </tbody>
 </table>
-###Sliderinit/Initialize parameter
+###Sliderinit / Initialize parameter
 <table width="100%">
 <thead>
   <tr>
