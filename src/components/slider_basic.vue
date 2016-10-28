@@ -58,8 +58,8 @@ export default {
                 start: {},
                 end: {},
                 tracking: false,
-                thresholdTime: 500,//滑动判定距离
-                thresholdDistance: 100,//滑动判定时间
+                thresholdTime: 500,//滑动时间阈值判定距离
+                thresholdDistance: 100,//滑动距离阈值
                 // direction:'vertical',//垂直滚动
                 // loop:true,//无限循环
                 // autoplay:1000,//自动播放:时间[ms]
