@@ -275,12 +275,15 @@ export default {
      },
      methods:{
      	swipeStart (e) {
+        let that = this ;
      		this.basicdata.animation['animation-ease'] = false;
         // 暂停自动滚动
         if(this.sliderinit.autoplay){
           let that = this;
           this.clock().stop(that);
         }
+        // 阻止页面滚动
+        document.addEventListener('touchmove',that.preventDefault(e));
         if (e.type === 'touchstart') {
             if (e.touches.length>1) {
               this.sliderinit.tracking = false;
@@ -316,7 +319,6 @@ export default {
                     this.sliderinit.end.y = e.clientY;
                 }
                 if(this.sliderinit.direction == 'vertical'){
-                  console.log('yes');
                   this.basicdata.posheight = -(this.currentHeight) + this.sliderinit.end.y - this.sliderinit.start.y  + 'px';
                   return
                 }
@@ -324,6 +326,7 @@ export default {
             }
         },
         swipeEnd (e) {
+            let that = this;
             this.sliderinit.tracking = false;
             let now = new Date().getTime();
             let deltaTime = now - this.sliderinit.start.t;
@@ -333,9 +336,11 @@ export default {
             if(this.sliderinit.autoplay){
               let that = this;
               setTimeout(function(){
-                that.clock().begin(that);
+              that.clock().begin(that);
               },350);
-            }
+            };
+            // 解除阻止
+            document.removeEventListener('touchmove',that.preventDefault(e));
             /* work out what the movement was */
             if (deltaTime > this.sliderinit.thresholdTime) {
             		this.slide(this.sliderinit.currentPage);
@@ -440,10 +445,14 @@ export default {
               }
             },
             stop:function(that){
-              clearInterval(that.setIntervalid);
+              clearInterval(that.setIntervalid)
             },
             }
         },
+        // 阻止页面滚动
+        preventDefault(e){
+          e.preventDefault(e);
+        }
      }
 
 }
