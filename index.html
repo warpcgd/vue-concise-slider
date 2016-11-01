@@ -3,7 +3,10 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
     <title>slider</title>
     <style>
     body {
@@ -13,7 +16,7 @@
         font-size: 14px;
         margin: 0;
         padding: 0;
-       /* position: absolute;
+        /* position: absolute;
         top: 0;
         left: 0;
         right: 0;
@@ -22,26 +25,28 @@
         /*bug:当内容超过一屏时，滚动条需要默认显示*/
         overflow-y: scroll;
     }
-    .main{
+
+    .main {
         display: -webkit-flex;
         display: flex;
-        flex-flow:column nowrap;
-        justify-content:center ;
-        align-items:center;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
         height: 100%;
         text-align: center;
         margin-bottom: 20px;
     }
-    h3{
-       font-size: 20px;
-       margin: 0;
-       margin-top: 25px;
+
+    h3 {
+        font-size: 20px;
+        margin: 0;
+        margin-top: 25px;
     }
     </style>
 </head>
 
 <body>
-    <div class="main">
+    <div class="main" ontouchstart="iosScrollBug()">
         <h3>基本例子</h3>
         <div id="sliderbasic"></div>
         <h3>垂直滚动</h3>
@@ -50,9 +55,12 @@
         <div id="sliderindefiniteWidth"></div>
         <h3>无缝循环滚动</h3>
         <div id="sliderbasicloop"></div>
-
     </div>
 </body>
 <script src="https://apps.bdimg.com/libs/vue/1.0.14/vue.js"></script>
 <script src="dist/build.js"></script>
+<script>
+    // ios 如果父层不进行touch事件的绑定，会造成子层不触发touch事件，猜想可能是事件的传递问题
+    function iosScrollBug(){}
+</script>
 </html>
