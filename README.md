@@ -5,6 +5,9 @@
 
 vue-slider,一个简单的滑动组件,配置简单,支持自适应/全屏+按钮+分页,同时兼容移动端和PC端
 
+##版本
+支持vue2.0+
+
 ###目前已实现
 - [x] 全屏自适应
 - [x] 移动端兼容
@@ -66,9 +69,6 @@ export default {
         sliderinit: {
           // 写了一些无需配置的项，下个版本会放到slider设定默认值
           currentPage: 0,//当前页码
-          start: {},//默认需要书写,存放点击位置
-          end: {},//默认需要书写,存放点击位置
-          tracking: false,//swipestart状态判断
           thresholdDistance: 500,//滑动判定距离
           thresholdTime: 100,//滑动判定时间
           autoplay:1000,//自动滚动[ms]
@@ -173,19 +173,19 @@ export default {
     <td><code>slideTo</code></td>
     <td>number</td>
     <td>滑动到(number)页</td>
-    <td><code>this.$broadcast('slideTo', num)</code></td>
+    <td><code>$emit('slideTo', num)</code></td>
   </tr>
  <tr align="center">
     <td><code>slideNext</code></td>
     <td>-</td>
     <td>滑动到下一页</td>
-    <td><code>this.$broadcast('slideNext')</code></td>
+    <td><code>$emit('slideNext')</code></td>
   </tr>
   <tr align="center">
     <td><code>slideTo</code></td>
     <td>-</td>
     <td>滑动到上一页</td>
-    <td><code>this.$broadcast('slidePre')</code></td>
+    <td><code>$emit('slidePre')</code></td>
   </tr>
  </tbody>
 </table>
@@ -204,7 +204,7 @@ export default {
     <td><code>slide</code></td>
     <td>number</td>
     <td>当前滑动到第(number)页</td>
-    <td><code>vm.$on('slide', function(pagenum){console.log(pagenum)})</code></td>
+    <td><code>childComponents.$on('slide', function(pagenum){console.log(pagenum)})</code></td>
   </tr>
  </tbody>
 </table>

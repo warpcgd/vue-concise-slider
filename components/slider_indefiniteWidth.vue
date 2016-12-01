@@ -17,7 +17,8 @@
 }
 </style>
 <template>
-	<slider :pages="someList" :sliderinit="sliderinit">
+<div>
+	<slider :pages="someList" :sliderinit="sliderinit" @slide='slide'>
     <!-- slot  -->
   </slider>
   <div class="sliderButton">
@@ -26,6 +27,7 @@
   <button @click="appendslider">添加一页</button>
   <button @click="turnTo(2)">跳转到第三页</button>
   </div>
+    </div>
 </template>
 <script>
 import slider from './slider'
@@ -76,29 +78,28 @@ export default {
     },
     methods: {
         turnTo (num) {
-            // 传递事件
-            this.$broadcast('slideTo', num);
+            // 传递事件 vue 2.0 传递事件修改了，好的写法应该直接写在空vue类中
+            this.$children[0].$emit('slideTo', num);
+            console.log(this);
         },
         slideNext () {
-            this.$broadcast('slideNext');
+            this.$children[0].$emit('slideNext');
         },
         slidePre () {
-            this.$broadcast('slidePre');
+            this.$children[0].$emit('slidePre');
         },
         appendslider(){
             this.someList.push({
                 title: 'slidernew',
                 style:{
-                    'background':'#333',
-                    'color':'#fff',
-                    'margin-left':'20px'
+                    background:'#333',
+                    color:'#fff'
                 }
             });
-        }
-    },
-    events:{
+        },
+         // 监听事件也发生了变化,需要指向一个子组件实例
         slide(pagenum){
-            // console.log(pagenum);
+            console.log(pagenum);
         }
     }
 }
