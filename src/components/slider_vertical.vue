@@ -17,7 +17,8 @@
 }
 </style>
 <template>
-	<slider :pages="someList" :sliderinit="sliderinit">
+<div>
+  <slider :pages="someList" :sliderinit="sliderinit">
     <!-- slot  -->
   </slider>
   <div class="sliderButton">
@@ -72,13 +73,13 @@ export default {
     methods: {
         turnTo (num) {
             // 传递事件
-            this.$broadcast('slideTo', num);
+            this.$emit('slideTo', num);
         },
         slideNext () {
-            this.$broadcast('slideNext');
+            this.$emit('slideNext');
         },
         slidePre () {
-            this.$broadcast('slidePre');
+            this.$emit('slidePre');
         },
         appendslider(){
             this.someList.push({

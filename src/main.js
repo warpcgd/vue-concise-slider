@@ -6,7 +6,6 @@ import sliderindefiniteWidth from './components/slider_indefiniteWidth';
 import sliderbasicloop from './components/slider_basic_loop';
 // 垂直滚动
 import slidervertical from './components/slider_vertical';
-Vue.config.debug = true;
 
 // 实例vue
 new Vue(sliderbasic);

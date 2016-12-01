@@ -21,11 +21,14 @@
         left: 0;
         right: 0;
         bottom: 0;*/
-        width: 100%;
+
         /*bug:当内容超过一屏时，滚动条需要默认显示*/
         overflow-y: scroll;
+        width: 100%;
     }
-
+    body div{
+        width: 100%;
+    }
     .main {
         display: -webkit-flex;
         display: flex;
@@ -57,7 +60,7 @@
         <div id="sliderbasicloop"></div>
     </div>
 </body>
-<script src="https://apps.bdimg.com/libs/vue/1.0.14/vue.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.1.3/vue.js"></script>
 <script src="dist/build.js"></script>
 <script>
     // ios 如果父层不进行touch事件的绑定，会造成子层不触发touch事件，猜想可能是事件的传递问题

@@ -157,8 +157,8 @@
        </template>
       </div>
       <div class="slider-pagination slider-pagination-bullets">
-         <template v-for="item in pagenums">
-           <span @click='slide($index)' class="slider-pagination-bullet" :class="$index == sliderinit.currentPage ? 'slider-pagination-bullet-active':''"></span>
+         <template v-for="n in pagenums">
+           <span @click='slide(n-1)' class="slider-pagination-bullet" :class="n-1 == sliderinit.currentPage ? 'slider-pagination-bullet-active':''"></span>
         </template>
       </div>
     </div>
@@ -171,6 +171,9 @@ export default {
      		basicdata:{
      			poswidth:'0',
           posheight:'0',
+          start: {},
+          end: {},
+          tracking: false,
      			animation:{
      				'animation-ease':false,
      			},
@@ -249,7 +252,7 @@ export default {
           return posheight
         }
      },
-    ready () {
+    mounted () {
       let that = this;
       //起始跳到指定页 更新为无样式的了,更符合常理
       that.slide(this.sliderinit.currentPage,'animationnone')
@@ -264,14 +267,17 @@ export default {
           this.pre();
       });
       // 第一次的滚动也要向上传递一次事件
-      that.$dispatch('slide',this.sliderinit.currentPage);
+      that.$emit('slide',this.sliderinit.currentPage);
 
       //自动轮播 支持无缝滚动
       that.clock().begin(that);
       // 设定垂直轮播class
       if(this.sliderinit.direction == 'vertical'){
         this.basicdata.containerClass['swiper-container-vertical'] = true;
-      }
+      };
+      // document.addEventListener('touchmove',function(e){
+      //   e.preventDefault();
+      // });
      },
      methods:{
      	swipeStart (e) {
@@ -286,52 +292,52 @@ export default {
         document.addEventListener('touchmove',that.preventDefault(e));
         if (e.type === 'touchstart') {
             if (e.touches.length>1) {
-              this.sliderinit.tracking = false;
+              this.basicdata.tracking = false;
                 return;
             } else {
-              this.sliderinit.tracking = true;
+              this.basicdata.tracking = true;
                     /* Hack - would normally use e.timeStamp but it's whack in Fx/Android */
-              this.sliderinit.start.t = new Date().getTime();
-              this.sliderinit.start.x = e.targetTouches[0].clientX;
-              this.sliderinit.start.y = e.targetTouches[0].clientY;
-              this.sliderinit.end.x = e.targetTouches[0].clientX;
-              this.sliderinit.end.y = e.targetTouches[0].clientY;
+              this.basicdata.start.t = new Date().getTime();
+              this.basicdata.start.x = e.targetTouches[0].clientX;
+              this.basicdata.start.y = e.targetTouches[0].clientY;
+              this.basicdata.end.x = e.targetTouches[0].clientX;
+              this.basicdata.end.y = e.targetTouches[0].clientY;
             }
         } else {
-                this.sliderinit.tracking = true;
+                this.basicdata.tracking = true;
                 /* Hack - would normally use e.timeStamp but it's whack in Fx/Android */
-                this.sliderinit.start.t = new Date().getTime();
-                this.sliderinit.start.x = e.clientX;
-                this.sliderinit.start.y = e.clientY;
-                this.sliderinit.end.x = e.clientX;
-                this.sliderinit.end.y = e.clientY;
+                this.basicdata.start.t = new Date().getTime();
+                this.basicdata.start.x = e.clientX;
+                this.basicdata.start.y = e.clientY;
+                this.basicdata.end.x = e.clientX;
+                this.basicdata.end.y = e.clientY;
         		}
         },
         swipeMove (e) {
-            if (this.sliderinit.tracking) {
+            if (this.basicdata.tracking) {
                 if (e.type === 'touchmove') {
                     e.preventDefault();
-                    this.sliderinit.end.x = e.targetTouches[0].clientX;
-                    this.sliderinit.end.y = e.targetTouches[0].clientY;
+                    this.basicdata.end.x = e.targetTouches[0].clientX;
+                    this.basicdata.end.y = e.targetTouches[0].clientY;
                 } else {
                     e.preventDefault();
-                    this.sliderinit.end.x = e.clientX;
-                    this.sliderinit.end.y = e.clientY;
+                    this.basicdata.end.x = e.clientX;
+                    this.basicdata.end.y = e.clientY;
                 }
                 if(this.sliderinit.direction == 'vertical'){
-                  this.basicdata.posheight = -(this.currentHeight) + this.sliderinit.end.y - this.sliderinit.start.y  + 'px';
+                  this.basicdata.posheight = -(this.currentHeight) + this.basicdata.end.y - this.basicdata.start.y  + 'px';
                   return
                 }
-                this.basicdata.poswidth = -(this.currentWidth) + this.sliderinit.end.x - this.sliderinit.start.x  + 'px';
+                this.basicdata.poswidth = -(this.currentWidth) + this.basicdata.end.x - this.basicdata.start.x  + 'px';
             }
         },
         swipeEnd (e) {
             let that = this;
-            this.sliderinit.tracking = false;
+            this.basicdata.tracking = false;
             let now = new Date().getTime();
-            let deltaTime = now - this.sliderinit.start.t;
-            let deltaX = this.sliderinit.end.x - this.sliderinit.start.x;
-            let deltaY = this.sliderinit.end.y - this.sliderinit.start.y;
+            let deltaTime = now - this.basicdata.start.t;
+            let deltaX = this.basicdata.end.x - this.basicdata.start.x;
+            let deltaY = this.basicdata.end.y - this.basicdata.start.y;
             // 自动滚动重启
             if(this.sliderinit.autoplay){
               let that = this;
@@ -424,12 +430,12 @@ export default {
               }else{
                 that.slide(0,'animationnone');
               }
-            },350);
+            },200);
             // 不传递广播事件
             return
           }
           // 广播事件
-          this.$dispatch('slide',this.sliderinit.currentPage)
+          this.$emit('slide',this.sliderinit.currentPage)
         },
         clock:function(){
           // 暂时这么写，写了自调用，但是vue不支持，欢迎小伙伴提供新的思路
@@ -451,7 +457,7 @@ export default {
         },
         // 阻止页面滚动
         preventDefault(e){
-          e.preventDefault(e);
+          e.preventDefault();
         }
      }
 

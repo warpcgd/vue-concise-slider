@@ -17,15 +17,17 @@
 }
 </style>
 <template>
+<div>
 	<slider :pages="someList" :sliderinit="sliderinit">
     <!-- slot  -->
-  </slider>
+    </slider>
   <div class="sliderButton">
-  <button @click="slidePre">上一页</button>
-  <button @click="slideNext">下一页</button>
-  <button @click="appendslider">添加一页</button>
-  <button @click="turnTo(2)">跳转到第三页</button>
+    <button @click="slidePre">上一页</button>
+    <button @click="slideNext">下一页</button>
+    <button @click="appendslider">添加一页</button>
+    <button @click="turnTo(2)">跳转到第三页</button>
   </div>
+</div>
 </template>
 <script>
 import slider from './slider'
@@ -55,9 +57,9 @@ export default {
             ],
             sliderinit: {
                 currentPage: 1,
-                start: {},
-                end: {},
-                tracking: false,
+                // start: {},
+                // end: {},
+                // tracking: false,
                 thresholdTime: 500,//滑动时间阈值判定距离
                 thresholdDistance: 100,//滑动距离阈值
                 // direction:'vertical',//垂直滚动
@@ -71,14 +73,15 @@ export default {
     },
     methods: {
         turnTo (num) {
-            // 传递事件
-            this.$broadcast('slideTo', num);
+            // 传递事件 vue 2.0 传递事件修改了，好的写法应该直接写在空vue类中
+            this.$children[0].$emit('slideTo', num);
+            console.log(this);
         },
         slideNext () {
-            this.$broadcast('slideNext');
+            this.$children[0].$emit('slideNext');
         },
         slidePre () {
-            this.$broadcast('slidePre');
+            this.$children[0].$emit('slidePre');
         },
         appendslider(){
             this.someList.push({

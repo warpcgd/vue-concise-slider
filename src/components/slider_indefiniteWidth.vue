@@ -17,6 +17,7 @@
 }
 </style>
 <template>
+<div>
 	<slider :pages="someList" :sliderinit="sliderinit">
     <!-- slot  -->
   </slider>
@@ -26,6 +27,7 @@
   <button @click="appendslider">添加一页</button>
   <button @click="turnTo(2)">跳转到第三页</button>
   </div>
+    </div>
 </template>
 <script>
 import slider from './slider'
@@ -77,13 +79,13 @@ export default {
     methods: {
         turnTo (num) {
             // 传递事件
-            this.$broadcast('slideTo', num);
+            this.$emit('slideTo', num);
         },
         slideNext () {
-            this.$broadcast('slideNext');
+            this.$emit('slideNext');
         },
         slidePre () {
-            this.$broadcast('slidePre');
+            this.$emit('slidePre');
         },
         appendslider(){
             this.someList.push({
