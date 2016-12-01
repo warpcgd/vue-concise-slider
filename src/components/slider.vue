@@ -266,8 +266,6 @@ export default {
       that.$on('slidePre', () => {
           this.pre();
       });
-      // 第一次的滚动也要向上传递一次事件
-      that.$emit('slide',this.sliderinit.currentPage);
 
       //自动轮播 支持无缝滚动
       that.clock().begin(that);

@@ -18,7 +18,7 @@
 </style>
 <template>
 <div>
-	<slider :pages="someList" :sliderinit="sliderinit">
+	<slider :pages="someList" :sliderinit="sliderinit" @slide='slide'>
     <!-- slot  -->
     </slider>
   <div class="sliderButton">
@@ -91,12 +91,11 @@ export default {
                     color:'#fff'
                 }
             });
-        }
-    },
-    events:{
+        },
+        // 监听事件也发生了变化,需要指向一个子组件实例
         slide(pagenum){
             console.log(pagenum);
         }
-    }
+    },
 }
 </script>
