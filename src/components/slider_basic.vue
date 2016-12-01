@@ -95,7 +95,7 @@ export default {
     },
     events:{
         slide(pagenum){
-            // console.log(pagenum);
+            console.log(pagenum);
         }
     }
 }
