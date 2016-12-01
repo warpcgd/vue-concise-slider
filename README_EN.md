@@ -6,6 +6,9 @@ English | [中文](README.md)
 
 vue-slider,A simple sliding component,has easy configuration,support self-adaption / fullscreen / button / page,and is compatible with mobile and PC terminal
 
+###version
+Supported vue2.0+
+
 ###Achieved
 - [x] Self-adaption Fullscreen
 - [x] Compatible with mobile and PC terminal
@@ -65,11 +68,7 @@ export default {
         ],
         //Slider configuration[obj]
         sliderinit: {
-          // I have write some useless configuration,in next edition it will be set into default configuration
           currentPage: 0,//current Page of slider
-          start: {},//Store click information
-          end: {},//Store click information
-          tracking: false,//swipestart state estimation
           thresholdDistance: 500,//Minimal distance (in px) to trigger swipe to next/previous slide during swipes
           thresholdTime: 100,//Minimal duration (in ms) to trigger swipe to next/previous slide during swipes
           autoplay:1000,//delay between transitions (in ms).
@@ -174,19 +173,19 @@ export default {
     <td><code>slideTo</code></td>
     <td>number</td>
     <td>slide to (number) page</td>
-    <td><code>this.$broadcast('slideTo', num)</code></td>
+    <td><code>childComponents.$emit('slideTo', num)</code></td>
   </tr>
  <tr align="center">
     <td><code>slideNext</code></td>
     <td>-</td>
     <td>next page</td>
-    <td><code>this.$broadcast('slideNext')</code></td>
+    <td><code>childComponents.$emit('slideNext')</code></td>
   </tr>
   <tr align="center">
     <td><code>slideTo</code></td>
     <td>-</td>
     <td>prev page</td>
-    <td><code>this.$broadcast('slidePre')</code></td>
+    <td><code>childComponents.$emit('slidePre')</code></td>
   </tr>
  </tbody>
 </table>
@@ -205,7 +204,7 @@ export default {
     <td><code>slide</code></td>
     <td>number</td>
     <td>every slide handle even success or false can trigger this,and tell us now num of page</td>
-    <td><code>vm.$on('slide', function(pagenum){console.log(pagenum)})</code></td>
+    <td><code>childComponents.$on('slide', function(pagenum){console.log(pagenum)})</code></td>
   </tr>
  </tbody>
 </table>

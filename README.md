@@ -67,7 +67,6 @@ export default {
         ],
         //滑动配置[obj]
         sliderinit: {
-          // 写了一些无需配置的项，下个版本会放到slider设定默认值
           currentPage: 0,//当前页码
           thresholdDistance: 500,//滑动判定距离
           thresholdTime: 100,//滑动判定时间
@@ -173,19 +172,19 @@ export default {
     <td><code>slideTo</code></td>
     <td>number</td>
     <td>滑动到(number)页</td>
-    <td><code>$emit('slideTo', num)</code></td>
+    <td><code>childComponents.$emit('slideTo', num)</code></td>
   </tr>
  <tr align="center">
     <td><code>slideNext</code></td>
     <td>-</td>
     <td>滑动到下一页</td>
-    <td><code>$emit('slideNext')</code></td>
+    <td><code>childComponents.$emit('slideNext')</code></td>
   </tr>
   <tr align="center">
     <td><code>slideTo</code></td>
     <td>-</td>
     <td>滑动到上一页</td>
-    <td><code>$emit('slidePre')</code></td>
+    <td><code>childComponents.$emit('slidePre')</code></td>
   </tr>
  </tbody>
 </table>
