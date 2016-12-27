@@ -34,7 +34,7 @@ Follow like this demo
 
 ```html
 <template>
-  <slider :pages="someList" :sliderinit="sliderinit">
+  <slider :pages="pages" :sliderinit="sliderinit">
     <!-- slot  -->
   </slider>
 </template>
