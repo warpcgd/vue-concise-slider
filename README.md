@@ -33,7 +33,7 @@ vue-slider,一个简单的滑动组件,配置简单,支持自适应/全屏+按�
 
 ```html
 <template>
-  <slider :pages="someList" :sliderinit="sliderinit">
+  <slider :pages="pages" :sliderinit="sliderinit">
     <!-- slot  -->
   </slider>
 </template>
