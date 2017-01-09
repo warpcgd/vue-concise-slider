@@ -21,17 +21,40 @@
 }
 .slider-wrapper {
     box-sizing: content-box;
-    display: flex;
+    /*display: flex;*/
     height: 100%;
     position: relative;
     transition-property: transform;
     width: 100%;
     z-index: 1;
+    display: box;              /* OLD - Android 4.4- */
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    /* 09版 */
+    -webkit-box-orient: horizontal;
+    /* 12版 */
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    -ms-flex-direction: row;
+    -o-flex-direction: row;
+    flex-direction: row;
 }
 /*垂直*/
 .swiper-container-vertical > .slider-wrapper{
+  /*flex-direction: column;*/
+  /* 09版 */
+  -webkit-box-orient: vertical;
+  /* 12版 */
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
   flex-direction: column;
 }
+
 
 .slider-item {
     flex-shrink: 0;
