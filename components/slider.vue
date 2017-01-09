@@ -44,8 +44,17 @@
 }
 /*垂直*/
 .swiper-container-vertical > .slider-wrapper{
+  /*flex-direction: column;*/
+  /* 09版 */
+  -webkit-box-orient: vertical;
+  /* 12版 */
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
   flex-direction: column;
 }
+
 
 .slider-item {
     flex-shrink: 0;
