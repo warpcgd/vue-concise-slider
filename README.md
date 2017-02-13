@@ -6,6 +6,7 @@
 vue-slider,一个简单的滑动组件,配置简单,支持自适应/全屏+按钮+分页,同时兼容移动端和PC端
 
 ##版本
+v2.1
 支持vue2.0+
 
 ###目前已实现
@@ -15,6 +16,7 @@ vue-slider,一个简单的滑动组件,配置简单,支持自适应/全屏+按�
 - [x] 定时自动切换
 - [x] 不定宽度滚动
 - [x] 无缝循环滚动
+- [x] 多级滚动
 
 ###未来将实现
 - [ ] 渐变滚动
@@ -154,6 +156,18 @@ export default {
     <td>boolean</td>
     <td>false</td>
     <td>循环滚动</td>
+  </tr>
+  <tr align="center">
+    <td><code>infinite</code></td>
+    <td>number</td>
+    <td>1</td>
+    <td>loop无缝滚动时,可以设置前后遍历数</td>
+  </tr>
+  <tr align="center">
+    <td><code>slidesToScroll</code></td>
+    <td>number</td>
+    <td>1</td>
+    <td>每次滑动切换的页数</td>
   </tr>
  </tbody>
 </table>

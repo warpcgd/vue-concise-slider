@@ -56,13 +56,10 @@ export default {
                 }
             ],
             sliderinit: {
-                currentPage: 1,
-                // start: {},
-                // end: {},
-                // tracking: false,
+                currentPage: 0,
                 thresholdTime: 500,//滑动时间阈值判定距离
                 thresholdDistance: 100,//滑动距离阈值
-                // direction:'vertical',//垂直滚动
+                // slideSpeed:1000,//滑动速度
                 // loop:true,//无限循环
                 // autoplay:1000,//自动播放:时间[ms]
             }
@@ -92,9 +89,9 @@ export default {
                 }
             });
         },
-        // 监听事件也发生了变化,需要指向一个子组件实例
+        // 监听事件发生了变化,需要指向一个子组件实例
         slide(pagenum){
-            console.log(pagenum);
+            console.log('currentPage:'+pagenum);
         }
     },
 }

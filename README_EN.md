@@ -7,6 +7,7 @@ English | [中文](README.md)
 vue-slider,A simple sliding component,has easy configuration,support self-adaption / fullscreen / button / page,and is compatible with mobile and PC terminal
 
 ###version
+v2.1
 Supported vue2.0+
 
 ###Achieved
@@ -16,7 +17,7 @@ Supported vue2.0+
 - [x] Autoplay Slides
 - [x] Auto Slides Per View / Carousel Mode
 - [x] Loop Mode / Infinite Loop
-
+- [x] Loop Mode / multiple slide
 ###To Do List
 - [ ] Fade Effect
 - [ ] Parallax
@@ -155,6 +156,18 @@ export default {
     <td>boolean</td>
     <td>false</td>
     <td>Set to true to enable continuous loop mode</td>
+  </tr>
+  <tr align="center">
+    <td><code>infinite</code></td>
+    <td>like carousel, works with multiple slides</td>
+    <td>1</td>
+    <td></td>
+  </tr>
+  <tr align="center">
+    <td><code>slidesToScroll</code></td>
+    <td>number</td>
+    <td>1</td>
+    <td>slides scrolled at once</td>
   </tr>
  </tbody>
 </table>

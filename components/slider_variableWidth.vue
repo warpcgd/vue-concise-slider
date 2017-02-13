@@ -32,7 +32,7 @@
 <script>
 import slider from './slider'
 export default {
-	 el: '#sliderindefiniteWidth',
+	 el: '#slidervariableWidth',
 	 data () {
         return {
             someList:[
@@ -57,17 +57,16 @@ export default {
                     style:{
                          'background':'#7baabe',
                          'width':'40%',
+                         'margin-right':'20px'
                     },
                 }
             ],
             sliderinit: {
                 currentPage: 1,
-                start: {},
-                end: {},
                 tracking: false,
                 thresholdTime: 500,//滑动判定距离
                 thresholdDistance: 100,//滑动判定时间
-                // 不定宽度的无限循环感觉很丑，还需优化
+                // 不定宽度的无限循环感觉很丑:(
                 // loop:true,//无限循环
                 // autoplay:1000,//自动播放:时间[ms]
             }
@@ -99,7 +98,7 @@ export default {
         },
          // 监听事件也发生了变化,需要指向一个子组件实例
         slide(pagenum){
-            console.log(pagenum);
+            console.log('currentPage:'+pagenum);
         }
     }
 }

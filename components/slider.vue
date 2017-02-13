@@ -9,7 +9,9 @@
     height: 400px;
     margin: 20px auto;
     width: 70%;
-    }
+    position: relative;
+    white-space: nowrap;
+}
 .slider-center-center{
 		margin: auto;
     z-index: 1;
@@ -21,26 +23,16 @@
 }
 .slider-wrapper {
     box-sizing: content-box;
-    /*display: flex;*/
+    display: flex;
     height: 100%;
     position: relative;
     transition-property: transform;
     width: 100%;
     z-index: 1;
-    display: box;              /* OLD - Android 4.4- */
-    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
-    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
-    display: -ms-flexbox;      /* TWEENER - IE 10 */
-    display: -webkit-flex;     /* NEW - Chrome */
-    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
-    /* 09版 */
-    -webkit-box-orient: horizontal;
-    /* 12版 */
-    -webkit-flex-direction: row;
-    -moz-flex-direction: row;
-    -ms-flex-direction: row;
-    -o-flex-direction: row;
-    flex-direction: row;
+    /*display: inline-block;*/
+    /*white-space: nowrap;*/
+    /*font-size: 0;*/
+    /*line-height: 0;*/
 }
 /*垂直*/
 .swiper-container-vertical > .slider-wrapper{
@@ -54,7 +46,6 @@
   -o-flex-direction: column;
   flex-direction: column;
 }
-
 
 .slider-item {
     flex-shrink: 0;
@@ -70,15 +61,16 @@
     justify-content: center;
     text-align: center;
     color: #fff;
+    /*display: inline-block;*/
 }
 .slider-item {
     background-position: center center!important;
     background-size: cover!important;
 }
-.animation-ease {
+/*.animation-ease {
 		-webkit-transition: -webkit-transform 350ms cubic-bezier(.165, .84, .44, 1);
 		transition: transform 350ms cubic-bezier(.165, .84, .44, 1);
-}
+}*/
 .slider-pagination {
     position: absolute;
     text-align: center;
@@ -150,43 +142,60 @@
     }
 }
 </style>
-<template>
+
+  <template>
     <div class='slider-container' :class = 'basicdata.containerClass'>
       <div class="slider-wrapper"
       :style="styleobj"
-      :class="basicdata.animation"
 	    @touchmove="swipeMove"
    	  @touchstart="swipeStart"
       @touchend="swipeEnd"
       @mousedown="swipeStart"
       @mouseup="swipeEnd"
       @mousemove="swipeMove"
+      @webkitTransitionEnd = "onTransitionEnd"
+      @transitionend = "onTransitionEnd"
       >
       <!-- 正常滚动 -->
        <template  v-if="!sliderinit.loop">
         <template  v-for="item in pages">
-      	 <div class="slider-item" :style="item.style">
+      	  <div class="slider-item" :style="item.style">
         	{{item.title}}
        	  </div>
         </template>
        </template>
       <!-- 无缝滚动 -->
        <template  v-if="sliderinit.loop">
-        <div class="slider-item" :style="pages[pages.length-1].style">{{pages[pages.length-1].title}}</div>
-         <template  v-for="item in pages">
-          <div class="slider-item" :style="item.style">{{item.title}}</div>
+
+
+         <template v-if="sliderinit.infinite" v-for="(item, index) in pages" >
+            <div v-if="index+sliderinit.infinite-pages.length>=0" class="slider-item" :style=" item.style">{{item.title}}</div>
          </template>
-        <div class="slider-item" :style="pages[0].style">{{pages[0].title}}</div>
+         <template v-if="!sliderinit.infinite">
+            <div class="slider-item" :style="pages[pages.length-1].style">{{pages[pages.length-1].title}}</div>
+         </template>
+         <!-- 无缝滚动copy最后项 -->
+         <template  v-for="item in pages">
+            <div class="slider-item" :style="item.style">{{item.title}}</div>
+         </template>
+         <!-- 无缝滚动copy第一项 -->
+         <template v-if="sliderinit.infinite" v-for="(item, index) in pages" >
+            <div v-if="index-sliderinit.infinite<0" class="slider-item" :style=" item.style">{{item.title}}</div>
+         </template>
+         <template v-if="!sliderinit.infinite">
+            <div class="slider-item" :style="pages[0].style">{{pages[0].title}}</div>
+         </template>
        </template>
       </div>
       <div class="slider-pagination slider-pagination-bullets">
-         <template v-for="n in pagenums">
-           <span @click='slide(n-1)' class="slider-pagination-bullet" :class="n-1 == sliderinit.currentPage ? 'slider-pagination-bullet-active':''"></span>
+        <template  v-for="n in pagenums">
+           <span @click='slide(n-1)' class="slider-pagination-bullet" :class="n-1 == sliderinit.currentPage? 'slider-pagination-bullet-active':''"></span>
         </template>
       </div>
     </div>
   </template>
 <script>
+import detectPrefixes from '.././utils/detect-prefixes.js';
 export default {
      props: ['sliderinit', 'pages'],
      data(){
@@ -197,52 +206,55 @@ export default {
           start: {},
           end: {},
           tracking: false,
-     			animation:{
-     				'animation-ease':false,
-     			},
+     			animation:false,
           containerClass:{
             'swiper-container-vertical':false,
           },
           setIntervalid:'',
+          prefixes:detectPrefixes(),
+          transitionEnding:false,
      		}
      	}
      },
      computed:{
      		// 动画执行obj
      		styleobj: function () {
-     			return {'transform': 'translate3D(' + this.basicdata.poswidth + ',' + this.basicdata.posheight + ',0)'}
+          let style = {};
+          style['transform']='translate3D(' + this.basicdata.poswidth + ',' + this.basicdata.posheight + ',0)';
+          style[this.basicdata.prefixes.transition+'TimingFunction'] = 'ease';
+          style[this.basicdata.prefixes.transition+'Duration'] = (this.basicdata.animation?this.sliderinit.slideSpeed||300:0) + 'ms';
+     			return style
    		  },
    		  // pagenum滑动数
    		  pagenums: function(){
    		   	return this.pages.length
    		  },
-        // 组件的核心，计算当前父级需要进行的偏移,每次要遍历节点,应该直接储存节点，提高性能
+        // 组件的核心，计算当前父级需要进行的偏移,每次要遍历节点
         currentWidth:{
           get:function(){
-          let poswidth = 0;
-          let $slider;
-          let lastPage = this.sliderinit.currentPage-1;
-          let srollbar = false;
-          if(this.sliderinit.loop){
-            lastPage = this.sliderinit.currentPage;
-          }
-          // 获取slideritem子集
-          for(let item in this.$el.children){
-            if(/slider-wrapper/ig.test(this.$el.children[item].className)){
-               $slider = this.$el.children[item]
+            let $slider;
+            let lastPage = this.sliderinit.currentPage;
+            let srollbar = false;
+            if(this.sliderinit.loop){
+              if(this.sliderinit.infinite){
+                lastPage = this.sliderinit.currentPage+(this.sliderinit.infinite<=this.pages.length?this.sliderinit.infinite:this.pages.length);
+              }else{
+                lastPage = this.sliderinit.currentPage+1;
+              }
             }
-          }
-           // 遍历子集
-          let $sliderChildren  = $slider.children;
-          for(let item in $sliderChildren){
-            if(item <= lastPage){
-              // 找到实际宽度clientWidth+外边距
-              poswidth += $sliderChildren[item].offsetWidth;
-              poswidth += parseInt($sliderChildren[item].style.marginRight.length?$sliderChildren[item].style.marginRight:0);
-              poswidth += parseInt($sliderChildren[item].style.marginLeft.length?$sliderChildren[item].style.marginLeft:0);
+            // 获取slideritem子集
+            for(let item in this.$el.children){
+              if(/slider-wrapper/ig.test(this.$el.children[item].className)){
+                 $slider = this.$el.children[item]
+              }
             }
-          }
-          return poswidth
+             // 遍历子集
+            let $sliderChildren  = $slider.children;
+            let offsetLeft = $sliderChildren[lastPage].offsetLeft
+            if(this.sliderinit.loop){
+               offsetLeft = $sliderChildren[lastPage].offsetLeft
+            }
+            return offsetLeft
          },
          set:function(value){
           return value;
@@ -254,8 +266,12 @@ export default {
           let lastPage = this.sliderinit.currentPage-1;
           let srollbar = false;
           if(this.sliderinit.loop){
-            lastPage = this.sliderinit.currentPage;
-          }
+              if(this.sliderinit.infinite){
+                lastPage = this.sliderinit.currentPage+(this.sliderinit.infinite<=this.pages.length?this.sliderinit.infinite:this.pages.length)-1;
+              }else{
+                lastPage = this.sliderinit.currentPage+1;
+              }
+            }
           // 获取slideritem子集
           for(let item in this.$el.children){
             if(/slider-wrapper/ig.test(this.$el.children[item].className)){
@@ -268,8 +284,8 @@ export default {
             if(item <= lastPage){
               // 找到实际宽度clientWidth+外边距
               posheight += $sliderChildren[item].offsetHeight;
-              posheight += parseInt($sliderChildren[item].style.marginTop.length?$sliderChildren[item].style.marginTop:0);
-              posheight += parseInt($sliderChildren[item].style.marginBottom.length?$sliderChildren[item].style.marginBottom:0);
+              posheight += parseInt($sliderChildren[item].style.marginTop||0);
+              posheight += parseInt($sliderChildren[item].style.marginBottom||0);
             }
           }
           return posheight
@@ -296,14 +312,14 @@ export default {
       if(this.sliderinit.direction == 'vertical'){
         this.basicdata.containerClass['swiper-container-vertical'] = true;
       };
-      // document.addEventListener('touchmove',function(e){
-      //   e.preventDefault();
-      // });
      },
      methods:{
      	swipeStart (e) {
         let that = this ;
-     		this.basicdata.animation['animation-ease'] = false;
+        if(this.basicdata.transitionEnding){
+          return
+        }
+     		this.basicdata.animation = false;
         // 暂停自动滚动
         if(this.sliderinit.autoplay){
           let that = this;
@@ -353,7 +369,6 @@ export default {
             }
         },
         swipeEnd (e) {
-            let that = this;
             this.basicdata.tracking = false;
             let now = new Date().getTime();
             let deltaTime = now - this.basicdata.start.t;
@@ -363,11 +378,11 @@ export default {
             if(this.sliderinit.autoplay){
               let that = this;
               setTimeout(function(){
-              that.clock().begin(that);
-              },350);
+                that.clock().begin(that);
+              },this.sliderinit.autoplay);
             };
             // 解除阻止
-            document.removeEventListener('touchmove',that.preventDefault(e));
+            document.removeEventListener('touchmove',this.preventDefault(e));
             /* work out what the movement was */
             if (deltaTime > this.sliderinit.thresholdTime) {
             		this.slide(this.sliderinit.currentPage);
@@ -403,24 +418,26 @@ export default {
             }
         },
         pre () {
-			       if (this.sliderinit.currentPage != 0) {
-						  this.sliderinit.currentPage -= 1;
+			       if (this.sliderinit.currentPage >= 1) {
+						  this.sliderinit.currentPage -= this.sliderinit.slidesToScroll||1;
 				  	  this.slide();
-		         } else if(this.sliderinit.loop) {
-			         this.sliderinit.currentPage -= 1;
-               this.slide(this.sliderinit.currentPage,'loop');
+		         } else if(this.sliderinit.loop &&this.sliderinit.currentPage == 0) {
+			         this.sliderinit.currentPage -= this.sliderinit.slidesToScroll||1;
+               this.basicdata.transitionEnding = true;
+               this.slide();
 					   }else{
               this.slide();
              }
 
         },
         next () {
-			     if (this.sliderinit.currentPage != this.pagenums - 1) {
-						this.sliderinit.currentPage += 1;
+			     if (this.sliderinit.currentPage < this.pagenums - 1) {
+						this.sliderinit.currentPage += this.sliderinit.slidesToScroll||1;
 						this.slide();
-			     } else if(this.sliderinit.loop) {
-						this.sliderinit.currentPage += 1;
-            this.slide(this.sliderinit.currentPage,'loop');
+			     } else if(this.sliderinit.loop && this.sliderinit.currentPage == this.pagenums - 1) {
+						this.sliderinit.currentPage += this.sliderinit.slidesToScroll||1;
+            this.basicdata.transitionEnding = true;
+            this.slide();
            }else{
             this.slide();
            }
@@ -429,57 +446,65 @@ export default {
           let that = this;
 
           //执行动画
-			    this.basicdata.animation['animation-ease'] = true;
+			    that.basicdata.animation = true;
           // 无样式滚动
           if(type =='animationnone'){
-            this.basicdata.animation['animation-ease'] = false;
+            that.basicdata.animation = false;
           }
           if(pagenum||pagenum == 0){
-            this.sliderinit.currentPage = pagenum;
+            that.sliderinit.currentPage = pagenum;
           }
           // 增加垂直滚动判定
-          if(this.sliderinit.direction == 'vertical'){
-            this.basicdata.posheight = -this.currentHeight + 'px';
+          if(that.sliderinit.direction == 'vertical'){
+            that.basicdata.posheight = -that.currentHeight + 'px';
           }else{
-			      this.basicdata.poswidth = -this.currentWidth + 'px';
-          }
-          //下面350定时写死了，下次更新会提供API修改
-          if(type == 'loop'){
-            setTimeout(function(){
-              if(that.sliderinit.currentPage == -1){
-                that.slide(that.pagenums-1,'animationnone');
-              }else{
-                that.slide(0,'animationnone');
-              }
-            },200);
-            // 不传递广播事件
-            return
+			      that.basicdata.poswidth = -that.currentWidth + 'px';
           }
           // 广播事件
-          this.$emit('slide',this.sliderinit.currentPage)
+          if(that.sliderinit.currentPage < 0|| that.sliderinit.currentPage >= that.pagenums){
+            return
+          }
+          that.$emit('slide',that.sliderinit.currentPage)
         },
         clock:function(){
           // 暂时这么写，写了自调用，但是vue不支持，欢迎小伙伴提供新的思路
           return {
             begin:function(that){
              if(that.sliderinit.autoplay){
-              that.setIntervalid = setInterval(function(){
-              that.next();
-              if(that.sliderinit.currentPage == that.pagenums - 1&&!that.sliderinit.loop){
-                clearInterval(that.setIntervalid)
+              if(that.basicdata.setIntervalid){
+                return
               }
+              that.basicdata.setIntervalid = setInterval(function(){
+                that.next();
+                if(that.sliderinit.currentPage == that.pagenums - 1&&!that.sliderinit.loop){
+                  clearInterval(that.basicdata.setIntervalid);
+                  that.basicdata.setIntervalid = 0;
+                }
               }, that.sliderinit.autoplay);
-              }
+             }
             },
             stop:function(that){
-              clearInterval(that.setIntervalid)
+              clearInterval(that.basicdata.setIntervalid);
+              that.basicdata.setIntervalid = 0;
             },
             }
         },
         // 阻止页面滚动
         preventDefault(e){
           e.preventDefault();
-        }
+        },
+        // 无线循环中transitionEnd
+        onTransitionEnd(){
+          if(this.sliderinit.loop){
+              this.basicdata.transitionEnding = false;
+              if(this.sliderinit.currentPage<0){
+                this.slide(this.pagenums+this.sliderinit.currentPage,'animationnone');
+              }else if(this.sliderinit.currentPage >= this.pagenums){
+                this.slide(0+this.sliderinit.currentPage-this.pagenums,'animationnone');
+              }
+
+          }
+        },
      }
 
 }
