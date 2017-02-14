@@ -166,8 +166,6 @@
        </template>
       <!-- 无缝滚动 -->
        <template  v-if="sliderinit.loop">
-
-
          <template v-if="sliderinit.infinite" v-for="(item, index) in pages" >
             <div v-if="index+sliderinit.infinite-pages.length>=0" class="slider-item" :style=" item.style">{{item.title}}</div>
          </template>
@@ -293,7 +291,7 @@ export default {
      },
     mounted () {
       let that = this;
-      //起始跳到指定页 更新为无样式的了,更符合常理
+      //起始跳到指定页 无样式
       that.slide(this.sliderinit.currentPage,'animationnone')
     	//定制事件
       that.$on('slideTo', (num) => {
@@ -493,7 +491,7 @@ export default {
         preventDefault(e){
           e.preventDefault();
         },
-        // 无线循环中transitionEnd
+        // 无限循环中transitionEnd
         onTransitionEnd(){
           if(this.sliderinit.loop){
               this.basicdata.transitionEnding = false;
