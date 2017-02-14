@@ -18,6 +18,7 @@ Supported vue2.0+
 - [x] Auto Slides Per View / Carousel Mode
 - [x] Loop Mode / Infinite Loop
 - [x] Loop Mode / multiple slide
+
 ###To Do List
 - [ ] Fade Effect
 - [ ] Parallax
@@ -25,6 +26,7 @@ Supported vue2.0+
 ###Example
 
 [demo](https://warpcgd.github.io/vue-slider/index.html)
+
 [full documents](https://github.com/warpcgd/vue-slider/tree/gh-pages)
 
 ###How to use it
@@ -159,9 +161,9 @@ export default {
   </tr>
   <tr align="center">
     <td><code>infinite</code></td>
-    <td>like carousel, works with multiple slides</td>
+    <td>number</td>
     <td>1</td>
-    <td></td>
+    <td>like carousel, works with multiple slides</td>
   </tr>
   <tr align="center">
     <td><code>slidesToScroll</code></td>
@@ -226,4 +228,4 @@ export default {
 Welcome to leave your opinion:https://github.com/warpcgd/vue-slider/issues/1
 
 ###BUG？oh no!
-Can be submitted here, will be dealt with as soon as possible:https://github.com/warpcgd/vue-slider/issues/2
+You can be submitted here, and i will be dealt with as soon as possible:https://github.com/warpcgd/vue-slider/issues/2

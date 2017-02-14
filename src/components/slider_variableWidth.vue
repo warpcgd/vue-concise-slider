@@ -79,7 +79,6 @@ export default {
         turnTo (num) {
             // 传递事件 vue 2.0 传递事件修改了，好的写法应该直接写在空vue类中
             this.$children[0].$emit('slideTo', num);
-            console.log(this);
         },
         slideNext () {
             this.$children[0].$emit('slideNext');
