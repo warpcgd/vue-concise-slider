@@ -24,7 +24,7 @@ v2.1
 
 ### 例子
 
-[slider效果](https://warpcgd.github.io/vue-slider/index.html)
+[slider效果](https://warpcgd.github.io/vue-slider/index.html)</br>
 [完整文档](https://github.com/warpcgd/vue-slider/tree/gh-pages)
 
 ### 快速开始使用
