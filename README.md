@@ -6,11 +6,11 @@
 
 vue-slider,一个简单的滑动组件,配置简单,支持自适应/全屏+按钮+分页,同时兼容移动端和PC端
 
-##版本
+## 版本
 v2.1
 支持vue2.0+
 
-###目前已实现
+### 目前已实现
 - [x] 全屏自适应
 - [x] 移动端兼容
 - [x] 垂直滚动
@@ -19,20 +19,20 @@ v2.1
 - [x] 无缝循环滚动
 - [x] 多级滚动
 
-###未来将实现
+### 未来将实现
 - [ ] 渐变滚动
 - [ ] 视差效果
 
-###例子
+### 例子
 
 [slider效果](https://warpcgd.github.io/vue-slider/index.html)
 [完整文档](https://github.com/warpcgd/vue-slider/tree/gh-pages)
 
-###快速开始使用
+### 快速开始使用
 
 通过以下demo来实现
 
-###app.vue父级组件
+### app.vue父级组件
 
 ```html
 <template>
@@ -88,7 +88,7 @@ export default {
 </script>
 
 ```
-###pages/初始化参数
+### pages/初始化参数
 <table width="100%">
 <thead>
   <tr>
@@ -113,7 +113,7 @@ export default {
   </tr>
  </tbody>
 </table>
-###sliderinit/初始化参数
+### sliderinit/初始化参数
 <table width="100%">
 <thead>
   <tr>
@@ -174,7 +174,7 @@ export default {
   </tr>
  </tbody>
 </table>
-###API/父级传递的事件
+### API/父级传递的事件
 <table width="100%" align="center">
 <thead>
   <tr>
@@ -205,7 +205,7 @@ export default {
   </tr>
  </tbody>
 </table>
-###API/父级监听的事件
+### API/父级监听的事件
 <table width="100%" align="center">
 <thead>
   <tr>
@@ -225,8 +225,8 @@ export default {
  </tbody>
 </table>
 
-###有更好的想法？
+### 有更好的想法？
 欢迎来留下你的意见:https://github.com/warpcgd/vue-slider/issues/1
 
-###BUG？oh no!
+### BUG？oh no!
 可以在这里提交,会尽快处理:https://github.com/warpcgd/vue-slider/issues/2
