@@ -1,16 +1,16 @@
 English | [中文](README.md)
 
-##vue-slider.js
+## vue-slider.js
 ![](vue-slider-github.jpg)
 * * *
 
 vue-slider,A simple sliding component,has easy configuration,support self-adaption / fullscreen / button / page,and is compatible with mobile and PC terminal
 
-###version
+### version
 v2.1
 Supported vue2.0+
 
-###Achieved
+### Achieved
 - [x] Self-adaption Fullscreen
 - [x] Compatible with mobile and PC terminal
 - [x] Vertical Slides
@@ -19,21 +19,20 @@ Supported vue2.0+
 - [x] Loop Mode / Infinite Loop
 - [x] Loop Mode / multiple slide
 
-###To Do List
+### To Do List
 - [ ] Fade Effect
 - [ ] Parallax
 
-###Example
+### Example
 
-[demo](https://warpcgd.github.io/vue-slider/index.html)
-
+[demo](https://warpcgd.github.io/vue-slider/index.html)</br>
 [full documents](https://github.com/warpcgd/vue-slider/tree/gh-pages)
 
-###How to use it
+### How to use it
 
 Follow like this demo
 
-###app.vue / parent component
+### app.vue / parent component
 
 ```html
 <template>
@@ -87,7 +86,7 @@ export default {
 </script>
 
 ```
-###Pages / Initialize parameter
+### Pages / Initialize parameter
 <table width="100%">
 <thead>
   <tr>
@@ -112,7 +111,9 @@ export default {
   </tr>
  </tbody>
 </table>
-###Sliderinit / Initialize parameter
+
+### Sliderinit / Initialize parameter
+
 <table width="100%">
 <thead>
   <tr>
@@ -173,7 +174,9 @@ export default {
   </tr>
  </tbody>
 </table>
-###API / Self-Events
+
+### API / Self-Events
+
 <table width="100%" align="center">
 <thead>
   <tr>
@@ -204,7 +207,9 @@ export default {
   </tr>
  </tbody>
 </table>
-###API / Parents-Event
+
+### API / Parents-Event
+
 <table width="100%" align="center">
 <thead>
   <tr>
@@ -224,8 +229,8 @@ export default {
  </tbody>
 </table>
 
-###Have a better idea？
+### Have a better idea？
 Welcome to leave your opinion:https://github.com/warpcgd/vue-slider/issues/1
 
-###BUG？oh no!
+### BUG？oh no!
 You can be submitted here, and i will be dealt with as soon as possible:https://github.com/warpcgd/vue-slider/issues/2
