@@ -3,7 +3,6 @@
 ## vue-slider.js
 ![](vue-slider-github.jpg)
 * * *
-
 vue-slider,一个简单的滑动组件,配置简单,支持自适应/全屏+按钮+分页,同时兼容移动端和PC端
 
 ## 版本
