@@ -1,6 +1,6 @@
 中文 | [English](README_EN.md)
 
-##vue-slider.js
+## vue-slider.js
 ![](vue-slider-github.jpg)
 * * *
 
