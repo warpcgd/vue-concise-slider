@@ -85,7 +85,6 @@ export default {
     }
 }
 </script>
-
 ```
 ### pages/初始化参数
 <table width="100%">
@@ -112,7 +111,9 @@ export default {
   </tr>
  </tbody>
 </table>
-#### sliderinit/初始化参数
+
+### sliderinit/初始化参数
+
 <table width="100%">
 <thead>
   <tr>
@@ -173,7 +174,9 @@ export default {
   </tr>
  </tbody>
 </table>
-#### API/父级传递的事件
+
+### API/父级传递的事件
+
 <table width="100%" align="center">
 <thead>
   <tr>
@@ -204,7 +207,9 @@ export default {
   </tr>
  </tbody>
 </table>
-#### API/父级监听的事件
+
+### API/父级监听的事件
+
 <table width="100%" align="center">
 <thead>
   <tr>
