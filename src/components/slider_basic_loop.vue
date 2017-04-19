@@ -18,7 +18,7 @@
 </style>
 <template>
 <div>
-	<slider :pages="someList" :sliderinit="sliderinit" @slide='slide'>
+	<slider :pages="someList" :sliderinit="sliderinit" @slide='slide' @itemClick="itemClick">
     <!-- slot  -->
     </slider>
   <div class="sliderButton">
@@ -91,6 +91,9 @@ export default {
         //
         slide(pagenum){
             console.log(pagenum);
+        },
+        itemClick(position){
+            console.log('Current item postion: ' + postion);
         }
     },
 }
