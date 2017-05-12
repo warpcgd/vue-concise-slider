@@ -1,20 +1,5 @@
 <style>
-.sliderButton{
-
-    text-align: center;
-}
-.sliderButton button{
-    display: inline-block;
-    background: #fff;
-    border-radius: 3px;
-/*    width: 100px;*/
-    height: 30px;
-    border: 1px solid #333;
-    line-height: 30px;
-    margin-left: 10px;
-    padding: 0 15px;
-     margin-top: 10px;
-}
+@import "../utils/common";
 </style>
 <template>
 <div>
