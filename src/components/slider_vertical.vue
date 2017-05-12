@@ -1,5 +1,5 @@
-<style  lang="scss">
-@import "../utils/common";
+<style lang="sass">
+@import "../utils/common.scss"
 </style>
 <template>
 <div>
