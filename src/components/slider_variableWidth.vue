@@ -1,4 +1,4 @@
-<style>
+<style lang="scss">
 @import "../utils/common";
 </style>
 <template>
@@ -27,7 +27,7 @@ export default {
             'background': '#1bbc9b',
             'width': '80%',
             'margin-right': '20px'
-          },
+          }
         },
         {
           title: 'slide2',
@@ -35,7 +35,7 @@ export default {
             'background': '#4bbfc3',
             'width': '60%',
             'margin-right': '20px'
-          },
+          }
         },
         {
           title: 'slide3',
@@ -43,7 +43,7 @@ export default {
             'background': '#7baabe',
             'width': '40%',
             'margin-right': '20px'
-          },
+          }
         }
       ],
       sliderinit: {
@@ -52,8 +52,8 @@ export default {
         thresholdTime: 500, // 滑动判定距离
         thresholdDistance: 100 // 滑动判定时间
         // 不定宽度的无限循环感觉很丑:(
-        // loop:true,//无限循环
-        // autoplay:1000,//自动播放:时间[ms]
+        // loop:true, // 无限循环
+        // autoplay:1000 // 自动播放:时间[ms]
       }
     }
   },
@@ -71,18 +71,18 @@ export default {
     slidePre () {
       this.$children[0].$emit('slidePre')
     },
-    appendslider(){
+    appendslider () {
       this.someList.push({
         title: 'slidernew',
-        style:{
-          background:'#333',
-          color:'#fff'
+        style: {
+          background: '#333',
+          color: '#fff'
         }
       })
     },
     // 监听事件也发生了变化,需要指向一个子组件实例
-    slide(pagenum){
-      console.log('currentPage:'+pagenum)
+    slide (pagenum) {
+      console.log('currentPage:' + pagenum)
     }
   }
 }

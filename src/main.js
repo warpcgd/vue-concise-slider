@@ -1,3 +1,4 @@
+import Vue from 'vue'
 // 基础滚动
 import sliderbasic from './components/slider_basic'
 // 不定宽滚动
@@ -8,7 +9,9 @@ import sliderbasicloop from './components/slider_basic_loop'
 import slidervertical from './components/slider_vertical'
 // 多级滚动
 import slidermultipleSlide from './components/slider_multipleSlide'
+
 // 实例vue
+/* eslint-disable no-new */
 new Vue(sliderbasic)
 new Vue(slidervariableWidth)
 new Vue(sliderbasicloop)
