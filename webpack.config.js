@@ -8,11 +8,11 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var vue = require("vue-loader");
 
 
-//__dirname是node里面的一个变量，指向的是当前文件夹目录
+// __dirname是node里面的一个变量，指向的是当前文件夹目录
 var ROOT_PATH = path.resolve(__dirname);
-//这个我们的文件入口，等下我们就会从main.js这个文件作为入口
+// 这个我们的文件入口，等下我们就会从main.js这个文件作为入口
 var APP_PATH = path.resolve(ROOT_PATH, 'src/main');
-//这个是文件打包出来的输出路径
+// 这个是文件打包出来的输出路径
 var BUILD_PATH = path.resolve(ROOT_PATH, 'dist');
 module.exports = {
     entry: [APP_PATH],
@@ -27,6 +27,20 @@ module.exports = {
         chunkFilename: '[id].build.js?[chunkhash]',
     },
     module: {
+        preLoaders: [
+            {
+                test: /\.vue$/,
+                loader: 'eslint',
+                include: path.resolve(__dirname, './'),
+                exclude: /node_modules/
+            },
+            {
+                test: /\.js$/,
+                loader: 'eslint',
+                include: path.resolve(__dirname, './'),
+                exclude: /node_modules/
+            }
+        ],
         // 加载器
         loaders: [
             // 解析.vue文件
