@@ -153,8 +153,8 @@
     @mousedown="swipeStart"
     @mouseup="swipeEnd"
     @mousemove="swipeMove"
-    @webkitTransitionEnd = "onTransitionEnd"
-    @transitionend = "onTransitionEnd"
+    @webkit-transition-end="onTransitionEnd"
+    @transitionend="onTransitionEnd"
     >
     <!-- 正常滚动 -->
     <template v-if="!sliderinit.loop">
