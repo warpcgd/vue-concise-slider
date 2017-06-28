@@ -1,9 +1,8 @@
 {
-  "name": "my-project",
-  "version": "1.0.0",
+  "name": "vue-concise-slider",
+  "version": "2.1.0",
   "description": "A Vue.js project",
-  "author": "",
-  "private": true,
+  "author": "lxc",
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "webpack -p",
