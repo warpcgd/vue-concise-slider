@@ -1,11 +1,15 @@
-中文 | [English](README_EN.md)
-
-## vue-slider.js
+中文 | [English](https://github.com/warpcgd/vue-concise-slider/blob/master/README_EN.md)
+[![npm](https://img.shields.io/npm/dw/localeval.svg)](https://www.npmjs.com/package/vue-concise-slider)
+[![npm](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/vue-concise-slider)
+[![Github file size](https://img.shields.io/github/size/webcaetano/craft/build/craft.min.js.svg)](https://github.com/warpcgd/vue-concise-slider)
+## vue-concise-slider.js
 ![](vue-slider-github.jpg)
 * * *
-vue-slider,一个简单的滑动组件,配置简单,支持自适应/全屏+按钮+分页,同时兼容移动端和PC端
+vue-concise-slider,一个简单的滑动组件,配置简单,支持自适应/全屏+按钮+分页,同时兼容移动端和PC端
 
 ## 版本
+v2.1.1 ~ v2.1.2
+组件发布至NPM
 v2.1
 支持vue2.0+
 
@@ -24,12 +28,14 @@ v2.1
 
 ### 例子
 
-[slider效果](https://warpcgd.github.io/vue-slider/index.html)</br>
-[完整文档](https://github.com/warpcgd/vue-slider/tree/gh-pages)
+[slider效果](https://warpcgd.github.io/vue-concise-slider/index.html)</br>
+[完整文档](https://github.com/warpcgd/vue-concise-slider/tree/gh-pages)
 
 ### 快速开始使用
 
-通过以下demo来实现
+```html
+  npm install vue-concise-slider -save
+```
 
 ### app.vue父级组件
 
@@ -41,7 +47,7 @@ v2.1
 </template>
 
 <script>
-import slider from './slider'// 引入slider组件
+import slider from 'vue-concise-slider'// 引入slider组件
 export default {
    el: '#app',
    data () {
@@ -230,7 +236,7 @@ export default {
 </table>
 
 ### 有更好的想法？
-欢迎来留下你的意见:https://github.com/warpcgd/vue-slider/issues/1
+欢迎来留下你的意见:https://github.com/warpcgd/vue-concise-slider/issues/1
 
 ### BUG？oh no!
-可以在这里提交,会尽快处理:https://github.com/warpcgd/vue-slider/issues/2
+可以在这里提交,会尽快处理:https://github.com/warpcgd/vue-concise-slider/issues/2

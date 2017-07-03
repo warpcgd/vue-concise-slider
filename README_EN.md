@@ -1,12 +1,16 @@
 English | [中文](README.md)
-
-## vue-slider.js
+[![npm](https://img.shields.io/npm/dw/localeval.svg)](https://www.npmjs.com/package/vue-concise-slider)
+[![npm](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/vue-concise-slider)
+[![Github file size](https://img.shields.io/github/size/webcaetano/craft/build/craft.min.js.svg)](https://github.com/warpcgd/vue-concise-slider)
+## vue-concise-slider.js
 ![](vue-slider-github.jpg)
 * * *
 
-vue-slider,A simple sliding component,has easy configuration,support self-adaption / fullscreen / button / page,and is compatible with mobile and PC terminal
+vue-concise-slider,A simple sliding component,has easy configuration,support self-adaption / fullscreen / button / page,and is compatible with mobile and PC terminal
 
 ### version
+v2.1.1 ~ v2.1.2
+Published on NPM
 v2.1
 Supported vue2.0+
 
@@ -25,12 +29,14 @@ Supported vue2.0+
 
 ### Example
 
-[demo](https://warpcgd.github.io/vue-slider/index.html)</br>
-[full documents](https://github.com/warpcgd/vue-slider/tree/gh-pages)
+[demo](https://warpcgd.github.io/vue-concise-slider/index.html)</br>
+[full documents](https://github.com/warpcgd/vue-concise-slider/tree/gh-pages)
 
 ### How to use it
 
-Follow like this demo
+```html
+  npm install vue-concise-slider -save
+```
 
 ### app.vue / parent component
 
@@ -42,7 +48,7 @@ Follow like this demo
 </template>
 
 <script>
-import slider from './slider'// import slider component
+import slider from 'vue-concise-slider'// import slider component
 export default {
    el: '#app',
    data () {
@@ -230,7 +236,7 @@ export default {
 </table>
 
 ### Have a better idea？
-Welcome to leave your opinion:https://github.com/warpcgd/vue-slider/issues/1
+Welcome to leave your opinion:https://github.com/warpcgd/vue-concise-slider/issues/1
 
 ### BUG？oh no!
-You can be submitted here, and i will be dealt with as soon as possible:https://github.com/warpcgd/vue-slider/issues/2
+You can be submitted here, and i will be dealt with as soon as possible:https://github.com/warpcgd/vue-concise-slider/issues/2

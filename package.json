@@ -1,7 +1,7 @@
 {
   "name": "vue-concise-slider",
-  "version": "2.1.1",
-  "description": "A Vue.js project",
+  "version": "2.1.2",
+  "description": "vue-slider,A simple sliding component,has easy configuration,support self-adaption / fullscreen / button / page,and is compatible with mobile and PC terminal",
   "author": {
     "name": "lixichen",
     "email": "warpcgd@qq.com"
@@ -16,9 +16,11 @@
   },
   "dependencies": {
     "vue": "^2.1.3",
-    "babel-runtime": "^6.0.0"
+    "babel-runtime": "^6.0.0",
+    "vue-loader": "^8.3.0",
+    "eslint": "^2.10.2",
   },
-  "main": "./src/components/slider.vue",
+  "main": "./dist/module.js",
   "devDependencies": {
     "babel-core": "^6.0.0",
     "babel-eslint": "^7.2.3",
