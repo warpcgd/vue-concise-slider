@@ -11,10 +11,7 @@ English | [中文](README.md)
 vue-concise-slider,A simple sliding component,has easy configuration,support self-adaption / fullscreen / button / page,and is compatible with mobile and PC terminal
 
 ### version
-v2.1.1 ~ v2.1.2
-Published on NPM
-v2.1
-Supported vue2.0+
+v2.1.2  Supported vue2.0+
 
 ### Achieved
 - [x] Self-adaption Fullscreen
@@ -40,7 +37,7 @@ Supported vue2.0+
   npm install vue-concise-slider --save
 ```
 
-### app.vue / parent component
+### How to use it
 
 ```html
 <template>

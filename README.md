@@ -11,10 +11,7 @@
 vue-concise-slider,一个简单的滑动组件,配置简单,支持自适应/全屏+按钮+分页,同时兼容移动端和PC端
 
 ## 版本
-v2.1.1 ~ v2.1.2
-组件发布至NPM
-v2.1
-支持vue2.0+
+v2.1.2  支持vue2.0+
 
 ### 目前已实现
 - [x] 全屏自适应
@@ -40,7 +37,7 @@ v2.1
   npm install vue-concise-slider --save
 ```
 
-### app.vue父级组件
+### 如何使用
 
 ```html
 <template>
