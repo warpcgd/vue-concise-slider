@@ -1,8 +1,11 @@
 中文 | [English](https://github.com/warpcgd/vue-concise-slider/blob/master/README_EN.md)
-[![npm](https://img.shields.io/npm/dw/localeval.svg)](https://www.npmjs.com/package/vue-concise-slider)
-[![npm](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/vue-concise-slider)
-[![Github file size](https://img.shields.io/github/size/webcaetano/craft/build/craft.min.js.svg)](https://github.com/warpcgd/vue-concise-slider)
+
 ## vue-concise-slider.js
+
+[![NPM](https://nodei.co/npm/vue-concise-slider.png)](https://nodei.co/npm/vue-concise-slider/)
+[![npm](https://img.shields.io/npm/v/vue-concise-slider.svg)](https://www.npmjs.com/package/vue-concise-slider)
+[![npm](https://img.shields.io/npm/dw/vue-concise-slider.svg)](https://www.npmjs.com/package/vue-concise-slider)
+
 ![](vue-slider-github.jpg)
 * * *
 vue-concise-slider,一个简单的滑动组件,配置简单,支持自适应/全屏+按钮+分页,同时兼容移动端和PC端

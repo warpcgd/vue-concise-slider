@@ -1,7 +1,9 @@
 English | [中文](README.md)
-[![npm](https://img.shields.io/npm/dw/localeval.svg)](https://www.npmjs.com/package/vue-concise-slider)
-[![npm](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/vue-concise-slider)
-[![Github file size](https://img.shields.io/github/size/webcaetano/craft/build/craft.min.js.svg)](https://github.com/warpcgd/vue-concise-slider)
+
+[![NPM](https://nodei.co/npm/vue-concise-slider.png)](https://nodei.co/npm/vue-concise-slider/)
+[![npm](https://img.shields.io/npm/v/vue-concise-slider.svg)](https://www.npmjs.com/package/vue-concise-slider)
+[![npm](https://img.shields.io/npm/dw/vue-concise-slider.svg)](https://www.npmjs.com/package/vue-concise-slider)
+
 ## vue-concise-slider.js
 ![](vue-slider-github.jpg)
 * * *
