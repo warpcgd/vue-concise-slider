@@ -2,9 +2,9 @@
 
 ## vue-concise-slider.js
 
-[![NPM](https://nodei.co/npm/vue-concise-slider.png)](https://nodei.co/npm/vue-concise-slider/)
 [![npm](https://img.shields.io/npm/v/vue-concise-slider.svg)](https://www.npmjs.com/package/vue-concise-slider)
 [![npm](https://img.shields.io/npm/dw/vue-concise-slider.svg)](https://www.npmjs.com/package/vue-concise-slider)
+[![npm](https://img.shields.io/github/size/warpcgd/vue-concise-slider/dist/module.js.svg)](https://www.npmjs.com/package/vue-concise-slider)
 
 ![](vue-slider-github.jpg)
 * * *
@@ -34,10 +34,10 @@ v2.1
 [slider效果](https://warpcgd.github.io/vue-concise-slider/index.html)</br>
 [完整文档](https://github.com/warpcgd/vue-concise-slider/tree/gh-pages)
 
-### 快速开始使用
+### 安装
 
 ```html
-  npm install vue-concise-slider -save
+  npm install vue-concise-slider --save
 ```
 
 ### app.vue父级组件

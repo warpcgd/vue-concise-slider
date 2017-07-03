@@ -1,8 +1,8 @@
 English | [中文](README.md)
 
-[![NPM](https://nodei.co/npm/vue-concise-slider.png)](https://nodei.co/npm/vue-concise-slider/)
 [![npm](https://img.shields.io/npm/v/vue-concise-slider.svg)](https://www.npmjs.com/package/vue-concise-slider)
 [![npm](https://img.shields.io/npm/dw/vue-concise-slider.svg)](https://www.npmjs.com/package/vue-concise-slider)
+[![npm](https://img.shields.io/github/size/warpcgd/vue-concise-slider/dist/module.js.svg)](https://www.npmjs.com/package/vue-concise-slider)
 
 ## vue-concise-slider.js
 ![](vue-slider-github.jpg)
@@ -34,10 +34,10 @@ Supported vue2.0+
 [demo](https://warpcgd.github.io/vue-concise-slider/index.html)</br>
 [full documents](https://github.com/warpcgd/vue-concise-slider/tree/gh-pages)
 
-### How to use it
+### Installation
 
 ```html
-  npm install vue-concise-slider -save
+  npm install vue-concise-slider --save
 ```
 
 ### app.vue / parent component
