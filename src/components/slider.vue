@@ -304,7 +304,6 @@ export default {
     that.$on('slidePre', () => {
       this.pre()
     })
-
     // 自动轮播 支持无缝滚动
     that.clock().begin(that)
     // 设定垂直轮播class
@@ -313,6 +312,12 @@ export default {
     }
   },
   methods: {
+
+  	onItemClick(position){
+  	  // slide item 点击事件
+  	  this.$emit('itemClick', position);
+  	}
+
     swipeStart (e) {
       let that = this
       if (this.basicdata.transitionEnding) {
@@ -368,6 +373,15 @@ export default {
       }
     },
     swipeEnd (e) {
+
+      // 注册点击事件
+      if(
+        this.basicdata.end.x  === this.basicdata.start.x && 
+        this.basicdata.end.y === this.basicdata.start.y
+        ){
+          this.onItemClick(this.sliderinit.currentPage);
+      }
+      
       this.basicdata.tracking = false
       let now = new Date().getTime()
       let deltaTime = now - this.basicdata.start.t
@@ -397,6 +411,7 @@ export default {
           this.next()
           return
         } else {
+
           this.slide(this.sliderinit.currentPage)
           return
         }
