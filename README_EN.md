@@ -231,6 +231,12 @@ export default {
     <td>every slide handle even success or false can trigger this,and tell us now num of page</td>
     <td><code>childComponents.$on('slide', function(pagenum){console.log(pagenum)})</code></td>
   </tr>
+  <tr align="center">
+    <td><code>tap</code></td>
+    <td>number</td>
+    <td>Event will be fired when user click/tap on Slider.</td>
+    <td><code>childComponents.$on('tap', function(pagenum){console.log(pagenum)})</code></td>
+  </tr>
  </tbody>
 </table>
 

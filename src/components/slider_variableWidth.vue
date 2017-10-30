@@ -3,7 +3,7 @@
 </style>
 <template>
 <div>
-  <slider :pages="someList" :sliderinit="sliderinit" @slide='slide'>
+  <slider :pages="someList" :sliderinit="sliderinit" @slide='slide' @tap='onTap'>
   <!-- slot  -->
   </slider>
   <div class="sliderButton">
@@ -82,7 +82,11 @@ export default {
     },
     // 监听事件也发生了变化,需要指向一个子组件实例
     slide (pagenum) {
-      console.log('currentPage:' + pagenum)
+      console.log('slider:currentPage:' + pagenum)
+    },
+    // tap事件
+    onTap (pagenum) {
+      console.log('tap:currentPage:' + pagenum)
     }
   }
 }

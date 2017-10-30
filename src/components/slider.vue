@@ -249,6 +249,9 @@ export default {
         }
         // 遍历子集
         let $sliderChildren = $slider.children
+        if (!$sliderChildren.length) {
+          return 0
+        }
         let offsetLeft = $sliderChildren[lastPage].offsetLeft
         if (this.sliderinit.loop) {
           offsetLeft = $sliderChildren[lastPage].offsetLeft
@@ -396,6 +399,9 @@ export default {
           // swipe left
           this.next()
           return
+        } else if (deltaTime < 300 && Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
+          this.$emit('tap', this.sliderinit.currentPage)
+          this.slide(this.basicdata.currentPage)
         } else {
           this.slide(this.sliderinit.currentPage)
           return
@@ -410,6 +416,9 @@ export default {
           // swipe left
           this.next()
           return
+        } else if (deltaTime < 300 && Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
+          this.$emit('tap', this.sliderinit.currentPage)
+          this.slide(this.basicdata.currentPage)
         } else {
           this.slide(this.sliderinit.currentPage)
           return
@@ -492,14 +501,17 @@ export default {
     },
     // 无限循环中transitionEnd
     onTransitionEnd () {
-      if (this.sliderinit.loop) {
-        this.basicdata.transitionEnding = false
-        if (this.sliderinit.currentPage < 0) {
-          this.slide(this.pagenums + this.sliderinit.currentPage, 'animationnone')
-        } else if (this.sliderinit.currentPage >= this.pagenums) {
-          this.slide(0 + this.sliderinit.currentPage - this.pagenums, 'animationnone')
+      var that = this
+      setTimeout(function () {
+        if (that.sliderinit.loop) {
+          that.basicdata.transitionEnding = false
+          if (that.sliderinit.currentPage < 0) {
+            that.slide(that.pagenums + that.sliderinit.currentPage, 'animationnone')
+          } else if (that.sliderinit.currentPage >= that.pagenums) {
+            that.slide(0 + that.sliderinit.currentPage - that.pagenums, 'animationnone')
+          }
         }
-      }
+      }, 0)
     }
   }
 }

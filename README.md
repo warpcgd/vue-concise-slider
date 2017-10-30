@@ -232,6 +232,12 @@ export default {
     <td>当前滑动到第(number)页</td>
     <td><code>childComponents.$on('slide', function(pagenum){console.log(pagenum)})</code></td>
   </tr>
+  <tr align="center">
+    <td><code>tap</code></td>
+    <td>number</td>
+    <td>当前点击第(number)页</td>
+    <td><code>childComponents.$on('tap', function(pagenum){console.log(pagenum)})</code></td>
+  </tr>
  </tbody>
 </table>
 

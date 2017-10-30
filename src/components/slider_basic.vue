@@ -3,7 +3,7 @@
 </style>
 <template>
 <div>
-  <slider :pages="someList" :sliderinit="sliderinit" @slide='slide'>
+  <slider :pages="someList" :sliderinit="sliderinit" @tap='onTap' @slide='slide'>
   <!-- slot  -->
   </slider>
   <div class="sliderButton">
@@ -20,26 +20,7 @@ export default {
   el: '#sliderbasic',
   data () {
     return {
-      someList: [
-        {
-          title: 'slide1',
-          style: {
-            'background': '#1bbc9b'
-          }
-        },
-        {
-          title: 'slide2',
-          style: {
-            'background': '#4bbfc3'
-          }
-        },
-        {
-          title: 'slide3',
-          style: {
-            'background': '#7baabe'
-          }
-        }
-      ],
+      someList: [],
       sliderinit: {
         currentPage: 0,
         thresholdTime: 500, // 滑动时间阈值判定距离
@@ -75,7 +56,11 @@ export default {
     },
     // 监听事件发生了变化,需要指向一个子组件实例
     slide (pagenum) {
-      console.log('currentPage:' + pagenum)
+      console.log('slider:currentPage:' + pagenum)
+    },
+    // tap事件
+    onTap (pagenum) {
+      console.log('tap:currentPage:' + pagenum)
     }
   }
 }
