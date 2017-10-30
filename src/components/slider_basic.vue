@@ -20,7 +20,26 @@ export default {
   el: '#sliderbasic',
   data () {
     return {
-      someList: [],
+      someList: [
+        {
+          title: 'slide1',
+          style: {
+            'background': '#1bbc9b'
+          }
+        },
+        {
+          title: 'slide2',
+          style: {
+            'background': '#4bbfc3'
+          }
+        },
+        {
+          title: 'slide3',
+          style: {
+            'background': '#7baabe'
+          }
+        }
+      ],
       sliderinit: {
         currentPage: 0,
         thresholdTime: 500, // 滑动时间阈值判定距离
