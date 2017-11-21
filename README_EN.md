@@ -8,10 +8,10 @@ English | [中文](README.md)
 ![](vue-slider-github.jpg)
 * * *
 
-vue-concise-slider,A simple sliding component,has easy configuration,support self-adaption / fullscreen / button / page,and is compatible with mobile and PC terminal
+vue-concise-slider,A simple sliding component,has easy configuration,supported self-adaption / fullscreen / button / page,and is compatible with mobile and PC terminal
 
 ### version
-v2.1.2  Supported vue2.0+
+v2.2.0  Supported vue2.0+
 
 ### Achieved
 - [x] Self-adaption Fullscreen
@@ -26,10 +26,10 @@ v2.1.2  Supported vue2.0+
 - [ ] Fade Effect
 - [ ] Parallax
 
-### Example
+### Links
 
-[demo](https://warpcgd.github.io/vue-concise-slider/index.html)</br>
-[full documents](https://github.com/warpcgd/vue-concise-slider/tree/gh-pages)
+- [Documentation](https://warpcgd.github.io/vue-concise-slider/)
+- [demo](https://warpcgd.github.io/vue-concise-slider/index.html)
 
 ### Installation
 
@@ -41,204 +41,87 @@ v2.1.2  Supported vue2.0+
 
 ```html
 <template>
-  <slider :pages="pages" :sliderinit="sliderinit">
-    <!-- slot  -->
-  </slider>
+<!-- Make a frame wrapped slider -->
+ <div style="width:70%;margin:20px auto;height:400px">
+      <!-- Configuring slider components -->
+      <slider :pages="pages" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+          <!-- Set loading -->
+          <div slot="loading">loading...</div>
+      </slider>
+ </div>
 </template>
-
 <script>
-import slider from 'vue-concise-slider'// import slider component
+import slider from 'vue-concise-slider'// import slider components
 export default {
    el: '#app',
    data () {
       return {
-        // List of pictures [arr]
+        //Image list
         pages:[
           {
-            title: '',
-            style:{
-             background:'url(src/img/testimg-1.jpg)'
+          html: '<div class="slider1">slider1</div>',
+          style: {
+            'background': '#1bbc9b'
             }
           },
           {
-           title: '',
-           style:{
-            background:'url(src/img/testimg-2.jpg)'
+            html: '<div class="slider2">slider2</div>',
+            style: {
+              'background': '#4bbfc3'
             }
           },
           {
-            title: 'slide3',
-            style:{
-              background:'#4bbfc3',
-            },
+            html: '<div class="slider3">slider3</div>',
+            style: {
+              'background': '#7baabe'
+            }
           }
         ],
-        //Slider configuration[obj]
+        //Sliding configuration [obj]
         sliderinit: {
-          currentPage: 0,//current Page of slider
-          thresholdDistance: 500,//Minimal distance (in px) to trigger swipe to next/previous slide during swipes
-          thresholdTime: 100,//Minimal duration (in ms) to trigger swipe to next/previous slide during swipes
-          autoplay:1000,//delay between transitions (in ms).
-          loop:true//Set to true to enable continuous loop mode
-          direction:'vertical'//Could be 'horizontal' or 'vertical' (for vertical slider).
+          currentPage: 0,
+          thresholdDistance: 500,
+          thresholdTime: 100,
+          autoplay:1000,
+          loop:true,
+          direction:'vertical',
+          infinite:1,
+          slidesToScroll:1,
+          timingFunction: 'ease',
+          duration: 300
         }
       }
     },
     components: {
         slider
+    },
+    methods: {
+      // Listener event
+      slide (data) {
+        console.log(data)
+      },
+      onTap (data) {
+        console.log(data)
+      },
+      onInit (data) {
+        console.log(data)
+      }
     }
 }
 </script>
-
 ```
-### Pages / Initialize parameter
-<table width="100%">
-<thead>
-  <tr>
-    <th width="20%">Option</th>
-    <th width="15%">Type</th>
-    <th width="15%">Default</th>
-    <th width="50%">Description</th>
-  </tr>
-</thead>
-<tbody>
-  <tr align="center">
-    <td><code>title</code></td>
-    <td>string</td>
-    <td>-</td>
-    <td>Now it is every page's title , will be echo HTML in the future.</td>
-  </tr>
-  <tr align="center">
-    <td><code>style</code></td>
-    <td>obj</td>
-    <td>-</td>
-    <td>Attribute in style will be show in page css of sliders,so you can add background/background-color,even font-size or other style to page,of course slider would calculate page's width,so you may not set width of page </td>
-  </tr>
- </tbody>
-</table>
+## Browser Support
 
-### Sliderinit / Initialize parameter
+Modern browsers and Internet Explorer 10+.
 
-<table width="100%">
-<thead>
-  <tr>
-    <th width="20%">Option</th>
-    <th width="15%">Type</th>
-    <th width="15%">Default</th>
-    <th width="50%">Description</th>
-  </tr>
-</thead>
-<tbody>
-  <tr align="center">
-    <td><code>direction</code></td>
-    <td>string</td>
-    <td>'horizontal'</td>
-    <td>Could be 'horizontal' or 'vertical' (for vertical slider).</td>
-  </tr>
-  <tr align="center">
-    <td><code>currentPage</code></td>
-    <td>number</td>
-    <td>-</td>
-    <td>Initing current Page of slider</td>
-  </tr>
-  <tr align="center">
-    <td><code>thresholdDistance</code></td>
-    <td>number</td>
-    <td>-</td>
-    <td>Minimal distance (in px) to trigger swipe to next/previous slide during swipes</td>
-  </tr>
-  <tr align="center">
-    <td><code>thresholdTime</code></td>
-    <td>number</td>
-    <td>-</td>
-    <td>Minimal duration (in ms) to trigger swipe to next/previous slide during swipes</td>
-  </tr>
-  <tr align="center">
-    <td><code>autoplay</code></td>
-    <td>number[ms]</td>
-    <td>-</td>
-    <td>delay between transitions (in ms).</td>
-  </tr>
-  <tr align="center">
-    <td><code>loop</code></td>
-    <td>boolean</td>
-    <td>false</td>
-    <td>Set to true to enable continuous loop mode</td>
-  </tr>
-  <tr align="center">
-    <td><code>infinite</code></td>
-    <td>number</td>
-    <td>1</td>
-    <td>like carousel, works with multiple slides</td>
-  </tr>
-  <tr align="center">
-    <td><code>slidesToScroll</code></td>
-    <td>number</td>
-    <td>1</td>
-    <td>slides scrolled at once</td>
-  </tr>
- </tbody>
-</table>
 
-### API / Self-Events
+## Contributing
 
-<table width="100%" align="center">
-<thead>
-  <tr>
-    <th align="center" width="12.5%">Method</th>
-    <th align="center" width="12.5%">Parameters</th>
-    <th align="center" width="35%">Description</th>
-    <th align="center" width="40%">Example</th>
-  </tr>
-</thead>
-<tbody>
-  <tr align="center">
-    <td><code>slideTo</code></td>
-    <td>number</td>
-    <td>slide to (number) page</td>
-    <td><code>childComponents.$emit('slideTo', num)</code></td>
-  </tr>
- <tr align="center">
-    <td><code>slideNext</code></td>
-    <td>-</td>
-    <td>next page</td>
-    <td><code>childComponents.$emit('slideNext')</code></td>
-  </tr>
-  <tr align="center">
-    <td><code>slideTo</code></td>
-    <td>-</td>
-    <td>prev page</td>
-    <td><code>childComponents.$emit('slidePre')</code></td>
-  </tr>
- </tbody>
-</table>
-
-### API / Parents-Event
-
-<table width="100%" align="center">
-<thead>
-  <tr>
-    <th align="center" width="12.5%">Method</th>
-    <th align="center" width="12.5%">Parameters</th>
-    <th align="center" width="35%">Description</th>
-    <th align="center" width="40%">Example</th>
-  </tr>
-</thead>
-<tbody>
-  <tr align="center">
-    <td><code>slide</code></td>
-    <td>number</td>
-    <td>every slide handle even success or false can trigger this,and tell us now num of page</td>
-    <td><code>childComponents.$on('slide', function(pagenum){console.log(pagenum)})</code></td>
-  </tr>
-  <tr align="center">
-    <td><code>tap</code></td>
-    <td>number</td>
-    <td>Event will be fired when user click/tap on Slider.</td>
-    <td><code>childComponents.$on('tap', function(pagenum){console.log(pagenum)})</code></td>
-  </tr>
- </tbody>
-</table>
+- Fork it!
+- Create your feature branch: `git checkout -b my-new-feature`
+- Commit your changes: `git commit -am 'Add some feature'`
+- Push to the branch: `git push origin my-new-feature`
+- Submit a pull request
 
 ### Have a better idea？
 Welcome to leave your opinion:https://github.com/warpcgd/vue-concise-slider/issues/1
