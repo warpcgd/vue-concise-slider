@@ -1,0 +1,372 @@
+<vuep template="#config"></vuep>
+
+## pages
+
+- 类型：`Array`
+- 默认值：`null`
+
+滑动列表,支持各项单独配置dom，以及样式css
+
+```html
+[
+  {
+    html: '',
+    style:{
+     background:'url(src/img/testimg-1.jpg)'
+    }
+  },
+  {
+   html: '',
+   style:{
+    background:'url(src/img/testimg-2.jpg)'
+    }
+  },
+  {
+    html: 'slide3',
+    style:{
+      background:'#4bbfc3',
+    }
+  }
+]
+```
+
+### html
+
+- 类型：`String`
+- 默认值：`null`
+
+值挂载在[v-html](https://vuejs.org/v2/api/#v-html)标签上,输出真正的 HTML
+
+```html
+  {
+  html: '<div>test</div>'
+  }
+```
+
+### style
+
+- 类型：`object`
+- 默认值：`null`
+
+直接作用在每个item上的style样式，可以输出背景图，背景色，每项宽度可自定义，自动切换为不定宽滚动
+
+```html
+  {
+  style:{
+    background:'#4bbfc3'
+   }
+  }
+```
+
+## sliderinit
+
+- 类型：`Object`
+- 默认值：`null`
+
+滑动配置
+
+```html
+  {
+    currentPage: 0,//当前页码
+    thresholdDistance: 500,//滑动判定距离
+    thresholdTime: 100,//滑动判定时间
+    autoplay:1000,//自动滚动[ms]
+    loop:true,//循环滚动
+    direction:'vertical',//方向设置，垂直滚动
+    infinite:1,//无限滚动前后遍历数
+    slidesToScroll:1,//每次滑动项数
+  }
+```
+
+### direction
+
+- 类型：`string`
+- 默认值：`horizontal`
+
+方向设置，默认为水平滚动('horizontal'),可设置为垂直滚动('vertical')
+
+```html
+  {
+    direction:'horizontal'
+  }
+```
+
+### currentPage
+
+- 类型：`number`
+- 默认值：`0`
+
+初始化slider时为第几页
+
+```html
+  {
+    currentPage:0
+  }
+```
+
+### thresholdDistance
+
+- 类型：`number`
+- 默认值：`null`
+
+触发滑动的距离阈值
+
+```html
+  {
+    thresholdDistance:''
+  }
+```
+
+### thresholdTime
+
+- 类型：`number`
+- 默认值：`null`
+
+触发滑动的时间阈值
+
+```html
+  {
+    thresholdTime:''
+  }
+```
+
+### autoplay
+
+- 类型：`number`
+- 默认值：`number[ms]`
+
+自动播放的时间
+
+```html
+  {
+    autoplay:''
+  }
+```
+
+### loop
+
+- 类型：`boolean`
+- 默认值：`false`
+
+是否循环滚动
+
+```html
+  {
+    loop:false
+  }
+```
+
+### infinite
+
+- 类型：`number`
+- 默认值：`1`
+
+loop设置为true时,设置前后复制页面的数量
+
+```html
+  {
+    infinite:1
+  }
+```
+### slidesToScroll
+
+- 类型：`number`
+- 默认值：`1`
+
+每次滑动切换的页数
+
+```html
+  {
+    slidesToScroll:1
+  }
+```
+### preventDocumentMove
+
+- 类型：`boolean`
+- 默认值：`false`
+
+阻止touch事件触发时，整个页面的滚动
+
+```html
+  {
+    preventDocumentMove:true
+  }
+```
+
+### duration
+
+- 类型：`number[ms]`
+- 默认值：`300`
+
+滑动持续时间[ms]
+
+```html
+  {
+    duration: 300
+  }
+```
+
+### timingFunction
+
+- 类型：`string`
+- 默认值：`ease`
+
+滑动方式
+
+```html
+  {
+    timingFunction: 'ease'
+  }
+```
+## 传递的事件
+
+### slideTo
+
+- 参数：`number`
+
+滑动到(number)页
+
+```html
+  slideTo () {
+    this.$children[0].$emit('slideTo', num)
+  }
+
+```
+### slideNext
+
+- 参数：`null`
+
+滑动到下一页
+
+```html
+  slideNext () {
+    childComponents.$emit('slideNext')
+  }
+
+```
+
+### slidePre
+
+- 参数：`null`
+
+滑动到上一页
+
+```html
+  slide () {
+    childComponents.$emit('slidePre')
+  }
+
+```
+
+### autoplayStart
+
+- 参数：`ms`
+
+开启定时轮播,设置轮播时长
+
+```html
+  childComponents.$emit('autoplayStart',1000)
+```
+
+### autoplayStop
+
+- 参数：``
+
+暂停定时轮播
+
+```html
+  childComponents.$emit('autoplayStop')
+```
+## 监听的事件
+
+### slide
+
+- 参数：`obj`
+
+当前滑动到第几页,参数为slider基础信息
+
+```html
+  slide (data) {
+    console.log(data)
+  }
+```
+
+### tap
+
+- 参数：`obj`
+
+当前点击第几页,参数为slider基础信息
+
+```html
+  tap (data) {
+    console.log(data)
+  }
+```
+
+### init
+
+- 参数：`obj`
+
+初始化成功事件,参数为slider基础信息
+
+```html
+  init (data) {
+    console.log(data)
+  }
+```
+
+
+<script v-pre type="text/x-template" id="config">
+  <template>
+      <slider :pages="pages" :sliderinit="sliderinit">
+      <!-- slot  -->
+      </slider>
+  </template>
+
+  <script>
+    // import slider from 'vue-concise-slider'// 引入slider组件
+    import slider from 'module.js'// 引入slider组件
+    // export default
+    module.exports = {
+         components: {
+              slider
+         },
+         data () {
+            return {
+              //图片列表[arr]
+              pages:[
+                {
+                  html: 'slide1',
+                  style:{
+                   'background': '#1bbc9b'
+                  }
+                },
+                {
+                 html: 'slide2',
+                 style:{
+                    background:'#4bbfc3'
+                  }
+                },
+                {
+                  html: 'slide3',
+                  style:{
+                    background:'#333'
+                  },
+                }
+              ],
+              //滑动配置[obj]
+              sliderinit: {
+                currentPage: 0,//当前页码
+                thresholdDistance: 100,//滑动判定距离
+                thresholdTime: 300,//滑动判定时间
+                loop:true,//循环滚动
+                infinite:1,//无限滚动前后遍历数
+                slidesToScroll:1,//每次滑动项数
+                direction:'horizontal',//方向设置
+                autoplay:0,//自动播放
+              }
+            }
+         }
+    }
+  </script>
+</script>

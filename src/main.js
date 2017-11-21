@@ -1,13 +1,13 @@
 // 基础滚动
-import sliderbasic from './components/slider_basic'
+import sliderbasic from './demo/slider_basic'
 // 不定宽滚动
-import slidervariableWidth from './components/slider_variableWidth'
+import slidervariableWidth from './demo/slider_variableWidth'
 // 无限滚动
-import sliderbasicloop from './components/slider_basic_loop'
+import sliderbasicloop from './demo/slider_basic_loop'
 // 垂直滚动
-import slidervertical from './components/slider_vertical'
+import slidervertical from './demo/slider_vertical'
 // 多级滚动
-import slidermultipleSlide from './components/slider_multipleSlide'
+import slidermultipleSlide from './demo/slider_multipleSlide'
 
 // 实例vue
 new Vue(sliderbasic)
