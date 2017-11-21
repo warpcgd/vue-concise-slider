@@ -24,9 +24,6 @@ vue-concise-slider是一个简单的Vue滑动组件,配置简单,支持自适应
 
 <vuep template="#example"></vuep>
 
-## 文档
-
-- [Documentation](https://docsify.js.org)
 
 ## 有更好的想法？
 欢迎来留下你的意见:https://github.com/warpcgd/vue-concise-slider/issues/1

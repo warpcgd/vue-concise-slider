@@ -45,6 +45,33 @@
         margin: 0;
         margin-top: 25px;
     }
+
+    @-webkit-keyframes loading-7{
+      0%{margin-bottom:0}
+      50%{margin-bottom:20px;}
+      100%{margin-bottom:0px;}
+    }
+    .loadingDot i {
+      display: inline-block;
+      margin-left: 5px;
+      background: rgb(27, 188, 155);
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .loadingDot i:nth-child(1) {
+      -webkit-animation: loading-7 .7s ease-in 0s infinite;
+    }
+    .loadingDot i:nth-child(2) {
+      -webkit-animation: loading-7 .7s ease-in 0.15s infinite;
+    }
+    .loadingDot i:nth-child(3) {
+      -webkit-animation: loading-7 .7s ease-in 0.3s infinite;
+    }
+    .loadingDot i:nth-child(4) {
+      -webkit-animation: loading-7 .7s ease-in 0.45s infinite;
+    }
+
     </style>
 </head>
 
