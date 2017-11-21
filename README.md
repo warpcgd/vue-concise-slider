@@ -34,7 +34,7 @@ vue-concise-slider,一个简单的滑动组件,配置简单,支持自适应/全�
 ### 链接
 
 - [文档](https://warpcgd.github.io/vue-concise-slider/)
-- [demo](https://warpcgd.github.io/vue-concise-slider/index.html)
+- [demo](https://warpcgd.github.io/vue-concise-slider/demo/)
 
 ### 安装
 
