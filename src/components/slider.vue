@@ -45,6 +45,8 @@ export default {
         transitionEnding: false,
         setIntervalid: '',
         tracking: false,
+        thresholdDistance: this.sliderinit.thresholdDistance || 150,
+        thresholdTime: this.sliderinit.thresholdTime || 300,
         animation: false,
         loading: false,
         containerClass: {
@@ -253,16 +255,16 @@ export default {
       // 解除阻止
       document.removeEventListener('touchmove', this.preventDefault(e))
       /* work out what the movement was */
-      if (deltaTime > this.sliderinit.thresholdTime) {
+      if (deltaTime > this.temporaryData.thresholdTime) {
         this.slide(this.basicdata.currentPage)
         /* gesture too slow */
         return
       } else if (this.sliderinit.direction !== 'vertical') {
-        if ((deltaX > this.sliderinit.thresholdDistance) && (Math.abs(deltaY) < this.sliderinit.thresholdDistance)) {
+        if ((deltaX > this.temporaryData.thresholdDistance) && (Math.abs(deltaY) < this.temporaryData.thresholdDistance)) {
           // swipe right
           this.pre()
           return
-        } else if ((-deltaX > this.sliderinit.thresholdDistance) && (Math.abs(deltaY) < this.sliderinit.thresholdDistance)) {
+        } else if ((-deltaX > this.temporaryData.thresholdDistance) && (Math.abs(deltaY) < this.temporaryData.thresholdDistance)) {
           // swipe left
           this.next()
           return
@@ -277,11 +279,11 @@ export default {
         }
         // 垂直判定
       } else {
-        if ((deltaY > this.sliderinit.thresholdDistance) && (Math.abs(deltaX) < this.sliderinit.thresholdDistance)) {
+        if ((deltaY > this.temporaryData.thresholdDistance) && (Math.abs(deltaX) < this.temporaryData.thresholdDistance)) {
           // swipe right
           this.pre()
           return
-        } else if ((-deltaY > this.sliderinit.thresholdDistance) && (Math.abs(deltaX) < this.sliderinit.thresholdDistance)) {
+        } else if ((-deltaY > this.temporaryData.thresholdDistance) && (Math.abs(deltaX) < this.temporaryData.thresholdDistance)) {
           // swipe left
           this.next()
           return

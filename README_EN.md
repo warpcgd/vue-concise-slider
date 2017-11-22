@@ -13,6 +13,12 @@ vue-concise-slider,A simple sliding component,has easy configuration,supported s
 ### version
 [v2.2.0](https://github.com/warpcgd/vue-concise-slider/issues/29)  Supported vue2.0+
 
+### Features
+
+* Simple configuration
+* Simple and lightweight (~17kB gzipped)
+* Multiple sliding effects
+
 ### Achieved
 - [x] Self-adaption Fullscreen
 - [x] Compatible with mobile and PC terminal

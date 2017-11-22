@@ -107,26 +107,26 @@
 ### thresholdDistance
 
 - 类型：`number`
-- 默认值：`null`
+- 默认值：`150`
 
 触发滑动的距离阈值
 
 ```html
   {
-    thresholdDistance:''
+    thresholdDistance:'150'
   }
 ```
 
 ### thresholdTime
 
 - 类型：`number`
-- 默认值：`null`
+- 默认值：`300`
 
 触发滑动的时间阈值
 
 ```html
   {
-    thresholdTime:''
+    thresholdTime:'300'
   }
 ```
 
@@ -139,7 +139,7 @@
 
 ```html
   {
-    autoplay:''
+    autoplay:'1000'
   }
 ```
 

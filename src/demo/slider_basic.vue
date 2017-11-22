@@ -35,13 +35,13 @@ export default {
     return {
       someList: [],
       sliderinit: {
-        currentPage: 1,
-        thresholdDistance: 100, // 滑动距离阈值判定
-        thresholdTime: 300, // 滑动时间阈值判定
-        duration: 300, // 滑动速度
-        timingFunction: 'ease', // 滑动方式
-        loop: false, // 无限循环
-        autoplay: 0 // 自动播放:时间[ms]
+        // currentPage: 1,
+        // thresholdDistance: 100, // 滑动距离阈值判定
+        // thresholdTime: 300, // 滑动时间阈值判定
+        // duration: 300, // 滑动速度
+        // timingFunction: 'ease', // 滑动方式
+        // loop: false, // 无限循环
+        // autoplay: 0 // 自动播放:时间[ms]
       }
     }
   },

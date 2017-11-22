@@ -103,26 +103,26 @@ Initing current Page of slider
 ### thresholdDistance
 
 - Type: `number`
-- Default value: `null`
+- Default value: `150`
 
 Minimal distance (in px) to trigger swipe to next/previous slide during swipes
 
 ```html
   {
-    thresholdDistance:''
+    thresholdDistance:'150'
   }
 ```
 
 ### thresholdTime
 
 - Type: `number`
-- Default value: `null`
+- Default value: `300`
 
 Minimal duration (in ms) to trigger swipe to next/previous slide during swipes
 
 ```html
   {
-    thresholdTime:''
+    thresholdTime:'300'
   }
 ```
 
