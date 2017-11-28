@@ -455,8 +455,8 @@ export default {
   /*display: inline-block;*/
 }
 .slider-item {
-  background-position: center center!important;
-  background-size: cover!important;
+  background-position: center center;
+  background-size: cover;
 }
 
 .slider-pagination {
@@ -527,11 +527,11 @@ export default {
   right: 10px;
 }
 /*移动端优化*/
- @media screen and (max-width:414px) {
+ /*@media screen and (max-width:414px) {
   .slider-container {
   height: 200px;
   margin: 20px auto;
   width: 90%;
   }
-}
+}*/
 </style>
