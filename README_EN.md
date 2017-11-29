@@ -4,19 +4,19 @@ English | [中文](README.md)
 [![npm](https://img.shields.io/npm/dw/vue-concise-slider.svg)](https://www.npmjs.com/package/vue-concise-slider)
 [![npm](https://img.shields.io/github/size/warpcgd/vue-concise-slider/dist/module.js.svg)](https://www.npmjs.com/package/vue-concise-slider)
 
-## vue-concise-slider.js
+## vue-concise-slider
 ![](vue-slider-github.jpg)
 * * *
 
 vue-concise-slider,A simple sliding component,has easy configuration,supported self-adaption / fullscreen / button / page,and is compatible with mobile and PC terminal
 
 ### version
-[v2.2.0](https://github.com/warpcgd/vue-concise-slider/issues/29)  Supported vue2.0+
+[v2.3.0](https://github.com/warpcgd/vue-concise-slider/issues/29)  Supported vue2.0+
 
 ### Features
 
 * Simple configuration
-* Simple and lightweight (~17kB gzipped)
+* Simple and lightweight (~19.6kB gzipped)
 * Multiple sliding effects
 
 ### Achieved
@@ -27,9 +27,9 @@ vue-concise-slider,A simple sliding component,has easy configuration,supported s
 - [x] Auto Slides Per View / Carousel Mode
 - [x] Loop Mode / Infinite Loop
 - [x] Loop Mode / multiple slide
+- [x] Fade Effect
 
 ### To Do List
-- [ ] Fade Effect
 - [ ] Parallax
 
 ### Links

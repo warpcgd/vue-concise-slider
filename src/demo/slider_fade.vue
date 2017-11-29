@@ -30,17 +30,17 @@
 <script>
 import slider from '../components/slider'
 export default {
-  el: '#sliderbasic',
+  el: '#sliderfade',
   data () {
     return {
       someList: [],
       sliderinit: {
-        // currentPage: 1,
+        effect: 'fade',
         // thresholdDistance: 100, // 滑动距离阈值判定
         // thresholdTime: 300, // 滑动时间阈值判定
         // duration: 300, // 滑动速度
         // timingFunction: 'ease', // 滑动方式
-        // loop: false, // 无限循环
+        loop: true // 无限循环
         // autoplay: 0 // 自动播放:时间[ms]
       }
     }
@@ -52,20 +52,19 @@ export default {
         {
           html: '<div class="slide1">slide1</div>',
           style: {
-            'background': '#1bbc9b',
-            'backgroundSize': '100%'
+            background: 'url(src/img/testimg-1.jpg)'
           }
         },
         {
           html: 'slide2',
           style: {
-            'background': '#4bbfc3'
+            background: 'url(src/img/testimg-2.jpg)'
           }
         },
         {
           html: 'slide3',
           style: {
-            'background': '#7baabe'
+            background: 'url(src/img/testimg-3.jpg)'
           }
         }
       ]

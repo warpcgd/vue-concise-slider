@@ -77,6 +77,18 @@
     slidesToScroll:1,//每次滑动项数
   }
 ```
+### effect
+
+- 类型：`string`
+- 默认值：`fade`
+
+切换效果，默认为滚动滑动('slide'),可设置为渐变滑动('fade')
+
+```html
+  {
+    effect:'slide'
+  }
+```
 
 ### direction
 

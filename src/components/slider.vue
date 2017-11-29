@@ -12,7 +12,7 @@
       @transitionend="onTransitionEnd"
       >
       <!-- 组件在 vm.currentview 变化时改变！ -->
-      <component :pages="pages" :sliderinit="sliderinit" v-bind:is="currentView"></component>
+      <component :pages="pages" :sliderinit="sliderinit" :basicdata="basicdata" :temporarydata="temporaryData" v-bind:is="currentView"></component>
       </div>
       <div class="slider-pagination slider-pagination-bullets">
         <template v-for="n in pagenums">
@@ -29,6 +29,7 @@
 import detectPrefixes from '../utils/detect-prefixes.js'
 import sliderBasic from './slider_basic.vue'
 import sliderBasicLoop from './slider_basic_loop.vue'
+import sliderFade from './slider_fade.vue'
 export default {
   props: ['sliderinit', 'pages'],
   data () {
@@ -44,6 +45,7 @@ export default {
         prefixes: detectPrefixes(),
         transitionEnding: false,
         setIntervalid: '',
+        effect: this.sliderinit.effect || 'slide',
         tracking: false,
         thresholdDistance: this.sliderinit.thresholdDistance || 150,
         thresholdTime: this.sliderinit.thresholdTime || 300,
@@ -52,7 +54,8 @@ export default {
         containerClass: {
           'swiper-container-vertical': false
         },
-        pageInit: false
+        pageInit: false,
+        currentPage: this.sliderinit.currentPage || 0
       }
     }
   },
@@ -63,6 +66,9 @@ export default {
       style['transform'] = 'translate3D(' + this.basicdata.poswidth + ',' + this.basicdata.posheight + ',0)'
       style[this.temporaryData.prefixes.transition + 'TimingFunction'] = this.sliderinit.timingFunction || 'ease'
       style[this.temporaryData.prefixes.transition + 'Duration'] = (this.temporaryData.animation ? this.sliderinit.duration || 300 : 0) + 'ms'
+      if (this.temporaryData.effect === 'fade') {
+        return {}
+      }
       return style
     },
     // pagenum滑动数
@@ -76,12 +82,17 @@ export default {
       return this.pages.length
     },
     currentView: function () {
-      return this.sliderinit.loop ? 'basicLoop' : 'basic'
+      if (this.temporaryData.effect === 'slide') {
+        return this.sliderinit.loop ? 'basicLoop' : 'basic'
+      }
+      if (this.temporaryData.effect === 'fade') {
+        return this.sliderinit.loop ? 'fadeLoop' : 'fade'
+      }
     },
     // 组件的核心，计算当前父级需要进行的偏移,每次要遍历节点
     currentWidth: {
       get: function () {
-        if (!this.pagenums) {
+        if (!this.pages.length || this.temporaryData.effect === 'fade') {
           return 0
         }
         let $slider
@@ -113,7 +124,7 @@ export default {
       }
     },
     currentHeight: function () {
-      if (!this.pages.length) {
+      if (!this.pages.length || this.temporaryData.effect === 'fade') {
         return 0
       }
       let posheight = 0
@@ -303,7 +314,12 @@ export default {
       } else if (this.sliderinit.loop && this.basicdata.currentPage === 0) {
         this.basicdata.currentPage -= this.sliderinit.slidesToScroll || 1
         this.temporaryData.transitionEnding = true
-        this.slide()
+        if (this.basicdata.currentPage < 0 && this.temporaryData.effect === 'fade') {
+          this.slide(this.pagenums - 1)
+          this.temporaryData.transitionEnding = false
+        } else {
+          this.slide()
+        }
       } else {
         this.slide()
       }
@@ -316,7 +332,12 @@ export default {
       } else if (this.sliderinit.loop && this.basicdata.currentPage === this.pagenums - 1) {
         this.basicdata.currentPage += this.sliderinit.slidesToScroll || 1
         this.temporaryData.transitionEnding = true
-        this.slide()
+        if (this.basicdata.currentPage >= this.pagenums && this.temporaryData.effect === 'fade') {
+          this.slide(0)
+          this.temporaryData.transitionEnding = false
+        } else {
+          this.slide()
+        }
       } else {
         this.slide()
       }
@@ -333,13 +354,17 @@ export default {
       if (pagenum || pagenum === 0) {
         that.basicdata.currentPage = pagenum
       }
-      // 增加垂直滚动判定
-      if (that.sliderinit.direction === 'vertical') {
-        that.basicdata.posheight = -that.currentHeight + 'px'
+      if (this.temporaryData.effect === 'fade') {
+        return
       } else {
-        that.basicdata.poswidth = -that.currentWidth + 'px'
+        // 增加垂直滚动判定
+        if (that.sliderinit.direction === 'vertical') {
+          that.basicdata.posheight = -that.currentHeight + 'px'
+        } else {
+          that.basicdata.poswidth = -that.currentWidth + 'px'
+        }
       }
-      // 广播事件
+      //
       if (that.basicdata.currentPage < 0 || that.basicdata.currentPage >= that.pagenums) {
         return
       }
@@ -373,7 +398,7 @@ export default {
     onTransitionEnd () {
       var that = this
       setTimeout(function () {
-        if (that.sliderinit.loop) {
+        if (that.sliderinit.loop && that.temporaryData.effect !== 'fade') {
           that.temporaryData.transitionEnding = false
           if (that.basicdata.currentPage < 0) {
             that.slide(that.pagenums + that.basicdata.currentPage, 'animationnone')
@@ -386,7 +411,9 @@ export default {
   },
   components: {
     basic: sliderBasic,
-    basicLoop: sliderBasicLoop
+    basicLoop: sliderBasicLoop,
+    fade: sliderFade,
+    fadeLoop: sliderFade
   }
 }
 </script>
@@ -446,7 +473,7 @@ export default {
 }
 .slider-item {
   align-items: center;
-  background: #fff none repeat scroll 0 0;
+  /*background: #fff none repeat scroll 0 0;*/
   display: flex;
   font-size: 40px;
   justify-content: center;
@@ -455,8 +482,8 @@ export default {
   /*display: inline-block;*/
 }
 .slider-item {
-  background-position: center center;
-  background-size: cover;
+  background-position: center center!important;
+  background-size: cover!important;
 }
 
 .slider-pagination {
@@ -502,6 +529,7 @@ export default {
   position:absolute;
   top:50%;
   transform: translateY(-50%);
+  z-index: 999
 }
 .slider-button-next, .slider-button-prev {
   background-position: center center;
@@ -532,6 +560,6 @@ export default {
   height: 200px;
   margin: 20px auto;
   width: 90%;
-  }
-}*/
+  }*/
+/*}*/
 </style>

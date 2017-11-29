@@ -1,6 +1,6 @@
 中文 | [English](https://github.com/warpcgd/vue-concise-slider/blob/master/README_EN.md)
 
-## vue-concise-slider.js
+## vue-concise-slider
 
 [![npm](https://img.shields.io/npm/v/vue-concise-slider.svg)](https://www.npmjs.com/package/vue-concise-slider)
 [![npm](https://img.shields.io/npm/dw/vue-concise-slider.svg)](https://www.npmjs.com/package/vue-concise-slider)
@@ -11,11 +11,11 @@
 vue-concise-slider,一个简单的滑动组件,配置简单,支持自适应/全屏+按钮+分页,同时兼容移动端和PC端
 
 ## 版本
-[v2.2.0](https://github.com/warpcgd/vue-concise-slider/issues/29) 支持vue2.0+
+[v2.3.0](https://github.com/warpcgd/vue-concise-slider/issues/29) 支持vue2.0+
 
 ## 特点
 * 简单配置
-* 轻量 (~17.8kB gzipped)
+* 轻量 (~19.6kB gzipped)
 * 多种滑动样式
 
 ### 目前已实现
@@ -26,9 +26,9 @@ vue-concise-slider,一个简单的滑动组件,配置简单,支持自适应/全�
 - [x] 不定宽度滚动
 - [x] 无缝循环滚动
 - [x] 多级滚动
+- [x] 渐变滚动
 
 ### 未来将实现
-- [ ] 渐变滚动
 - [ ] 视差效果
 
 ### 链接

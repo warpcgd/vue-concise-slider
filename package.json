@@ -1,6 +1,6 @@
 {
   "name": "vue-concise-slider",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "description": "vue-slider,A simple sliding component,has easy configuration,support self-adaption / fullscreen / button / page,and is compatible with mobile and PC terminal",
   "author": {
     "name": "lixichen",

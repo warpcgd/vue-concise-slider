@@ -73,6 +73,18 @@ Sliding configuration
     slidesToScroll:1
   }
 ```
+### effect
+
+- Type: `string`
+- Default value: `slide`
+
+Switching effect,it Could be 'slide' or 'fade'
+
+```html
+  {
+    effect:'slide'
+  }
+```
 
 ### direction
 

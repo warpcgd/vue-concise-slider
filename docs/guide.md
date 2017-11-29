@@ -133,7 +133,7 @@ export default {
 ```html
   <template>
       <div style="width:70%;margin:20px auto;height:400px">
-        <slider :pages="someList" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+        <slider :pages="someList" :sliderinit="sliderinit" >
         </slider>
       </div>
   </template>
@@ -188,7 +188,69 @@ export default {
   }
   </script>
 ```
+## Fade Effect
 
+1.effect set `fade`,and loop set `true`,Openning cycle slip
+
+```html
+  <template>
+      <div style="width:70%;margin:20px auto;height:400px">
+        <slider :pages="someList" :sliderinit="sliderinit" >
+        </slider>
+      </div>
+  </template>
+  <script>
+  import slider from '../components/slider'
+  export default {
+    el: '#sliderbasic',
+    data () {
+      return {
+        // someList
+        someList: [],
+        sliderinit: {
+          effect: 'fade',
+          currentPage: 1,
+          thresholdDistance: 100,
+          thresholdTime: 300,
+          duration: 300,
+          timingFunction: 'ease',
+          loop: true,
+          autoplay: 0
+        }
+      }
+    },
+    mounted () {
+      let that = this
+      setTimeout(function () {
+        // Picture data can be assigned directly to someList
+        that.someList = [
+          {
+            html: '<div class="slide1">slide1</div>',
+            style: {
+              'background': '#1bbc9b'
+            }
+          },
+          {
+            html: 'slide2',
+            style: {
+              'background': '#4bbfc3'
+            }
+          },
+          {
+            html: 'slide3',
+            style: {
+              'background': '#7baabe'
+            }
+          }
+        ]
+      }, 2000)
+    },
+    components: {
+      slider
+    }
+  }
+  </script>
+```
 
 
 

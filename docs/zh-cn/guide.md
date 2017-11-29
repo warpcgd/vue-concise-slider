@@ -112,7 +112,7 @@ export default {
       -webkit-animation: loading-7 .7s ease-in 0.45s infinite;
     }
   </style>
-  <slider :pages="someList" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+  <slider :pages="someList" :sliderinit="sliderinit">
       <!-- 设置loading,可自定义loadin特效 -->
       <div slot="loading">
         <div class="loadingDot">
@@ -132,7 +132,7 @@ export default {
 ```html
   <template>
       <div style="width:70%;margin:20px auto;height:400px">
-        <slider :pages="someList" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+        <slider :pages="someList" :sliderinit="sliderinit">
         </slider>
       </div>
   </template>
@@ -145,7 +145,71 @@ export default {
         // someList留空
         someList: [],
         sliderinit: {
-          currentPage: 1,
+          currentPage: 1,//当前页面
+          thresholdDistance: 100, // 滑动距离阈值判定
+          thresholdTime: 300, // 滑动时间阈值判定
+          duration: 300, // 滑动速度
+          timingFunction: 'ease', // 滑动方式
+          loop: true, // 无限循环
+          autoplay: 0 // 自动播放:时间[ms]
+        }
+      }
+    },
+    mounted () {
+      let that = this
+      setTimeout(function () {
+        // 拿回来的图片数据可以直接赋值someList
+        that.someList = [
+          {
+            html: '<div class="slide1">slide1</div>',
+            style: {
+              'background': '#1bbc9b'
+            }
+          },
+          {
+            html: 'slide2',
+            style: {
+              'background': '#4bbfc3'
+            }
+          },
+          {
+            html: 'slide3',
+            style: {
+              'background': '#7baabe'
+            }
+          }
+        ]
+      }, 2000)
+    },
+    components: {
+      slider
+    }
+  }
+  </script>
+```
+
+## 渐变滚动
+
+1.effect配置`fade`,可设置loop为`true`,开启循环滑动
+
+```html
+  <template>
+      <div style="width:70%;margin:20px auto;height:400px">
+        <slider :pages="someList" :sliderinit="sliderinit">
+        </slider>
+      </div>
+  </template>
+  <script>
+  import slider from '../components/slider'
+  export default {
+    el: '#sliderbasic',
+    data () {
+      return {
+        // someList留空
+        someList: [],
+        sliderinit: {
+          effect: 'fade',//滑动方式
+          currentPage: 1,//当前页面
           thresholdDistance: 100, // 滑动距离阈值判定
           thresholdTime: 300, // 滑动时间阈值判定
           duration: 300, // 滑动速度

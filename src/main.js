@@ -1,3 +1,5 @@
+// 渐变滚动
+import sliderfade from './demo/slider_fade'
 // 基础滚动
 import sliderbasic from './demo/slider_basic'
 // 不定宽滚动
@@ -10,6 +12,7 @@ import slidervertical from './demo/slider_vertical'
 import slidermultipleSlide from './demo/slider_multipleSlide'
 
 // 实例vue
+new Vue(sliderfade)
 new Vue(sliderbasic)
 new Vue(slidervariableWidth)
 new Vue(sliderbasicloop)
