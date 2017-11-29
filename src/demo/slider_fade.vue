@@ -50,21 +50,21 @@ export default {
     setTimeout(function () {
       that.someList = [
         {
-          html: '<div class="slide1">slide1</div>',
+          html: 'slide1',
           style: {
-            background: 'url(src/img/testimg-1.jpg)'
+            'background': '#1bbc9b'
           }
         },
         {
           html: 'slide2',
           style: {
-            background: 'url(src/img/testimg-2.jpg)'
+            background: '#4bbfc3'
           }
         },
         {
           html: 'slide3',
           style: {
-            background: 'url(src/img/testimg-3.jpg)'
+            background: '#333'
           }
         }
       ]
