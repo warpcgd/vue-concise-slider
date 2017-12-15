@@ -11,7 +11,7 @@ See the [Quick start](#Quick start) for more details
 ## Features
 
 * Simple configuration
-* Simple and lightweight (~19.6kB gzipped)
+* Simple and lightweight (~23kB gzipped)
 * Multiple sliding effects
 
 ## Install

@@ -30,49 +30,77 @@
 <script>
 import slider from '../components/slider'
 export default {
-  el: '#sliderbasic',
+  el: '#slidercoverFlow',
   data () {
     return {
       someList: [],
       sliderinit: {
-        // currentPage: 1,
-        // thresholdDistance: 100, // 滑动距离阈值判定
-        // thresholdTime: 300, // 滑动时间阈值判定
-        // duration: 300, // 滑动速度
-        // timingFunction: 'ease', // 滑动方式
-        // loop: false, // 无限循环
-        // autoplay: 0 // 自动播放:时间[ms]
+        effect: 'coverflow',
+        currentPage: 1,
+        tracking: false,
+        thresholdDistance: 100, // 滑动距离阈值判定
+        thresholdTime: 300, // 滑动时间阈值判定
+        deviation: 200, // 偏移值
+        widthScalingRatio: 0.8, // 宽度缩放比例
+        heightScalingRatio: 0.8, // 高度缩放比例
+        infinite: 2, // 多级滚动时，需要添加前后遍历数
+        slidesToScroll: 1, // 需要滚动页面的数量
+        loop: true // 无限循环
+        // autoplay: 1000 // 自动播放:时间[ms]
       }
     }
+  },
+  components: {
+    slider
   },
   mounted () {
     let that = this
     setTimeout(function () {
       that.someList = [
         {
-          html: '<div class="slide1">slide1</div>',
+          html: 'slide1',
           style: {
             'background': '#1bbc9b',
-            'backgroundSize': '100%'
+            'width': '33.33333333%'
           }
         },
         {
           html: 'slide2',
           style: {
-            'background': '#4bbfc3'
+            'background': '#4bbfc3',
+            'width': '33.33333333%'
           }
         },
         {
           html: 'slide3',
           style: {
-            'background': '#7baabe'
+            'background': '#7baabe',
+            'width': '33.33333333%'
+          }
+        },
+        {
+          html: 'slide4',
+          style: {
+            'background': '#1bbc9b',
+            'width': '33.33333333%'
+          }
+        },
+        {
+          html: 'slide5',
+          style: {
+            'background': '#4bbfc3',
+            'width': '33.33333333%'
+          }
+        },
+        {
+          html: 'slide6',
+          style: {
+            'background': '#7baabe',
+            'width': '33.33333333%'
           }
         }
       ]
     }, 2000)
-  },
-  components: {
-    slider
   },
   methods: {
     turnTo (num) {
@@ -95,6 +123,17 @@ export default {
       this.$children[0].$emit('autoplayStop')
       // slider.$emit('slidePre')
     },
+    appendslider () {
+      this.someList.push({
+        html: 'slidernew',
+        style: {
+          background: '#333',
+          color: '#fff',
+          width: '23.5%',
+          'margin-right': '2%'
+        }
+      })
+    },
     loadingShow () {
       this.$children[0].$emit('loadingShow')
       // slider.$emit('slidePre')
@@ -102,15 +141,6 @@ export default {
     loadingHide () {
       this.$children[0].$emit('loadingHide')
       // slider.$emit('slidePre')
-    },
-    appendslider () {
-      this.someList.push({
-        html: 'slidernew',
-        style: {
-          background: '#333',
-          color: '#fff'
-        }
-      })
     },
     // 监听事件发生了变化,需要指向一个子组件实例
     slide (data) {

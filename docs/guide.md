@@ -252,6 +252,71 @@ export default {
   </script>
 ```
 
+## CoverFlow Effect
 
+1. effect set `coverflow`,and loop set `true`,Openning cycle slip
+2. someList data needs to set at least the width (% or PX)
+
+```html
+  <template>
+      <div style="width:70%;margin:20px auto;height:400px">
+        <slider :pages="someList" :sliderinit="sliderinit" >
+        </slider>
+      </div>
+  </template>
+  <script>
+  import slider from '../components/slider'
+  export default {
+    el: '#sliderbasic',
+    data () {
+      return {
+      someList: [],
+      sliderinit: {
+          effect: 'coverflow',
+          currentPage: 1,
+          tracking: false,
+          thresholdDistance: 100,
+          thresholdTime: 300,
+          deviation: 200,
+          widthScalingRatio: 0.8,
+          heightScalingRatio: 0.8,
+          infinite: 2,
+          slidesToScroll: 1,
+          loop: true
+        }
+      }
+    },
+    mounted () {
+      let that = this
+      setTimeout(function () {
+        // Picture data can be assigned directly to someList
+        that.someList = [
+          {
+            html: '<div class="slide1">slide1</div>',
+            style: {
+              'background': '#1bbc9b'
+            }
+          },
+          {
+            html: 'slide2',
+            style: {
+              'background': '#4bbfc3'
+            }
+          },
+          {
+            html: 'slide3',
+            style: {
+              'background': '#7baabe'
+            }
+          }
+        ]
+      }, 2000)
+    },
+    components: {
+      slider
+    }
+  }
+  </script>
+```
 
 

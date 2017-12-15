@@ -16,12 +16,14 @@
       </slider>
     </div>
     <div class="sliderButton">
-      <button @click="slidePre">上一页</button>
-      <button @click="slideNext">下一页</button>
-      <button @click="appendslider">添加一页</button>
-      <button @click="turnTo(2)">跳转到第三页</button>
-      <button @click="autoplayStart">启动自动滚动</button>
-      <button @click="autoplayStop">停止自动滚动</button>
+      <button @click="slidePre">上一页/pre</button>
+      <button @click="slideNext">下一页/next</button>
+      <button @click="appendslider">添加一页/append</button>
+      <button @click="turnTo(2)">跳转到第三页/turnTo</button>
+      <button @click="autoplayStart">启动自动滚动/autoplayStart</button>
+      <button @click="autoplayStop">停止自动滚动/autoplayStop</button>
+      <button @click="loadingShow">loading显示/loadingShow</button>
+      <button @click="loadingHide">loading关闭/loadingHide</button>
     </div>
   </div>
 </template>
@@ -91,6 +93,14 @@ export default {
     },
     autoplayStop () {
       this.$children[0].$emit('autoplayStop')
+      // slider.$emit('slidePre')
+    },
+    loadingShow () {
+      this.$children[0].$emit('loadingShow')
+      // slider.$emit('slidePre')
+    },
+    loadingHide () {
+      this.$children[0].$emit('loadingHide')
       // slider.$emit('slidePre')
     },
     appendslider () {

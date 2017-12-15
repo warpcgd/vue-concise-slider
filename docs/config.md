@@ -78,7 +78,7 @@ Sliding configuration
 - Type: `string`
 - Default value: `slide`
 
-Switching effect,it Could be 'slide' or 'fade'
+Switching effect,it Could be 'slide','fade','coverflow'
 
 ```html
   {
@@ -224,6 +224,43 @@ Sliding mode
 ```html
   {
     timingFunction: 'ease'
+  }
+```
+
+### widthScalingRatio
+
+- Type: `string`
+- Default value: `0.8`
+
+Coverflow mode configuration width scale scaling, range 0~1
+
+```html
+  {
+    widthScalingRatio: '0.8'
+  }
+```
+### heightScalingRatio
+
+- Type: `string`
+- Default value: `0.8`
+
+Coverflow mode configuration hight scale scaling, range 0~1
+
+```html
+  {
+    heightScalingRatio: '0.8'
+  }
+```
+### deviation
+
+- Type: `string`
+- Default value: `200`
+
+Configuration of sliding item offset in coverflow mode
+
+```html
+  {
+    deviation: '200'
   }
 ```
 ## Transitive events

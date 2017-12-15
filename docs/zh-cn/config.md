@@ -82,7 +82,7 @@
 - 类型：`string`
 - 默认值：`fade`
 
-切换效果，默认为滚动滑动('slide'),可设置为渐变滑动('fade')
+切换效果，默认为滚动滑动('slide'),可设置为渐变滑动('fade'),旋转滚动('coverflow')
 
 ```html
   {
@@ -228,6 +228,42 @@ loop设置为true时,设置前后复制页面的数量
 ```html
   {
     timingFunction: 'ease'
+  }
+```
+### widthScalingRatio
+
+- 类型：`string`
+- 默认值：`0.8`
+
+coverflow模式下配置宽度比例缩放,范围0~1
+
+```html
+  {
+    widthScalingRatio: '0.8'
+  }
+```
+### heightScalingRatio
+
+- 类型：`string`
+- 默认值：`0.8`
+
+coverflow模式下配置高度比例缩放,范围0~1
+
+```html
+  {
+    heightScalingRatio: '0.8'
+  }
+```
+### deviation
+
+- 类型：`string`
+- 默认值：`200`
+
+coverflow模式下配置滑动项偏移
+
+```html
+  {
+    deviation: '200'
   }
 ```
 ## 传递的事件

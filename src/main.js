@@ -10,6 +10,8 @@ import sliderbasicloop from './demo/slider_basic_loop'
 import slidervertical from './demo/slider_vertical'
 // 多级滚动
 import slidermultipleSlide from './demo/slider_multipleSlide'
+// 多级滚动
+import slidercoverFlow from './demo/slider_coverFlow'
 
 // 实例vue
 new Vue(sliderfade)
@@ -18,3 +20,4 @@ new Vue(slidervariableWidth)
 new Vue(sliderbasicloop)
 new Vue(slidervertical)
 new Vue(slidermultipleSlide)
+new Vue(slidercoverFlow)

@@ -16,7 +16,7 @@ vue-concise-slider,A simple sliding component,has easy configuration,supported s
 ### Features
 
 * Simple configuration
-* Simple and lightweight (~19.6kB gzipped)
+* Simple and lightweight (~23kB gzipped)
 * Multiple sliding effects
 
 ### Achieved
@@ -28,6 +28,7 @@ vue-concise-slider,A simple sliding component,has easy configuration,supported s
 - [x] Loop Mode / Infinite Loop
 - [x] Loop Mode / multiple slide
 - [x] Fade Effect
+- [x] CoverFlow Effect
 
 ### To Do List
 - [ ] Parallax

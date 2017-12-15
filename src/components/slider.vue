@@ -30,6 +30,7 @@ import detectPrefixes from '../utils/detect-prefixes.js'
 import sliderBasic from './slider_basic.vue'
 import sliderBasicLoop from './slider_basic_loop.vue'
 import sliderFade from './slider_fade.vue'
+import sliderCoverflow from './slider_coverflow.vue'
 export default {
   props: ['sliderinit', 'pages'],
   data () {
@@ -39,7 +40,8 @@ export default {
         posheight: '0',
         start: {},
         end: {},
-        currentPage: this.sliderinit.currentPage || 0
+        currentPage: this.sliderinit.currentPage || 0,
+        direction: ''
       },
       temporaryData: {
         prefixes: detectPrefixes(),
@@ -55,6 +57,9 @@ export default {
           'swiper-container-vertical': false
         },
         pageInit: false,
+        widthScalingRatio: this.sliderinit.widthScalingRatio || 0.8,
+        heightScalingRatio: this.sliderinit.heightScalingRatio || 0.8,
+        deviation: this.sliderinit.deviation || 200,
         currentPage: this.sliderinit.currentPage || 0
       }
     }
@@ -66,7 +71,7 @@ export default {
       style['transform'] = 'translate3D(' + this.basicdata.poswidth + ',' + this.basicdata.posheight + ',0)'
       style[this.temporaryData.prefixes.transition + 'TimingFunction'] = this.sliderinit.timingFunction || 'ease'
       style[this.temporaryData.prefixes.transition + 'Duration'] = (this.temporaryData.animation ? this.sliderinit.duration || 300 : 0) + 'ms'
-      if (this.temporaryData.effect === 'fade') {
+      if (this.temporaryData.effect === 'fade' || this.temporaryData.effect === 'coverflow') {
         return {}
       }
       return style
@@ -88,11 +93,14 @@ export default {
       if (this.temporaryData.effect === 'fade') {
         return this.sliderinit.loop ? 'fadeLoop' : 'fade'
       }
+      if (this.temporaryData.effect === 'coverflow') {
+        return this.sliderinit.loop ? 'coverflow' : 'coverflow'
+      }
     },
     // 组件的核心，计算当前父级需要进行的偏移,每次要遍历节点
     currentWidth: {
       get: function () {
-        if (!this.pages.length || this.temporaryData.effect === 'fade') {
+        if (!this.pages.length || this.temporaryData.effect === 'fade' || this.temporaryData.effect === 'coverflow') {
           return 0
         }
         let $slider
@@ -105,6 +113,9 @@ export default {
             lastPage = this.basicdata.currentPage + 1
           }
         }
+        if (this.sliderinit.effect === 'coverflow') {
+          lastPage -= 1
+        }
         // 获取slideritem子集
         for (let item in this.$el.children) {
           if (/slider-touch/ig.test(this.$el.children[item].className)) {
@@ -114,9 +125,19 @@ export default {
         // 遍历子集
         let $sliderChildren = $slider.children[0].children
         let offsetLeft = $sliderChildren[lastPage].offsetLeft
+        // let index = lastPage > 0 && lastPage <= this.pages.length ? lastPage - 1 : 0
+
+        // let width = this.pages[index].style.width.indexOf('px') === -1 ? this.$el.offsetWidth * parseFloat(this.pages[index].style.width) / 100 : parseFloat(this.pages[index].style.width)
+        // let width = this.$el.offsetWidth * 0.333333
         if (this.sliderinit.loop) {
           offsetLeft = $sliderChildren[lastPage].offsetLeft
         }
+        // if (this.sliderinit.effect === 'coverflow' && lastPage === this.pages.length + this.sliderinit.infinite - 2 && this.basicdata.direction === 'left') {
+        //   return offsetLeft - width * 0.3
+        // } else if (this.sliderinit.effect === 'coverflow' && lastPage === 1 && this.basicdata.direction === 'right') {
+        //   // return offsetLeft + width * 0.3
+        // }
+
         return offsetLeft
       },
       set: function (value) {
@@ -247,6 +268,9 @@ export default {
           this.basicdata.posheight = -(this.currentHeight) + this.basicdata.end.y - this.basicdata.start.y + 'px'
           return
         }
+        if (this.temporaryData.effect === 'fade' || this.temporaryData.effect === 'coverflow') {
+          return
+        }
         this.basicdata.poswidth = -(this.currentWidth) + this.basicdata.end.x - this.basicdata.start.x + 'px'
       }
     },
@@ -308,6 +332,7 @@ export default {
       }
     },
     pre () {
+      this.basicdata.direction = 'left'
       if (this.basicdata.currentPage >= 1) {
         this.basicdata.currentPage -= this.sliderinit.slidesToScroll || 1
         this.slide()
@@ -326,6 +351,7 @@ export default {
       this.$emit('slide', this.basicdata)
     },
     next () {
+      this.basicdata.direction = 'right'
       if (this.basicdata.currentPage < this.pagenums - 1) {
         this.basicdata.currentPage += this.sliderinit.slidesToScroll || 1
         this.slide()
@@ -413,7 +439,8 @@ export default {
     basic: sliderBasic,
     basicLoop: sliderBasicLoop,
     fade: sliderFade,
-    fadeLoop: sliderFade
+    fadeLoop: sliderFade,
+    coverflow: sliderCoverflow
   }
 }
 </script>
@@ -451,6 +478,7 @@ export default {
   transition-property: transform;
   width: 100%;
   z-index: 1;
+  align-items: center;
 }
 /*垂直*/
 .swiper-container-vertical  .slider-wrapper{
