@@ -49,8 +49,8 @@ export default {
         setIntervalid: '',
         effect: this.sliderinit.effect || 'slide',
         tracking: false,
-        thresholdDistance: this.sliderinit.thresholdDistance || 150,
-        thresholdTime: this.sliderinit.thresholdTime || 300,
+        thresholdDistance: this.sliderinit.thresholdDistance || 100,
+        thresholdTime: this.sliderinit.thresholdTime || 500,
         animation: false,
         loading: false,
         containerClass: {
