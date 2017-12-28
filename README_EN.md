@@ -51,7 +51,7 @@ vue-concise-slider,A simple sliding component,has easy configuration,supported s
 <!-- Make a frame wrapped slider -->
  <div style="width:70%;margin:20px auto;height:400px">
       <!-- Configuring slider components -->
-      <slider :pages="pages" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+      <slider ref="slider" :pages="pages" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
           <!-- Set loading -->
           <div slot="loading">loading...</div>
       </slider>

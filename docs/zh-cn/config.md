@@ -276,7 +276,7 @@ coverflow模式下配置滑动项偏移
 
 ```html
   slideTo () {
-    this.$children[0].$emit('slideTo', num)
+    this.$ref.slider.$emit('slideTo', num)
   }
 
 ```
@@ -288,7 +288,7 @@ coverflow模式下配置滑动项偏移
 
 ```html
   slideNext () {
-    childComponents.$emit('slideNext')
+    this.$ref.slider.$emit('slideNext')
   }
 
 ```
@@ -301,7 +301,7 @@ coverflow模式下配置滑动项偏移
 
 ```html
   slide () {
-    childComponents.$emit('slidePre')
+    this.$ref.slider.$emit('slidePre')
   }
 
 ```
@@ -313,7 +313,7 @@ coverflow模式下配置滑动项偏移
 开启定时轮播,设置轮播时长
 
 ```html
-  childComponents.$emit('autoplayStart',1000)
+  this.$ref.slider.$emit('autoplayStart',1000)
 ```
 
 ### autoplayStop
@@ -323,7 +323,7 @@ coverflow模式下配置滑动项偏移
 暂停定时轮播
 
 ```html
-  childComponents.$emit('autoplayStop')
+  this.$ref.slider.$emit('autoplayStop')
 ```
 ## 监听的事件
 

@@ -13,7 +13,7 @@
 <!-- Make a frame wrapped slider -->
  <div style="width:70%;margin:20px auto;height:400px">
       <!-- Configuring slider components -->
-      <slider :pages="pages" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+      <slider ref="slider" :pages="pages" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
           <!-- Set loading -->
           <div slot="loading">loading...</div>
       </slider>
@@ -133,7 +133,7 @@ export default {
 ```html
   <template>
       <div style="width:70%;margin:20px auto;height:400px">
-        <slider :pages="someList" :sliderinit="sliderinit" >
+        <slider ref="slider" :pages="someList" :sliderinit="sliderinit" >
         </slider>
       </div>
   </template>
@@ -195,7 +195,7 @@ export default {
 ```html
   <template>
       <div style="width:70%;margin:20px auto;height:400px">
-        <slider :pages="someList" :sliderinit="sliderinit" >
+        <slider ref="slider" :pages="someList" :sliderinit="sliderinit" >
         </slider>
       </div>
   </template>
@@ -260,7 +260,7 @@ export default {
 ```html
   <template>
       <div style="width:70%;margin:20px auto;height:400px">
-        <slider :pages="someList" :sliderinit="sliderinit" >
+        <slider ref="slider" :pages="someList" :sliderinit="sliderinit" >
         </slider>
       </div>
   </template>

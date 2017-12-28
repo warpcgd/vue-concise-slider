@@ -13,7 +13,7 @@
 <!-- 制作一个框架包裹slider -->
  <div style="width:70%;margin:20px auto;height:400px">
       <!-- 配置slider组件 -->
-      <slider :pages="pages" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+      <slider ref="slider" :pages="pages" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
           <!-- 设置loading,可自定义 -->
           <div slot="loading">loading...</div>
       </slider>
@@ -112,7 +112,7 @@ export default {
       -webkit-animation: loading-7 .7s ease-in 0.45s infinite;
     }
   </style>
-  <slider :pages="someList" :sliderinit="sliderinit">
+  <slider ref="slider" :pages="someList" :sliderinit="sliderinit">
       <!-- 设置loading,可自定义loadin特效 -->
       <div slot="loading">
         <div class="loadingDot">
@@ -195,7 +195,7 @@ export default {
 ```html
   <template>
       <div style="width:70%;margin:20px auto;height:400px">
-        <slider :pages="someList" :sliderinit="sliderinit">
+        <slider ref="slider" :pages="someList" :sliderinit="sliderinit">
         </slider>
       </div>
   </template>
@@ -260,7 +260,7 @@ export default {
 ```html
   <template>
       <div style="width:70%;margin:20px auto;height:400px">
-        <slider :pages="someList" :sliderinit="sliderinit">
+        <slider ref="slider" :pages="someList" :sliderinit="sliderinit">
         </slider>
       </div>
   </template>

@@ -4,7 +4,7 @@
 <template>
   <div>
     <div style="width:70%;margin:20px auto;height:400px">
-      <slider :pages="someList" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+      <slider ref="slider" :pages="someList" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
         <div slot="loading">
           <div class="loadingDot">
             <i></i>
@@ -75,22 +75,22 @@ export default {
   methods: {
     turnTo (num) {
       // 传递事件 vue 2.0 传递事件修改了，好的写法应该直接写在空vue类中
-      this.$children[0].$emit('slideTo', num)
+      this.$ref.slider.$emit('slideTo', num)
     },
     slideNext () {
-      this.$children[0].$emit('slideNext')
+      this.$ref.slider.$emit('slideNext')
       // slider.$emit('slideNext')
     },
     slidePre () {
-      this.$children[0].$emit('slidePre')
+      this.$ref.slider.$emit('slidePre')
       // slider.$emit('slidePre')
     },
     autoplayStart () {
-      this.$children[0].$emit('autoplayStart')
+      this.$ref.slider.$emit('autoplayStart')
       // slider.$emit('slidePre')
     },
     autoplayStop () {
-      this.$children[0].$emit('autoplayStop')
+      this.$ref.slider.$emit('autoplayStop')
       // slider.$emit('slidePre')
     },
     appendslider () {
@@ -103,11 +103,11 @@ export default {
       })
     },
     loadingShow () {
-      this.$children[0].$emit('loadingShow')
+      this.$ref.slider.$emit('loadingShow')
       // slider.$emit('slidePre')
     },
     loadingHide () {
-      this.$children[0].$emit('loadingHide')
+      this.$ref.slider.$emit('loadingHide')
       // slider.$emit('slidePre')
     },
     // 监听事件发生了变化,需要指向一个子组件实例

@@ -35,7 +35,7 @@ You can be submitted here, and i will be dealt with as soon as possible:https://
 
 <script v-pre type="text/x-template" id="example">
   <template>
-    <slider :pages="pages" :sliderinit="sliderinit">
+    <slider ref="slider" :pages="pages" :sliderinit="sliderinit">
     <!-- slot  -->
     </slider>
   </template>

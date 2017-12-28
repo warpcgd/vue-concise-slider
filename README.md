@@ -30,7 +30,7 @@ vue-concise-slider,一个简单的滑动组件,配置简单,支持自适应/全�
 - [x] 旋转滚动
 
 ### 未来将实现
-- [ ]
+- [ ] 分页自定义
 
 ### 链接
 
@@ -50,7 +50,7 @@ vue-concise-slider,一个简单的滑动组件,配置简单,支持自适应/全�
 <!-- 制作一个框架包裹slider -->
  <div style="width:70%;margin:20px auto;height:400px">
       <!-- 配置slider组件 -->
-      <slider :pages="pages" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+      <slider ref="slider" :pages="pages" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
           <!-- 设置loading,可自定义 -->
           <div slot="loading">loading...</div>
       </slider>
