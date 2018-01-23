@@ -274,7 +274,7 @@ Sliding to (number) page
 
 ```html
   slideTo () {
-    this.$ref.slider.$emit('slideTo', num)
+    this.$refs.slider.$emit('slideTo', num)
   }
 
 ```
@@ -286,7 +286,7 @@ Sliding to the next page
 
 ```html
   slideNext () {
-    this.$ref.slider.$emit('slideNext')
+    this.$refs.slider.$emit('slideNext')
   }
 
 ```
@@ -299,7 +299,7 @@ Sliding to the previous page
 
 ```html
   slide () {
-    this.$ref.slider.$emit('slidePre')
+    this.$refs.slider.$emit('slidePre')
   }
 
 ```
@@ -311,7 +311,7 @@ Sliding to the previous page
 Opening timing carousel,Setting the carousel time
 
 ```html
-  this.$ref.slider.$emit('autoplayStart',1000)
+  this.$refs.slider.$emit('autoplayStart',1000)
 ```
 
 ### autoplayStop
@@ -321,7 +321,7 @@ Opening timing carousel,Setting the carousel time
 Pause timing carousel
 
 ```html
-  this.$ref.slider.$emit('autoplayStop')
+  this.$refs.slider.$emit('autoplayStop')
 ```
 
 ## Monitoring events

@@ -76,30 +76,30 @@ export default {
   methods: {
     turnTo (num) {
       // 传递事件 vue 2.0 传递事件修改了，好的写法应该直接写在空vue类中
-      this.$ref.slider.$emit('slideTo', num)
+      this.$refs.slider.$emit('slideTo', num)
     },
     slideNext () {
-      this.$ref.slider.$emit('slideNext')
+      this.$refs.slider.$emit('slideNext')
       // slider.$emit('slideNext')
     },
     slidePre () {
-      this.$ref.slider.$emit('slidePre')
+      this.$refs.slider.$emit('slidePre')
       // slider.$emit('slidePre')
     },
     autoplayStart () {
-      this.$ref.slider.$emit('autoplayStart')
+      this.$refs.slider.$emit('autoplayStart')
       // slider.$emit('slidePre')
     },
     autoplayStop () {
-      this.$ref.slider.$emit('autoplayStop')
+      this.$refs.slider.$emit('autoplayStop')
       // slider.$emit('slidePre')
     },
     loadingShow () {
-      this.$ref.slider.$emit('loadingShow')
+      this.$refs.slider.$emit('loadingShow')
       // slider.$emit('slidePre')
     },
     loadingHide () {
-      this.$ref.slider.$emit('loadingHide')
+      this.$refs.slider.$emit('loadingHide')
       // slider.$emit('slidePre')
     },
     appendslider () {
