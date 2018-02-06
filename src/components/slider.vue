@@ -60,7 +60,9 @@ export default {
         widthScalingRatio: this.sliderinit.widthScalingRatio || 0.8,
         heightScalingRatio: this.sliderinit.heightScalingRatio || 0.8,
         deviation: this.sliderinit.deviation || 200,
-        currentPage: this.sliderinit.currentPage || 0
+        currentPage: this.sliderinit.currentPage || 0,
+        pageWidth: 0,
+        pageHeight: 0
       }
     }
   },
@@ -180,6 +182,8 @@ export default {
   },
   mounted () {
     let that = this
+    this.temporaryData.pageWidth = this.$el.offsetWidth
+    this.temporaryData.pageHeight = this.$el.offsetHeight
     // 初始化事件
     this.$emit('init', this.basicdata)
     // 定制事件

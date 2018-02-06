@@ -18,7 +18,7 @@ export default {
   methods: {
     // 设置默认的
     transform: function (index) {
-      let offsetWidth = '-' + this.$el.offsetWidth * index + 'px'
+      let offsetWidth = '-' + this.temporarydata.pageWidth * index + 'px'
       let style = {}
       style['transform'] = 'translate3D(' + offsetWidth + ',0,0)'
       style['opacity'] = this.basicdata.currentPage === index || this.basicdata.currentPage === index + 1 ? '1' : '0'

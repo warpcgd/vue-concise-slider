@@ -17,14 +17,14 @@ export default {
   },
   methods: {
     transform: function (index) {
-      let winWidth = this.$el.offsetWidth
+      let winWidth = this.temporarydata.pageWidth
       let height = ''
       if (this.pages[index].style.height) {
-        height = this.pages[index].style.height.indexOf('px') === -1 ? this.$el.offsetHeight * parseFloat(this.pages[index].style.height) / 100 : parseFloat(this.pages[index].style.height)
+        height = this.pages[index].style.height.indexOf('px') === -1 ? this.temporarydata.pageHeight * parseFloat(this.pages[index].style.height) / 100 : parseFloat(this.pages[index].style.height)
       } else {
-        height = this.$el.offsetHeight
+        height = this.temporarydata.pageHeight
       }
-      let width = this.pages[index].style.width.indexOf('px') === -1 ? this.$el.offsetWidth * parseFloat(this.pages[index].style.width) / 100 : parseFloat(this.pages[index].style.width)
+      let width = this.pages[index].style.width.indexOf('px') === -1 ? this.temporarydata.pageWidth * parseFloat(this.pages[index].style.width) / 100 : parseFloat(this.pages[index].style.width)
       let offsetWidth = winWidth / 2 - width / 2
       let leftWidth = offsetWidth - this.temporarydata.deviation + 'px'
       let rightWidth = offsetWidth + this.temporarydata.deviation + width * (1 - this.temporarydata.widthScalingRatio) + 'px'
@@ -85,7 +85,6 @@ export default {
       style[this.temporarydata.prefixes.transition + 'Duration'] = (this.temporarydata.animation ? this.sliderinit.duration || 300 : 0) + 'ms'
       style['position'] = 'absolute'
       return style
-      // })
     }
   }
 }
