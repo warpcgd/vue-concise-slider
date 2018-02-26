@@ -56,6 +56,7 @@ export default {
           style: {
             'background': '#1bbc9b'
           },
+          //对slider的扩展，如果需要对某一页banner添加说明或其他不同的需求，可以通过定义component来进行扩展
           component: {
             data() {
               return {

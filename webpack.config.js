@@ -21,9 +21,6 @@ module.exports = {
   },
   resolve: {
     extensions: [ '', '.js', '.vue' ],
-    alias: {
-      'vue$': 'vue/dist/vue.js'
-      }
   },
   module: {
     preLoaders: [
@@ -58,7 +55,6 @@ module.exports = {
     ]
   },
   babel: {
-    babelrc: false,
     presets: ['es2015'],
     plugins: ['transform-runtime']
   },
