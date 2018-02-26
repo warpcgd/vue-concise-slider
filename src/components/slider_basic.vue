@@ -3,7 +3,10 @@
     <template v-if="pages.length">
       <template v-for="item in pages">
     	  <div class="slider-item" :style="item.style">
-    	    <div v-html="item.html"></div>
+    	    <div v-if="!item.component" v-html="item.html"></div>
+          <template v-else>
+            <component :is="item.component" ></component>
+          </template>
     	  </div>
       </template>
     </template>
