@@ -344,7 +344,83 @@ export default {
   </script>
 ```
 
+## pages使用动态组件
 
+1. pages中传入动态组件属性'component'
+
+```html
+  <template>
+      <div style="width:70%;margin:20px auto;height:400px">
+        <slider ref="slider" :pages="someList" :sliderinit="sliderinit">
+        </slider>
+      </div>
+  </template>
+  <script>
+  import slider from '../components/slider'
+  export default {
+    el: '#sliderbasic',
+    data () {
+      return {
+      someList: [],
+      sliderinit: {
+          effect: 'coverflow',
+          currentPage: 1,
+          tracking: false,
+          thresholdDistance: 100, // 滑动距离阈值判定
+          thresholdTime: 300, // 滑动时间阈值判定
+          deviation: 200, // 偏移值
+          widthScalingRatio: 0.8, // 宽度缩放比例
+          heightScalingRatio: 0.8, // 高度缩放比例
+          infinite: 2, // 多级滚动时，需要添加前后遍历数
+          slidesToScroll: 1, // 需要滚动页面的数量
+          loop: true // 无限循环
+          // autoplay: 1000 // 自动播放:时间[ms]
+        }
+      }
+    },
+    mounted () {
+      let that = this
+      setTimeout(function () {
+        // 拿回来的图片数据可以直接赋值someList
+        that.someList = [
+        {
+          //如果component为真的时候，此html项失效
+          html: '<div class="slide1">slide1</div>',
+          style: {
+            'background': '#1bbc9b'
+          },
+          //对slider的扩展，如果需要对某一页banner添加说明或其他不同的需求，可以通过定义component来进行扩展
+          component: {
+            data() {
+              return {
+                //图片路径
+                img: 'xxxxx.jpg'
+              }
+            },
+            template: `<div><img :src="img" /><p>插入的说明文字</p>...</div>`
+          }
+        },
+        {
+          html: 'slide2',
+          style: {
+            'background': '#4bbfc3'
+          }
+        },
+        {
+          html: 'slide3',
+          style: {
+            'background': '#7baabe'
+          }
+        }
+      ]
+      }, 2000)
+    },
+    components: {
+      slider
+    }
+  }
+  </script>
+```
 
 
 

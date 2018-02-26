@@ -319,4 +319,75 @@ export default {
   </script>
 ```
 
+## Pages uses dynamic components
+
+1. The incoming dynamic component attribute 'component' in pages
+
+```html
+  <template>
+      <div style="width:70%;margin:20px auto;height:400px">
+        <slider ref="slider" :pages="someList" :sliderinit="sliderinit">
+        </slider>
+      </div>
+  </template>
+  <script>
+  import slider from '../components/slider'
+  export default {
+    el: '#sliderbasic',
+    data () {
+      return {
+      someList: [],
+      sliderinit: {
+          currentPage: 1,
+          thresholdDistance: 100,
+          thresholdTime: 300,
+          duration: 300,
+          timingFunction: 'ease',
+          loop: true,
+          autoplay: 0
+        }
+      }
+    },
+    mounted () {
+      let that = this
+      setTimeout(function () {
+        that.someList = [
+        {
+          // If component is true, this HTML item is invalid
+
+          html: '<div class="slide1">slide1</div>',
+          style: {
+            'background': '#1bbc9b'
+          },
+          component: {
+            data() {
+              return {
+                //img src
+                img: 'xxxxx.jpg'
+              }
+            },
+            template: `<div><img :src="img" /><p>插入的说明文字</p>...</div>`
+          }
+        },
+        {
+          html: 'slide2',
+          style: {
+            'background': '#4bbfc3'
+          }
+        },
+        {
+          html: 'slide3',
+          style: {
+            'background': '#7baabe'
+          }
+        }
+      ]
+      }, 2000)
+    },
+    components: {
+      slider
+    }
+  }
+  </script>
+```
 
