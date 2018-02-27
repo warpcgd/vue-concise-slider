@@ -57,6 +57,25 @@
    }
   }
 ```
+### component
+
+- 类型：`object`
+- 默认值：`null`
+
+对每页page的扩展，可以自定义component模板
+
+```html
+  {
+    component: {
+      data () {
+        return {
+          img: 'src/img/testimg-1.jpg'
+        }
+      },
+      template: '<div><img style="width: 100%" :src="img" /><p style="position: absolute; margin: 0; right: 10px; bottom: 10px; font-size: 16px;">test</p></div>'
+    }
+  }
+```
 
 ## sliderinit
 

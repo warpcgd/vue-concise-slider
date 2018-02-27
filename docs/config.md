@@ -54,6 +54,26 @@ The style pattern that works directly on each item can output background maps, b
   }
 ```
 
+### component
+
+- Type: `object`
+- Default value: `null`
+
+For the extension of each page page, you can customize the component template
+
+```html
+  {
+    component: {
+      data () {
+        return {
+          img: 'src/img/testimg-1.jpg'
+        }
+      },
+      template: '<div><img style="width: 100%" :src="img" /><p style="position: absolute; margin: 0; right: 10px; bottom: 10px; font-size: 16px;">test</p></div>'
+    }
+  }
+```
+
 ## sliderinit
 
 - Type: `Object`
