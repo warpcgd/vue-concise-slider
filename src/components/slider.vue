@@ -24,7 +24,6 @@
       </div>
     </div>
 </template>
-
 <script>
 import detectPrefixes from '../utils/detect-prefixes.js'
 import sliderBasic from './slider_basic.vue'
@@ -107,6 +106,7 @@ export default {
         }
         let $slider
         let lastPage = this.basicdata.currentPage
+        let pageWidth = this.temporaryData.pageWidth
         // let srollbar = false
         if (this.sliderinit.loop) {
           if (this.sliderinit.infinite) {
@@ -127,32 +127,20 @@ export default {
         // 遍历子集
         let $sliderChildren = $slider.children[0].children
         let offsetLeft = $sliderChildren[lastPage].offsetLeft
-        // let index = lastPage > 0 && lastPage <= this.pages.length ? lastPage - 1 : 0
-
-        // let width = this.pages[index].style.width.indexOf('px') === -1 ? this.$el.offsetWidth * parseFloat(this.pages[index].style.width) / 100 : parseFloat(this.pages[index].style.width)
-        // let width = this.$el.offsetWidth * 0.333333
         if (this.sliderinit.loop) {
           offsetLeft = $sliderChildren[lastPage].offsetLeft
         }
-        // if (this.sliderinit.effect === 'coverflow' && lastPage === this.pages.length + this.sliderinit.infinite - 2 && this.basicdata.direction === 'left') {
-        //   return offsetLeft - width * 0.3
-        // } else if (this.sliderinit.effect === 'coverflow' && lastPage === 1 && this.basicdata.direction === 'right') {
-        //   // return offsetLeft + width * 0.3
-        // }
-
-        return offsetLeft
-      },
-      set: function (value) {
-        return value
+        return offsetLeft + pageWidth - pageWidth
       }
     },
-    currentHeight: function () {
+    currentHeight () {
       if (!this.pages.length || this.temporaryData.effect === 'fade') {
         return 0
       }
       let posheight = 0
       let $slider
       let lastPage = this.basicdata.currentPage - 1
+      let pageWidth = this.temporaryData.pageWidth
       // let srollbar = false
       if (this.sliderinit.loop) {
         if (this.sliderinit.infinite) {
@@ -177,7 +165,7 @@ export default {
           posheight += parseInt($sliderChildren[item].style.marginBottom || 0)
         }
       }
-      return posheight
+      return posheight + pageWidth - pageWidth
     }
   },
   mounted () {
@@ -218,6 +206,12 @@ export default {
     if (this.sliderinit.direction === 'vertical') {
       this.temporaryData.containerClass['swiper-container-vertical'] = true
     }
+    // 添加reszie监听
+    window.addEventListener('resize', () => {
+      that.temporaryData.pageWidth = that.$el.offsetWidth
+      that.temporaryData.pageHeight = that.$el.offsetHeight
+      that.slide(that.basicdata.currentPage, 'animationnone')
+    })
   },
   methods: {
     swipeStart (e) {
