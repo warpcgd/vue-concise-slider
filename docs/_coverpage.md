@@ -2,7 +2,7 @@
 
 > A simple vue sliding component
 
-- Simple and lightweight (~23kB gzipped)
+- Simple and lightweight (~24kB gzipped)
 - Multiple sliding effects
 - Simple configuration
 
