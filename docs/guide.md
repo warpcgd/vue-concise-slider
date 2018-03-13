@@ -354,19 +354,19 @@ export default {
         that.someList = [
         {
           // If component is true, this HTML item is invalid
-
           html: '<div class="slide1">slide1</div>',
           style: {
             'background': '#1bbc9b'
           },
           component: {
+            props: ['item', 'sliderinit', 'pages'],
             data() {
               return {
                 //img src
                 img: 'xxxxx.jpg'
               }
             },
-            template: `<div><img :src="img" /><p>插入的说明文字</p>...</div>`
+            template: `<div><img :src="img" /><p>test</p>...</div>`
           }
         },
         {

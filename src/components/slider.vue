@@ -2,12 +2,12 @@
     <div class='slider-container' :class = 'temporaryData.containerClass'>
       <div class='slider-touch'
       :style="styleobj"
-      @touchmove="swipeMove"
-      @touchstart="swipeStart"
-      @touchend="swipeEnd"
-      @mousedown="swipeStart"
-      @mouseup="swipeEnd"
-      @mousemove="swipeMove"
+      @touchmove.stop.capture.prevent="swipeMove"
+      @touchstart.stop.capture.prevent="swipeStart"
+      @touchend.stop.capture.prevent="swipeEnd"
+      @mousedown.stop.capture.prevent="swipeStart"
+      @mouseup.stop.capture.prevent="swipeEnd"
+      @mousemove.stop.capture.prevent="swipeMove"
       @webkit-transition-end="onTransitionEnd"
       @transitionend="onTransitionEnd"
       >
@@ -254,11 +254,11 @@ export default {
     swipeMove (e) {
       if (this.temporaryData.tracking) {
         if (e.type === 'touchmove') {
-          e.preventDefault()
+          // e.preventDefault()
           this.basicdata.end.x = e.targetTouches[0].clientX
           this.basicdata.end.y = e.targetTouches[0].clientY
         } else {
-          e.preventDefault()
+          // e.preventDefault()
           this.basicdata.end.x = e.clientX
           this.basicdata.end.y = e.clientY
         }

@@ -62,17 +62,24 @@
 - 类型：`object`
 - 默认值：`null`
 
-对每页page的扩展，可以自定义component模板
+对每页page的扩展，可以自定义component模板，支持传入props
+* item : 每项pages
+* sliderinit: slider配置
+* pages: 滑动列表
 
 ```html
   {
     component: {
+      props: ['item', 'sliderinit', 'pages'],
       data () {
         return {
           img: 'src/img/testimg-1.jpg'
         }
       },
-      template: '<div><img style="width: 100%" :src="img" /><p style="position: absolute; margin: 0; right: 10px; bottom: 10px; font-size: 16px;">test</p></div>'
+      mounted () {
+        console.log(this.item)
+      },
+      template: '<div><img style="width: 100%" :src="img" /><p style="position: absolute; margin: 0; right: 10px; bottom: 10px; font-size: 16px;">test1</p></div>'
     }
   }
 ```

@@ -59,17 +59,25 @@ The style pattern that works directly on each item can output background maps, b
 - Type: `object`
 - Default value: `null`
 
-For the extension of each page page, you can customize the component template
+For the extension of each page page, you can customize the component template , and use props in the component
+
+* item : per pages
+* sliderinit: slider configuration
+* pages: array of slider list
 
 ```html
   {
     component: {
+      props: ['item', 'sliderinit', 'pages'],
       data () {
         return {
           img: 'src/img/testimg-1.jpg'
         }
       },
-      template: '<div><img style="width: 100%" :src="img" /><p style="position: absolute; margin: 0; right: 10px; bottom: 10px; font-size: 16px;">test</p></div>'
+      mounted () {
+        console.log(this.item)
+      },
+      template: '<div><img style="width: 100%" :src="img" /><p style="position: absolute; margin: 0; right: 10px; bottom: 10px; font-size: 16px;">test1</p></div>'
     }
   }
 ```
@@ -79,7 +87,7 @@ For the extension of each page page, you can customize the component template
 - Type: `Object`
 - Default value: `null`
 
-Sliding configuration
+Slider configuration
 
 ```html
   {

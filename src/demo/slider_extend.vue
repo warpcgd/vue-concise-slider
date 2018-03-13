@@ -39,7 +39,7 @@ export default {
         tracking: false,
         thresholdDistance: 100, // 滑动距离阈值判定
         thresholdTime: 300, // 滑动时间阈值判定
-        loop: true // 无限循环
+        loop: false // 无限循环
         // autoplay:1000,//自动播放:时间[ms]
       }
     }
@@ -56,26 +56,54 @@ export default {
           style: {
             'background': '#1bbc9b'
           },
-        // 对slider的扩展，如果需要对某一页banner添加说明或其他不同的需求，可以通过定义component来进行扩展
+          // 对slider的扩展，如果需要对某一页banner添加说明或其他不同的需求，可以通过定义component来进行扩展
           component: {
+            props: ['item', 'sliderinit', 'pages'],
             data () {
               return {
                 img: 'src/img/testimg-1.jpg'
               }
             },
-            template: '<div><img style="width: 100%" :src="img" /><p style="position: absolute; margin: 0; right: 10px; bottom: 10px; font-size: 16px;">test</p></div>'
+            mounted () {
+              console.log(this.item)
+            },
+            template: '<div><img style="width: 100%" :src="img" /><p style="position: absolute; margin: 0; right: 10px; bottom: 10px; font-size: 16px;">test1</p></div>'
           }
         },
         {
           html: 'slide2',
           style: {
             'background': '#4bbfc3'
+          },
+          component: {
+            props: ['item', 'sliderinit', 'pages'],
+            data () {
+              return {
+                img: 'src/img/testimg-2.jpg'
+              }
+            },
+            mounted () {
+              console.log(this.item)
+            },
+            template: '<div><img style="width: 100%" :src="img" /><p style="position: absolute; margin: 0; right: 10px; bottom: 10px; font-size: 16px;">test2</p></div>'
           }
         },
         {
           html: 'slide3',
           style: {
             'background': '#7baabe'
+          },
+          component: {
+            props: ['item', 'sliderinit', 'pages'],
+            data () {
+              return {
+                img: 'src/img/testimg-3.jpg'
+              }
+            },
+            mounted () {
+              console.log(this.item)
+            },
+            template: '<div><img style="width: 100%" :src="img" /><p style="position: absolute; margin: 0; right: 10px; bottom: 10px; font-size: 16px;">test3</p></div>'
           }
         }
       ]

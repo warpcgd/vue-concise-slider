@@ -5,7 +5,7 @@
         <div class="slider-item" :style="[item.style, transform(index)]">
           <div v-if="!item.component" v-html="item.html"></div>
           <template v-else>
-            <component :is="item.component" ></component>
+            <component :pages="pages" :item="item" :sliderinit="sliderinit" :is="item.component" ></component>
           </template>
         </div>
       </template>

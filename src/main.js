@@ -13,7 +13,7 @@ import slidermultipleSlide from './demo/slider_multipleSlide'
 // 多级滚动
 import slidercoverFlow from './demo/slider_coverFlow'
 // 对slider的扩展
-import sliderExtend from './demo/slider_extend'
+import sliderextend from './demo/slider_extend'
 
 // 实例vue
 new Vue(sliderfade)
@@ -23,4 +23,4 @@ new Vue(sliderbasicloop)
 new Vue(slidervertical)
 new Vue(slidermultipleSlide)
 new Vue(slidercoverFlow)
-new Vue(sliderExtend)
+new Vue(sliderextend)
