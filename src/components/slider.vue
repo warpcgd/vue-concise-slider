@@ -1,5 +1,5 @@
 <template>
-    <div class='slider-container' :class = 'temporaryData.containerClass'>
+    <div class='slider-container' :class = 'temporaryData.containerClass' @mouseleave="swipeOut">
       <div class='slider-touch'
       :style="styleobj"
       @touchmove.stop.capture.prevent="swipeMove"
@@ -327,6 +327,11 @@ export default {
           this.slide(this.basicdata.currentPage)
           return
         }
+      }
+    },
+    swipeOut (e) {
+      if (this.$el === e.target) {
+        this.swipeEnd(e)
       }
     },
     pre () {
