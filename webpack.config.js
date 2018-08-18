@@ -20,7 +20,7 @@ module.exports = {
     umdNamedDefine: true
   },
   resolve: {
-    extensions: [ '', '.js', '.vue' ],
+    extensions: [ '', '.js', '.vue' ]
   },
   module: {
     preLoaders: [
