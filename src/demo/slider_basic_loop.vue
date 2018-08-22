@@ -5,6 +5,9 @@
   <div>
     <div style="width:70%;margin:20px auto;height:400px">
       <slider ref="slider" :pages="someList" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+        <sliderItem>1</sliderItem>
+        <sliderItem>2</sliderItem>
+        <sliderItem>3</sliderItem>
         <div slot="loading">
           <div class="loadingDot">
             <i></i>
@@ -29,13 +32,14 @@
 </template>
 <script>
 import slider from '../components/slider'
+import sliderItem from '../components/slider_item'
 export default {
   el: '#sliderbasicloop',
   data () {
     return {
       someList: [],
       sliderinit: {
-        currentPage: 1,
+        currentPage: 0,
         tracking: false,
         thresholdDistance: 100, // 滑动距离阈值判定
         thresholdTime: 300, // 滑动时间阈值判定
@@ -45,31 +49,32 @@ export default {
     }
   },
   components: {
-    slider
+    slider,
+    sliderItem
   },
   mounted () {
-    let that = this
+    // let that = this
     setTimeout(function () {
-      that.someList = [
-        {
-          html: '<div class="slide1">slide1</div>',
-          style: {
-            'background': '#1bbc9b'
-          }
-        },
-        {
-          html: 'slide2',
-          style: {
-            'background': '#4bbfc3'
-          }
-        },
-        {
-          html: 'slide3',
-          style: {
-            'background': '#7baabe'
-          }
-        }
-      ]
+      // that.someList = [
+      //   {
+      //     html: '<div class="slide1">slide1</div>',
+      //     style: {
+      //       'background': '#1bbc9b'
+      //     }
+      //   },
+      //   {
+      //     html: 'slide2',
+      //     style: {
+      //       'background': '#4bbfc3'
+      //     }
+      //   },
+      //   {
+      //     html: 'slide3',
+      //     style: {
+      //       'background': '#7baabe'
+      //     }
+      //   }
+      // ]
     }, 2000)
   },
   methods: {

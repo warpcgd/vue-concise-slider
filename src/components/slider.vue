@@ -11,15 +11,18 @@
       @webkit-transition-end="onTransitionEnd"
       @transitionend="onTransitionEnd"
       >
+      <div class="slider-wrapper" v-if="pages.length === 0 && sliderinit.effect !== 'fade' && sliderinit.effect !== 'coverflow'">
+        <slot></slot>
+      </div>
       <!-- 组件在 vm.currentview 变化时改变！ -->
-      <component :pages="pages" :sliderinit="sliderinit" :basicdata="basicdata" :temporarydata="temporaryData" v-bind:is="currentView"></component>
+      <component v-if="pages.length !== 0" :pages="pages" :sliderinit="sliderinit" :basicdata="basicdata" :temporarydata="temporaryData" v-bind:is="currentView"></component>
       </div>
       <div class="slider-pagination slider-pagination-bullets">
-        <template v-for="n in pagenums">
+        <template v-for="n in (pagenums||temporaryData.sliderLength)">
           <span @click='slide(n-1)' class="slider-pagination-bullet" :class="n-1 === basicdata.currentPage? 'slider-pagination-bullet-active':''"></span>
         </template>
       </div>
-      <div class="slider-loading" v-show="!pagenums||temporaryData.loading">
+      <div class="slider-loading" v-show="(!pagenums && temporaryData.sliderLength === 0)||temporaryData.loading">
         <slot name="loading"></slot>
       </div>
     </div>
@@ -32,6 +35,7 @@ import sliderFade from './slider_fade.vue'
 import sliderCoverflow from './slider_coverflow.vue'
 export default {
   props: ['sliderinit', 'pages'],
+  name: 'slider',
   data () {
     return {
       basicdata: {
@@ -46,6 +50,8 @@ export default {
         prefixes: detectPrefixes(),
         transitionEnding: false,
         setIntervalid: '',
+        renderTime: '',
+        sliderLength: 0,
         effect: this.sliderinit.effect || 'slide',
         tracking: false,
         thresholdDistance: this.sliderinit.thresholdDistance || 100,
@@ -101,7 +107,7 @@ export default {
     // 组件的核心，计算当前父级需要进行的偏移,每次要遍历节点
     currentWidth: {
       get: function () {
-        if (!this.pages.length || this.temporaryData.effect === 'fade' || this.temporaryData.effect === 'coverflow') {
+        if ((!this.pagenums && this.temporaryData.sliderLength === 0) || this.temporaryData.effect === 'fade' || this.temporaryData.effect === 'coverflow') {
           return 0
         }
         let $slider
@@ -110,7 +116,7 @@ export default {
         // let srollbar = false
         if (this.sliderinit.loop) {
           if (this.sliderinit.infinite) {
-            lastPage = this.basicdata.currentPage + (this.sliderinit.infinite <= this.pagenums ? this.sliderinit.infinite : this.pagenums)
+            lastPage = this.basicdata.currentPage + (this.sliderinit.infinite <= (this.pagenums || this.temporaryData.sliderLength) ? this.sliderinit.infinite : (this.pagenums || this.temporaryData.sliderLength))
           } else {
             lastPage = this.basicdata.currentPage + 1
           }
@@ -155,7 +161,7 @@ export default {
           $slider = this.$el.children[item]
         }
       }
-       // 遍历子集
+      // 遍历子集
       let $sliderChildren = $slider.children[0].children
       for (let item in $sliderChildren) {
         if (item <= lastPage) {
@@ -301,11 +307,11 @@ export default {
           // swipe left
           this.next()
           return
-        // tap
+          // tap
         } else if (deltaTime < 300 && Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
           this.$emit('tap', this.basicdata)
           this.slide(this.basicdata.currentPage)
-        //
+          //
         } else {
           this.slide(this.basicdata.currentPage)
           return
@@ -343,7 +349,7 @@ export default {
         this.basicdata.currentPage -= this.sliderinit.slidesToScroll || 1
         this.temporaryData.transitionEnding = true
         if (this.basicdata.currentPage < 0 && this.temporaryData.effect === 'fade') {
-          this.slide(this.pagenums - 1)
+          this.slide((this.pagenums || this.temporaryData.sliderLength) - 1)
           this.temporaryData.transitionEnding = false
         } else {
           this.slide()
@@ -355,13 +361,13 @@ export default {
     },
     next () {
       this.basicdata.direction = 'right'
-      if (this.basicdata.currentPage < this.pagenums - 1) {
+      if (this.basicdata.currentPage < (this.pagenums || this.temporaryData.sliderLength) - 1) {
         this.basicdata.currentPage += this.sliderinit.slidesToScroll || 1
         this.slide()
-      } else if (this.sliderinit.loop && this.basicdata.currentPage === this.pagenums - 1) {
+      } else if (this.sliderinit.loop && this.basicdata.currentPage === (this.pagenums || this.temporaryData.sliderLength) - 1) {
         this.basicdata.currentPage += this.sliderinit.slidesToScroll || 1
         this.temporaryData.transitionEnding = true
-        if (this.basicdata.currentPage >= this.pagenums && this.temporaryData.effect === 'fade') {
+        if (this.basicdata.currentPage >= (this.pagenums || this.temporaryData.sliderLength) && this.temporaryData.effect === 'fade') {
           this.slide(0)
           this.temporaryData.transitionEnding = false
         } else {
@@ -394,7 +400,7 @@ export default {
         }
       }
       //
-      if (that.basicdata.currentPage < 0 || that.basicdata.currentPage >= that.pagenums) {
+      if (that.basicdata.currentPage < 0 || that.basicdata.currentPage >= (that.pagenums || that.temporaryData.sliderLength)) {
         return
       }
     },
@@ -407,7 +413,7 @@ export default {
           }
           that.temporaryData.setIntervalid = setInterval(function () {
             that.next()
-            if (that.basicdata.currentPage === that.pagenums - 1 && !that.sliderinit.loop) {
+            if (that.basicdata.currentPage === (that.pagenums || that.temporaryData.sliderLength) - 1 && !that.sliderinit.loop) {
               clearInterval(that.temporaryData.setIntervalid)
               that.temporaryData.setIntervalid = 0
             }
@@ -430,10 +436,30 @@ export default {
         if (that.sliderinit.loop && that.temporaryData.effect !== 'fade') {
           that.temporaryData.transitionEnding = false
           if (that.basicdata.currentPage < 0) {
-            that.slide(that.pagenums + that.basicdata.currentPage, 'animationnone')
-          } else if (that.basicdata.currentPage >= that.pagenums) {
-            that.slide(0 + that.basicdata.currentPage - that.pagenums, 'animationnone')
+            that.slide((that.pagenums || that.temporaryData.sliderLength) + that.basicdata.currentPage, 'animationnone')
+          } else if (that.basicdata.curentPage >= (that.pagenums || that.temporaryData.sliderLength)) {
+            that.slide(0 + that.basicdata.currentPage - that.agenums, 'animationnone')
           }
+        }
+      }, 0)
+    },
+    renderDom () {
+      let that = this
+      // 防抖函数
+      if (this.temporaryData.renderTime) {
+        clearTimeout(this.temporaryData.renderTime)
+      }
+      this.temporaryData.renderTime = setTimeout(() => {
+        that.temporaryData.renderTime = undefined
+        let slideDom = that.$el.getElementsByClassName('slider-wrapper')[0]
+        let sliderItem = slideDom.getElementsByClassName('slider-item')
+        that.temporaryData.sliderLength = sliderItem.length
+        // loop
+        if (that.temporaryData.sliderLength > 1 && that.sliderinit.loop) {
+          var cloneDom1 = sliderItem[0].cloneNode(true)
+          var cloneDom2 = sliderItem[that.temporaryData.sliderLength - 1].cloneNode(true)
+          slideDom.insertBefore(cloneDom2, sliderItem[0])
+          slideDom.appendChild(cloneDom1)
         }
       }, 0)
     }
@@ -455,13 +481,13 @@ export default {
   position: relative;
   z-index: 1;
 }
- .slider-container {
+.slider-container {
   height: 100%;
   width: 100%;
   position: relative;
   white-space: nowrap;
 }
-.slider-center-center{
+.slider-center-center {
   margin: auto;
   z-index: 1;
   position: absolute;
@@ -484,7 +510,7 @@ export default {
   align-items: center;
 }
 /*垂直*/
-.swiper-container-vertical  .slider-wrapper{
+.swiper-container-vertical .slider-wrapper {
   /*flex-direction: column;*/
   /* 09版 */
   -webkit-box-orient: vertical;
@@ -513,8 +539,8 @@ export default {
   /*display: inline-block;*/
 }
 .slider-item {
-  background-position: center center!important;
-  background-size: cover!important;
+  background-position: center center !important;
+  background-size: cover !important;
 }
 
 .slider-pagination {
@@ -524,12 +550,12 @@ export default {
   /*transition: all 350ms ease 0s;*/
   z-index: 10;
 }
-.slider-pagination-bullets{
+.slider-pagination-bullets {
   bottom: 10px;
   left: 0;
   width: 100%;
 }
-.slider-pagination-bullet{
+.slider-pagination-bullet {
   background: #000 none repeat scroll 0 0;
   border-radius: 100%;
   display: inline-block;
@@ -540,7 +566,7 @@ export default {
   margin: 0 5px;
 }
 /*垂直*/
-.swiper-container-vertical  .slider-pagination-bullets {
+.swiper-container-vertical .slider-pagination-bullets {
   bottom: auto;
   left: auto;
   width: auto;
@@ -548,7 +574,7 @@ export default {
   top: 50%;
   transform: translate3d(0px, -50%, 0px);
 }
-.swiper-container-vertical .slider-pagination-bullet{
+.swiper-container-vertical .slider-pagination-bullet {
   display: block;
   margin: 5px 0;
 }
@@ -556,13 +582,14 @@ export default {
   background: #fff none repeat scroll 0 0;
   opacity: 1;
 }
-.slider-loading{
-  position:absolute;
-  top:50%;
+.slider-loading {
+  position: absolute;
+  top: 50%;
   transform: translateY(-50%);
-  z-index: 999
+  z-index: 999;
 }
-.slider-button-next, .slider-button-prev {
+.slider-button-next,
+.slider-button-prev {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 27px 44px;
@@ -574,19 +601,19 @@ export default {
   width: 27px;
   z-index: 10;
 }
-.slider-button-prev{
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D\'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg\'%20viewBox%3D\'0%200%2027%2044\'%3E%3Cpath%20d%3D\'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z\'%20fill%3D\'%23ffffff\'%2F%3E%3C%2Fsvg%3E");
+.slider-button-prev {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23ffffff'%2F%3E%3C%2Fsvg%3E");
   left: 10px;
   right: auto;
 }
 
-.slider-button-next{
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D\'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg\'%20viewBox%3D\'0%200%2027%2044\'%3E%3Cpath%20d%3D\'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z\'%20fill%3D\'%23ffffff\'%2F%3E%3C%2Fsvg%3E");
+.slider-button-next {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23ffffff'%2F%3E%3C%2Fsvg%3E");
   left: auto;
   right: 10px;
 }
 /*移动端优化*/
- /*@media screen and (max-width:414px) {
+/*@media screen and (max-width:414px) {
   .slider-container {
   height: 200px;
   margin: 20px auto;
