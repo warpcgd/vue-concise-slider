@@ -1,0 +1,9 @@
+{
+  "presets": [
+    "babel-preset-env",
+    "stage-2"
+  ],
+  "plugins": [
+    "transform-runtime"
+  ]
+}
