@@ -4,7 +4,8 @@
 <template>
   <div>
     <div style="width:70%;margin:20px auto;height:400px">
-      <slider ref="slider" :pages="someList" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+      <slider ref="slider" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+        <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
         <div slot="loading">
           <div class="loadingDot">
             <i></i>
@@ -18,7 +19,8 @@
     <div class="sliderButton">
       <button @click="slidePre">上一页/pre</button>
       <button @click="slideNext">下一页/next</button>
-      <button @click="appendslider">添加一页/append</button>
+      <button @click="appendslider">从尾添加一页/append</button>
+      <button @click="unShiftSlider">从头添加一页/unshift</button>
       <button @click="turnTo(2)">跳转到第三页/turnTo</button>
       <button @click="autoplayStart">启动自动滚动/autoplayStart</button>
       <button @click="autoplayStop">停止自动滚动/autoplayStop</button>
@@ -29,6 +31,7 @@
 </template>
 <script>
 import slider from '../components/slider'
+import slideritem from '../components/slider_item'
 export default {
   el: '#sliderfade',
   data () {
@@ -71,7 +74,8 @@ export default {
     }, 2000)
   },
   components: {
-    slider
+    slider,
+    slideritem
   },
   methods: {
     turnTo (num) {
@@ -104,6 +108,15 @@ export default {
     },
     appendslider () {
       this.someList.push({
+        html: 'slidernew',
+        style: {
+          background: '#333',
+          color: '#fff'
+        }
+      })
+    },
+    unShiftSlider () {
+      this.someList.unshift({
         html: 'slidernew',
         style: {
           background: '#333',

@@ -6,14 +6,11 @@
 
 <script>
 export default {
-  name: 'slider-item',
+  name: 'slideritem',
   data () {
     return {
       slideClass: 'slider-item'
     }
-  },
-  ready () {
-    this.renderDom()
   },
   mounted () {
     this.renderDom()
@@ -21,7 +18,7 @@ export default {
   methods: {
     renderDom () {
       if (this.$parent) {
-        this.$parent.renderDom()
+        this.$parent.renderDom(this.$el)
       }
     }
   }

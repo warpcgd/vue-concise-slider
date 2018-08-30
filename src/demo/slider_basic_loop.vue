@@ -4,10 +4,8 @@
 <template>
   <div>
     <div style="width:70%;margin:20px auto;height:400px">
-      <slider ref="slider" :pages="someList" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
-        <sliderItem>1</sliderItem>
-        <sliderItem>2</sliderItem>
-        <sliderItem>3</sliderItem>
+      <slider ref="slider" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+        <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
         <div slot="loading">
           <div class="loadingDot">
             <i></i>
@@ -21,7 +19,8 @@
     <div class="sliderButton">
       <button @click="slidePre">上一页/pre</button>
       <button @click="slideNext">下一页/next</button>
-      <button @click="appendslider">添加一页/append</button>
+      <button @click="appendslider">从尾添加一页/append</button>
+      <button @click="unShiftSlider">从头添加一页/unshift</button>
       <button @click="turnTo(2)">跳转到第三页/turnTo</button>
       <button @click="autoplayStart">启动自动滚动/autoplayStart</button>
       <button @click="autoplayStop">停止自动滚动/autoplayStop</button>
@@ -32,7 +31,7 @@
 </template>
 <script>
 import slider from '../components/slider'
-import sliderItem from '../components/slider_item'
+import slideritem from '../components/slider_item'
 export default {
   el: '#sliderbasicloop',
   data () {
@@ -43,38 +42,39 @@ export default {
         tracking: false,
         thresholdDistance: 100, // 滑动距离阈值判定
         thresholdTime: 300, // 滑动时间阈值判定
-        loop: true // 无限循环
+        loop: true, // 无限循环
+        infinite: 1
         // autoplay:1000,//自动播放:时间[ms]
       }
     }
   },
   components: {
     slider,
-    sliderItem
+    slideritem
   },
   mounted () {
-    // let that = this
+    let that = this
     setTimeout(function () {
-      // that.someList = [
-      //   {
-      //     html: '<div class="slide1">slide1</div>',
-      //     style: {
-      //       'background': '#1bbc9b'
-      //     }
-      //   },
-      //   {
-      //     html: 'slide2',
-      //     style: {
-      //       'background': '#4bbfc3'
-      //     }
-      //   },
-      //   {
-      //     html: 'slide3',
-      //     style: {
-      //       'background': '#7baabe'
-      //     }
-      //   }
-      // ]
+      that.someList = [
+        {
+          html: 'slide1',
+          style: {
+            'background': '#1bbc9b'
+          }
+        },
+        {
+          html: 'slide2',
+          style: {
+            'background': '#4bbfc3'
+          }
+        },
+        {
+          html: 'slide3',
+          style: {
+            'background': '#7baabe'
+          }
+        }
+      ]
     }, 2000)
   },
   methods: {
@@ -100,6 +100,15 @@ export default {
     },
     appendslider () {
       this.someList.push({
+        html: 'slidernew',
+        style: {
+          background: '#333',
+          color: '#fff'
+        }
+      })
+    },
+    unShiftSlider () {
+      this.someList.unshift({
         html: 'slidernew',
         style: {
           background: '#333',

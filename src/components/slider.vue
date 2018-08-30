@@ -11,7 +11,7 @@
       @webkit-transition-end="onTransitionEnd"
       @transitionend="onTransitionEnd"
       >
-      <div class="slider-wrapper" v-if="pages.length === 0 && sliderinit.effect !== 'fade' && sliderinit.effect !== 'coverflow'">
+      <div class="slider-wrapper" :class="classObject" v-if="pages.length === 0 && sliderinit.effect !== 'coverflow'">
         <slot></slot>
       </div>
       <!-- 组件在 vm.currentview 变化时改变！ -->
@@ -34,7 +34,22 @@ import sliderBasicLoop from './slider_basic_loop.vue'
 import sliderFade from './slider_fade.vue'
 import sliderCoverflow from './slider_coverflow.vue'
 export default {
-  props: ['sliderinit', 'pages'],
+  props: {
+    sliderinit: {
+      type: Object,
+      // 对象或数组且一定会从一个工厂函数返回默认值
+      default: function () {
+        return {}
+      }
+    },
+    pages: {
+      type: Array,
+      // 对象或数组且一定会从一个工厂函数返回默认值
+      default: function () {
+        return []
+      }
+    }
+  },
   name: 'slider',
   data () {
     return {
@@ -67,7 +82,8 @@ export default {
         deviation: this.sliderinit.deviation || 200,
         currentPage: this.sliderinit.currentPage || 0,
         pageWidth: 0,
-        pageHeight: 0
+        pageHeight: 0,
+        sliderItem: ''
       }
     }
   },
@@ -85,7 +101,8 @@ export default {
     },
     // pagenum滑动数
     pagenums: function () {
-      if (this.pages.length && !this.temporaryData.pageInit) {
+      // 初始化跳转到页面
+      if ((this.pages.length || this.temporaryData.sliderLength !== 0) && !this.temporaryData.pageInit) {
         this.temporaryData.pageInit = true
         this.$nextTick(() => {
           this.slide(this.basicdata.currentPage, 'animationnone')
@@ -107,7 +124,7 @@ export default {
     // 组件的核心，计算当前父级需要进行的偏移,每次要遍历节点
     currentWidth: {
       get: function () {
-        if ((!this.pagenums && this.temporaryData.sliderLength === 0) || this.temporaryData.effect === 'fade' || this.temporaryData.effect === 'coverflow') {
+        if ((!this.pages.length && this.temporaryData.sliderLength === 0) || this.temporaryData.effect === 'fade' || this.temporaryData.effect === 'coverflow') {
           return 0
         }
         let $slider
@@ -140,17 +157,17 @@ export default {
       }
     },
     currentHeight () {
-      if (!this.pages.length || this.temporaryData.effect === 'fade') {
+      if ((!this.pages.length && this.temporaryData.sliderLength === 0) || this.temporaryData.effect === 'fade') {
         return 0
       }
       let posheight = 0
       let $slider
-      let lastPage = this.basicdata.currentPage - 1
+      let lastPage = this.basicdata.currentPage
       let pageWidth = this.temporaryData.pageWidth
       // let srollbar = false
       if (this.sliderinit.loop) {
         if (this.sliderinit.infinite) {
-          lastPage = this.basicdata.currentPage + (this.sliderinit.infinite <= this.pages.length ? this.sliderinit.infinite : this.pages.length) - 1
+          lastPage = this.basicdata.currentPage + (this.sliderinit.infinite <= (this.pages.length || this.temporaryData.sliderLength) ? this.sliderinit.infinite : (this.pages.length || this.temporaryData.sliderLength)) - 1
         } else {
           lastPage = this.basicdata.currentPage + 1
         }
@@ -172,6 +189,19 @@ export default {
         }
       }
       return posheight + pageWidth - pageWidth
+    },
+    classObject () {
+      let obj = {}
+      switch (this.sliderinit.effect) {
+        case 'fade':
+          obj = {
+            'slider-fade': true
+          }
+          break
+        default:
+          break
+      }
+      return obj
     }
   },
   mounted () {
@@ -336,7 +366,7 @@ export default {
       }
     },
     swipeOut (e) {
-      if (this.$el === e.target) {
+      if (this.$el === e.target && this.temporaryData.tracking) {
         this.swipeEnd(e)
       }
     },
@@ -389,7 +419,10 @@ export default {
       if (pagenum || pagenum === 0) {
         that.basicdata.currentPage = pagenum
       }
-      if (this.temporaryData.effect === 'fade') {
+      if (that.temporaryData.effect === 'fade') {
+        if (!that.pagenums) {
+          that.fadeDom()
+        }
         return
       } else {
         // 增加垂直滚动判定
@@ -409,6 +442,9 @@ export default {
       return {
         begin: function (that) {
           if (that.temporaryData.setIntervalid) {
+            return
+          }
+          if (that.sliderinit.autoplay === 0) {
             return
           }
           that.temporaryData.setIntervalid = setInterval(function () {
@@ -433,35 +469,81 @@ export default {
     onTransitionEnd () {
       var that = this
       setTimeout(function () {
-        if (that.sliderinit.loop && that.temporaryData.effect !== 'fade') {
+        if (that.sliderinit.loop && that.temporaryData.effect !== '') {
           that.temporaryData.transitionEnding = false
           if (that.basicdata.currentPage < 0) {
             that.slide((that.pagenums || that.temporaryData.sliderLength) + that.basicdata.currentPage, 'animationnone')
-          } else if (that.basicdata.curentPage >= (that.pagenums || that.temporaryData.sliderLength)) {
-            that.slide(0 + that.basicdata.currentPage - that.agenums, 'animationnone')
+          } else if (that.basicdata.currentPage >= (that.pagenums || that.temporaryData.sliderLength)) {
+            that.slide(0 + that.basicdata.currentPage - (that.pagenums || that.temporaryData.sliderLength), 'animationnone')
           }
         }
       }, 0)
     },
-    renderDom () {
+    renderDom (item) {
       let that = this
       // 防抖函数
       if (this.temporaryData.renderTime) {
         clearTimeout(this.temporaryData.renderTime)
       }
+      // fade添加z-index
+      that.temporaryData.sliderLength += 1
+      if (that.temporaryData.sliderLength >= 1 && that.sliderinit.effect === 'fade') {
+        if (item.previousSibling) {
+          item['style']['z-index'] = 99 - that.temporaryData.sliderLength
+        } else {
+          item['style']['z-index'] = 99 + that.temporaryData.sliderLength
+        }
+      }
       this.temporaryData.renderTime = setTimeout(() => {
         that.temporaryData.renderTime = undefined
         let slideDom = that.$el.getElementsByClassName('slider-wrapper')[0]
         let sliderItem = slideDom.getElementsByClassName('slider-item')
-        that.temporaryData.sliderLength = sliderItem.length
-        // loop
-        if (that.temporaryData.sliderLength > 1 && that.sliderinit.loop) {
-          var cloneDom1 = sliderItem[0].cloneNode(true)
-          var cloneDom2 = sliderItem[that.temporaryData.sliderLength - 1].cloneNode(true)
-          slideDom.insertBefore(cloneDom2, sliderItem[0])
-          slideDom.appendChild(cloneDom1)
+        // that.temporaryData.sliderLength = sliderItem.length
+        // loop && effect !== 'fade'
+        if (that.temporaryData.sliderLength > 1 && that.sliderinit.loop && that.sliderinit.effect !== 'fade') {
+          // 先清空上次添加的节点
+          let sliderCopy = slideDom.getElementsByClassName('slider-copy')
+          for (let i = sliderCopy.length - 1; i >= 0; i--) {
+            slideDom.removeChild(sliderCopy[i])
+          }
+          // 批量复制添加
+          sliderItem = slideDom.getElementsByClassName('slider-item')
+          let length = sliderItem.length
+          let infinite = that.sliderinit.infinite || 1
+          let a = 0
+          for (let j = 0; j < length; j++) {
+            console.log(sliderItem)
+            if (j + infinite - length >= 0) {
+              // 向前添加节点
+              let copeBefore = sliderItem[j + a].cloneNode(true)
+              copeBefore.classList.add('slider-copy')
+              slideDom.insertBefore(copeBefore, sliderItem[0 + a])
+              slideDom.insertBefore(copeBefore, sliderItem[0 + a])
+              a++
+            } else if (j - infinite < 0) {
+               // 向后添加节点
+              let copeAfter = sliderItem[j].cloneNode(true)
+              copeAfter.classList.add('slider-copy')
+              slideDom.appendChild(copeAfter)
+            }
+          }
         }
       }, 0)
+    },
+    fadeDom () {
+      let currentPage = this.basicdata.currentPage
+      let slideDom = this.$el.getElementsByClassName('slider-wrapper')[0]
+      let sliderItem = slideDom.getElementsByClassName('slider-item')
+      for (let i = 0; i < sliderItem.length; i++) {
+        if (i === currentPage || i === currentPage + 1) {
+          sliderItem[i]['style']['opacity'] = '1'
+          sliderItem[i]['style']['transition-property'] = 'opacity'
+          sliderItem[i]['style'][this.temporaryData.prefixes.transition + '-duration'] = (this.temporaryData.animation ? this.sliderinit.duration || 300 : 0) + 'ms'
+        } else {
+          sliderItem[i]['style']['opacity'] = '0'
+          sliderItem[i]['style'][this.temporaryData.prefixes.transition + '-duration'] = (this.temporaryData.animation ? this.sliderinit.duration || 300 : 0) + 'ms'
+        }
+      }
     }
   },
   components: {
@@ -543,6 +625,11 @@ export default {
   background-size: cover !important;
 }
 
+.slider-fade .slider-item {
+  position: absolute;
+  left: 0;
+  opacity: 0;
+}
 .slider-pagination {
   position: absolute;
   text-align: center;
@@ -612,12 +699,4 @@ export default {
   left: auto;
   right: 10px;
 }
-/*移动端优化*/
-/*@media screen and (max-width:414px) {
-  .slider-container {
-  height: 200px;
-  margin: 20px auto;
-  width: 90%;
-  }*/
-/*}*/
 </style>

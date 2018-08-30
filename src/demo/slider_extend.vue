@@ -61,13 +61,13 @@ export default {
             props: ['item', 'sliderinit', 'pages'],
             data () {
               return {
-                img: 'src/img/testimg-1.jpg'
+                title: 'slider1'
               }
             },
             mounted () {
               console.log(this.item)
             },
-            template: '<div><img style="width: 100%" :src="img" /><p style="position: absolute; margin: 0; right: 10px; bottom: 10px; font-size: 16px;">test1</p></div>'
+            template: '<div>{{title}}</div>'
           }
         },
         {
@@ -79,13 +79,13 @@ export default {
             props: ['item', 'sliderinit', 'pages'],
             data () {
               return {
-                img: 'src/img/testimg-2.jpg'
+                title: 'slider2'
               }
             },
             mounted () {
               console.log(this.item)
             },
-            template: '<div><img style="width: 100%" :src="img" /><p style="position: absolute; margin: 0; right: 10px; bottom: 10px; font-size: 16px;">test2</p></div>'
+            template: '<div>{{title}}</div>'
           }
         },
         {
@@ -97,13 +97,13 @@ export default {
             props: ['item', 'sliderinit', 'pages'],
             data () {
               return {
-                img: 'src/img/testimg-3.jpg'
+                title: 'slider3'
               }
             },
             mounted () {
               console.log(this.item)
             },
-            template: '<div><img style="width: 100%" :src="img" /><p style="position: absolute; margin: 0; right: 10px; bottom: 10px; font-size: 16px;">test3</p></div>'
+            template: '<div>{{title}}</div>'
           }
         }
       ]

@@ -4,7 +4,8 @@
 <template>
   <div>
     <div style="width:70%;margin:20px auto;height:400px">
-      <slider ref="slider" :pages="someList" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+      <slider ref="slider"  :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+        <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
         <div slot="loading">
           <div class="loadingDot">
             <i></i>
@@ -29,32 +30,34 @@
 </template>
 <script>
 import slider from '../components/slider'
+import slideritem from '../components/slider_item'
 export default {
   el: '#slidervertical',
   data () {
     return {
       someList: [],
       sliderinit: {
-        currentPage: 1,
+        currentPage: 2,
         tracking: false,
         thresholdDistance: 100, // 滑动距离阈值判定
         thresholdTime: 300, // 滑动时间阈值判定
         direction: 'vertical', // 垂直滚动
         loop: true, // 无限循环
-        infinite: 4
+        infinite: 1
         // autoplay:1000 // 自动播放:时间[ms]
       }
     }
   },
   components: {
-    slider
+    slider,
+    slideritem
   },
   mounted () {
     let that = this
     setTimeout(function () {
       that.someList = [
         {
-          html: '<div class="slide1">slide1</div>',
+          html: 'slide1',
           style: {
             'background': '#1bbc9b'
           }

@@ -4,10 +4,8 @@
 <template>
   <div>
     <div style="width:70%;margin:20px auto;height:400px">
-      <slider ref="slider" :pages="someList" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
-        <sliderItem>1</sliderItem>
-        <sliderItem>2</sliderItem>
-        <sliderItem>3</sliderItem>
+      <slider ref="slider" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+        <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
         <div slot="loading">
           <div class="loadingDot">
             <i></i>
@@ -32,14 +30,14 @@
 </template>
 <script>
 import slider from '../components/slider'
-import sliderItem from '../components/slider_item'
+import slideritem from '../components/slider_item'
 export default {
   el: '#sliderbasic',
   data () {
     return {
       someList: [],
       sliderinit: {
-        // currentPage: 1,
+        currentPage: 1
         // thresholdDistance: 100, // 滑动距离阈值判定
         // thresholdTime: 300, // 滑动时间阈值判定
         // duration: 300, // 滑动速度
@@ -50,34 +48,33 @@ export default {
     }
   },
   mounted () {
-    // let that = this
+    let that = this
     setTimeout(function () {
-      // that.someList = [
-      //   {
-      //     html: '<div class="slide1">slide1</div>',
-      //     style: {
-      //       'background': '#1bbc9b',
-      //       'backgroundSize': '100%'
-      //     }
-      //   },
-      //   {
-      //     html: 'slide2',
-      //     style: {
-      //       'background': '#4bbfc3'
-      //     }
-      //   },
-      //   {
-      //     html: 'slide3',
-      //     style: {
-      //       'background': '#7baabe'
-      //     }
-      //   }
-      // ]
+      that.someList = [
+        {
+          html: 'slide1',
+          style: {
+            'background': '#1bbc9b'
+          }
+        },
+        {
+          html: 'slide2',
+          style: {
+            'background': '#4bbfc3'
+          }
+        },
+        {
+          html: 'slide3',
+          style: {
+            'background': '#7baabe'
+          }
+        }
+      ]
     }, 2000)
   },
   components: {
     slider,
-    sliderItem
+    slideritem
   },
   methods: {
     turnTo (num) {

@@ -4,7 +4,8 @@
 <template>
   <div>
     <div style="width:70%;margin:20px auto;height:400px">
-      <slider ref="slider" :pages="someList" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+      <slider ref="slider" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+        <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
         <div slot="loading">
           <div class="loadingDot">
             <i></i>
@@ -29,6 +30,7 @@
 </template>
 <script>
 import slider from '../components/slider'
+import slideritem from '../components/slider_item'
 export default {
   el: '#slidermultipleSlide',
   data () {
@@ -47,7 +49,8 @@ export default {
     }
   },
   components: {
-    slider
+    slider,
+    slideritem
   },
   mounted () {
     let that = this
