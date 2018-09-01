@@ -17,7 +17,7 @@
       <!-- 组件在 vm.currentview 变化时改变！ -->
       <component v-if="pages.length !== 0" :pages="pages" :sliderinit="sliderinit" :basicdata="basicdata" :temporarydata="temporaryData" v-bind:is="currentView"></component>
       </div>
-      <div class="slider-pagination slider-pagination-bullets">
+      <div v-if="temporaryData.pagination" class="slider-pagination slider-pagination-bullets">
         <template v-for="n in (pagenums||temporaryData.sliderLength)">
           <span @click='slide(n-1)' class="slider-pagination-bullet" :class="n-1 === basicdata.currentPage? 'slider-pagination-bullet-active':''"></span>
         </template>
@@ -83,7 +83,8 @@ export default {
         currentPage: this.sliderinit.currentPage || 0,
         pageWidth: 0,
         pageHeight: 0,
-        sliderItem: ''
+        sliderItem: '',
+        pagination: this.sliderinit.pagination === undefined ? true : this.sliderinit.pagination
       }
     }
   },
@@ -130,10 +131,11 @@ export default {
         let $slider
         let lastPage = this.basicdata.currentPage
         let pageWidth = this.temporaryData.pageWidth
+        let infinite = this.sliderinit.infinite || 1
         // let srollbar = false
         if (this.sliderinit.loop) {
-          if (this.sliderinit.infinite) {
-            lastPage = this.basicdata.currentPage + (this.sliderinit.infinite <= (this.pagenums || this.temporaryData.sliderLength) ? this.sliderinit.infinite : (this.pagenums || this.temporaryData.sliderLength))
+          if (infinite) {
+            lastPage = this.basicdata.currentPage + (infinite <= (this.pagenums || this.temporaryData.sliderLength) ? infinite : (this.pagenums || this.temporaryData.sliderLength))
           } else {
             lastPage = this.basicdata.currentPage + 1
           }
@@ -162,12 +164,13 @@ export default {
       }
       let posheight = 0
       let $slider
-      let lastPage = this.basicdata.currentPage
+      let lastPage = this.basicdata.currentPage - 1
       let pageWidth = this.temporaryData.pageWidth
+      let infinite = this.sliderinit.infinite || 1
       // let srollbar = false
       if (this.sliderinit.loop) {
-        if (this.sliderinit.infinite) {
-          lastPage = this.basicdata.currentPage + (this.sliderinit.infinite <= (this.pages.length || this.temporaryData.sliderLength) ? this.sliderinit.infinite : (this.pages.length || this.temporaryData.sliderLength)) - 1
+        if (infinite) {
+          lastPage = this.basicdata.currentPage + (infinite <= (this.pages.length || this.temporaryData.sliderLength) ? infinite : (this.pages.length || this.temporaryData.sliderLength)) - 1
         } else {
           lastPage = this.basicdata.currentPage + 1
         }

@@ -29,15 +29,17 @@
   </div>
 </template>
 <script>
-import slider from '../components/slider'
-import slideritem from '../components/slider_item'
+// import slider from '../components/slider'
+// import slideritem from '../components/slider_item'
+import {slider, slideritem} from '../../dist/module.js'
 export default {
   el: '#sliderbasic',
   data () {
     return {
       someList: [],
       sliderinit: {
-        currentPage: 1
+        currentPage: 1,
+        pagination: false
         // thresholdDistance: 100, // 滑动距离阈值判定
         // thresholdTime: 300, // 滑动时间阈值判定
         // duration: 300, // 滑动速度

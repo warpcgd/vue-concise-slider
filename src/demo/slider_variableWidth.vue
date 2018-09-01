@@ -37,10 +37,10 @@ export default {
     return {
       someList: [],
       sliderinit: {
-        currentPage: 1,
-        tracking: false,
-        thresholdDistance: 100, // 滑动距离阈值判定
-        thresholdTime: 300 // 滑动时间阈值判定
+        currentPage: 1
+        // tracking: false,
+        // thresholdDistance: 100, // 滑动距离阈值判定
+        // thresholdTime: 300 // 滑动时间阈值判定
         // 不定宽度的无限循环感觉很丑:(
         // loop:true, // 无限循环
         // autoplay:1000 // 自动播放:时间[ms]

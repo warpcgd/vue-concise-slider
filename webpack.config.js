@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const resolve = dir => path.join(__dirname, '..', dir)
 module.exports = {
   devtool: process.env.NODE_ENV === 'production' ? '' : 'inline-source-map',
   devServer: { // 检测代码变化并自动重新编译并自动刷新浏览器
@@ -13,7 +14,10 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js'
+    filename: '[name].js',
+    library: 'vueConciseSlider',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
   resolve: {
     extensions: ['.js', '.vue', '.scss']
@@ -24,6 +28,15 @@ module.exports = {
   module: {
     // 加载器
     rules: [
+      {
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: [resolve('src')],
+        options: {
+          formatter: require('eslint-friendly-formatter')
+        }
+      },
       // 解析.vue文件
       {
         test: /.vue$/,

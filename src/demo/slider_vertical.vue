@@ -37,13 +37,11 @@ export default {
     return {
       someList: [],
       sliderinit: {
-        currentPage: 2,
-        tracking: false,
+        currentPage: 0,
         thresholdDistance: 100, // 滑动距离阈值判定
         thresholdTime: 300, // 滑动时间阈值判定
         direction: 'vertical', // 垂直滚动
-        loop: true, // 无限循环
-        infinite: 1
+        loop: false // 无限循环
         // autoplay:1000 // 自动播放:时间[ms]
       }
     }

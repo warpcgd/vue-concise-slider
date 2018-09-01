@@ -39,11 +39,11 @@ export default {
       someList: [],
       sliderinit: {
         currentPage: 0,
-        tracking: false,
-        thresholdDistance: 100, // 滑动距离阈值判定
-        thresholdTime: 300, // 滑动时间阈值判定
-        loop: true, // 无限循环
-        infinite: 1
+        // tracking: false,
+        // thresholdDistance: 100, // 滑动距离阈值判定
+        // thresholdTime: 300, // 滑动时间阈值判定
+        loop: true // 无限循环
+        // infinite: 1
         // autoplay:1000,//自动播放:时间[ms]
       }
     }
