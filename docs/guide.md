@@ -124,6 +124,69 @@ export default {
       </div>
   </slider>
 ```
+## Use slot to render a custom page
+
+1. Import slider and slideritem
+2. Do not pass in the page array, use slideritem instead
+3. Cannot be used in coverflow mode
+
+```html
+  <template>
+  <div>
+    <div style="width:70%;margin:20px auto;height:400px">
+      <slider ref="slider" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+        <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
+      </slider>
+    </div>
+  </div>
+</template>
+<script>
+import { slider, slideritem } from '../../dist/module.js'
+export default {
+  el: '#sliderbasic',
+  data () {
+    return {
+      someList: [],
+      sliderinit: {
+        pagination: true,
+        thresholdDistance: 100, // 滑动距离阈值判定
+        thresholdTime: 300, // 滑动时间阈值判定
+        duration: 300 // 滑动速度
+      }
+    }
+  },
+  mounted () {
+    let that = this
+    setTimeout(function () {
+      that.someList = [
+        {
+          html: 'slide1',
+          style: {
+            'background': '#1bbc9b'
+          }
+        },
+        {
+          html: 'slide2',
+          style: {
+            'background': '#4bbfc3'
+          }
+        },
+        {
+          html: 'slide3',
+          style: {
+            'background': '#7baabe'
+          }
+        }
+      ]
+    }, 2000)
+  },
+  components: {
+    slider,
+    slideritem
+  },
+}
+</script>
+```
 
 ## Asynchronous loading
 
@@ -390,4 +453,70 @@ export default {
   }
   </script>
 ```
+## Use custom paging
 
+1. Pagination is set to true
+2. Set the renderPagination function
+
+```html
+  <template>
+  <div>
+    <div style="width:70%;margin:20px auto;height:400px">
+      <slider ref="slider" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+        <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
+      </slider>
+    </div>
+  </div>
+</template>
+<script>
+import { slider, slideritem } from '../../dist/module.js'
+export default {
+  el: '#sliderbasic',
+  data () {
+    return {
+      someList: [],
+      sliderinit: {
+        pagination: true,
+        thresholdDistance: 100, // 滑动距离阈值判定
+        thresholdTime: 300, // 滑动时间阈值判定
+        duration: 300, // 滑动速度
+        renderPagination: (h, index) => {
+          return h('div', {
+            class: 'swiper-pagination-bullet'
+          }, [index])
+        }
+      }
+    }
+  },
+  mounted () {
+    let that = this
+    setTimeout(function () {
+      that.someList = [
+        {
+          html: 'slide1',
+          style: {
+            'background': '#1bbc9b'
+          }
+        },
+        {
+          html: 'slide2',
+          style: {
+            'background': '#4bbfc3'
+          }
+        },
+        {
+          html: 'slide3',
+          style: {
+            'background': '#7baabe'
+          }
+        }
+      ]
+    }, 2000)
+  },
+  components: {
+    slider,
+    slideritem
+  },
+}
+</script>
+```

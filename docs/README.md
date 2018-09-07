@@ -11,7 +11,7 @@ See the [Quick start](#Quick start) for more details
 ## Features
 
 * Simple configuration
-* Simple and lightweight (~23kB gzipped)
+* Simple and lightweight (~36kB)
 * Multiple sliding effects
 
 ## Install
@@ -35,20 +35,22 @@ You can be submitted here, and i will be dealt with as soon as possible:https://
 
 <script v-pre type="text/x-template" id="example">
   <template>
-    <slider ref="slider" :pages="pages" :sliderinit="sliderinit">
-    <!-- slot  -->
-    </slider>
+      <slider :pages="pages" :sliderinit="sliderinit">
+      <!-- slot  -->
+      </slider>
   </template>
 
   <script>
-    import slider from 'module.js'// import slider
+    // import slider from 'vue-concise-slider'
+    import slider from 'module.js'
+    // export default
     module.exports = {
          components: {
               slider
          },
          data () {
             return {
-              //Image list[arr]
+              //image list
               pages:[
                 {
                   html: 'slide1',
@@ -69,14 +71,16 @@ You can be submitted here, and i will be dealt with as soon as possible:https://
                   },
                 }
               ],
-              // Sliding configuration[obj]
+              //Sliding configuration
               sliderinit: {
                 currentPage: 0,
                 thresholdDistance: 100,
                 thresholdTime: 300,
                 loop:true,
                 infinite:1,
-                slidesToScroll:1
+                slidesToScroll:1,
+                direction:'horizontal',
+                autoplay:0
               }
             }
          }

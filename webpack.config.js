@@ -56,30 +56,6 @@ module.exports = {
           'css-loader'
         ]
       },
-      // .scss 文件想要编译，scss就需要这些东西！来编译处理
-      // install css-loader style-loader sass-loader node-sass --save-dev
-      {
-        test: /\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'scss-loader'
-        ]
-      },
-      // 图片转化，小于8K自动转化为base64的编码
-      {
-        test: /\.(png|jpg|jpeg|gif)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-              mimetype: 'image/png',
-              name: 'img/[hash].[ext]'
-            }
-          }
-        ]
-      },
       // html模板编译
       { test: /\.(html|tpl)$/, loader: 'html-loader' }
     ]

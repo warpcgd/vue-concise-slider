@@ -292,6 +292,36 @@ coverflow模式下配置滑动项偏移
     deviation: '200'
   }
 ```
+### pagination
+
+- 类型：`boolean`
+- 默认值：`true`
+
+所有模式下分页是否显示
+
+```html
+  {
+    pagination: true
+  }
+```
+### renderPagination
+
+- 类型：`function`
+- 默认值：`null`
+- 参数：`createElement, index`
+
+自定义分页函数，参数为vue的createElement函数，和当前页码index
+
+```html
+  {
+    renderPagination: (h, index) => {
+      return h('div', {
+        class: 'swiper-pagination-bullet'
+      }, [index])
+    }
+  }
+```
+
 ## 传递的事件
 
 ### slideTo

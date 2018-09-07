@@ -11,7 +11,7 @@
 vue-concise-slider,一个简单的滑动组件,配置简单,支持自适应/全屏+按钮+分页,同时兼容移动端和PC端
 
 ## 版本
-[v2.5.2](https://github.com/warpcgd/vue-concise-slider/issues/29) 支持vue2.0+
+[v2.5.4](https://github.com/warpcgd/vue-concise-slider/issues/29) 支持vue2.0+
 
 ## 特点
 * 简单配置
@@ -29,9 +29,13 @@ vue-concise-slider,一个简单的滑动组件,配置简单,支持自适应/全�
 - [x] 渐变滚动
 - [x] 旋转滚动
 - [x] page中加入自定义组件
+- [x] 使用slot替代page
+- [x] 自定义分页
 
 ### 未来将实现
-- [ ] 分页自定义
+- [ ] 层级嵌套slider
+- [ ] 虚拟slider
+- [ ] 新的coverflow
 
 ### 链接
 
@@ -52,38 +56,21 @@ vue-concise-slider,一个简单的滑动组件,配置简单,支持自适应/全�
  <div style="width:70%;margin:20px auto;height:400px">
       <!-- 配置slider组件 -->
       <slider ref="slider" :pages="pages" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+          <!-- 直接使用slideritem slot -->
+           <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
           <!-- 设置loading,可自定义 -->
           <div slot="loading">loading...</div>
       </slider>
  </div>
 </template>
 <script>
-import slider from 'vue-concise-slider'// import slider components
+import { slider, slideritem } from 'vue-concise-slider'// import slider components
 export default {
    el: '#app',
    data () {
       return {
         //Image list
-        pages:[
-          {
-          html: '<div class="slider1">slider1</div>',
-          style: {
-            'background': '#1bbc9b'
-            }
-          },
-          {
-            html: '<div class="slider2">slider2</div>',
-            style: {
-              'background': '#4bbfc3'
-            }
-          },
-          {
-            html: '<div class="slider3">slider3</div>',
-            style: {
-              'background': '#7baabe'
-            }
-          }
-        ],
+        someList:[],
         //Sliding configuration [obj]
         sliderinit: {
           currentPage: 0,
@@ -100,7 +87,33 @@ export default {
       }
     },
     components: {
-        slider
+      slider,
+      slideritem
+    },
+    mounted () {
+      let that = this
+      setTimeout(function () {
+        that.someList = [
+          {
+            html: 'slide1',
+            style: {
+              'background': '#1bbc9b'
+            }
+          },
+          {
+            html: 'slide2',
+            style: {
+              'background': '#4bbfc3'
+            }
+          },
+          {
+            html: 'slide3',
+            style: {
+              'background': '#7baabe'
+            }
+          }
+        ]
+      }, 2000)
     },
     methods: {
       // Listener event

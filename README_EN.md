@@ -11,7 +11,7 @@ English | [中文](README.md)
 vue-concise-slider,A simple sliding component,has easy configuration,supported self-adaption / fullscreen / button / page,and is compatible with mobile and PC terminal
 
 ### version
-[v2.4.7](https://github.com/warpcgd/vue-concise-slider/issues/29)  Supported vue2.0+
+[v2.5.4](https://github.com/warpcgd/vue-concise-slider/issues/29)  Supported vue2.0+
 
 ### Features
 
@@ -30,9 +30,13 @@ vue-concise-slider,A simple sliding component,has easy configuration,supported s
 - [x] Fade Effect
 - [x] CoverFlow Effect
 - [x] Add custom components in page
+- [x] Use slideritem instead of page
+- [x] Custom paging
 
 ### To Do List
-- [ ] Parallax
+- [ ] Hierarchical nested slider
+- [ ] Virtual slider
+- [ ] New coverflow
 
 ### Links
 
@@ -53,38 +57,21 @@ vue-concise-slider,A simple sliding component,has easy configuration,supported s
  <div style="width:70%;margin:20px auto;height:400px">
       <!-- Configuring slider components -->
       <slider ref="slider" :pages="pages" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+          <!-- slideritem slot -->
+          <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
           <!-- Set loading -->
           <div slot="loading">loading...</div>
       </slider>
  </div>
 </template>
 <script>
-import slider from 'vue-concise-slider'// import slider components
+import { slider, slideritem } from 'vue-concise-slider'// import slider components
 export default {
    el: '#app',
    data () {
       return {
         //Image list
-        pages:[
-          {
-          html: '<div class="slider1">slider1</div>',
-          style: {
-            'background': '#1bbc9b'
-            }
-          },
-          {
-            html: '<div class="slider2">slider2</div>',
-            style: {
-              'background': '#4bbfc3'
-            }
-          },
-          {
-            html: '<div class="slider3">slider3</div>',
-            style: {
-              'background': '#7baabe'
-            }
-          }
-        ],
+        someList:[],
         //Sliding configuration [obj]
         sliderinit: {
           currentPage: 0,
@@ -101,7 +88,33 @@ export default {
       }
     },
     components: {
-        slider
+        slider,
+        slideritem
+    },
+    mounted () {
+      let that = this
+      setTimeout(function () {
+        that.someList = [
+          {
+            html: 'slide1',
+            style: {
+              'background': '#1bbc9b'
+            }
+          },
+          {
+            html: 'slide2',
+            style: {
+              'background': '#4bbfc3'
+            }
+          },
+          {
+            html: 'slide3',
+            style: {
+              'background': '#7baabe'
+            }
+          }
+        ]
+      }, 2000)
     },
     methods: {
       // Listener event

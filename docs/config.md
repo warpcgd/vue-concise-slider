@@ -291,6 +291,36 @@ Configuration of sliding item offset in coverflow mode
     deviation: '200'
   }
 ```
+### pagination
+
+- Type: `boolean`
+- Default: `true`
+
+Whether paging is displayed in all modes
+
+```html
+  {
+    pagination: true
+  }
+```
+### renderPagination
+
+- Type: `function`
+- Default: `null`
+- Parameter: `createElement, index`
+
+Custom paging function, the parameter is VUE's createElement function, and the current page number index
+
+```html
+  {
+    renderPagination: (h, index) => {
+      return h('div', {
+        class: 'swiper-pagination-bullet'
+      }, [index])
+    }
+  }
+```
+
 ## Transitive events
 
 

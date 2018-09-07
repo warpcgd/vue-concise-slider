@@ -1,5 +1,19 @@
-<style lang="sass">
-@import "../utils/common.scss"
+<style>
+.sliderButton{
+  text-align: center;
+}
+.sliderButton button{
+  display: inline-block;
+  background: #fff;
+  border-radius: 3px;
+  /*width: 100px;*/
+  height: 30px;
+  border: 1px solid #333;
+  line-height: 30px;
+  margin-left: 10px;
+  padding: 0 15px;
+  margin-top: 10px;
+}
 </style>
 <template>
   <div>
@@ -31,18 +45,17 @@
 <script>
 // import slider from '../components/slider'
 // import slideritem from '../components/slider_item'
-import {slider, slideritem} from '../../dist/module.js'
+import { slider, slideritem } from '../../dist/module.js'
 export default {
   el: '#sliderbasic',
   data () {
     return {
       someList: [],
       sliderinit: {
-        currentPage: 1,
-        pagination: false
-        // thresholdDistance: 100, // 滑动距离阈值判定
-        // thresholdTime: 300, // 滑动时间阈值判定
-        // duration: 300, // 滑动速度
+        pagination: true,
+        thresholdDistance: 100, // 滑动距离阈值判定
+        thresholdTime: 300, // 滑动时间阈值判定
+        duration: 300 // 滑动速度
         // timingFunction: 'ease', // 滑动方式
         // loop: false, // 无限循环
         // autoplay: 0 // 自动播放:时间[ms]

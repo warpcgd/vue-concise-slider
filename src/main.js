@@ -14,13 +14,17 @@ import slidermultipleSlide from './demo/slider_multipleSlide'
 import slidercoverFlow from './demo/slider_coverFlow'
 // 对slider的扩展
 import sliderextend from './demo/slider_extend'
+// 自定义pageation
+import sliderrenderPagination from './demo/slider_renderPagination'
 
 // 实例vue
-new Vue(sliderfade)
-new Vue(sliderbasic)
-new Vue(slidervariableWidth)
-new Vue(sliderbasicloop)
-new Vue(slidervertical)
-new Vue(slidermultipleSlide)
-new Vue(slidercoverFlow)
-new Vue(sliderextend)
+new Vue(sliderfade) // eslint-disable-line
+new Vue(sliderbasic) // eslint-disable-line
+new Vue(slidervariableWidth) // eslint-disable-line
+new Vue(sliderbasicloop) // eslint-disable-line
+new Vue(slidervertical) // eslint-disable-line
+new Vue(slidermultipleSlide) // eslint-disable-line
+new Vue(slidercoverFlow) // eslint-disable-line
+new Vue(sliderextend) // eslint-disable-line
+new Vue(sliderrenderPagination) // eslint-disable-line
+

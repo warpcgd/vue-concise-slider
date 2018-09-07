@@ -11,7 +11,7 @@ vue-concise-slider是一个简单的Vue滑动组件,配置简单,支持自适应
 ## 特点
 
 * 简单配置
-* 轻量 (~16.9kB gzipped)
+* 轻量 (~36kB)
 * 多种滑动样式
 
 ## 安装
@@ -35,20 +35,22 @@ vue-concise-slider是一个简单的Vue滑动组件,配置简单,支持自适应
 
 <script v-pre type="text/x-template" id="example">
   <template>
-    <slider ref="slider" :pages="pages" :sliderinit="sliderinit">
-    <!-- slot  -->
-    </slider>
+      <slider :pages="pages" :sliderinit="sliderinit">
+      <!-- slot  -->
+      </slider>
   </template>
 
   <script>
-    import slider from 'module.js'// 引入slider组件
+    // import slider from 'vue-concise-slider'
+    import slider from 'module.js'
+    // export default
     module.exports = {
          components: {
               slider
          },
          data () {
             return {
-              //图片列表[arr]
+              //image list
               pages:[
                 {
                   html: 'slide1',
@@ -69,14 +71,16 @@ vue-concise-slider是一个简单的Vue滑动组件,配置简单,支持自适应
                   },
                 }
               ],
-              //滑动配置[obj]
+              //Sliding configuration
               sliderinit: {
-                currentPage: 0,//当前页码
-                thresholdDistance: 100,//滑动判定距离
-                thresholdTime: 300,//滑动判定时间
-                loop:true,//循环滚动
-                infinite:1,//无限滚动前后遍历数
-                slidesToScroll:1,//每次滑动项数
+                currentPage: 0,
+                thresholdDistance: 100,
+                thresholdTime: 300,
+                loop:true,
+                infinite:1,
+                slidesToScroll:1,
+                direction:'horizontal',
+                autoplay:0
               }
             }
          }

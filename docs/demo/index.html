@@ -7,7 +7,7 @@
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta content="telephone=no" name="format-detection">
-    <title>slider</title>
+    <title>stack</title>
     <style>
     body {
         background: #eee none repeat scroll 0 0;
@@ -23,8 +23,8 @@
         bottom: 0;*/
 
         /*bug:当内容超过一屏时，滚动条需要默认显示*/
-          overflow-y: scroll;
-          width: 100%;
+        overflow-y: scroll;
+        width: 100%;
     }
     body div{
         width: 100%;
@@ -76,6 +76,7 @@
 </head>
 
 <body>
+
     <div class="main" ontouchstart="iosScrollBug()">
         <h3>渐变滚动/fade</h3>
         <div id="sliderfade"></div>
@@ -93,9 +94,11 @@
         <div id="slidercoverFlow"></div>
         <h3>slider扩展</h3>
         <div id="sliderExtend"></div>
+        <h3>自定义分页器</h3>
+        <div id="sliderRenderPagination"></div>
     </div>
 </body>
-<script src="https://cdn.bootcss.com/vue/2.1.3/vue.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
 <script src="build.js"></script>
 <script>
     // ios 如果父层不进行touch事件的绑定，会造成子层不触发touch事件，猜想可能是事件的传递问题
