@@ -20,7 +20,7 @@
       <div v-if="temporaryData.pagination" class="slider-pagination slider-pagination-bullets">
         <template v-for="n in (pagenums||temporaryData.sliderLength)">
           <span v-if="!sliderinit.renderPagination" @click='slide(n-1)' class="slider-pagination-bullet" :class="n-1 === basicdata.currentPage? 'slider-pagination-bullet-active':''"></span>
-          <renderPagination v-if="sliderinit.renderPagination"  @click.native='slide(n-1)' :class="n-1 === basicdata.currentPage? 'slider-pagination-bullet-active-render':''" :index="n" :sliderinit="sliderinit" ></renderPagination>  
+          <renderpagination v-if="sliderinit.renderPagination"  @click.native='slide(n-1)' :class="n-1 === basicdata.currentPage? 'slider-pagination-bullet-active-render':''" :index="n" :sliderinit="sliderinit" ></renderpagination>  
         </template>
       </div>
       <div class="slider-loading" v-show="(!pagenums && temporaryData.sliderLength === 0)||temporaryData.loading">
@@ -34,6 +34,7 @@ import sliderBasic from './slider_basic.vue'
 import sliderBasicLoop from './slider_basic_loop.vue'
 import sliderFade from './slider_fade.vue'
 import sliderCoverflow from './slider_coverflow.vue'
+import renderpagination from './pagination_render.vue'
 export default {
   props: {
     sliderinit: {
@@ -52,25 +53,6 @@ export default {
     }
   },
   name: 'slider',
-  created () {
-    Vue.component('renderPagination', { // eslint-disable-line
-      render: function (createElement) {
-        let index = this.index
-        let render = this.sliderinit.renderPagination
-        return render.call(this, createElement, index)
-      },
-      props: {
-        index: {
-          type: Number,
-          required: true
-        },
-        sliderinit: {
-          type: Object,
-          required: true
-        }
-      }
-    })
-  },
   data () {
     return {
       basicdata: {
@@ -575,7 +557,8 @@ export default {
     basicLoop: sliderBasicLoop,
     fade: sliderFade,
     fadeLoop: sliderFade,
-    coverflow: sliderCoverflow
+    coverflow: sliderCoverflow,
+    renderpagination: renderpagination
   }
 }
 </script>

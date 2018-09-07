@@ -42,7 +42,7 @@
   </div>
 </template>
 <script>
-import slider from '../components/slider'
+import slider from '../../dist/module.js'
 export default {
   el: '#sliderExtend',
   data () {

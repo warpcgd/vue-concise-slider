@@ -43,8 +43,7 @@
   </div>
 </template>
 <script>
-import slider from '../components/slider'
-import slideritem from '../components/slider_item'
+import { slider, slideritem } from '../../dist/module.js'
 export default {
   el: '#slidervertical',
   data () {
