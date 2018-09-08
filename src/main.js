@@ -12,8 +12,6 @@ import slidervertical from './demo/slider_vertical'
 import slidermultipleSlide from './demo/slider_multipleSlide'
 // 多级滚动
 import slidercoverFlow from './demo/slider_coverFlow'
-// 对slider的扩展
-import sliderextend from './demo/slider_extend'
 // 自定义pageation
 import sliderrenderPagination from './demo/slider_renderPagination'
 
@@ -25,6 +23,5 @@ new Vue(sliderbasicloop) // eslint-disable-line
 new Vue(slidervertical) // eslint-disable-line
 new Vue(slidermultipleSlide) // eslint-disable-line
 new Vue(slidercoverFlow) // eslint-disable-line
-new Vue(sliderextend) // eslint-disable-line
 new Vue(sliderrenderPagination) // eslint-disable-line
 

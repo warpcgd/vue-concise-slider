@@ -13,14 +13,15 @@
 <!-- Make a frame wrapped slider -->
  <div style="width:70%;margin:20px auto;height:400px">
       <!-- Configuring slider components -->
-      <slider ref="slider" :pages="pages" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+      <slider ref="slider" :pages="pages" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
+          <slideritem v-for="(item,index) in pages" :key="index" :style="item.style">{{item.html}}</slideritem>
           <!-- Set loading -->
           <div slot="loading">loading...</div>
       </slider>
  </div>
 </template>
 <script>
-import slider from 'vue-concise-slider'// import slider components
+import { slider, slideritem } from 'vue-concise-slider' // import slider components
 export default {
    el: '#app',
    data () {
@@ -47,17 +48,17 @@ export default {
           }
         ],
         //Sliding configuration [obj]
-        sliderinit: {
+        options: {
           currentPage: 0,
           thresholdDistance: 500,
           thresholdTime: 100,
           autoplay:1000,
           loop:true,
           direction:'vertical',
-          infinite:1,
+          loopedSlides:1,
           slidesToScroll:1,
           timingFunction: 'ease',
-          duration: 300
+          speed: 300
         }
       }
     },
@@ -99,20 +100,20 @@ export default {
       border-radius: 50%;
     }
     .loadingDot i:nth-child(1) {
-      -webkit-animation: loading-7 .7s ease-in 0s infinite;
-      animation: loading-7 .7s ease-in 0s infinite;
+      -webkit-animation: loading-7 .7s ease-in 0s loopedSlides;
+      animation: loading-7 .7s ease-in 0s loopedSlides;
     }
     .loadingDot i:nth-child(2) {
-      -webkit-animation: loading-7 .7s ease-in 0.15s infinite;
+      -webkit-animation: loading-7 .7s ease-in 0.15s loopedSlides;
     }
     .loadingDot i:nth-child(3) {
-      -webkit-animation: loading-7 .7s ease-in 0.3s infinite;
+      -webkit-animation: loading-7 .7s ease-in 0.3s loopedSlides;
     }
     .loadingDot i:nth-child(4) {
-      -webkit-animation: loading-7 .7s ease-in 0.45s infinite;
+      -webkit-animation: loading-7 .7s ease-in 0.45s loopedSlides;
     }
   </style>
-  <slider :pages="someList" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+  <slider :pages="someList" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
       <!-- setting loading -->
       <div slot="loading">
         <div class="loadingDot">
@@ -134,24 +135,24 @@ export default {
   <template>
   <div>
     <div style="width:70%;margin:20px auto;height:400px">
-      <slider ref="slider" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+      <slider ref="slider" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
         <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
       </slider>
     </div>
   </div>
 </template>
 <script>
-import { slider, slideritem } from '../../dist/module.js'
+import { slider, slideritem } from 'vue-concise-slider'
 export default {
   el: '#sliderbasic',
   data () {
     return {
       someList: [],
-      sliderinit: {
+      options: {
         pagination: true,
         thresholdDistance: 100, // 滑动距离阈值判定
         thresholdTime: 300, // 滑动时间阈值判定
-        duration: 300 // 滑动速度
+        speed: 300 // 滑动速度
       }
     }
   },
@@ -196,23 +197,24 @@ export default {
 ```html
   <template>
       <div style="width:70%;margin:20px auto;height:400px">
-        <slider ref="slider" :pages="someList" :sliderinit="sliderinit" >
+        <slider ref="slider" :options="options" >
+            <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
         </slider>
       </div>
   </template>
   <script>
-  import slider from '../components/slider'
+  import { slider, slideritem } from 'vue-concise-slider'
   export default {
     el: '#sliderbasic',
     data () {
       return {
         // someList
         someList: [],
-        sliderinit: {
+        options: {
           currentPage: 1,
           thresholdDistance: 100,
           thresholdTime: 300,
-          duration: 300,
+          speed: 300,
           timingFunction: 'ease',
           loop: true,
           autoplay: 0
@@ -258,24 +260,25 @@ export default {
 ```html
   <template>
       <div style="width:70%;margin:20px auto;height:400px">
-        <slider ref="slider" :pages="someList" :sliderinit="sliderinit" >
+        <slider ref="slider" :options="options" >
+          <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
         </slider>
       </div>
   </template>
   <script>
-  import slider from '../components/slider'
+  import { slider, slideritem } from 'vue-concise-slider'
   export default {
     el: '#sliderbasic',
     data () {
       return {
         // someList
         someList: [],
-        sliderinit: {
+        options: {
           effect: 'fade',
           currentPage: 1,
           thresholdDistance: 100,
           thresholdTime: 300,
-          duration: 300,
+          speed: 300,
           timingFunction: 'ease',
           loop: true,
           autoplay: 0
@@ -323,7 +326,7 @@ export default {
 ```html
   <template>
       <div style="width:70%;margin:20px auto;height:400px">
-        <slider ref="slider" :pages="someList" :sliderinit="sliderinit" >
+        <slider ref="slider" :pages="someList" :options="options" >
         </slider>
       </div>
   </template>
@@ -334,7 +337,7 @@ export default {
     data () {
       return {
       someList: [],
-      sliderinit: {
+      options: {
           effect: 'coverflow',
           currentPage: 1,
           tracking: false,
@@ -343,7 +346,7 @@ export default {
           deviation: 200,
           widthScalingRatio: 0.8,
           heightScalingRatio: 0.8,
-          infinite: 2,
+          loopedSlides: 2,
           slidesToScroll: 1,
           loop: true
         }
@@ -385,11 +388,12 @@ export default {
 ## Pages uses dynamic components
 
 1. The incoming dynamic component attribute 'component' in pages
+2. V3.0.0 or later is not supported
 
 ```html
   <template>
       <div style="width:70%;margin:20px auto;height:400px">
-        <slider ref="slider" :pages="someList" :sliderinit="sliderinit">
+        <slider ref="slider" :pages="someList" :options="options">
         </slider>
       </div>
   </template>
@@ -400,11 +404,11 @@ export default {
     data () {
       return {
       someList: [],
-      sliderinit: {
+      options: {
           currentPage: 1,
           thresholdDistance: 100,
           thresholdTime: 300,
-          duration: 300,
+          speed: 300,
           timingFunction: 'ease',
           loop: true,
           autoplay: 0
@@ -422,7 +426,7 @@ export default {
             'background': '#1bbc9b'
           },
           component: {
-            props: ['item', 'sliderinit', 'pages'],
+            props: ['item', 'options', 'pages'],
             data() {
               return {
                 //img src
@@ -462,7 +466,7 @@ export default {
   <template>
   <div>
     <div style="width:70%;margin:20px auto;height:400px">
-      <slider ref="slider" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+      <slider ref="slider" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
         <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
       </slider>
     </div>
@@ -475,11 +479,11 @@ export default {
   data () {
     return {
       someList: [],
-      sliderinit: {
+      options: {
         pagination: true,
         thresholdDistance: 100, // 滑动距离阈值判定
         thresholdTime: 300, // 滑动时间阈值判定
-        duration: 300, // 滑动速度
+        speed: 300, // 滑动速度
         renderPagination: (h, index) => {
           return h('div', {
             class: 'swiper-pagination-bullet'

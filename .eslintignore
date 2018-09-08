@@ -2,5 +2,7 @@ dist/*.js
 dist/*.html
 docs/*.js
 docs/*.html
+docs/**/*.js
+docs/**/*.html
 src/exportModule.js
 src/main.js

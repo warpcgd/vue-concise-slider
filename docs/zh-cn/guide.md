@@ -13,14 +13,15 @@
 <!-- 制作一个框架包裹slider -->
  <div style="width:70%;margin:20px auto;height:400px">
       <!-- 配置slider组件 -->
-      <slider ref="slider" :pages="pages" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+      <slider ref="slider" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
+          <slideritem v-for="(item,index) in pages" :key="index" :style="item.style">{{item.html}}</slideritem>
           <!-- 设置loading,可自定义 -->
           <div slot="loading">loading...</div>
       </slider>
  </div>
 </template>
 <script>
-import slider from 'vue-concise-slider'// 引入slider组件
+import { slider, slideritem } from 'vue-concise-slider' // 引入slider组件
 export default {
    el: '#app',
    data () {
@@ -47,17 +48,17 @@ export default {
           }
         ],
         //滑动配置[obj]
-        sliderinit: {
+        options: {
           currentPage: 0,//当前页码
           thresholdDistance: 500,//滑动判定距离
           thresholdTime: 100,//滑动判定时间
           autoplay:1000,//自动滚动[ms]
           loop:true,//循环滚动
           direction:'vertical',//方向设置，垂直滚动
-          infinite:1,//无限滚动前后遍历数
+          loopedSlides:1,//无限滚动前后遍历数
           slidesToScroll:1,//每次滑动项数
           timingFunction: 'ease', // 滑动方式
-          duration: 300, // 滑动时间
+          speed: 300, // 滑动时间
         }
       }
     },
@@ -89,24 +90,24 @@ export default {
   <template>
   <div>
     <div style="width:70%;margin:20px auto;height:400px">
-      <slider ref="slider" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+      <slider ref="slider" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
         <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
       </slider>
     </div>
   </div>
 </template>
 <script>
-import { slider, slideritem } from '../../dist/module.js'
+import { slider, slideritem } from 'vue-concise-slider'
 export default {
   el: '#sliderbasic',
   data () {
     return {
       someList: [],
-      sliderinit: {
+      options: {
         pagination: true,
         thresholdDistance: 100, // 滑动距离阈值判定
         thresholdTime: 300, // 滑动时间阈值判定
-        duration: 300 // 滑动速度
+        speed: 300 // 滑动速度
       }
     }
   },
@@ -162,20 +163,20 @@ export default {
       border-radius: 50%;
     }
     .loadingDot i:nth-child(1) {
-      -webkit-animation: loading-7 .7s ease-in 0s infinite;
-      animation: loading-7 .7s ease-in 0s infinite;
+      -webkit-animation: loading-7 .7s ease-in 0s loopedSlides;
+      animation: loading-7 .7s ease-in 0s loopedSlides;
     }
     .loadingDot i:nth-child(2) {
-      -webkit-animation: loading-7 .7s ease-in 0.15s infinite;
+      -webkit-animation: loading-7 .7s ease-in 0.15s loopedSlides;
     }
     .loadingDot i:nth-child(3) {
-      -webkit-animation: loading-7 .7s ease-in 0.3s infinite;
+      -webkit-animation: loading-7 .7s ease-in 0.3s loopedSlides;
     }
     .loadingDot i:nth-child(4) {
-      -webkit-animation: loading-7 .7s ease-in 0.45s infinite;
+      -webkit-animation: loading-7 .7s ease-in 0.45s loopedSlides;
     }
   </style>
-  <slider ref="slider" :pages="someList" :sliderinit="sliderinit">
+  <slider ref="slider" :pages="someList" :options="options">
       <!-- 设置loading,可自定义loadin特效 -->
       <div slot="loading">
         <div class="loadingDot">
@@ -195,23 +196,24 @@ export default {
 ```html
   <template>
       <div style="width:70%;margin:20px auto;height:400px">
-        <slider :pages="someList" :sliderinit="sliderinit">
+        <slider :options="options">
+          <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
         </slider>
       </div>
   </template>
   <script>
-  import slider from '../components/slider'
+  import { slider, slideritem } from 'vue-concise-slider'
   export default {
     el: '#sliderbasic',
     data () {
       return {
         // someList留空
         someList: [],
-        sliderinit: {
+        options: {
           currentPage: 1,//当前页面
           thresholdDistance: 100, // 滑动距离阈值判定
           thresholdTime: 300, // 滑动时间阈值判定
-          duration: 300, // 滑动速度
+          speed: 300, // 滑动速度
           timingFunction: 'ease', // 滑动方式
           loop: true, // 无限循环
           autoplay: 0 // 自动播放:时间[ms]
@@ -258,24 +260,25 @@ export default {
 ```html
   <template>
       <div style="width:70%;margin:20px auto;height:400px">
-        <slider ref="slider" :pages="someList" :sliderinit="sliderinit">
+        <slider ref="slider" :options="options">
+          <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
         </slider>
       </div>
   </template>
   <script>
-  import slider from '../components/slider'
+  import { slider, slideritem } from 'vue-concise-slider'
   export default {
     el: '#sliderbasic',
     data () {
       return {
         // someList留空
         someList: [],
-        sliderinit: {
+        options: {
           effect: 'fade',//滑动方式
           currentPage: 1,//当前页面
           thresholdDistance: 100, // 滑动距离阈值判定
           thresholdTime: 300, // 滑动时间阈值判定
-          duration: 300, // 滑动速度
+          speed: 300, // 滑动速度
           timingFunction: 'ease', // 滑动方式
           loop: true, // 无限循环
           autoplay: 0 // 自动播放:时间[ms]
@@ -323,18 +326,18 @@ export default {
 ```html
   <template>
       <div style="width:70%;margin:20px auto;height:400px">
-        <slider ref="slider" :pages="someList" :sliderinit="sliderinit">
+        <slider ref="slider" :pages="someList" :options="options">
         </slider>
       </div>
   </template>
   <script>
-  import slider from '../components/slider'
+  import { slider } from 'vue-concise-slider'
   export default {
     el: '#sliderbasic',
     data () {
       return {
       someList: [],
-      sliderinit: {
+      options: {
           effect: 'coverflow',
           currentPage: 1,
           tracking: false,
@@ -343,7 +346,7 @@ export default {
           deviation: 200, // 偏移值
           widthScalingRatio: 0.8, // 宽度缩放比例
           heightScalingRatio: 0.8, // 高度缩放比例
-          infinite: 2, // 多级滚动时，需要添加前后遍历数
+          loopedSlides: 2, // 多级滚动时，需要添加前后遍历数
           slidesToScroll: 1, // 需要滚动页面的数量
           loop: true // 无限循环
           // autoplay: 1000 // 自动播放:时间[ms]
@@ -410,11 +413,12 @@ export default {
 ## pages使用动态组件
 
 1. pages中传入动态组件属性'component'
+2. v3.0.0 以上版本不支持
 
 ```html
   <template>
       <div style="width:70%;margin:20px auto;height:400px">
-        <slider ref="slider" :pages="someList" :sliderinit="sliderinit">
+        <slider ref="slider" :pages="someList" :options="options">
         </slider>
       </div>
   </template>
@@ -425,7 +429,7 @@ export default {
     data () {
       return {
       someList: [],
-      sliderinit: {
+      options: {
           effect: 'coverflow',
           currentPage: 1,
           tracking: false,
@@ -434,7 +438,7 @@ export default {
           deviation: 200, // 偏移值
           widthScalingRatio: 0.8, // 宽度缩放比例
           heightScalingRatio: 0.8, // 高度缩放比例
-          infinite: 2, // 多级滚动时，需要添加前后遍历数
+          loopedSlides: 2, // 多级滚动时，需要添加前后遍历数
           slidesToScroll: 1, // 需要滚动页面的数量
           loop: true // 无限循环
           // autoplay: 1000 // 自动播放:时间[ms]
@@ -452,7 +456,7 @@ export default {
           },
           // 对slider的扩展，如果需要对某一页banner添加说明或其他不同的需求，可以通过定义component来进行扩展
           component: {
-            props: ['item', 'sliderinit', 'pages'],
+            props: ['item', 'options', 'pages'],
             data () {
               return {
                 img: 'src/img/testimg-1.jpg'
@@ -470,7 +474,7 @@ export default {
             'background': '#4bbfc3'
           },
           component: {
-            props: ['item', 'sliderinit', 'pages'],
+            props: ['item', 'options', 'pages'],
             data () {
               return {
                 img: 'src/img/testimg-2.jpg'
@@ -488,7 +492,7 @@ export default {
             'background': '#7baabe'
           },
           component: {
-            props: ['item', 'sliderinit', 'pages'],
+            props: ['item', 'options', 'pages'],
             data () {
               return {
                 img: 'src/img/testimg-3.jpg'
@@ -518,7 +522,7 @@ export default {
   <template>
   <div>
     <div style="width:70%;margin:20px auto;height:400px">
-      <slider ref="slider" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+      <slider ref="slider" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
         <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
       </slider>
     </div>
@@ -531,11 +535,11 @@ export default {
   data () {
     return {
       someList: [],
-      sliderinit: {
+      options: {
         pagination: true,
         thresholdDistance: 100, // 滑动距离阈值判定
         thresholdTime: 300, // 滑动时间阈值判定
-        duration: 300, // 滑动速度
+        speed: 300, // 滑动速度
         renderPagination: (h, index) => {
           return h('div', {
             class: 'swiper-pagination-bullet'

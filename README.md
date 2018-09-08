@@ -11,11 +11,11 @@
 vue-concise-slider,一个简单的滑动组件,配置简单,支持自适应/全屏+按钮+分页,同时兼容移动端和PC端
 
 ## 版本
-[v2.5.5](https://github.com/warpcgd/vue-concise-slider/issues/29) 支持vue2.0+
+[v3.0.0](https://github.com/warpcgd/vue-concise-slider/issues/29) 支持vue2.0+
 
 ## 特点
 * 简单配置
-* 轻量 (~24kB gzipped)
+* 轻量 (~30kB gzipped)
 * 多种滑动样式
 
 ### 目前已实现
@@ -55,7 +55,7 @@ vue-concise-slider,一个简单的滑动组件,配置简单,支持自适应/全�
 <!-- 制作一个框架包裹slider -->
  <div style="width:70%;margin:20px auto;height:400px">
       <!-- 配置slider组件 -->
-      <slider ref="slider" :pages="pages" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+      <slider ref="slider" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
           <!-- 直接使用slideritem slot -->
            <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
           <!-- 设置loading,可自定义 -->
@@ -72,17 +72,17 @@ export default {
         //Image list
         someList:[],
         //Sliding configuration [obj]
-        sliderinit: {
+        options: {
           currentPage: 0,
           thresholdDistance:500,
           thresholdTime:100,
           autoplay:1000,
           loop:true,
           direction:'vertical',
-          infinite:1,
+          loopedSlides:1,
           slidesToScroll:1,
           timingFunction: 'ease',
-          duration: 300
+          speed: 300
         }
       }
     },

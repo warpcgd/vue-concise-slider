@@ -18,7 +18,7 @@
 <template>
   <div>
     <div style="width:70%;margin:20px auto;height:400px">
-      <slider ref="slider" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+      <slider ref="slider" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
         <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
         <div slot="loading">
           <div class="loadingDot">
@@ -44,17 +44,18 @@
   </div>
 </template>
 <script>
-import { slider, slideritem } from '../../dist/module.js'
+import slider from '../components/slider'
+import slideritem from '../components/slider_item'
 export default {
   el: '#sliderfade',
   data () {
     return {
       someList: [],
-      sliderinit: {
+      options: {
         effect: 'fade',
         // thresholdDistance: 100, // 滑动距离阈值判定
         // thresholdTime: 300, // 滑动时间阈值判定
-        // duration: 300, // 滑动速度
+        // speed: 300, // 滑动速度
         // timingFunction: 'ease', // 滑动方式
         loop: true // 无限循环
         // autoplay: 0 // 自动播放:时间[ms]

@@ -1,5 +1,3 @@
-<vuep template="#config"></vuep>
-
 ## pages
 
 - 类型：`Array`
@@ -64,13 +62,13 @@
 
 对每页page的扩展，可以自定义component模板，支持传入props
 * item : 每项pages
-* sliderinit: slider配置
+* options: slider配置
 * pages: 滑动列表
 
 ```html
   {
     component: {
-      props: ['item', 'sliderinit', 'pages'],
+      props: ['item', 'options', 'pages'],
       data () {
         return {
           img: 'src/img/testimg-1.jpg'
@@ -84,7 +82,7 @@
   }
 ```
 
-## sliderinit
+## options
 
 - 类型：`Object`
 - 默认值：`null`
@@ -99,7 +97,7 @@
     autoplay:1000,//自动滚动[ms]
     loop:true,//循环滚动
     direction:'vertical',//方向设置，垂直滚动
-    infinite:1,//无限滚动前后遍历数
+    loopedSlides:1,//无限滚动前后遍历数
     slidesToScroll:1,//每次滑动项数
   }
 ```
@@ -194,7 +192,7 @@
   }
 ```
 
-### infinite
+### loopedSlides
 
 - 类型：`number`
 - 默认值：`1`
@@ -203,7 +201,7 @@ loop设置为true时,设置前后复制页面的数量
 
 ```html
   {
-    infinite:1
+    loopedSlides:1
   }
 ```
 ### slidesToScroll
@@ -231,7 +229,7 @@ loop设置为true时,设置前后复制页面的数量
   }
 ```
 
-### duration
+### speed
 
 - 类型：`number[ms]`
 - 默认值：`300`
@@ -240,7 +238,7 @@ loop设置为true时,设置前后复制页面的数量
 
 ```html
   {
-    duration: 300
+    speed: 300
   }
 ```
 
@@ -422,7 +420,7 @@ coverflow模式下配置滑动项偏移
 
 <script v-pre type="text/x-template" id="config">
   <template>
-      <slider :pages="pages" :sliderinit="sliderinit">
+      <slider :pages="pages" :options="options">
       <!-- slot  -->
       </slider>
   </template>
@@ -459,12 +457,12 @@ coverflow模式下配置滑动项偏移
                 }
               ],
               //滑动配置[obj]
-              sliderinit: {
+              options: {
                 currentPage: 0,//当前页码
                 thresholdDistance: 100,//滑动判定距离
                 thresholdTime: 300,//滑动判定时间
                 loop:true,//循环滚动
-                infinite:1,//无限滚动前后遍历数
+                loopedSlides:1,//无限滚动前后遍历数
                 slidesToScroll:1,//每次滑动项数
                 direction:'horizontal',//方向设置
                 autoplay:0,//自动播放

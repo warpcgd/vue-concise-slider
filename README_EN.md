@@ -11,12 +11,12 @@ English | [中文](README.md)
 vue-concise-slider,A simple sliding component,has easy configuration,supported self-adaption / fullscreen / button / page,and is compatible with mobile and PC terminal
 
 ### version
-[v2.5.5](https://github.com/warpcgd/vue-concise-slider/issues/29)  Supported vue2.0+
+[v3.0.0](https://github.com/warpcgd/vue-concise-slider/issues/29)  Supported vue2.0+
 
 ### Features
 
 * Simple configuration
-* Simple and lightweight (~24kB gzipped)
+* Simple and lightweight (~30kB gzipped)
 * Multiple sliding effects
 
 ### Achieved
@@ -25,7 +25,7 @@ vue-concise-slider,A simple sliding component,has easy configuration,supported s
 - [x] Vertical Slides
 - [x] Autoplay Slides
 - [x] Auto Slides Per View / Carousel Mode
-- [x] Loop Mode / Infinite Loop
+- [x] Loop Mode / loopedSlides Loop
 - [x] Loop Mode / multiple slide
 - [x] Fade Effect
 - [x] CoverFlow Effect
@@ -56,7 +56,7 @@ vue-concise-slider,A simple sliding component,has easy configuration,supported s
 <!-- Make a frame wrapped slider -->
  <div style="width:70%;margin:20px auto;height:400px">
       <!-- Configuring slider components -->
-      <slider ref="slider" :pages="pages" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+      <slider ref="slider" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
           <!-- slideritem slot -->
           <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
           <!-- Set loading -->
@@ -73,17 +73,17 @@ export default {
         //Image list
         someList:[],
         //Sliding configuration [obj]
-        sliderinit: {
+        options: {
           currentPage: 0,
           thresholdDistance: 500,
           thresholdTime: 100,
           autoplay:1000,
           loop:true,
           direction:'vertical',
-          infinite:1,
+          loopedSlides:1,
           slidesToScroll:1,
           timingFunction: 'ease',
-          duration: 300
+          speed: 300
         }
       }
     },

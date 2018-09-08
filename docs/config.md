@@ -1,5 +1,3 @@
-<vuep template="#config"></vuep>
-
 ## pages
 
 - Type: `Array`
@@ -62,13 +60,13 @@ The style pattern that works directly on each item can output background maps, b
 For the extension of each page page, you can customize the component template , and use props in the component
 
 * item : per pages
-* sliderinit: slider configuration
+* options: slider configuration
 * pages: array of slider list
 
 ```html
   {
     component: {
-      props: ['item', 'sliderinit', 'pages'],
+      props: ['item', 'options', 'pages'],
       data () {
         return {
           img: 'src/img/testimg-1.jpg'
@@ -82,7 +80,7 @@ For the extension of each page page, you can customize the component template , 
   }
 ```
 
-## sliderinit
+## options
 
 - Type: `Object`
 - Default value: `null`
@@ -97,7 +95,7 @@ Slider configuration
     autoplay:1000,
     loop:true,
     direction:'vertical',
-    infinite:1,
+    loopedSlides:1,
     slidesToScroll:1
   }
 ```
@@ -158,7 +156,7 @@ Minimal distance (in px) to trigger swipe to next/previous slide during swipes
 - Type: `number`
 - Default value: `500`
 
-Minimal duration (in ms) to trigger swipe to next/previous slide during swipes
+Minimal speed (in ms) to trigger swipe to next/previous slide during swipes
 
 ```html
   {
@@ -192,7 +190,7 @@ Set to true to enable continuous loop mode
   }
 ```
 
-### infinite
+### loopedSlides
 
 - Type: `number`
 - Default value: `1`
@@ -201,7 +199,7 @@ like carousel, works with multiple slides
 
 ```html
   {
-    infinite:1
+    loopedSlides:1
   }
 ```
 ### slidesToScroll
@@ -229,16 +227,16 @@ When the touch event is triggered, the entire page scrolls
   }
 ```
 
-### duration
+### speed
 
 - Type: `number[ms]`
 - Default value: `300`
 
-Sliding duration[ms]
+Sliding speed[ms]
 
 ```html
   {
-    duration: 300
+    speed: 300
   }
 ```
 
@@ -423,7 +421,7 @@ initted slider , and the parameters are slider basic information
 
 <script v-pre type="text/x-template" id="config">
   <template>
-      <slider :pages="pages" :sliderinit="sliderinit">
+      <slider :pages="pages" :options="options">
       <!-- slot  -->
       </slider>
   </template>
@@ -460,12 +458,12 @@ initted slider , and the parameters are slider basic information
                 }
               ],
               //Sliding configuration
-              sliderinit: {
+              options: {
                 currentPage: 0,
                 thresholdDistance: 100,
                 thresholdTime: 300,
                 loop:true,
-                infinite:1,
+                loopedSlides:1,
                 slidesToScroll:1,
                 direction:'horizontal',
                 autoplay:0

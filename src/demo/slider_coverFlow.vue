@@ -18,7 +18,7 @@
 <template>
   <div>
     <div style="width:70%;margin:20px auto;height:400px">
-      <slider ref="slider" :pages="someList" :sliderinit="sliderinit" @slide='slide' @tap='onTap' @init='onInit'>
+      <slider ref="slider" :pages="someList" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
         <div slot="loading">
           <div class="loadingDot">
             <i></i>
@@ -42,13 +42,13 @@
   </div>
 </template>
 <script>
-import slider from '../../dist/module.js'
+import slider from '../components/slider'
 export default {
   el: '#slidercoverFlow',
   data () {
     return {
       someList: [],
-      sliderinit: {
+      options: {
         effect: 'coverflow',
         currentPage: 1,
         tracking: false,
@@ -57,7 +57,7 @@ export default {
         deviation: 200, // 偏移值
         widthScalingRatio: 0.8, // 宽度缩放比例
         heightScalingRatio: 0.8, // 高度缩放比例
-        infinite: 2, // 多级滚动时，需要添加前后遍历数
+        loopedSlides: 2, // 多级滚动时，需要添加前后遍历数
         slidesToScroll: 1, // 需要滚动页面的数量
         loop: true // 无限循环
         // autoplay: 1000 // 自动播放:时间[ms]
