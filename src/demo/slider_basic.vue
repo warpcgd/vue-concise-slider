@@ -43,8 +43,6 @@
   </div>
 </template>
 <script>
-// import slider from '../components/slider'
-// import slideritem from '../components/slider_item'
 import slider from '../components/slider'
 import slideritem from '../components/slider_item'
 export default {
@@ -56,11 +54,7 @@ export default {
         pagination: true,
         thresholdDistance: 100, // 滑动距离阈值判定
         thresholdTime: 300, // 滑动时间阈值判定
-        renderPagination: (h, index) => {
-          return h('div', {
-            class: 'swiper-pagination-bullet'
-          }, [index])
-        },
+        grabCursor: true, // 抓标样式
         speed: 300 // 滑动速度
         // timingFunction: 'ease', // 滑动方式
         // loop: false, // 无限循环

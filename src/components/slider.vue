@@ -76,7 +76,8 @@ export default {
         animation: false,
         loading: false,
         containerClass: {
-          'swiper-container-vertical': false
+          'swiper-container-vertical': false,
+          'swiper-container-cursorGrab': this.options.grabCursor || false
         },
         pageInit: false,
         widthScalingRatio: this.options.widthScalingRatio || 0.8,
@@ -709,5 +710,8 @@ export default {
   top: 50%;
   transform: translateY(-50%);
   z-index: 999;
+}
+.swiper-container-cursorGrab {
+  cursor: grab;
 }
 </style>
