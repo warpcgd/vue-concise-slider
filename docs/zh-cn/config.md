@@ -338,7 +338,7 @@ coverflow模式下配置滑动项偏移
 - 类型：`boolean`
 - 默认值：`false`
 
-Use itemAnimation in infinite scrolling to ensure that the last one to the first (first to last) effect ends before you can continue to slide
+在无限滚动中使用itemAnimation，保证最后一个到第一个（第一个到最后一个）特效结束后才能继续滑动
 
 ```html
   {
