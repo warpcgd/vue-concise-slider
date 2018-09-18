@@ -2,12 +2,12 @@
     <div class='slider-container' :class = 's_data.containerClass' @mouseleave="swipeOut">
       <div class='slider-touch'
       :style="styleobj"
-      @touchmove.stop.capture.prevent="swipeMove"
-      @touchstart.stop.capture.prevent="swipeStart"
-      @touchend.stop.capture.prevent="swipeEnd"
-      @mousedown.stop.capture.prevent="swipeStart"
-      @mouseup.stop.capture.prevent="swipeEnd"
-      @mousemove.stop.capture.prevent="swipeMove"
+      @touchmove.stop.prevent="swipeMove"
+      @touchstart.stop.prevent="swipeStart"
+      @touchend.stop.prevent="swipeEnd"
+      @mousedown.stop.prevent="swipeStart"
+      @mouseup.stop.prevent="swipeEnd"
+      @mousemove.stop.prevent="swipeMove"
       @webkit-transition-end="onTransitionEnd"
       @transitionend="onTransitionEnd"
       >
@@ -66,6 +66,7 @@ export default {
       s_data: {
         prefixes: detectPrefixes(),
         transitionEnding: false,
+        itemTransitionEnding: false,
         setIntervalid: '',
         renderTime: '',
         sliderLength: 0,
@@ -74,6 +75,7 @@ export default {
         thresholdDistance: this.options.thresholdDistance || 100,
         thresholdTime: this.options.thresholdTime || 500,
         animation: false,
+        itemAnimation: this.options.itemAnimation || false,
         loading: false,
         containerClass: {
           'swiper-container-vertical': false,
@@ -157,6 +159,10 @@ export default {
         let offsetLeft = $sliderChildren[lastPage].offsetLeft
         if (this.options.loop) {
           offsetLeft = $sliderChildren[lastPage].offsetLeft
+        }
+        let offsetWidth = $sliderChildren[lastPage].offsetWidth
+        if (this.options.centeredSlides) {
+          offsetLeft = offsetLeft - pageWidth / 2 + offsetWidth / 2
         }
         return offsetLeft + pageWidth - pageWidth
       }
@@ -262,6 +268,9 @@ export default {
     swipeStart (e) {
       let that = this
       if (this.s_data.transitionEnding) {
+        return
+      }
+      if (this.s_data.itemTransitionEnding && this.options.itemAnimation) {
         return
       }
       this.s_data.animation = false
@@ -391,9 +400,11 @@ export default {
       } else if (this.options.loop && this.data.currentPage === 0) {
         this.data.currentPage -= slidesToScroll || 1
         this.s_data.transitionEnding = true
+        this.s_data.itemTransitionEnding = true
         if (this.data.currentPage < 0 && this.s_data.effect === 'fade') {
           this.slide((this.pagenums || sliderLength) - 1)
           this.s_data.transitionEnding = false
+          this.s_data.itemTransitionEnding = false
         } else {
           this.slide()
         }
@@ -401,7 +412,7 @@ export default {
         this.slide()
       }
       // this.$emit('update:currentpage', this.data.currentPage)
-      this.$emit('slide', this.data)
+      // this.$emit('slide', this.data)
     },
     next () {
       this.data.direction = 'right'
@@ -412,9 +423,11 @@ export default {
       } else if (this.options.loop && this.data.currentPage === (this.pagenums || sliderLength) - 1) {
         this.data.currentPage += this.options.slidesToScroll || 1
         this.s_data.transitionEnding = true
+        this.s_data.itemTransitionEnding = true
         if (this.data.currentPage >= (this.pagenums || sliderLength) && this.s_data.effect === 'fade') {
           this.slide(0)
           this.s_data.transitionEnding = false
+          this.s_data.itemTransitionEnding = false
         } else {
           this.slide()
         }
@@ -422,34 +435,63 @@ export default {
         this.slide()
       }
       // this.$emit('update:currentpage', this.data.currentPage)
-      this.$emit('slide', this.data)
+      // this.$emit('slide', this.data)
     },
     slide (pagenum, type) {
-      let that = this
       // 执行动画
-      that.s_data.animation = true
+      this.s_data.animation = true
       // 无样式滚动
       if (type === 'animationnone') {
-        that.s_data.animation = false
+        this.s_data.animation = false
       }
       if (pagenum || pagenum === 0) {
-        that.data.currentPage = pagenum
+        this.data.currentPage = pagenum
       }
-      if (that.s_data.effect === 'fade') {
-        if (!that.pagenums) {
-          that.fadeDom()
+      this.$emit('slide', this.data)
+      // fade优化
+      if (this.s_data.effect === 'fade') {
+        if (!this.pagenums) {
+          this.fadeDom()
         }
         return
       } else {
         // 增加垂直滚动判定
-        if (that.options.direction === 'vertical') {
-          that.data.posheight = -that.currentHeight + 'px'
+        if (this.options.direction === 'vertical') {
+          this.data.posheight = -this.currentHeight + 'px'
         } else {
-          that.data.poswidth = -that.currentWidth + 'px'
+          this.data.poswidth = -this.currentWidth + 'px'
         }
       }
-      //
-      if (that.data.currentPage < 0 || that.data.currentPage >= (that.pagenums || that.s_data.sliderLength)) {
+      // 添加class
+      if (this.s_data.sliderLength) {
+        let slideDom = this.$el.getElementsByClassName('slider-wrapper')[0]
+        let sliderItem = slideDom.getElementsByClassName('slider-item')
+        let sliderActiveCopy = slideDom.getElementsByClassName('slider-active-copy')
+        let loopedSlides = this.options.loopedSlides || 1
+        let sliderLength = this.s_data.sliderLength
+        let children = this.$children
+        let currentPage = this.data.currentPage
+        children = children.filter((item) => {
+          return item.$options._componentTag === 'slideritem'
+        })
+        children.forEach(element => {
+          element.removeActive()
+        })
+        if (children[currentPage]) {
+          children[currentPage].addActive()
+        }
+        if (currentPage < 0 || currentPage >= (this.pagenums || sliderLength)) {
+          sliderItem[currentPage + loopedSlides].classList.add('slider-active-copy')
+          let lastPage = currentPage < 0 ? (this.pagenums || sliderLength) + currentPage : 0 + currentPage - (this.pagenums || sliderLength)
+          children[lastPage].addActive()
+        } else {
+          for (let index = 0; index < sliderActiveCopy.length; index++) {
+            const item = sliderActiveCopy[index]
+            item.classList.remove('slider-active-copy')
+          }
+        }
+      }
+      if (this.data.currentPage < 0 || this.data.currentPage >= (this.pagenums || this.s_data.sliderLength)) {
         return
       }
     },
@@ -482,7 +524,10 @@ export default {
       e.preventDefault()
     },
     // 无限循环中transitionEnd
-    onTransitionEnd () {
+    onTransitionEnd (e) {
+      if (e.target !== e.currentTarget && this.options.effect !== 'coverflow') {
+        return
+      }
       var that = this
       setTimeout(function () {
         let currentPage = that.data.currentPage
@@ -495,6 +540,15 @@ export default {
             that.slide(0 + currentPage - (that.pagenums || sliderLength), 'animationnone')
           }
         }
+      }, 0)
+    },
+    onItemTransitionEnd (e) {
+      if (e.target !== e.currentTarget) {
+        return
+      }
+      var that = this
+      setTimeout(function () {
+        that.s_data.itemTransitionEnding = false
       }, 0)
     },
     renderDom (item) {
@@ -534,13 +588,15 @@ export default {
               // 向前添加节点
               let copeBefore = sliderItem[j + a].cloneNode(true)
               copeBefore.classList.add('slider-copy')
+              copeBefore.classList.remove('slider-active')
               slideDom.insertBefore(copeBefore, sliderItem[0 + a])
-              slideDom.insertBefore(copeBefore, sliderItem[0 + a])
+              // slideDom.insertBefore(copeBefore, sliderItem[0 + a])
               a++
             } else if (j - loopedSlides < 0) {
                // 向后添加节点
               let copeAfter = sliderItem[j].cloneNode(true)
               copeAfter.classList.add('slider-copy')
+              copeAfter.classList.remove('slider-active')
               slideDom.appendChild(copeAfter)
             }
           }
