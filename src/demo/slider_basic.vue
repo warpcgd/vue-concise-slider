@@ -19,9 +19,7 @@
   <div>
     <div style="width:70%;margin:20px auto;height:400px">
       <slider ref="slider" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
-        <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">
-           <a @click="clickItem">点一下试试</a>
-        </slideritem>
+        <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
         <div slot="loading">
           <div class="loadingDot">
             <i></i>
@@ -94,9 +92,6 @@ export default {
     slideritem
   },
   methods: {
-    clickItem () {
-      console.log('点中了')
-    },
     turnTo (num) {
       // 传递事件 vue 2.0 传递事件修改了，好的写法应该直接写在空vue类中
       this.$refs.slider.$emit('slideTo', num)
