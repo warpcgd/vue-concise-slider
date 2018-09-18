@@ -319,6 +319,32 @@ Custom paging function, the parameter is VUE's createElement function, and the c
   }
 ```
 
+### centeredSlides
+
+- Type：`boolean`
+- Default：`false`
+
+Whether to slide in the middle
+
+```html
+  {
+    centeredSlides: true
+  }
+```
+
+### itemAnimation
+
+- Type：`boolean`
+- Default：`false`
+
+Use itemAnimation in infinite scrolling to ensure that the last one to the first (first to last) effect ends before you can continue to slide
+
+```html
+  {
+    itemAnimation: true
+  }
+```
+
 ## Transitive events
 
 

@@ -320,6 +320,32 @@ coverflow模式下配置滑动项偏移
   }
 ```
 
+### centeredSlides
+
+- 类型：`boolean`
+- 默认值：`false`
+
+是否居中滑动
+
+```html
+  {
+    centeredSlides: true
+  }
+```
+
+### itemAnimation
+
+- 类型：`boolean`
+- 默认值：`false`
+
+Use itemAnimation in infinite scrolling to ensure that the last one to the first (first to last) effect ends before you can continue to slide
+
+```html
+  {
+    itemAnimation: true
+  }
+```
+
 ## 传递的事件
 
 ### slideTo
