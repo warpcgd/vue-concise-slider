@@ -2,20 +2,20 @@
     <div class='slider-container' :class = 's_data.containerClass' @mouseleave="swipeOut">
       <div class='slider-touch'
       :style="styleobj"
-      @touchmove.stop.prevent="swipeMove"
-      @touchstart.stop.prevent="swipeStart"
-      @touchend.stop.prevent="swipeEnd"
-      @mousedown.stop.prevent="swipeStart"
-      @mouseup.stop.prevent="swipeEnd"
-      @mousemove.stop.prevent="swipeMove"
+      @touchmove.stop="swipeMove"
+      @touchstart="swipeStart"
+      @touchend="swipeEnd"
+      @mousedown="swipeStart"
+      @mouseup="swipeEnd"
+      @mousemove.stop="swipeMove"
       @webkit-transition-end="onTransitionEnd"
       @transitionend="onTransitionEnd"
       >
-      <div class="slider-wrapper" :class="classObject" v-if="pages.length === 0 && options.effect !== 'coverflow'">
-        <slot></slot>
+      <div class="slider-wrapper" :class="classObject" v-if="pages.length === 0">
+        <slot :options="options" :data="data" :s_data="s_data"></slot>
       </div>
       <!-- 组件在 vm.currentview 变化时改变！ -->
-      <component v-if="pages.length !== 0" :pages="pages" :options="options" :data="data" :s_data="s_data" v-bind:is="currentView"></component>
+      <!-- <component v-if="pages.length !== 0" :pages="pages" :options="options" :data="data" :s_data="s_data" v-bind:is="currentView"></component> -->
       </div>
       <div v-if="s_data.pagination" class="slider-pagination slider-pagination-bullets">
         <template v-for="n in (pagenums||s_data.sliderLength)">
@@ -33,7 +33,7 @@ import detectPrefixes from '../utils/detect-prefixes.js'
 // import sliderBasic from './slider_basic.vue'
 // import sliderBasicLoop from './slider_basic_loop.vue'
 // import sliderFade from './slider_fade.vue'
-import sliderCoverflow from './slider_coverflow.vue'
+// import sliderCoverflow from './slider_coverflow.vue'
 // import renderpagination from './pagination_render.vue'
 export default {
   props: {
@@ -123,9 +123,9 @@ export default {
       // if (this.s_data.effect === 'fade') {
       //   return this.options.loop ? 'fadeLoop' : 'fade'
       // }
-      if (this.s_data.effect === 'coverflow') {
-        return this.options.loop ? 'coverflow' : 'coverflow'
-      }
+      // if (this.s_data.effect === 'coverflow') {
+      //   return this.options.loop ? 'coverflow' : 'coverflow'
+      // }
     },
     // 组件的核心，计算当前父级需要进行的偏移,每次要遍历节点
     currentWidth: {
@@ -317,14 +317,27 @@ export default {
           this.data.end.x = e.clientX
           this.data.end.y = e.clientY
         }
-        if (this.options.direction === 'vertical') {
-          this.data.posheight = -(this.currentHeight) + this.data.end.y - this.data.start.y + 'px'
-          return
+        let deltaX = Math.abs(this.data.end.x - this.data.start.x)
+        let deltaY = Math.abs(this.data.end.y - this.data.start.y)
+        if (deltaX >= deltaY && this.options.direction !== 'vertical') {
+          e.preventDefault()
+        } else if (deltaX <= deltaY && this.options.direction === 'vertical') {
+          e.preventDefault()
         }
         if (effect === 'fade' || effect === 'coverflow') {
           return
         }
-        this.data.poswidth = -(this.currentWidth) + this.data.end.x - this.data.start.x + 'px'
+        if (this.options.direction === 'vertical') {
+          if (deltaX > deltaY) {
+            return
+          }
+          this.data.posheight = -(this.currentHeight) + this.data.end.y - this.data.start.y + 'px'
+        } else {
+          if (deltaX < deltaY) {
+            return
+          }
+          this.data.poswidth = -(this.currentWidth) + this.data.end.x - this.data.start.x + 'px'
+        }
       }
     },
     swipeEnd (e) {
@@ -343,7 +356,9 @@ export default {
         }, this.options.autoplay)
       }
       // 解除阻止
-      document.removeEventListener('touchmove', this.preventDefault(e))
+      if (this.options.preventDocumentMove === true) {
+        document.removeEventListener('touchmove', this.preventDefault(e))
+      }
       if (deltaTime > this.s_data.thresholdTime) {
         this.slide(currentPage)
         /* gesture too slow */
@@ -481,7 +496,9 @@ export default {
           children[currentPage].addActive()
         }
         if (currentPage < 0 || currentPage >= (this.pagenums || sliderLength)) {
-          sliderItem[currentPage + loopedSlides].classList.add('slider-active-copy')
+          if (sliderItem[currentPage + loopedSlides] && sliderItem[currentPage + loopedSlides].classList) {
+            sliderItem[currentPage + loopedSlides].classList.add('slider-active-copy')
+          }
           let lastPage = currentPage < 0 ? (this.pagenums || sliderLength) + currentPage : 0 + currentPage - (this.pagenums || sliderLength)
           children[lastPage].addActive()
         } else {
@@ -572,7 +589,7 @@ export default {
         let sliderItem = slideDom.getElementsByClassName('slider-item')
         // that.s_data.sliderLength = sliderItem.length
         // loop && effect !== 'fade'
-        if (that.s_data.sliderLength > 1 && that.options.loop && that.options.effect !== 'fade') {
+        if (that.s_data.sliderLength > 1 && that.options.loop && that.options.effect !== 'fade' && that.options.effect !== 'coverflow') {
           // 先清空上次添加的节点
           let sliderCopy = slideDom.getElementsByClassName('slider-copy')
           for (let i = sliderCopy.length - 1; i >= 0; i--) {
@@ -625,7 +642,7 @@ export default {
     // basicLoop: sliderBasicLoop,
     // fade: sliderFade,
     // fadeLoop: sliderFade,
-    coverflow: sliderCoverflow,
+    // coverflow: sliderCoverflow,
     renderpagination: { // eslint-disable-line
       render: function (createElement) {
         let index = this.index
@@ -711,10 +728,6 @@ export default {
   text-align: center;
   color: #fff;
   /*display: inline-block;*/
-}
-.slider-item {
-  background-position: center center !important;
-  background-size: cover !important;
 }
 
 .slider-fade .slider-item {
