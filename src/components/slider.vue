@@ -168,6 +168,11 @@ export default {
       return posheight + pageWidth - pageWidth
     }
   },
+  activated(){
+      if(this.temporaryData.transitionEnding){
+          this.onTransitionEnd ()
+      }
+  },
   mounted () {
     let that = this
     this.temporaryData.pageWidth = this.$el.offsetWidth
