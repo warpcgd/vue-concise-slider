@@ -321,12 +321,16 @@ export default {
 ## CoverFlow Effect
 
 1. effect set `coverflow`,and loop set `true`,Openning cycle slip
-2. someList data needs to set at least the width (% or PX)
+2. You must use a template to wrap the slideritem
+3. The total number of pages passed in `pageLength`, and the current serial number `index`
 
 ```html
   <template>
       <div style="width:70%;margin:20px auto;height:400px">
-        <slider ref="slider" :pages="someList" :options="options" >
+        <slider ref="slider" :options="options">
+            <template slot-scope="coverflow">
+              <slideritem v-for="(item,index) in someList" :pageLength="someList.length" :index="index" :key="index" :style="item.style">{{item.html}}</slideritem>
+            </template>
         </slider>
       </div>
   </template>

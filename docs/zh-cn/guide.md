@@ -321,19 +321,23 @@ export default {
 ## 旋转滚动
 
 1. effect配置`coverflow`,可设置loop为`true`,开启循环滑动
-2. someList数据至少需要设置宽度(%或者px)
+2. 必须使用`template`包裹`slideritem`
+3. slideritem需要传入总页数`pageLength`，以及当前序号`index`
 
 ```html
   <template>
       <div style="width:70%;margin:20px auto;height:400px">
-        <slider ref="slider" :pages="someList" :options="options">
+        <slider ref="slider" :options="options">
+            <template slot-scope="coverflow">
+              <slideritem v-for="(item,index) in someList" :pageLength="someList.length" :index="index" :key="index" :style="item.style">{{item.html}}</slideritem>
+            </template>
         </slider>
       </div>
   </template>
   <script>
   import { slider } from 'vue-concise-slider'
   export default {
-    el: '#sliderbasic',
+    el: '#slidercoverflow',
     data () {
       return {
       someList: [],

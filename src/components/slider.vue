@@ -12,7 +12,7 @@
       @transitionend="onTransitionEnd"
       >
       <div class="slider-wrapper" :class="classObject" v-if="pages.length === 0">
-        <slot :options="options" :data="data" :s_data="s_data"></slot>
+        <slot></slot>
       </div>
       <!-- 组件在 vm.currentview 变化时改变！ -->
       <!-- <component v-if="pages.length !== 0" :pages="pages" :options="options" :data="data" :s_data="s_data" v-bind:is="currentView"></component> -->
