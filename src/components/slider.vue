@@ -110,9 +110,9 @@ export default {
       // 初始化跳转到页面
       if ((this.pages.length || this.s_data.sliderLength !== 0) && !this.s_data.pageInit) {
         this.s_data.pageInit = true
-        this.$nextTick(() => {
-          this.slide(this.data.currentPage, 'animationnone')
-        })
+        // this.$nextTick(() => {
+        //   this.slide(this.data.currentPage, 'animationnone')
+        // })
       }
       return this.pages.length
     },
@@ -595,6 +595,7 @@ export default {
           for (let i = sliderCopy.length - 1; i >= 0; i--) {
             slideDom.removeChild(sliderCopy[i])
           }
+          // debugger
           // 批量复制添加
           sliderItem = slideDom.getElementsByClassName('slider-item')
           let length = sliderItem.length
@@ -609,7 +610,8 @@ export default {
               slideDom.insertBefore(copeBefore, sliderItem[0 + a])
               // slideDom.insertBefore(copeBefore, sliderItem[0 + a])
               a++
-            } else if (j - loopedSlides < 0) {
+            }
+            if (j - loopedSlides < 0) {
                // 向后添加节点
               let copeAfter = sliderItem[j].cloneNode(true)
               copeAfter.classList.add('slider-copy')
@@ -618,6 +620,9 @@ export default {
             }
           }
         }
+        that.$nextTick(() => {
+          that.slide(that.data.currentPage, 'animationnone')
+        })
       }, 0)
     },
     fadeDom () {
