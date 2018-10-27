@@ -110,22 +110,8 @@ export default {
       // 初始化跳转到页面
       if ((this.pages.length || this.s_data.sliderLength !== 0) && !this.s_data.pageInit) {
         this.s_data.pageInit = true
-        // this.$nextTick(() => {
-        //   this.slide(this.data.currentPage, 'animationnone')
-        // })
       }
       return this.pages.length
-    },
-    currentView: function () {
-      // if (this.s_data.effect === 'slide') {
-      //   return this.options.loop ? 'basicLoop' : 'basic'
-      // }
-      // if (this.s_data.effect === 'fade') {
-      //   return this.options.loop ? 'fadeLoop' : 'fade'
-      // }
-      // if (this.s_data.effect === 'coverflow') {
-      //   return this.options.loop ? 'coverflow' : 'coverflow'
-      // }
     },
     // 组件的核心，计算当前父级需要进行的偏移,每次要遍历节点
     currentWidth: {
@@ -236,7 +222,7 @@ export default {
       this.pre()
     })
     this.$on('autoplayStart', (autoplay) => {
-      this.options.autoplay = autoplay || 1000
+      this.options.autoplay = autoplay || this.options.autoplay || 1000
       this.clock().begin(that)
     })
     this.$on('autoplayStop', () => {
@@ -327,6 +313,7 @@ export default {
         if (effect === 'fade' || effect === 'coverflow') {
           return
         }
+        console.log(this)
         if (this.options.direction === 'vertical') {
           if (deltaX > deltaY) {
             return
@@ -589,7 +576,7 @@ export default {
         let sliderItem = slideDom.getElementsByClassName('slider-item')
         // that.s_data.sliderLength = sliderItem.length
         // loop && effect !== 'fade'
-        if (that.s_data.sliderLength > 1 && that.options.loop && that.options.effect !== 'fade' && that.options.effect !== 'coverflow') {
+        if (that.s_data.sliderLength >= 1 && that.options.loop && that.options.effect !== 'fade' && that.options.effect !== 'coverflow') {
           // 先清空上次添加的节点
           let sliderCopy = slideDom.getElementsByClassName('slider-copy')
           for (let i = sliderCopy.length - 1; i >= 0; i--) {
@@ -640,6 +627,9 @@ export default {
           sliderItem[i]['style'][this.s_data.prefixes.transition + '-duration'] = (this.s_data.animation ? speed || 300 : 0) + 'ms'
         }
       }
+    },
+    judgeParentSlider () {
+
     }
   },
   components: {
