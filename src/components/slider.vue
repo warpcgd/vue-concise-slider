@@ -313,7 +313,7 @@ export default {
         if (effect === 'fade' || effect === 'coverflow') {
           return
         }
-        console.log(this)
+        // console.log(this)
         if (this.options.direction === 'vertical') {
           if (deltaX > deltaY) {
             return
