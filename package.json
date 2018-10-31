@@ -1,6 +1,6 @@
 {
   "name": "vue-concise-slider",
-  "version": "3.2.4",
+  "version": "3.2.5",
   "repository": {
     "type": "git",
     "url": "git@github.com/warpcgd/vue-concise-slider.git"
@@ -12,12 +12,9 @@
     "build": "cross-env NODE_ENV=production webpack -p",
     "analyz": "npm_config_report=true npm run build"
   },
-  "dependencies": {
-    "vue": "^2.5.13",
-    "webpack": "^3.12.0"
-  },
   "main": "./dist/module.js",
   "devDependencies": {
+    "vue": "^2.5.13",
     "babel-preset-env": "^1.7.0",
     "babel-runtime": "^6.26.0", 
     "webpack-bundle-analyzer": "^2.13.1",
@@ -71,7 +68,9 @@
     "webpack-dev-middleware": "^1.4.0",
     "webpack-dev-server": "^2.11.2",
     "webpack-hot-middleware": "^2.6.0",
-    "webpack-merge": "^0.8.3"
+    "webpack-merge": "^0.8.3",
+    "ejs": ">=2.5.5",
+    "growl": ">=1.10.0"
   },
   "directories": {
     "doc": "docs"
