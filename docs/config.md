@@ -345,6 +345,19 @@ Use itemAnimation in infinite scrolling to ensure that the last one to the first
   }
 ```
 
+### nested
+
+- Type：`boolean`
+- Default：`true`
+
+When nesting the same direction of the swiper, when the child swiper is switched, the parent swiper will switch.
+
+```html
+  {
+    nested: false
+  }
+```
+
 ## Transitive events
 
 

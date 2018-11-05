@@ -346,6 +346,19 @@ coverflow模式下配置滑动项偏移
   }
 ```
 
+### nested
+
+- 类型：`boolean`
+- 默认值：`true`
+
+用于嵌套相同方向的swiper时，当子swiper切换完的时候，开启父swiper的切换
+
+```html
+  {
+    nested: false
+  }
+```
+
 ## 传递的事件
 
 ### slideTo

@@ -14,6 +14,8 @@ import slidermultipleSlide from './demo/slider_multipleSlide'
 import sliderCenter from './demo/slider_center'
 // 多级滚动
 import slidercoverFlow from './demo/slider_coverFlow'
+// 多级滚动
+import slidernest from './demo/slider_nest'
 // 自定义pageation
 import sliderrenderPagination from './demo/slider_renderPagination'
 
@@ -27,4 +29,5 @@ new Vue(slidermultipleSlide) // eslint-disable-line
 new Vue(slidercoverFlow) // eslint-disable-line
 new Vue(sliderrenderPagination) // eslint-disable-line
 new Vue(sliderCenter) // eslint-disable-line
+new Vue(slidernest) // eslint-disable-line
 

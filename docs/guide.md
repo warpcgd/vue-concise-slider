@@ -528,3 +528,95 @@ export default {
 }
 </script>
 ```
+
+## Nested slider
+
+1. Effect is set to 'nest'
+2. Slideritem nesting
+
+```html
+  <template>
+  <div>
+    <div style="width:70%;margin:20px auto;height:400px">
+      <slider ref="slider" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
+        <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
+        <slideritem>
+          <slider ref="slider" :options="options1">
+            <slideritem v-for="(item,index) in someList1" :key="index" :style="item.style">{{item.html}}</slideritem>
+          </slider>
+        </slideritem>
+        <slideritem v-for="(item,index) in someList" :key="index + 3" :style="item.style">{{item.html}}</slideritem>
+      </slider>
+    </div>
+  </div>
+</template>
+<script>
+import { slider, slideritem } from '../../dist/module.js'
+export default {
+  el: '#slidernest',
+  data () {
+    return {
+      someList: [],
+      someList1: [],
+      options: {
+        // direction: 'vertical',
+        effect: 'nest',
+        pagination: true,
+        // nested: false, // 嵌套
+        thresholdDistance: 100, // 滑动距离阈值判定
+        thresholdTime: 300, // 滑动时间阈值判定
+        grabCursor: true, // 抓标样式
+        speed: 300, // 滑动速度
+        // timingFunction: 'ease', // 滑动方式
+        loop: true // 无限循环
+        // autoplay: 0 // 自动播放:时间[ms]
+      },
+      options1: {
+        direction: 'vertical',
+        pagination: true,
+        thresholdDistance: 100, // 滑动距离阈值判定
+        thresholdTime: 300, // 滑动时间阈值判定
+        grabCursor: true, // 抓标样式
+        speed: 300, // 滑动速度
+        // timingFunction: 'ease', // 滑动方式
+        loop: true // 无限循环
+        // autoplay: 0 // 自动播放:时间[ms]
+      }
+    }
+  },
+  mounted () {
+    let that = this
+    setTimeout(function () {
+      that.someList = [
+        {
+          html: 'slide1',
+          style: {
+            'background': '#1bbc9b'
+          }
+        }
+      ]
+      that.someList1 = [
+        {
+          html: 'slide1-1',
+          style: {
+            'background': '#1bbc9b'
+          }
+        },
+        {
+          html: 'slide2-2',
+          style: {
+            'background': '#4bbfc3'
+          }
+        },
+        {
+          html: 'slide3-3',
+          style: {
+            'background': '#7baabe'
+          }
+        }
+      ]
+    }, 2000)
+  },
+}
+</script>
+```

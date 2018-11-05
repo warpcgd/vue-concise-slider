@@ -2,14 +2,16 @@
     <div class='slider-container' :class = 's_data.containerClass' @mouseleave="swipeOut">
       <div class='slider-touch'
       :style="styleobj"
-      @touchmove.stop="swipeMove"
+      @touchmove="swipeMove"
       @touchstart="swipeStart"
       @touchend="swipeEnd"
       @mousedown="swipeStart"
       @mouseup="swipeEnd"
-      @mousemove.stop="swipeMove"
+      @mousemove="swipeMove"
       @webkit-transition-end="onTransitionEnd"
       @transitionend="onTransitionEnd"
+      @transitioncancel="onTransitionEnd"
+      @webkit-transition-cancel="onTransitionEnd"
       >
       <div class="slider-wrapper" :class="classObject" v-if="pages.length === 0">
         <slot></slot>
@@ -19,8 +21,8 @@
       </div>
       <div v-if="s_data.pagination" class="slider-pagination slider-pagination-bullets">
         <template v-for="n in (pagenums||s_data.sliderLength)">
-          <span v-if="!options.renderPagination" @click='slide(n-1)' class="slider-pagination-bullet" :class="n-1 === data.currentPage? 'slider-pagination-bullet-active':''"></span>
-          <renderpagination v-if="options.renderPagination"  @click.native='slide(n-1)' :class="n-1 === data.currentPage? 'slider-pagination-bullet-active-render':''" :index="n" :options="options" ></renderpagination>  
+          <span v-if="!options.renderPagination" @click='slide(n-1)' :key="n" class="slider-pagination-bullet" :class="n-1 === data.currentPage? 'slider-pagination-bullet-active':''"></span>
+          <renderpagination v-if="options.renderPagination"  @click.native='slide(n-1)' :key="n" :class="n-1 === data.currentPage? 'slider-pagination-bullet-active-render':''" :index="n" :options="options" ></renderpagination>
         </template>
       </div>
       <div class="slider-loading" v-show="(!pagenums && s_data.sliderLength === 0)||s_data.loading">
@@ -30,11 +32,6 @@
 </template>
 <script>
 import detectPrefixes from '../utils/detect-prefixes.js'
-// import sliderBasic from './slider_basic.vue'
-// import sliderBasicLoop from './slider_basic_loop.vue'
-// import sliderFade from './slider_fade.vue'
-// import sliderCoverflow from './slider_coverflow.vue'
-// import renderpagination from './pagination_render.vue'
 export default {
   props: {
     options: {
@@ -56,8 +53,8 @@ export default {
   data () {
     return {
       data: {
-        poswidth: '0',
-        posheight: '0',
+        poswidth: 0,
+        posheight: 0,
         start: {},
         end: {},
         currentPage: this.options.currentPage || 0,
@@ -71,6 +68,7 @@ export default {
         renderTime: '',
         sliderLength: 0,
         effect: this.options.effect || 'slide',
+        direction: this.options.direction || 'horizontal',
         tracking: false,
         thresholdDistance: this.options.thresholdDistance || 100,
         thresholdTime: this.options.thresholdTime || 500,
@@ -89,7 +87,32 @@ export default {
         pageWidth: 0,
         pageHeight: 0,
         sliderItem: '',
-        pagination: this.options.pagination === undefined ? true : this.options.pagination
+        pagination: this.options.pagination === undefined ? true : this.options.pagination,
+        nested: this.options.nested === undefined ? true : this.options.nested,
+        resize: this.options.resize === undefined ? true : this.options.resize,
+        $parent: this.judgeParentSlider(this),
+        route: false
+      }
+    }
+  },
+  watch: {
+    // 解决route跳转问题
+    '$route': function () {
+      let that = this
+      if (this.route) {
+        let currentPage = that.data.currentPage
+        let sliderLength = that.s_data.sliderLength
+        that.s_data.transitionEnding = false
+        if (currentPage < 0) {
+          that.slide(0, 'animationnone')
+        } else if (currentPage >= (that.pagenums || sliderLength)) {
+          that.slide(2, 'animationnone')
+        } else {
+          that.slide(currentPage, 'animationnone')
+        }
+        this.route = false
+      } else {
+        this.route = true
       }
     }
   },
@@ -97,7 +120,7 @@ export default {
     // 动画执行obj
     styleobj: function () {
       let style = {}
-      style['transform'] = 'translate3D(' + this.data.poswidth + ',' + this.data.posheight + ',0)'
+      style['transform'] = 'translate3D(' + this.data.poswidth + 'px' + ',' + this.data.posheight + 'px' + ',0)'
       style[this.s_data.prefixes.transition + 'TimingFunction'] = this.options.timingFunction || 'ease'
       style[this.s_data.prefixes.transition + 'Duration'] = (this.s_data.animation ? this.options.speed || 300 : 0) + 'ms'
       if (this.s_data.effect === 'fade' || this.s_data.effect === 'coverflow') {
@@ -109,7 +132,7 @@ export default {
     pagenums: function () {
       // 初始化跳转到页面
       if ((this.pages.length || this.s_data.sliderLength !== 0) && !this.s_data.pageInit) {
-        this.s_data.pageInit = true
+        // this.s_data.pageInit = true
       }
       return this.pages.length
     },
@@ -242,17 +265,22 @@ export default {
     // 设定垂直轮播class
     if (this.options.direction === 'vertical') {
       this.s_data.containerClass['swiper-container-vertical'] = true
+    } else {
+      this.s_data.containerClass['swiper-container-horizontal'] = true
     }
     // 添加reszie监听
-    window.addEventListener('resize', () => {
-      that.s_data.pageWidth = that.$el.offsetWidth
-      that.s_data.pageHeight = that.$el.offsetHeight
-      that.slide(that.data.currentPage, 'animationnone')
-    })
+    if (this.s_data.resize) {
+      window.addEventListener('resize', () => {
+        that.s_data.pageWidth = that.$el.offsetWidth
+        that.s_data.pageHeight = that.$el.offsetHeight
+        that.slide(that.data.currentPage, 'animationnone')
+      })
+    }
   },
   methods: {
     swipeStart (e) {
       let that = this
+      this.s_data.e = e
       if (this.s_data.transitionEnding) {
         return
       }
@@ -271,7 +299,7 @@ export default {
       if (e.type === 'touchstart') {
         if (e.touches.length > 1) {
           this.s_data.tracking = false
-          return
+          return false
         } else {
           this.s_data.tracking = true
           /* Hack - would normally use e.timeStamp but it's whack in Fx/Android */
@@ -292,8 +320,10 @@ export default {
       }
     },
     swipeMove (e) {
+      this.s_data.e = e
       if (this.s_data.tracking) {
         let effect = this.s_data.effect
+        let $parent = this.s_data.$parent
         if (e.type === 'touchmove') {
           // e.preventDefault()
           this.data.end.x = e.targetTouches[0].clientX
@@ -310,24 +340,43 @@ export default {
         } else if (deltaX <= deltaY && this.options.direction === 'vertical') {
           e.preventDefault()
         }
+        // 嵌套滚动处理事件传播
+        if ($parent && $parent.s_data.direction === this.s_data.direction) {
+          e.stopPropagation()
+        }
         if (effect === 'fade' || effect === 'coverflow') {
           return
         }
-        // console.log(this)
+        // console.log(this.judgeParentSlider(this))
         if (this.options.direction === 'vertical') {
           if (deltaX > deltaY) {
             return
           }
-          this.data.posheight = -(this.currentHeight) + this.data.end.y - this.data.start.y + 'px'
+          // 处理嵌套滚动
+          if ($parent && $parent.options.direction === 'vertical' && this.data.currentPage === 0 && this.data.end.y - this.data.start.y >= 0 && $parent.s_data.nested) {
+            $parent.data.posheight = -($parent.currentHeight) + this.data.end.y - this.data.start.y
+          } else if ($parent && $parent.options.direction === 'vertical' && this.data.currentPage === this.s_data.sliderLength - 1 && this.data.end.y - this.data.start.y <= 0 && $parent.s_data.nested) {
+            $parent.data.posheight = -($parent.currentHeight) + this.data.end.y - this.data.start.y
+          } else {
+            this.data.posheight = -(this.currentHeight) + this.data.end.y - this.data.start.y
+          }
         } else {
           if (deltaX < deltaY) {
             return
           }
-          this.data.poswidth = -(this.currentWidth) + this.data.end.x - this.data.start.x + 'px'
+          // 处理嵌套滚动
+          if ($parent && $parent.options.direction !== 'vertical' && this.data.currentPage === 0 && this.data.end.x - this.data.start.x >= 0 && $parent.s_data.nested) {
+            $parent.data.poswidth = -($parent.currentWidth) + this.data.end.x - this.data.start.x
+          } else if ($parent && $parent.options.direction !== 'vertical' && this.data.currentPage === this.s_data.sliderLength - 1 && this.data.end.x - this.data.start.x <= 0 && $parent.s_data.nested) {
+            $parent.data.poswidth = -($parent.currentWidth) + this.data.end.x - this.data.start.x
+          } else {
+            this.data.poswidth = -(this.currentWidth) + this.data.end.x - this.data.start.x
+          }
         }
       }
     },
     swipeEnd (e) {
+      this.s_data.e = e
       this.s_data.tracking = false
       let now = new Date().getTime()
       let deltaTime = now - this.data.start.t
@@ -349,16 +398,17 @@ export default {
       if (deltaTime > this.s_data.thresholdTime) {
         this.slide(currentPage)
         /* gesture too slow */
-        return
+        return false
       } else if (this.options.direction !== 'vertical') {
+        // 为了平滑滑动，修改y轴限制
         if ((deltaX > thresholdDistance) && (Math.abs(deltaY) < thresholdDistance)) {
           // swipe right
           this.pre()
-          return
+          return false
         } else if ((-deltaX > thresholdDistance) && (Math.abs(deltaY) < thresholdDistance)) {
           // swipe left
           this.next()
-          return
+          return false
           // tap
         } else if (deltaTime < 300 && Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
           this.$emit('tap', this.data)
@@ -366,24 +416,24 @@ export default {
           //
         } else {
           this.slide(currentPage)
-          return
+          return false
         }
         // 垂直判定
       } else {
         if ((deltaY > thresholdDistance) && (Math.abs(deltaX) < thresholdDistance)) {
           // swipe right
           this.pre()
-          return
+          return false
         } else if ((-deltaY > thresholdDistance) && (Math.abs(deltaX) < thresholdDistance)) {
           // swipe left
           this.next()
-          return
+          return false
         } else if (deltaTime < 300 && Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
           this.$emit('tap', this.data)
           this.slide(currentPage)
         } else {
           this.slide(currentPage)
-          return
+          return false
         }
       }
     },
@@ -396,10 +446,11 @@ export default {
       this.data.direction = 'left'
       let sliderLength = this.s_data.sliderLength
       let slidesToScroll = this.options.slidesToScroll
+      let $parent = this.s_data.$parent
       if (this.data.currentPage >= 1) {
         this.data.currentPage -= slidesToScroll || 1
         this.slide()
-      } else if (this.options.loop && this.data.currentPage === 0) {
+      } else if (this.options.loop && this.data.currentPage === 0 && (!$parent || !$parent.s_data.nested)) {
         this.data.currentPage -= slidesToScroll || 1
         this.s_data.transitionEnding = true
         this.s_data.itemTransitionEnding = true
@@ -410,6 +461,9 @@ export default {
         } else {
           this.slide()
         }
+      } else if ($parent && this.data.currentPage === 0 && $parent.s_data.nested) {
+        $parent.pre()
+        this.slide()
       } else {
         this.slide()
       }
@@ -419,10 +473,12 @@ export default {
     next () {
       this.data.direction = 'right'
       var sliderLength = this.s_data.sliderLength
+      let $parent = this.s_data.$parent
+      // debugger
       if (this.data.currentPage < (this.pagenums || sliderLength) - 1) {
         this.data.currentPage += this.options.slidesToScroll || 1
         this.slide()
-      } else if (this.options.loop && this.data.currentPage === (this.pagenums || sliderLength) - 1) {
+      } else if (this.options.loop && this.data.currentPage === (this.pagenums || sliderLength) - 1 && (!$parent || !$parent.s_data.nested)) {
         this.data.currentPage += this.options.slidesToScroll || 1
         this.s_data.transitionEnding = true
         this.s_data.itemTransitionEnding = true
@@ -433,6 +489,10 @@ export default {
         } else {
           this.slide()
         }
+      } else if ($parent && this.data.currentPage === (this.pagenums || sliderLength) - 1 && $parent.s_data.nested) {
+        let parent = this.s_data.$parent
+        parent.next()
+        this.slide()
       } else {
         this.slide()
       }
@@ -459,16 +519,23 @@ export default {
       } else {
         // 增加垂直滚动判定
         if (this.options.direction === 'vertical') {
-          this.data.posheight = -this.currentHeight + 'px'
+          this.data.posheight = -this.currentHeight
         } else {
-          this.data.poswidth = -this.currentWidth + 'px'
+          this.data.poswidth = -this.currentWidth
         }
       }
       // 添加class
       if (this.s_data.sliderLength) {
         let slideDom = this.$el.getElementsByClassName('slider-wrapper')[0]
-        let sliderItem = slideDom.getElementsByClassName('slider-item')
-        let sliderActiveCopy = slideDom.getElementsByClassName('slider-active-copy')
+        let childrens = Array.prototype.slice.call(slideDom.children)
+        let sliderItem = childrens.filter((item) => {
+          return item.className.indexOf('slider-item') !== -1
+        })
+        let sliderActiveCopy = childrens.filter((item) => {
+          return item.className.indexOf('slider-active-copy') !== -1
+        })
+        // let sliderItem = slideDom.getElementsByClassName('slider-item')
+        // let sliderActiveCopy = slideDom.getElementsByClassName('slider-active-copy')
         let loopedSlides = this.options.loopedSlides || 1
         let sliderLength = this.s_data.sliderLength
         let children = this.$children
@@ -479,6 +546,10 @@ export default {
         children.forEach(element => {
           element.removeActive()
         })
+        // 取消嵌套轮播active标签
+        if (this.options.effect === 'nest') {
+          return
+        }
         if (children[currentPage]) {
           children[currentPage].addActive()
         }
@@ -496,7 +567,7 @@ export default {
         }
       }
       if (this.data.currentPage < 0 || this.data.currentPage >= (this.pagenums || this.s_data.sliderLength)) {
-        return
+        return false
       }
     },
     clock: function () {
@@ -528,9 +599,18 @@ export default {
       e.preventDefault()
     },
     // 无限循环中transitionEnd
-    onTransitionEnd (e) {
-      if (e.target !== e.currentTarget && this.options.effect !== 'coverflow') {
+    onTransitionEnd (e, type) {
+      if (type !== 'route' && e.target !== e.currentTarget && this.options.effect !== 'coverflow') {
         return
+      }
+      if (type === 'route') {
+        let currentPage = this.data.currentPage
+        let sliderLength = this.s_data.sliderLength
+        if (currentPage < 0) {
+          this.slide((this.pagenums || sliderLength) + currentPage, 'animationnone')
+        } else if (currentPage >= (this.pagenums || sliderLength)) {
+          this.slide(0 + currentPage - (this.pagenums || sliderLength), 'animationnone')
+        }
       }
       var that = this
       setTimeout(function () {
@@ -573,7 +653,14 @@ export default {
       this.s_data.renderTime = setTimeout(() => {
         that.s_data.renderTime = undefined
         let slideDom = that.$el.getElementsByClassName('slider-wrapper')[0]
-        let sliderItem = slideDom.getElementsByClassName('slider-item')
+        let children = Array.prototype.slice.call(slideDom.children)
+        let sliderItem = children.filter((item) => {
+          return item.className.indexOf('slider-item') !== -1
+        })
+        // debugger
+        // children = children.filter((item) => {
+        //   return item.$options._componentTag === 'slideritem'
+        // })
         // that.s_data.sliderLength = sliderItem.length
         // loop && effect !== 'fade'
         if (that.s_data.sliderLength >= 1 && that.options.loop && that.options.effect !== 'fade' && that.options.effect !== 'coverflow') {
@@ -583,8 +670,11 @@ export default {
             slideDom.removeChild(sliderCopy[i])
           }
           // debugger
+          let children = Array.prototype.slice.call(slideDom.children)
           // 批量复制添加
-          sliderItem = slideDom.getElementsByClassName('slider-item')
+          sliderItem = children.filter((item) => {
+            return item.className.indexOf('slider-item') !== -1
+          })
           let length = sliderItem.length
           let loopedSlides = that.options.loopedSlides || 1
           let a = 0
@@ -596,10 +686,9 @@ export default {
               copeBefore.classList.remove('slider-active')
               slideDom.insertBefore(copeBefore, sliderItem[0 + a])
               // slideDom.insertBefore(copeBefore, sliderItem[0 + a])
-              a++
             }
             if (j - loopedSlides < 0) {
-               // 向后添加节点
+              // 向后添加节点
               let copeAfter = sliderItem[j].cloneNode(true)
               copeAfter.classList.add('slider-copy')
               copeAfter.classList.remove('slider-active')
@@ -628,8 +717,14 @@ export default {
         }
       }
     },
-    judgeParentSlider () {
-
+    judgeParentSlider (that) {
+      if (that.$parent && that.$parent.$vnode && that.$parent.$vnode.tag === 'vue-component-1-slider') {
+        return that.$parent
+      } else if (that.$parent && that.$parent.$vnode === undefined) {
+        return false
+      } else {
+        return this.judgeParentSlider(that.$parent)
+      }
     }
   },
   components: {
@@ -685,7 +780,7 @@ export default {
 .slider-touch {
   height: 100%;
 }
-.slider-wrapper {
+.swiper-container-horizontal > * > .slider-wrapper {
   box-sizing: content-box;
   display: flex;
   height: 100%;
@@ -694,9 +789,26 @@ export default {
   width: 100%;
   z-index: 1;
   align-items: center;
+  /*flex-direction: column;*/
+  /* 09版 */
+  -webkit-box-orient: vertical;
+  /* 12版 */
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
 }
 /*垂直*/
-.swiper-container-vertical .slider-wrapper {
+.swiper-container-vertical > * > .slider-wrapper {
+  box-sizing: content-box;
+  display: flex;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+  width: 100%;
+  z-index: 1;
+  align-items: center;
   /*flex-direction: column;*/
   /* 09版 */
   -webkit-box-orient: vertical;
@@ -737,12 +849,12 @@ export default {
   /*transition: all 350ms ease 0s;*/
   z-index: 10;
 }
-.slider-pagination-bullets {
+.swiper-container-horizontal > .slider-pagination-bullets {
   bottom: 10px;
   left: 0;
   width: 100%;
 }
-.slider-pagination-bullet {
+.swiper-container-horizontal > * > .slider-pagination-bullet {
   background: #000 none repeat scroll 0 0;
   border-radius: 100%;
   display: inline-block;
@@ -753,7 +865,8 @@ export default {
   margin: 0 5px;
 }
 /*垂直*/
-.swiper-container-vertical .slider-pagination-bullets {
+.swiper-container-vertical > .slider-pagination-bullets {
+  left: 0;
   bottom: auto;
   left: auto;
   width: auto;
@@ -761,11 +874,17 @@ export default {
   top: 50%;
   transform: translate3d(0px, -50%, 0px);
 }
-.swiper-container-vertical .slider-pagination-bullet {
+.swiper-container-vertical > * > .slider-pagination-bullet {
+  background: #000 none repeat scroll 0 0;
+  border-radius: 100%;
+  height: 8px;
+  opacity: 0.2;
+  width: 8px;
+  cursor: pointer;
   display: block;
   margin: 5px 0;
 }
-.slider-pagination-bullet-active {
+.swiper-container-vertical .slider-pagination-bullet-active ,.swiper-container-horizontal .slider-pagination-bullet-active{
   background: #fff none repeat scroll 0 0;
   opacity: 1;
 }
