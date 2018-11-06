@@ -90,6 +90,7 @@ export default {
         pagination: this.options.pagination === undefined ? true : this.options.pagination,
         nested: this.options.nested === undefined ? true : this.options.nested,
         resize: this.options.resize === undefined ? true : this.options.resize,
+        freeze: this.options.freeze === undefined ? false : this.options.freeze,
         $parent: this.judgeParentSlider(this),
         route: false
       }
@@ -281,6 +282,12 @@ export default {
     swipeStart (e) {
       let that = this
       this.s_data.e = e
+      if (this.s_data.freeze) {
+        return
+      }
+      if (this.s_data.transitionEnding) {
+        return
+      }
       if (this.s_data.transitionEnding) {
         return
       }
@@ -445,12 +452,12 @@ export default {
     pre () {
       this.data.direction = 'left'
       let sliderLength = this.s_data.sliderLength
-      let slidesToScroll = this.options.slidesToScroll
+      let slidesToScroll = this.options.slidesToScroll || 1
       let $parent = this.s_data.$parent
-      if (this.data.currentPage >= 1) {
+      if (this.data.currentPage >= 1 && this.data.currentPage - slidesToScroll >= 0) {
         this.data.currentPage -= slidesToScroll || 1
         this.slide()
-      } else if (this.options.loop && this.data.currentPage === 0 && (!$parent || !$parent.s_data.nested)) {
+      } else if (this.options.loop && this.data.currentPage - slidesToScroll < 0 && (!$parent || !$parent.s_data.nested)) {
         this.data.currentPage -= slidesToScroll || 1
         this.s_data.transitionEnding = true
         this.s_data.itemTransitionEnding = true
@@ -474,11 +481,12 @@ export default {
       this.data.direction = 'right'
       var sliderLength = this.s_data.sliderLength
       let $parent = this.s_data.$parent
+      let slidesToScroll = this.options.slidesToScroll || 1
       // debugger
-      if (this.data.currentPage < (this.pagenums || sliderLength) - 1) {
+      if (this.data.currentPage < (this.pagenums || sliderLength) - 1 && this.data.currentPage + slidesToScroll <= sliderLength - 1) {
         this.data.currentPage += this.options.slidesToScroll || 1
         this.slide()
-      } else if (this.options.loop && this.data.currentPage === (this.pagenums || sliderLength) - 1 && (!$parent || !$parent.s_data.nested)) {
+      } else if (this.options.loop && this.data.currentPage + slidesToScroll > sliderLength - 1 && (!$parent || !$parent.s_data.nested)) {
         this.data.currentPage += this.options.slidesToScroll || 1
         this.s_data.transitionEnding = true
         this.s_data.itemTransitionEnding = true
