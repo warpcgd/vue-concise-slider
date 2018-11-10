@@ -91,6 +91,7 @@ export default {
         nested: this.options.nested === undefined ? true : this.options.nested,
         resize: this.options.resize === undefined ? true : this.options.resize,
         freeze: this.options.freeze === undefined ? false : this.options.freeze,
+        slidesPerView: this.options.slidesPerView === undefined ? 0 : this.options.slidesPerView,
         $parent: this.judgeParentSlider(this),
         route: false
       }
@@ -454,6 +455,7 @@ export default {
       let sliderLength = this.s_data.sliderLength
       let slidesToScroll = this.options.slidesToScroll || 1
       let $parent = this.s_data.$parent
+      // let slidesPerView = this.s_data.slidesPerView
       if (this.data.currentPage >= 1 && this.data.currentPage - slidesToScroll >= 0) {
         this.data.currentPage -= slidesToScroll || 1
         this.slide()
@@ -482,8 +484,9 @@ export default {
       var sliderLength = this.s_data.sliderLength
       let $parent = this.s_data.$parent
       let slidesToScroll = this.options.slidesToScroll || 1
+      let slidesPerView = this.options.loop ? 0 : ((sliderLength - this.s_data.slidesPerView) / slidesToScroll)
       // debugger
-      if (this.data.currentPage < (this.pagenums || sliderLength) - 1 && this.data.currentPage + slidesToScroll <= sliderLength - 1) {
+      if (this.data.currentPage < (this.pagenums || sliderLength) - 1 && this.data.currentPage + slidesToScroll <= (slidesPerView ? slidesPerView + slidesToScroll - 1 : sliderLength - 1)) {
         this.data.currentPage += this.options.slidesToScroll || 1
         this.slide()
       } else if (this.options.loop && this.data.currentPage + slidesToScroll > sliderLength - 1 && (!$parent || !$parent.s_data.nested)) {
