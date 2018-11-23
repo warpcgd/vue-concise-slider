@@ -46,22 +46,22 @@ export default {
     transform () {
       let options = this.$parent.options
       let data = this.$parent.data
-      let sData = this.$parent.s_data
-      if (!options || !data || !sData || !this.$el || options.effect !== 'coverflow') {
+      let config = this.$parent.config
+      if (!options || !data || !config || !this.$el || options.effect !== 'coverflow') {
         return {}
       }
       let index = this.index
-      let winWidth = sData.pageWidth
-      // let height = sData.pageHeight
+      let winWidth = config.pageWidth
+      // let height = config.pageHeight
       let width = this.$el.offsetWidth
       let offsetWidth = winWidth / 2 - width / 2
-      let leftWidth = offsetWidth - sData.deviation + 'px'
-      let rightWidth = offsetWidth + sData.deviation + 'px'
+      let leftWidth = offsetWidth - config.deviation + 'px'
+      let rightWidth = offsetWidth + config.deviation + 'px'
       let centerWidth = offsetWidth + 'px'
       let style = {}
       // 基本
       if (index === data.currentPage - 1 || (index === this.pageLength - 2 && data.currentPage === -1)) {
-        style['transform'] = 'translate3D(' + leftWidth + ',0 ,0)' + ' scale3d(' + sData.widthScalingRatio + ',' + sData.heightScalingRatio + ',1)'
+        style['transform'] = 'translate3D(' + leftWidth + ',0 ,0)' + ' scale3d(' + config.widthScalingRatio + ',' + config.heightScalingRatio + ',1)'
         style['opacity'] = '1'
         if (data.direction === 'left') {
           style['z-index'] = '10'
@@ -70,7 +70,7 @@ export default {
         }
       } else if (index === data.currentPage + 1 || (index === 1 && data.currentPage === this.pageLength)) {
         style['transform'] = 'translate3D(' + rightWidth + ',0 ,0)'
-        style['transform'] = 'translate3D(' + rightWidth + ',0 ,0)' + ' scale3d(' + sData.widthScalingRatio + ',' + sData.heightScalingRatio + ',1)'
+        style['transform'] = 'translate3D(' + rightWidth + ',0 ,0)' + ' scale3d(' + config.widthScalingRatio + ',' + config.heightScalingRatio + ',1)'
         style['opacity'] = '1'
         if (data.direction === 'left') {
           style['z-index'] = '1'
@@ -87,11 +87,11 @@ export default {
       }
       // 循环拓展
       if (index === this.pageLength - 1 && data.currentPage === 0) {
-        style['transform'] = 'translate3D(' + leftWidth + ',0 ,0)' + ' scale3d(' + sData.widthScalingRatio + ',' + sData.heightScalingRatio + ',1)'
+        style['transform'] = 'translate3D(' + leftWidth + ',0 ,0)' + ' scale3d(' + config.widthScalingRatio + ',' + config.heightScalingRatio + ',1)'
         style['opacity'] = '1'
       }
       if (index === 0 && data.currentPage === this.pageLength - 1) {
-        style['transform'] = 'translate3D(' + rightWidth + ',0 ,0)' + ' scale3d(' + sData.widthScalingRatio + ',' + sData.heightScalingRatio + ',1)'
+        style['transform'] = 'translate3D(' + rightWidth + ',0 ,0)' + ' scale3d(' + config.widthScalingRatio + ',' + config.heightScalingRatio + ',1)'
         style['opacity'] = '1'
       }
       // 切换优化
@@ -104,7 +104,7 @@ export default {
           style['z-index'] = '99'
         }
       }
-      style[sData.prefixes.transition + 'Duration'] = (sData.animation ? options.speed || 300 : 0) + 'ms'
+      style[config.prefixes.transition + 'Duration'] = (config.animation ? options.speed || 300 : 0) + 'ms'
       style['position'] = 'absolute'
       return style
     }
