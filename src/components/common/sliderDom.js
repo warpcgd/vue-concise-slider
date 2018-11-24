@@ -29,19 +29,6 @@ export default {
     }
   },
   computed: {
-    classObject () {
-      let obj = {}
-      switch (this.options.effect) {
-        case 'fade':
-          obj = {
-            'slider-fade': true
-          }
-          break
-        default:
-          break
-      }
-      return obj
-    }
   },
   mounted () {
     this.config.pageWidth = this.$el.offsetWidth
@@ -58,6 +45,13 @@ export default {
       }
       // fade添加z-index
       that.config.sliderLength += 1
+      if (that.config.sliderLength >= 1 && that.options.effect === 'fade') {
+        if (item.previousSibling) {
+          item['style']['z-index'] = 99 - that.config.sliderLength
+        } else {
+          item['style']['z-index'] = 99 + that.config.sliderLength
+        }
+      }
       this.config.renderTime = setTimeout(() => {
         that.config.renderTime = undefined
         let slideDom = that.$el.getElementsByClassName('slider-wrapper')[0]

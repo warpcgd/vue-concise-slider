@@ -71,6 +71,7 @@ export default {
         // autoplay: 0 // 自动播放:时间[ms]
       },
       options1: {
+        effect: 'nest',
         direction: 'vertical',
         pagination: true,
         thresholdDistance: 100, // 滑动距离阈值判定
