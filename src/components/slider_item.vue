@@ -1,5 +1,9 @@
 <template>
   <div 
+  @touchstart.prevent="touchStart"
+  @touchend.prevent="touchEnd"
+  @mousedown.prevent="touchStart"
+  @mouseup.prevent="touchEnd"
   @webkit-transition-end="onTransitionEnd"
   @transitionend="onTransitionEnd" 
   :class="slideClass"
@@ -18,14 +22,69 @@ export default {
       slideClass: {
         'slider-item': true,
         'slider-active': false
+      },
+      data: {
+        start: {},
+        end: {},
+        index: this.index ? this.index : this.$vnode.key,
+        $el: ''
       }
     }
   },
   mounted () {
     this.renderDom()
+    this.data.$el = this.$el
     // console.log(options)
   },
   methods: {
+    touchStart (e) {
+      if (e.type === 'touchstart') {
+        if (e.touches.length > 1) {
+          this.data.tracking = false
+          return false
+        } else {
+          /* Hack - would normally use e.timeStamp but it's whack in Fx/Android */
+          this.data.start.t = new Date().getTime()
+          this.data.start.x = e.targetTouches[0].clientX
+          this.data.start.y = e.targetTouches[0].clientY
+          this.data.end.x = e.targetTouches[0].clientX
+          this.data.end.y = e.targetTouches[0].clientY
+          this.data.start.pageX = e.targetTouches[0].pageX
+          this.data.start.pageY = e.targetTouches[0].pageY
+        }
+      } else {
+        /* Hack - would normally use e.timeStamp but it's whack in Fx/Android */
+        this.data.start.t = new Date().getTime()
+        this.data.start.x = e.clientX
+        this.data.start.y = e.clientY
+        this.data.end.x = e.clientX
+        this.data.end.y = e.clientY
+        this.data.start.pageX = e.pageX
+        this.data.start.pageY = e.pageY
+      }
+    },
+    touchEnd (e) {
+      let now = new Date().getTime()
+      let deltaTime = now - this.data.start.t
+      if (e.type === 'touchend') {
+        this.data.end.t = new Date().getTime()
+        this.data.end.x = e.targetTouches[0].clientX
+        this.data.end.y = e.targetTouches[0].clientY
+        this.data.end.pageX = e.targetTouches[0].pageX
+        this.data.end.pageY = e.targetTouches[0].pageY
+      } else {
+        this.data.end.t = new Date().getTime()
+        this.data.end.x = e.clientX
+        this.data.end.y = e.clientY
+        this.data.end.pageX = e.pageX
+        this.data.end.pageY = e.pageY
+      }
+      let deltaX = (this.data.end.pageX - this.data.start.pageX) || 0
+      let deltaY = (this.data.end.pageY - this.data.start.pageY) || 0
+      if (deltaTime < 300 && Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
+        this.$emit('tap', this.data)
+      }
+    },
     renderDom () {
       // console.log(this.$parent)
       if (this.$parent) {

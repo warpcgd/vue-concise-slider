@@ -86,6 +86,8 @@ export default {
         currentPage: this.options.currentPage || 0,
         pageWidth: 0,
         pageHeight: 0,
+        onSlide: false,
+        onSlideEnd: true,
         sliderItem: '',
         pagination: this.options.pagination === undefined ? true : this.options.pagination,
         nested: this.options.nested === undefined ? true : this.options.nested,
@@ -171,9 +173,25 @@ export default {
         if (this.options.loop) {
           offsetLeft = $sliderChildren[lastPage].offsetLeft
         }
+        // 居中
         let offsetWidth = $sliderChildren[lastPage].offsetWidth
+        let slidesPerView = this.options.slidesPerView
+        let sliderLength = this.s_data.sliderLength
         if (this.options.centeredSlides) {
-          offsetLeft = offsetLeft - pageWidth / 2 + offsetWidth / 2
+          if (slidesPerView) {
+            let currentPage = this.data.currentPage
+            let cent = parseInt((slidesPerView - 1) / 2)
+            if (currentPage - cent <= 0) {
+              currentPage = 0
+            } else if (currentPage + cent >= sliderLength) {
+              currentPage = sliderLength - slidesPerView
+            } else {
+              currentPage = currentPage - cent
+            }
+            offsetLeft = $sliderChildren[currentPage].offsetLeft
+          } else {
+            offsetLeft = offsetLeft - pageWidth / 2 + offsetWidth / 2
+          }
         }
         return offsetLeft + pageWidth - pageWidth
       }
@@ -238,7 +256,7 @@ export default {
     this.$emit('init', this.data)
     // 定制事件
     this.$on('slideTo', (num) => {
-      this.slide(num)
+      this.slide(num, 'slideTo')
     })
     this.$on('slideNext', () => {
       this.next()
@@ -418,9 +436,9 @@ export default {
           this.next()
           return false
           // tap
-        } else if (deltaTime < 300 && Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
+        } else if (deltaTime < 100 && Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
           this.$emit('tap', this.data)
-          this.slide(currentPage)
+          this.slide(currentPage, 'click')
           //
         } else {
           this.slide(currentPage)
@@ -436,9 +454,9 @@ export default {
           // swipe left
           this.next()
           return false
-        } else if (deltaTime < 300 && Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
+        } else if (deltaTime < 100 && Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
           this.$emit('tap', this.data)
-          this.slide(currentPage)
+          this.slide(currentPage, 'click')
         } else {
           this.slide(currentPage)
           return false
@@ -451,6 +469,7 @@ export default {
       }
     },
     pre () {
+      // debugger
       this.data.direction = 'left'
       let sliderLength = this.s_data.sliderLength
       let slidesToScroll = this.options.slidesToScroll || 1
@@ -474,18 +493,18 @@ export default {
         $parent.pre()
         this.slide()
       } else {
-        this.slide()
+        this.slide(0)
       }
       // this.$emit('update:currentpage', this.data.currentPage)
       // this.$emit('slide', this.data)
     },
     next () {
       this.data.direction = 'right'
+      // debugger
       var sliderLength = this.s_data.sliderLength
       let $parent = this.s_data.$parent
       let slidesToScroll = this.options.slidesToScroll || 1
       let slidesPerView = this.options.loop ? 0 : ((sliderLength - this.s_data.slidesPerView) / slidesToScroll)
-      // debugger
       if (this.data.currentPage < (this.pagenums || sliderLength) - 1 && this.data.currentPage + slidesToScroll <= (slidesPerView ? slidesPerView + slidesToScroll - 1 : sliderLength - 1)) {
         this.data.currentPage += this.options.slidesToScroll || 1
         this.slide()
@@ -505,17 +524,31 @@ export default {
         parent.next()
         this.slide()
       } else {
-        this.slide()
+        let cent = 0
+        if (this.s_data.slidesPerView) {
+          cent = parseInt((this.s_data.slidesPerView - 1) / 2)
+        }
+        this.slide(sliderLength - cent)
       }
       // this.$emit('update:currentpage', this.data.currentPage)
       // this.$emit('slide', this.data)
     },
     slide (pagenum, type) {
+      // debugger
       // 执行动画
       this.s_data.animation = true
+      // 处理点击事件
+      if (type === 'slideTo' && this.s_data.onSlide === true) {
+        return false
+      }
       // 无样式滚动
       if (type === 'animationnone') {
         this.s_data.animation = false
+        this.s_data.onSlideEnd = true
+        this.s_data.onSlide = false
+      } else {
+        this.s_data.onSlideEnd = false
+        this.s_data.onSlide = true
       }
       if (pagenum || pagenum === 0) {
         this.data.currentPage = pagenum
@@ -530,8 +563,16 @@ export default {
       } else {
         // 增加垂直滚动判定
         if (this.options.direction === 'vertical') {
+          if (Math.abs(this.data.posheight) === Math.abs(-this.currentHeight)) {
+            this.s_data.onSlideEnd = true
+            this.s_data.onSlide = false
+          }
           this.data.posheight = -this.currentHeight
         } else {
+          if (Math.abs(this.data.poswidth) === Math.abs(-this.currentWidth)) {
+            this.s_data.onSlideEnd = true
+            this.s_data.onSlide = false
+          }
           this.data.poswidth = -this.currentWidth
         }
       }
@@ -610,20 +651,10 @@ export default {
       e.preventDefault()
     },
     // 无限循环中transitionEnd
-    onTransitionEnd (e, type) {
-      if (type !== 'route' && e.target !== e.currentTarget && this.options.effect !== 'coverflow') {
-        return
-      }
-      if (type === 'route') {
-        let currentPage = this.data.currentPage
-        let sliderLength = this.s_data.sliderLength
-        if (currentPage < 0) {
-          this.slide((this.pagenums || sliderLength) + currentPage, 'animationnone')
-        } else if (currentPage >= (this.pagenums || sliderLength)) {
-          this.slide(0 + currentPage - (this.pagenums || sliderLength), 'animationnone')
-        }
-      }
+    onTransitionEnd (e) {
       var that = this
+      this.s_data.onSlideEnd = true
+      this.s_data.onSlide = false
       setTimeout(function () {
         let currentPage = that.data.currentPage
         let sliderLength = that.s_data.sliderLength
