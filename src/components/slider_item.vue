@@ -1,9 +1,9 @@
 <template>
   <div 
-  @touchstart.prevent="touchStart"
-  @touchend.prevent="touchEnd"
-  @mousedown.prevent="touchStart"
-  @mouseup.prevent="touchEnd"
+  @touchstart="touchStart"
+  @touchend="touchEnd"
+  @mousedown="touchStart"
+  @mouseup="touchEnd"
   @webkit-transition-end="onTransitionEnd"
   @transitionend="onTransitionEnd" 
   :class="slideClass"
