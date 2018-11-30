@@ -250,6 +250,7 @@ export default {
   },
   mounted () {
     let that = this
+    console.log(this)
     this.s_data.pageWidth = this.$el.offsetWidth
     this.s_data.pageHeight = this.$el.offsetHeight
     // 初始化事件
@@ -361,9 +362,9 @@ export default {
         }
         let deltaX = Math.abs(this.data.end.x - this.data.start.x)
         let deltaY = Math.abs(this.data.end.y - this.data.start.y)
-        if (deltaX >= deltaY && this.options.direction !== 'vertical') {
+        if (deltaX >= deltaY && this.options.direction !== 'vertical' && e.cancelable) {
           e.preventDefault()
-        } else if (deltaX <= deltaY && this.options.direction === 'vertical') {
+        } else if (deltaX <= deltaY && this.options.direction === 'vertical' && e.cancelable) {
           e.preventDefault()
         }
         // 嵌套滚动处理事件传播
@@ -379,10 +380,12 @@ export default {
             return
           }
           // 处理嵌套滚动
-          if ($parent && $parent.options.direction === 'vertical' && this.data.currentPage === 0 && this.data.end.y - this.data.start.y >= 0 && $parent.s_data.nested) {
+          if ($parent && $parent.options.direction === 'vertical' && this.data.currentPage === 0 && this.data.end.y - this.data.start.y >= 0 && $parent.s_data.nested && !($parent.options.preventRebound && $parent.data.currentPage === 0)) {
             $parent.data.posheight = -($parent.currentHeight) + this.data.end.y - this.data.start.y
-          } else if ($parent && $parent.options.direction === 'vertical' && this.data.currentPage === this.s_data.sliderLength - 1 && this.data.end.y - this.data.start.y <= 0 && $parent.s_data.nested) {
+          } else if ($parent && $parent.options.direction === 'vertical' && this.data.currentPage === this.s_data.sliderLength - 1 && this.data.end.y - this.data.start.y <= 0 && $parent.s_data.nested && !($parent.options.preventRebound && $parent.data.currentPage === $parent.s_data.sliderLength - 1)) {
             $parent.data.posheight = -($parent.currentHeight) + this.data.end.y - this.data.start.y
+          } else if (this.options.preventRebound && !this.options.loop) {
+            return
           } else {
             this.data.posheight = -(this.currentHeight) + this.data.end.y - this.data.start.y
           }
@@ -391,10 +394,12 @@ export default {
             return
           }
           // 处理嵌套滚动
-          if ($parent && $parent.options.direction !== 'vertical' && this.data.currentPage === 0 && this.data.end.x - this.data.start.x >= 0 && $parent.s_data.nested) {
+          if ($parent && $parent.options.direction !== 'vertical' && this.data.currentPage === 0 && this.data.end.x - this.data.start.x >= 0 && $parent.s_data.nested && !($parent.options.preventRebound && $parent.data.currentPage === 0)) {
             $parent.data.poswidth = -($parent.currentWidth) + this.data.end.x - this.data.start.x
-          } else if ($parent && $parent.options.direction !== 'vertical' && this.data.currentPage === this.s_data.sliderLength - 1 && this.data.end.x - this.data.start.x <= 0 && $parent.s_data.nested) {
+          } else if ($parent && $parent.options.direction !== 'vertical' && this.data.currentPage === this.s_data.sliderLength - 1 && this.data.end.x - this.data.start.x <= 0 && $parent.s_data.nested && !($parent.options.preventRebound && $parent.data.currentPage === $parent.s_data.sliderLength - 1)) {
             $parent.data.poswidth = -($parent.currentWidth) + this.data.end.x - this.data.start.x
+          } else if (this.options.preventRebound && !this.options.loop) {
+            return
           } else {
             this.data.poswidth = -(this.currentWidth) + this.data.end.x - this.data.start.x
           }
@@ -500,11 +505,10 @@ export default {
     },
     next () {
       this.data.direction = 'right'
-      // debugger
       var sliderLength = this.s_data.sliderLength
       let $parent = this.s_data.$parent
       let slidesToScroll = this.options.slidesToScroll || 1
-      let slidesPerView = this.options.loop ? 0 : ((sliderLength - this.s_data.slidesPerView) / slidesToScroll)
+      let slidesPerView = this.s_data.slidesPerView ? (this.options.loop ? 0 : ((sliderLength - this.s_data.slidesPerView) / slidesToScroll)) : 0
       if (this.data.currentPage < (this.pagenums || sliderLength) - 1 && this.data.currentPage + slidesToScroll <= (slidesPerView ? slidesPerView + slidesToScroll - 1 : sliderLength - 1)) {
         this.data.currentPage += this.options.slidesToScroll || 1
         this.slide()
@@ -527,8 +531,10 @@ export default {
         let cent = 0
         if (this.s_data.slidesPerView) {
           cent = parseInt((this.s_data.slidesPerView - 1) / 2)
+          this.slide(sliderLength - cent)
+        } else {
+          this.slide(sliderLength - 1)
         }
-        this.slide(sliderLength - cent)
       }
       // this.$emit('update:currentpage', this.data.currentPage)
       // this.$emit('slide', this.data)
@@ -760,7 +766,7 @@ export default {
       }
     },
     judgeParentSlider (that) {
-      if (that.$parent && that.$parent.$vnode && that.$parent.$vnode.tag === 'vue-component-1-slider') {
+      if (that.$parent && that.$parent.$vnode && that.$parent.$options._componentTag === 'slider') {
         return that.$parent
       } else if (that.$parent && that.$parent.$vnode === undefined) {
         return false

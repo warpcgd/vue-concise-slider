@@ -68,10 +68,10 @@ export default {
       let deltaTime = now - this.data.start.t
       if (e.type === 'touchend') {
         this.data.end.t = new Date().getTime()
-        this.data.end.x = e.targetTouches[0].clientX
-        this.data.end.y = e.targetTouches[0].clientY
-        this.data.end.pageX = e.targetTouches[0].pageX
-        this.data.end.pageY = e.targetTouches[0].pageY
+        this.data.end.x = e.changedTouches[0].clientX
+        this.data.end.y = e.changedTouches[0].clientY
+        this.data.end.pageX = e.changedTouches[0].pageX
+        this.data.end.pageY = e.changedTouches[0].pageY
       } else {
         this.data.end.t = new Date().getTime()
         this.data.end.x = e.clientX
