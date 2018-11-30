@@ -193,6 +193,13 @@ export default {
             offsetLeft = offsetLeft - pageWidth / 2 + offsetWidth / 2
           }
         }
+        if (!this.options.centeredSlides && slidesPerView) {
+          let currentPage = this.data.currentPage
+          let slidesToScroll = this.options.slidesToScroll || 1
+          if (currentPage + slidesToScroll >= sliderLength) {
+            offsetLeft = $sliderChildren[sliderLength - slidesToScroll].offsetLeft
+          }
+        }
         return offsetLeft + pageWidth - pageWidth
       }
     },
@@ -508,8 +515,8 @@ export default {
       var sliderLength = this.s_data.sliderLength
       let $parent = this.s_data.$parent
       let slidesToScroll = this.options.slidesToScroll || 1
-      let slidesPerView = this.s_data.slidesPerView ? (this.options.loop ? 0 : ((sliderLength - this.s_data.slidesPerView) / slidesToScroll)) : 0
-      if (this.data.currentPage < (this.pagenums || sliderLength) - 1 && this.data.currentPage + slidesToScroll <= (slidesPerView ? slidesPerView + slidesToScroll - 1 : sliderLength - 1)) {
+      // let slidesPerView = this.s_data.slidesPerView ? (this.options.loop ? 0 : ((sliderLength - this.s_data.slidesPerView) / slidesToScroll)) : 0
+      if (this.data.currentPage < (this.pagenums || sliderLength) - 1 && this.data.currentPage + slidesToScroll <= sliderLength - 1) {
         this.data.currentPage += this.options.slidesToScroll || 1
         this.slide()
       } else if (this.options.loop && this.data.currentPage + slidesToScroll > sliderLength - 1 && (!$parent || !$parent.s_data.nested)) {
@@ -528,13 +535,14 @@ export default {
         parent.next()
         this.slide()
       } else {
-        let cent = 0
-        if (this.s_data.slidesPerView) {
-          cent = parseInt((this.s_data.slidesPerView - 1) / 2)
-          this.slide(sliderLength - cent)
-        } else {
-          this.slide(sliderLength - 1)
-        }
+        this.slide()
+        // let cent = 0
+        // if (this.s_data.slidesPerView) {
+        //   cent = parseInt((this.s_data.slidesPerView - 1) / 2)
+        //   this.slide(sliderLength - cent)
+        // } else {
+        //   this.slide(sliderLength - 1)
+        // }
       }
       // this.$emit('update:currentpage', this.data.currentPage)
       // this.$emit('slide', this.data)

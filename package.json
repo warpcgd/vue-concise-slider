@@ -1,6 +1,6 @@
 {
   "name": "vue-concise-slider",
-  "version": "3.3.2",
+  "version": "3.3.3",
   "repository": {
     "type": "git",
     "url": "git@github.com/warpcgd/vue-concise-slider.git"
@@ -16,7 +16,7 @@
   "devDependencies": {
     "vue": "^2.5.13",
     "babel-preset-env": "^1.7.0",
-    "babel-runtime": "^6.26.0", 
+    "babel-runtime": "^6.26.0",
     "webpack-bundle-analyzer": "^2.13.1",
     "babel-core": "^6.0.0",
     "babel-eslint": "^7.2.3",
