@@ -147,97 +147,110 @@ export default {
         if ((!this.pages.length && this.s_data.sliderLength === 0) || this.s_data.effect === 'fade' || this.s_data.effect === 'coverflow') {
           return 0
         }
-        let $slider
-        let lastPage = this.data.currentPage
-        let pageWidth = this.s_data.pageWidth
-        let loopedSlides = this.options.loopedSlides || 1
+        let $slider;
+        let lastPage = this.data.currentPage;
+        let pageWidth = this.s_data.pageWidth;
+        let loopedSlides = this.options.loopedSlides || 1;
         // let srollbar = false
         if (this.options.loop) {
           if (loopedSlides) {
-            lastPage = lastPage + (loopedSlides <= (this.pagenums || this.s_data.sliderLength) ? loopedSlides : (this.pagenums || this.s_data.sliderLength))
+            lastPage = lastPage + (loopedSlides <= (this.pagenums || this.s_data.sliderLength) ? loopedSlides : (this.pagenums || this.s_data.sliderLength));
           } else {
-            lastPage = lastPage + 1
+            lastPage = lastPage + 1;
           }
         }
         if (this.options.effect === 'coverflow') {
-          lastPage -= 1
+          lastPage -= 1;
         }
         // 获取slideritem子集
         for (let item in this.$el.children) {
           if (/slider-touch/ig.test(this.$el.children[item].className)) {
-            $slider = this.$el.children[item]
+            $slider = this.$el.children[item];
           }
         }
         // 遍历子集
-        let $sliderChildren = $slider.children[0].children
-        let offsetLeft = $sliderChildren[lastPage].offsetLeft
+        let $sliderChildren = $slider.children[0].children;
+        /**
+         * 每次切出浏览器都会造成offsetLeft错误
+         */
+        if(lastPage >= $sliderChildren.length){
+          return 0;
+        }
+        let offsetLeft = $sliderChildren[lastPage].offsetLeft;
         if (this.options.loop) {
-          offsetLeft = $sliderChildren[lastPage].offsetLeft
+          offsetLeft = $sliderChildren[lastPage].offsetLeft;
         }
         // 居中
-        let offsetWidth = $sliderChildren[lastPage].offsetWidth
-        let slidesPerView = this.options.slidesPerView
-        let sliderLength = this.s_data.sliderLength
+        let offsetWidth = $sliderChildren[lastPage].offsetWidth;
+        let slidesPerView = this.options.slidesPerView;
+        let sliderLength = this.s_data.sliderLength;
         if (this.options.centeredSlides) {
           if (slidesPerView) {
-            let currentPage = this.data.currentPage
-            let cent = parseInt((slidesPerView - 1) / 2)
+            let currentPage = this.data.currentPage;
+            let cent = parseInt((slidesPerView - 1) / 2);
             if (currentPage - cent <= 0) {
-              currentPage = 0
+              currentPage = 0;
             } else if (currentPage + cent >= sliderLength) {
-              currentPage = sliderLength - slidesPerView
+              currentPage = sliderLength - slidesPerView;
             } else {
-              currentPage = currentPage - cent
+              currentPage = currentPage - cent;
             }
-            offsetLeft = $sliderChildren[currentPage].offsetLeft
+            offsetLeft = $sliderChildren[currentPage].offsetLeft;
           } else {
-            offsetLeft = offsetLeft - pageWidth / 2 + offsetWidth / 2
+            offsetLeft = offsetLeft - pageWidth / 2 + offsetWidth / 2;
           }
         }
         if (!this.options.centeredSlides && slidesPerView) {
-          let currentPage = this.data.currentPage
-          let slidesToScroll = this.options.slidesToScroll || 1
+          let currentPage = this.data.currentPage;
+          let slidesToScroll = this.options.slidesToScroll || 1;
           if (currentPage + slidesToScroll >= sliderLength) {
-            offsetLeft = $sliderChildren[sliderLength - slidesToScroll].offsetLeft
+            offsetLeft = $sliderChildren[sliderLength - slidesToScroll].offsetLeft;
           }
         }
-        return offsetLeft + pageWidth - pageWidth
+        return offsetLeft + pageWidth - pageWidth;
       }
     },
     currentHeight () {
-      let sliderLength = this.s_data.sliderLength
-      let currentPage = this.data.currentPage
-      let pageLength = this.pages.length
-      let posheight = 0
-      let $slider
-      let lastPage = currentPage - 1
-      let pageWidth = this.s_data.pageWidth
-      let loopedSlides = this.options.loopedSlides || 1
+      let sliderLength = this.s_data.sliderLength;
+      let currentPage = this.data.currentPage;
+      let pageLength = this.pages.length;
+      let posheight = 0;
+      let $slider;
+      let lastPage = currentPage - 1;
+      let pageWidth = this.s_data.pageWidth;
+      let loopedSlides = this.options.loopedSlides || 1;
       if ((!pageLength && sliderLength === 0) || this.s_data.effect === 'fade') {
-        return 0
+        return 0;
       }
       // let srollbar = false
       if (this.options.loop) {
         if (loopedSlides) {
-          lastPage = currentPage + (loopedSlides <= (pageLength || sliderLength) ? loopedSlides : (pageLength || sliderLength)) - 1
+          lastPage = currentPage + (loopedSlides <= (pageLength || sliderLength) ? loopedSlides : (pageLength || sliderLength)) - 1;
         } else {
-          lastPage = currentPage + 1
+          lastPage = currentPage + 1;
         }
       }
       // 获取slideritem子集
       for (let item in this.$el.children) {
         if (/slider-touch/ig.test(this.$el.children[item].className)) {
-          $slider = this.$el.children[item]
+          $slider = this.$el.children[item];
         }
       }
       // 遍历子集
-      let $sliderChildren = $slider.children[0].children
+      let $sliderChildren = $slider.children[0].children;
+      /**
+       * 此处与offsetLeft错误一致，但是未出现过报错
+       * 防止后患，与offsetLeft做同样处理
+       */
+      if(lastPage >= $sliderChildren.length){
+        return 0;
+      }
       for (let item in $sliderChildren) {
         if (item <= lastPage) {
           // 找到实际宽度clientWidth+外边距
-          posheight += $sliderChildren[item].offsetHeight
-          posheight += parseInt($sliderChildren[item].style.marginTop || 0)
-          posheight += parseInt($sliderChildren[item].style.marginBottom || 0)
+          posheight += $sliderChildren[item].offsetHeight;
+          posheight += parseInt($sliderChildren[item].style.marginTop || 0);
+          posheight += parseInt($sliderChildren[item].style.marginBottom || 0);
         }
       }
       return posheight + pageWidth - pageWidth
@@ -258,7 +271,6 @@ export default {
   },
   mounted () {
     let that = this
-    console.log(this)
     this.s_data.pageWidth = this.$el.offsetWidth
     this.s_data.pageHeight = this.$el.offsetHeight
     // 初始化事件
