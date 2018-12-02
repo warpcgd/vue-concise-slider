@@ -1,11 +1,11 @@
 <template>
-  <div 
+  <div
   @touchstart="touchStart"
   @touchend="touchEnd"
   @mousedown="touchStart"
   @mouseup="touchEnd"
   @webkit-transition-end="onTransitionEnd"
-  @transitionend="onTransitionEnd" 
+  @transitionend="onTransitionEnd"
   :class="slideClass"
   :style="[transform(index)]"
   >
@@ -16,7 +16,7 @@
 <script>
 export default {
   props: ['index', 'pageLength'],
-  name: 'slideritem',
+  name: 'SliderItem',
   data () {
     return {
       slideClass: {

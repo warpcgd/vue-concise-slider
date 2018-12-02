@@ -1,38 +1,40 @@
 <template>
-    <div class='slider-container' :class = 's_data.containerClass' @mouseleave="swipeOut">
-      <div class='slider-touch'
-      :style="styleobj"
-      @touchmove="swipeMove"
-      @touchstart="swipeStart"
-      @touchend="swipeEnd"
-      @mousedown="swipeStart"
-      @mouseup="swipeEnd"
-      @mousemove="swipeMove"
-      @webkit-transition-end="onTransitionEnd"
-      @transitionend="onTransitionEnd"
-      @transitioncancel="onTransitionEnd"
-      @webkit-transition-cancel="onTransitionEnd"
-      >
-      <div class="slider-wrapper" :class="classObject" v-if="pages.length === 0">
-        <slot></slot>
-      </div>
-      <!-- 组件在 vm.currentview 变化时改变！ -->
-      <!-- <component v-if="pages.length !== 0" :pages="pages" :options="options" :data="data" :s_data="s_data" v-bind:is="currentView"></component> -->
-      </div>
-      <div v-if="s_data.pagination" class="slider-pagination slider-pagination-bullets">
-        <template v-for="n in (pagenums||s_data.sliderLength)">
-          <span v-if="!options.renderPagination" @click='slide(n-1)' :key="n" class="slider-pagination-bullet" :class="n-1 === data.currentPage? 'slider-pagination-bullet-active':''"></span>
-          <renderpagination v-if="options.renderPagination"  @click.native='slide(n-1)' :key="n" :class="n-1 === data.currentPage? 'slider-pagination-bullet-active-render':''" :index="n" :options="options" ></renderpagination>
-        </template>
-      </div>
-      <div class="slider-loading" v-show="(!pagenums && s_data.sliderLength === 0)||s_data.loading">
-        <slot name="loading"></slot>
-      </div>
+  <div class='slider-container' :class = 's_data.containerClass' @mouseleave="swipeOut">
+    <div class='slider-touch'
+    :style="styleobj"
+    @touchmove="swipeMove"
+    @touchstart="swipeStart"
+    @touchend="swipeEnd"
+    @mousedown="swipeStart"
+    @mouseup="swipeEnd"
+    @mousemove="swipeMove"
+    @webkit-transition-end="onTransitionEnd"
+    @transitionend="onTransitionEnd"
+    @transitioncancel="onTransitionEnd"
+    @webkit-transition-cancel="onTransitionEnd"
+    >
+    <div class="slider-wrapper" :class="classObject" v-if="pages.length === 0">
+      <slot></slot>
     </div>
+    <!-- 组件在 vm.currentview 变化时改变！ -->
+    <!-- <component v-if="pages.length !== 0" :pages="pages" :options="options" :data="data" :s_data="s_data" v-bind:is="currentView"></component> -->
+    </div>
+    <div v-if="s_data.pagination" class="slider-pagination slider-pagination-bullets">
+      <template v-for="n in (pagenums||s_data.sliderLength)">
+        <span v-if="!options.renderPagination" @click='slide(n-1)' :key="n" class="slider-pagination-bullet" :class="n-1 === data.currentPage? 'slider-pagination-bullet-active':''"></span>
+        <renderpagination v-if="options.renderPagination"  @click.native='slide(n-1)' :key="n" :class="n-1 === data.currentPage? 'slider-pagination-bullet-active-render':''" :index="n" :options="options" ></renderpagination>
+      </template>
+    </div>
+    <div class="slider-loading" v-show="(!pagenums && s_data.sliderLength === 0)||s_data.loading">
+      <slot name="loading"></slot>
+    </div>
+  </div>
 </template>
 <script>
-import detectPrefixes from '../utils/detect-prefixes.js'
+import detectPrefixes from '../utils/detect-prefixes.js';
+
 export default {
+  name: 'Slider',
   props: {
     options: {
       type: Object,
@@ -49,7 +51,6 @@ export default {
       }
     }
   },
-  name: 'slider',
   data () {
     return {
       data: {
@@ -592,51 +593,61 @@ export default {
       }
       // 添加class
       if (this.s_data.sliderLength) {
-        let slideDom = this.$el.getElementsByClassName('slider-wrapper')[0]
-        let childrens = Array.prototype.slice.call(slideDom.children)
+        let slideDom = this.$el.getElementsByClassName('slider-wrapper')[0];
+        let childrens = Array.prototype.slice.call(slideDom.children);
         let sliderItem = childrens.filter((item) => {
           return item.className.indexOf('slider-item') !== -1
-        })
+        });
         let sliderActiveCopy = childrens.filter((item) => {
           return item.className.indexOf('slider-active-copy') !== -1
-        })
+        });
         // let sliderItem = slideDom.getElementsByClassName('slider-item')
         // let sliderActiveCopy = slideDom.getElementsByClassName('slider-active-copy')
-        let loopedSlides = this.options.loopedSlides || 1
-        let sliderLength = this.s_data.sliderLength
-        let children = this.$children
-        let currentPage = this.data.currentPage
-        children = children.filter((item) => {
-          return item.$options._componentTag === 'slideritem'
-        })
+        let loopedSlides = this.options.loopedSlides || 1;
+        let sliderLength = this.s_data.sliderLength;
+        let children = this.$children;
+        /**
+         * 消除可能产生的错误
+         */
+        if(children.length <= 0){
+          return;
+        }
+        let currentPage = this.data.currentPage;
+        /**
+         * 这个可能会是空数组
+         * 导致下面的addActive()报错
+         */
+        // children = children.filter((item) => {
+        //   return item.$options._componentTag === 'slideritem'
+        // })
         children.forEach(element => {
-          element.removeActive()
-        })
+          element.removeActive();
+        });
         // 取消嵌套轮播active标签
         if (this.options.effect === 'nest') {
           return
         }
         if (children[currentPage]) {
-          children[currentPage].addActive()
+          children[currentPage].addActive();
         }
         if (currentPage < 0 || currentPage >= (this.pagenums || sliderLength)) {
           if (sliderItem[currentPage + loopedSlides] && sliderItem[currentPage + loopedSlides].classList) {
-            sliderItem[currentPage + loopedSlides].classList.add('slider-active-copy')
+            sliderItem[currentPage + loopedSlides].classList.add('slider-active-copy');
           }
-          let lastPage = currentPage < 0 ? (this.pagenums || sliderLength) + currentPage : 0 + currentPage - (this.pagenums || sliderLength)
-          children[lastPage].addActive()
+          let lastPage = currentPage < 0 ? (this.pagenums || sliderLength) + currentPage : 0 + currentPage - (this.pagenums || sliderLength);
+          children[lastPage].addActive();
         } else {
           for (let index = 0; index < sliderActiveCopy.length; index++) {
-            const item = sliderActiveCopy[index]
-            item.classList.remove('slider-active-copy')
+            const item = sliderActiveCopy[index];
+            item.classList.remove('slider-active-copy');
           }
         }
       }
       if (this.data.currentPage < 0 || this.data.currentPage >= (this.pagenums || this.s_data.sliderLength)) {
-        return false
+        return false;
       }
     },
-    clock: function () {
+    clock(){
       // 暂时这么写，写了自调用，但是vue不支持，欢迎小伙伴提供新的思路
       return {
         begin: function (that) {
@@ -682,7 +693,7 @@ export default {
         }
       }, 0)
     },
-    onItemTransitionEnd (e) {
+    onItemTransitionEnd(e) {
       if (e.target !== e.currentTarget) {
         return
       }
@@ -807,150 +818,151 @@ export default {
         }
       }
     }
+  },
+  destroyed(){
+    // 销毁时停止轮播，防止addActive报错
+    this.clock().stop(this);
   }
 }
 </script>
-
 <style>
-.slider-container {
-  margin: 0 auto;
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
-}
-.slider-container {
-  height: 100%;
-  width: 100%;
-  position: relative;
-  white-space: nowrap;
-}
-.slider-center-center {
-  margin: auto;
-  z-index: 1;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-.slider-touch {
-  height: 100%;
-}
-.swiper-container-horizontal > * > .slider-wrapper {
-  box-sizing: content-box;
-  display: flex;
-  height: 100%;
-  position: relative;
-  transition-property: transform;
-  width: 100%;
-  z-index: 1;
-  align-items: center;
-  /*flex-direction: column;*/
-  /* 09版 */
-  -webkit-box-orient: vertical;
-  /* 12版 */
-  -webkit-flex-direction: row;
-  -moz-flex-direction: row;
-  -ms-flex-direction: row;
-  -o-flex-direction: row;
-  flex-direction: row;
-}
-/*垂直*/
-.swiper-container-vertical > * > .slider-wrapper {
-  box-sizing: content-box;
-  display: flex;
-  height: 100%;
-  position: relative;
-  transition-property: transform;
-  width: 100%;
-  z-index: 1;
-  align-items: center;
-  /*flex-direction: column;*/
-  /* 09版 */
-  -webkit-box-orient: vertical;
-  /* 12版 */
-  -webkit-flex-direction: column;
-  -moz-flex-direction: column;
-  -ms-flex-direction: column;
-  -o-flex-direction: column;
-  flex-direction: column;
-}
-
-.slider-item {
-  flex-shrink: 0;
-  height: 100%;
-  position: relative;
-  width: 100%;
-}
-.slider-item {
-  align-items: center;
-  /*background: #fff none repeat scroll 0 0;*/
-  display: flex;
-  font-size: 40px;
-  justify-content: center;
-  text-align: center;
-  color: #fff;
-  /*display: inline-block;*/
-}
-
-.slider-fade .slider-item {
-  position: absolute;
-  left: 0;
-  opacity: 0;
-}
-.slider-pagination {
-  position: absolute;
-  text-align: center;
-  transform: translate3d(0px, 0px, 0px);
-  /*transition: all 350ms ease 0s;*/
-  z-index: 10;
-}
-.swiper-container-horizontal > .slider-pagination-bullets {
-  bottom: 10px;
-  left: 0;
-  width: 100%;
-}
-.swiper-container-horizontal > * > .slider-pagination-bullet {
-  background: #000 none repeat scroll 0 0;
-  border-radius: 100%;
-  display: inline-block;
-  height: 8px;
-  opacity: 0.2;
-  width: 8px;
-  cursor: pointer;
-  margin: 0 5px;
-}
-/*垂直*/
-.swiper-container-vertical > .slider-pagination-bullets {
-  left: 0;
-  bottom: auto;
-  left: auto;
-  width: auto;
-  right: 10px;
-  top: 50%;
-  transform: translate3d(0px, -50%, 0px);
-}
-.swiper-container-vertical > * > .slider-pagination-bullet {
-  background: #000 none repeat scroll 0 0;
-  border-radius: 100%;
-  height: 8px;
-  opacity: 0.2;
-  width: 8px;
-  cursor: pointer;
-  display: block;
-  margin: 5px 0;
-}
-.swiper-container-vertical .slider-pagination-bullet-active ,.swiper-container-horizontal .slider-pagination-bullet-active{
-  background: #fff none repeat scroll 0 0;
-  opacity: 1;
-}
-.slider-loading {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 999;
-}
-.swiper-container-cursorGrab {
-  cursor: grab;
-}
+  .slider-container {
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+  }
+  .slider-container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    white-space: nowrap;
+  }
+  .slider-center-center {
+    margin: auto;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .slider-touch {
+    height: 100%;
+  }
+  .swiper-container-horizontal > * > .slider-wrapper {
+    box-sizing: content-box;
+    display: flex;
+    height: 100%;
+    position: relative;
+    transition-property: transform;
+    width: 100%;
+    z-index: 1;
+    align-items: center;
+    /*flex-direction: column;*/
+    /* 09版 */
+    -webkit-box-orient: vertical;
+    /* 12版 */
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    -ms-flex-direction: row;
+    -o-flex-direction: row;
+    flex-direction: row;
+  }
+  /*垂直*/
+  .swiper-container-vertical > * > .slider-wrapper {
+    box-sizing: content-box;
+    display: flex;
+    height: 100%;
+    position: relative;
+    transition-property: transform;
+    width: 100%;
+    z-index: 1;
+    align-items: center;
+    /*flex-direction: column;*/
+    /* 09版 */
+    -webkit-box-orient: vertical;
+    /* 12版 */
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    -o-flex-direction: column;
+    flex-direction: column;
+  }
+  .slider-item {
+    flex-shrink: 0;
+    height: 100%;
+    position: relative;
+    width: 100%;
+  }
+  .slider-item {
+    align-items: center;
+    /*background: #fff none repeat scroll 0 0;*/
+    display: flex;
+    font-size: 40px;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    /*display: inline-block;*/
+  }
+  .slider-fade .slider-item {
+    position: absolute;
+    left: 0;
+    opacity: 0;
+  }
+  .slider-pagination {
+    position: absolute;
+    text-align: center;
+    transform: translate3d(0px, 0px, 0px);
+    /*transition: all 350ms ease 0s;*/
+    z-index: 10;
+  }
+  .swiper-container-horizontal > .slider-pagination-bullets {
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+  }
+  .swiper-container-horizontal > * > .slider-pagination-bullet {
+    background: #000 none repeat scroll 0 0;
+    border-radius: 100%;
+    display: inline-block;
+    height: 8px;
+    opacity: 0.2;
+    width: 8px;
+    cursor: pointer;
+    margin: 0 5px;
+  }
+  /*垂直*/
+  .swiper-container-vertical > .slider-pagination-bullets {
+    left: 0;
+    bottom: auto;
+    left: auto;
+    width: auto;
+    right: 10px;
+    top: 50%;
+    transform: translate3d(0px, -50%, 0px);
+  }
+  .swiper-container-vertical > * > .slider-pagination-bullet {
+    background: #000 none repeat scroll 0 0;
+    border-radius: 100%;
+    height: 8px;
+    opacity: 0.2;
+    width: 8px;
+    cursor: pointer;
+    display: block;
+    margin: 5px 0;
+  }
+  .swiper-container-vertical .slider-pagination-bullet-active, .swiper-container-horizontal .slider-pagination-bullet-active {
+    background: #fff none repeat scroll 0 0;
+    opacity: 1;
+  }
+  .slider-loading {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+  }
+  .swiper-container-cursorGrab {
+    cursor: grab;
+  }
 </style>
