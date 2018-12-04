@@ -44,7 +44,7 @@
     }
   }
 </script>
-<style>
+<style scoped>
   body {
     -webkit-font-smoothing: antialiased;
     color: #34495e;
@@ -58,7 +58,7 @@
   }
   */
   .custom-layout {
-    padding-top: 0
+    padding-top: 0;
   }
   section.cover {
       -ms-flex-align: center;
