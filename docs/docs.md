@@ -1,3 +1,6 @@
+---
+sidebar: auto
+---
 ## pages
 
 - Type: `Array`

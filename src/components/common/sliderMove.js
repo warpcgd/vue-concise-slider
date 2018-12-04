@@ -94,12 +94,12 @@ export default {
         }
         if (this.config.direction === 'vertical') {
           if (deltaX > deltaY) {
-            return
+            return false
           }
           // 处理嵌套滚动
         } else {
           if (deltaX < deltaY) {
-            return
+            return false
           }
         }
       }

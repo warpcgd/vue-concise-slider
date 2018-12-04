@@ -16,7 +16,7 @@ export default {
       someList: [],
       options: {
         currentPage: 0,
-        thresholdDistance: 100, // 滑动距离阈值判定
+        thresholdDistance: 30, // 滑动距离阈值判定
         thresholdTime: 1000, // 滑动时间阈值判定
         loopedSlides: 3, // 多级滚动时，需要添加前后遍历数
         slidesToScroll: 1, // 需要滚动页面的数量
@@ -33,7 +33,7 @@ export default {
       {
           text: 'Swipe',
           style: {
-            'background': '#1bbc9b',
+            'background': '#4abf8a',
             'width': '32%',
             'margin-right': '2%'
           }
@@ -41,7 +41,7 @@ export default {
         {
           text: 'Drag',
           style: {
-            'background': '#1bbc9b',
+            'background': '#4abf8a',
             'width': '32%',
             'margin-right': '2%'
           }
@@ -49,7 +49,7 @@ export default {
         {
           text: 'Responsive',
           style: {
-            'background': '#1bbc9b',
+            'background': '#4abf8a',
             'width': '32%',
             'margin-right': '2%'
           }
@@ -57,7 +57,7 @@ export default {
         {
           text: 'CSS3',
           style: {
-            'background': '#1bbc9b',
+            'background': '#4abf8a',
             'width': '32%',
             'margin-right': '2%'
           }
@@ -65,7 +65,7 @@ export default {
         {
           text: 'Fast',
           style: {
-            'background': '#1bbc9b',
+            'background': '#4abf8a',
             'width': '32%',
             'margin-right': '2%'
           }
@@ -73,7 +73,7 @@ export default {
         {
           text: 'Easy',
           style: {
-            'background': '#1bbc9b',
+            'background': '#4abf8a',
             'width': '32%',
             'margin-right': '2%'
           }
@@ -81,7 +81,7 @@ export default {
         {
           text: 'Free',
           style: {
-            'background': '#1bbc9b',
+            'background': '#4abf8a',
             'width': '32%',
             'margin-right': '2%'
           }
@@ -89,7 +89,7 @@ export default {
         {
           text: 'Upgradable',
           style: {
-            'background': '#1bbc9b',
+            'background': '#4abf8a',
             'width': '32%',
             'margin-right': '2%'
           }
@@ -97,7 +97,7 @@ export default {
         {
           text: 'Infinity',
           style: {
-            'background': '#1bbc9b',
+            'background': '#4abf8a',
             'width': '32%',
             'margin-right': '2%'
           }
@@ -105,7 +105,7 @@ export default {
         {
           text: 'Auto Width',
           style: {
-            'background': '#1bbc9b',
+            'background': '#4abf8a',
             'width': '32%',
             'margin-right': '2%'
           }

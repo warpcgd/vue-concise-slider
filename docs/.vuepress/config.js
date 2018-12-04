@@ -7,8 +7,8 @@ module.exports = {
         link: '/'
       },
       {
-        text: 'Demo',
-        link: '/guide/'
+        text: 'Demos',
+        link: '/demos'
       },
       {
         text: 'Docs',
@@ -18,6 +18,9 @@ module.exports = {
         text: 'Guide',
         link: '/guide'
       }
-    ]
+    ],
+    themeConfig: {
+      sidebar: 'auto'
+    }
   }
 }

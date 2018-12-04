@@ -14,7 +14,7 @@ sidebar: auto
 ```html
 <template>
 <!-- Make a frame wrapped slider -->
- <div style="width:100%;margin:20px auto;height:400px">
+ <div style="width:70%;margin:20px auto;height:400px">
       <!-- Configuring slider components -->
       <slider ref="slider" :pages="pages" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
           <slideritem v-for="(item,index) in pages" :key="index" :style="item.style">{{item.html}}</slideritem>
