@@ -6,32 +6,56 @@
         <div class="demo__basic--title">Basic demos:</div>
         <div class="splite__line"></div>
         <div class="demo__basic--wrap">
-          <div class="demo__basic--item">Basic</div>
-          <div class="demo__basic--item">Basic</div>
-          <div class="demo__basic--item">Basic</div>
-          <div class="demo__basic--item">Basic</div>
-          <div class="demo__basic--item">Basic</div>
-          <div class="demo__basic--item">Basic</div>
-          <div class="demo__basic--item">Basic</div>
-          <div class="demo__basic--item">Basic</div>
+          <router-link to="/demos/foo">
+            <div class="demo__basic--item">Basic</div>
+          </router-link>
+          <router-link to="/demos/foo">
+            <div class="demo__basic--item">Basic</div>
+          </router-link>
+          <router-link to="/demos/foo">
+            <div class="demo__basic--item">Basic</div>
+          </router-link>
+          <router-link to="/demos/foo">
+            <div class="demo__basic--item">Basic</div>
+          </router-link>
+          <router-link to="/demos/foo">
+            <div class="demo__basic--item">Basic</div>
+          </router-link>
+          <router-link to="/demos/foo">
+            <div class="demo__basic--item">Basic</div>
+          </router-link>
+          <router-link to="/demos/foo">
+            <div class="demo__basic--item">Basic</div>
+          </router-link>
+          <router-link to="/demos/foo">
+            <div class="demo__basic--item">Basic</div>
+          </router-link>
         </div>
       </div>
       <div class="demo__plugins">
         <div class="demo__plugins--title">plugins demos:</div>
         <div class="splite__line"></div>
         <div class="demo__plugins--wrap">
-          <div class="demo__plugins--item">plugins</div>
-          <div class="demo__plugins--item">plugins</div>
-          <div class="demo__plugins--item">plugins</div>
-          <div class="demo__plugins--item">plugins</div>
+          <router-link to="/demos/plugins">
+            <div class="demo__basic--item">plugins</div>
+          </router-link>
+          <router-link to="/demos/plugins">
+            <div class="demo__plugins--item">plugins</div>
+          </router-link>
+          <router-link to="/demos/plugins">
+            <div class="demo__plugins--item">plugins</div>
+          </router-link>
+          <router-link to="/demos/plugins">
+            <div class="demo__plugins--item">plugins</div>
+          </router-link>
         </div>
       </div>
       <div class="demo__libary">
         <div class="demo__libary--title">libary demos:</div>
         <div class="splite__line"></div>
-        <div class="demo__libary--wrap">
-          <div class="demo__libary--item">libary</div>
-        </div>
+          <router-link to="/demos/libary">
+            <div class="demo__libary--item">libary</div>
+          </router-link>
       </div>
     </div>
   </div>
@@ -44,6 +68,9 @@
   }
 </script>
 <style lang="scss">
+a {
+  color: rgb(42, 46, 45);
+}
 .demo {
   @import url('https://fonts.googleapis.com/css?family=Open+Sans');
   font-family: 'Open Sans', sans-serif;
