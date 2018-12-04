@@ -8,7 +8,7 @@ module.exports = {
       },
       {
         text: 'Demos',
-        link: '/demos'
+        link: '/demos/'
       },
       {
         text: 'Docs',
