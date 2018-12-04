@@ -257,7 +257,6 @@ export default {
   },
   mounted () {
     let that = this
-    console.log(this)
     this.s_data.pageWidth = this.$el.offsetWidth
     this.s_data.pageHeight = this.$el.offsetHeight
     // 初始化事件
@@ -290,6 +289,14 @@ export default {
       // 自动轮播 支持无缝滚动
       this.clock().begin(that)
     }
+    // 解决页面切换报错bug
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        that.options.autoplay && that.clock().stop(that)
+      } else {
+        that.options.autoplay && that.clock().begin(that)
+      }
+    }, false)
     // 设定垂直轮播class
     if (this.options.direction === 'vertical') {
       this.s_data.containerClass['swiper-container-vertical'] = true
@@ -536,13 +543,6 @@ export default {
         this.slide()
       } else {
         this.slide()
-        // let cent = 0
-        // if (this.s_data.slidesPerView) {
-        //   cent = parseInt((this.s_data.slidesPerView - 1) / 2)
-        //   this.slide(sliderLength - cent)
-        // } else {
-        //   this.slide(sliderLength - 1)
-        // }
       }
       // this.$emit('update:currentpage', this.data.currentPage)
       // this.$emit('slide', this.data)
