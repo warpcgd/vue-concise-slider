@@ -103,20 +103,22 @@ export default {
     // 解决route跳转问题
     '$route': function () {
       let that = this
-      if (this.route) {
+      if (that.route) {
         let currentPage = that.data.currentPage
         let sliderLength = that.s_data.sliderLength
         that.s_data.transitionEnding = false
         if (currentPage < 0) {
           that.slide(0, 'animationnone')
         } else if (currentPage >= (that.pagenums || sliderLength)) {
-          that.slide(2, 'animationnone')
+          that.slide(sliderLength - 1, 'animationnone')
         } else {
           that.slide(currentPage, 'animationnone')
         }
-        this.route = false
+        that.options.autoplay && that.clock().begin(that)
+        that.route = false
       } else {
-        this.route = true
+        that.route = true
+        that.options.autoplay && that.clock().stop(that)
       }
     }
   },
@@ -306,11 +308,30 @@ export default {
     // 添加reszie监听
     if (this.s_data.resize) {
       window.addEventListener('resize', () => {
-        that.s_data.pageWidth = that.$el.offsetWidth
-        that.s_data.pageHeight = that.$el.offsetHeight
-        that.slide(that.data.currentPage, 'animationnone')
+        this.s_data.pageWidth = this.$el.offsetWidth
+        this.s_data.pageHeight = this.$el.offsetHeight
+        // 修复循环切换bug
+        if (this.data.currentPage >= this.s_data.sliderLength && that.options.loop) {
+          this.slide(0, 'animationnone')
+          return false
+        }
+        this.slide(this.data.currentPage, 'animationnone')
       })
     }
+  },
+  beforeDestroy () {
+    let that = this
+    this.options.autoplay && this.clock().stop(this)
+    if (this.options.preventDocumentMove === true) {
+      document.removeEventListener('touchmove', this.preventDefault())
+    }
+    document.removeEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        that.options.autoplay && that.clock().stop(that)
+      } else {
+        that.options.autoplay && that.clock().begin(that)
+      }
+    }, false)
   },
   methods: {
     swipeStart (e) {
@@ -388,7 +409,6 @@ export default {
         if (effect === 'fade' || effect === 'coverflow') {
           return
         }
-        // console.log(this.judgeParentSlider(this))
         if (this.options.direction === 'vertical') {
           if (deltaX > deltaY) {
             return
