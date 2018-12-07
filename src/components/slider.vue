@@ -292,13 +292,7 @@ export default {
       this.clock().begin(that)
     }
     // 解决页面切换报错bug
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden) {
-        that.options.autoplay && that.clock().stop(that)
-      } else {
-        that.options.autoplay && that.clock().begin(that)
-      }
-    }, false)
+    document.addEventListener('visibilitychange', this.visibilitychange, false)
     // 设定垂直轮播class
     if (this.options.direction === 'vertical') {
       this.s_data.containerClass['swiper-container-vertical'] = true
@@ -307,33 +301,36 @@ export default {
     }
     // 添加reszie监听
     if (this.s_data.resize) {
-      window.addEventListener('resize', () => {
-        this.s_data.pageWidth = this.$el.offsetWidth
-        this.s_data.pageHeight = this.$el.offsetHeight
-        // 修复循环切换bug
-        if (this.data.currentPage >= this.s_data.sliderLength && that.options.loop) {
-          this.slide(0, 'animationnone')
-          return false
-        }
-        this.slide(this.data.currentPage, 'animationnone')
-      })
+      window.addEventListener('resize', this.resize)
     }
   },
   beforeDestroy () {
-    let that = this
     this.options.autoplay && this.clock().stop(this)
     if (this.options.preventDocumentMove === true) {
       document.removeEventListener('touchmove', this.preventDefault())
     }
-    document.removeEventListener('visibilitychange', function () {
+    document.removeEventListener('visibilitychange', this.visibilitychange, false)
+    window.removeEventListener('resize', this.resize)
+  },
+  methods: {
+    visibilitychange () {
+      let that = this
       if (document.hidden) {
         that.options.autoplay && that.clock().stop(that)
       } else {
         that.options.autoplay && that.clock().begin(that)
       }
-    }, false)
-  },
-  methods: {
+    },
+    resize () {
+      this.s_data.pageWidth = this.$el.offsetWidth
+      this.s_data.pageHeight = this.$el.offsetHeight
+      // 修复循环切换bug
+      if (this.data.currentPage >= this.s_data.sliderLength && this.options.loop) {
+        this.slide(0, 'animationnone')
+        return false
+      }
+      this.slide(this.data.currentPage, 'animationnone')
+    },
     swipeStart (e) {
       let that = this
       this.s_data.e = e
