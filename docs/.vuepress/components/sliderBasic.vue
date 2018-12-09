@@ -35,7 +35,8 @@ export default {
           style: {
             'background': '#4abf8a',
             'width': '32%',
-            'margin-right': '2%'
+            'margin-right': '2%',
+            "user-select":"none"
           }
         },
         {
@@ -43,7 +44,8 @@ export default {
           style: {
             'background': '#4abf8a',
             'width': '32%',
-            'margin-right': '2%'
+            'margin-right': '2%',
+            "user-select":"none"
           }
         },
         {
@@ -51,7 +53,8 @@ export default {
           style: {
             'background': '#4abf8a',
             'width': '32%',
-            'margin-right': '2%'
+            'margin-right': '2%',
+            "user-select":"none"
           }
         },
         {
@@ -59,7 +62,8 @@ export default {
           style: {
             'background': '#4abf8a',
             'width': '32%',
-            'margin-right': '2%'
+            'margin-right': '2%',
+            "user-select":"none"
           }
         },
         {
@@ -67,7 +71,8 @@ export default {
           style: {
             'background': '#4abf8a',
             'width': '32%',
-            'margin-right': '2%'
+            'margin-right': '2%',
+            "user-select":"none"
           }
         },
         {
@@ -75,7 +80,8 @@ export default {
           style: {
             'background': '#4abf8a',
             'width': '32%',
-            'margin-right': '2%'
+            'margin-right': '2%',
+            "user-select":"none"
           }
         },
         {
@@ -83,7 +89,8 @@ export default {
           style: {
             'background': '#4abf8a',
             'width': '32%',
-            'margin-right': '2%'
+            'margin-right': '2%',
+            "user-select":"none"
           }
         },
         {
@@ -91,7 +98,8 @@ export default {
           style: {
             'background': '#4abf8a',
             'width': '32%',
-            'margin-right': '2%'
+            'margin-right': '2%',
+            "user-select":"none"
           }
         },
         {
@@ -99,7 +107,8 @@ export default {
           style: {
             'background': '#4abf8a',
             'width': '32%',
-            'margin-right': '2%'
+            'margin-right': '2%',
+            "user-select":"none"
           }
         },
         {
@@ -107,7 +116,8 @@ export default {
           style: {
             'background': '#4abf8a',
             'width': '32%',
-            'margin-right': '2%'
+            'margin-right': '2%',
+            "user-select":"none"
           }
         }
     ]

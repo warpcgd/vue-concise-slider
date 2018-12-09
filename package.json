@@ -81,6 +81,10 @@
   "directories": {
     "doc": "docs"
   },
-  "keywords": [],
+  "keywords": [
+    "vue",
+    "slider",
+    "swiper"
+  ],
   "license": "ISC"
 }
