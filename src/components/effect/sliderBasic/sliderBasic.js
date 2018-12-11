@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     judgeParentSlider (that) {
-      if (that.$parent && that.$parent.$vnode && that.$parent.$vnode.tag === 'vue-component-1-slider') {
+      if (that.$parent && that.$parent.$vnode && that.$parent.$options._componentTag === 'slider') {
         return that.$parent
       } else if (that.$parent && that.$parent.$vnode === undefined) {
         return false
@@ -70,14 +70,14 @@ export default {
       if (this.config.effect === 'nest') {
         return sliderNest.methods.pre.call(this)
       }
-      this.slide()
+      this.slide(0)
     },
     next () {
       let $parent = this.config.$parent
       let sliderLength = this.config.sliderLength
       let slidesToScroll = this.config.slidesToScroll
-      let slidesPerView = this.options.loop ? 0 : ((sliderLength - this.config.slidesPerView) / slidesToScroll)
-      if (this.data.currentPage < sliderLength - 1 && this.data.currentPage + slidesToScroll <= (slidesPerView ? slidesPerView + slidesToScroll - 1 : sliderLength - 1)) {
+      // let slidesPerView = this.options.loop ? 0 : ((sliderLength - this.config.slidesPerView) / slidesToScroll)
+      if (this.data.currentPage < sliderLength - 1 && this.data.currentPage + slidesToScroll <= sliderLength - 1) {
         this.data.currentPage += this.options.slidesToScroll || 1
         this.slide()
         return false

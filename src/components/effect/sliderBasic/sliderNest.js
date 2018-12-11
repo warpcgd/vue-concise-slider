@@ -40,6 +40,10 @@ export default {
     },
     swipeMove (e) {
       let $parent = this.config.$parent
+      // 嵌套滚动处理事件传播
+      if ($parent && $parent.config.direction === this.config.direction) {
+        e.stopPropagation()
+      }
       if (this.config.tracking) {
         if (this.config.direction === 'vertical') {
           if ($parent && $parent.options.direction === 'vertical' && this.data.currentPage === 0 && this.data.end.y - this.data.start.y >= 0 && $parent.config.nested) {

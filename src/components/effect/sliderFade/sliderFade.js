@@ -20,8 +20,6 @@ export default {
       }
     }
   },
-  computed: {
-  },
   methods: {
     pre () {
       let sliderLength = this.config.sliderLength

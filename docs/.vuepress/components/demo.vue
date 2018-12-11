@@ -82,7 +82,7 @@ a {
     line-height: 100px;
     font-size: 32px;
     font-weight: bold;
-    background-color: #1ccacd;
+    background: linear-gradient(to left bottom, hsl(189, 100%, 85%) 0%,hsl(111, 100%, 85%) 100%);
   }
   &__content {
     margin: 0 auto;

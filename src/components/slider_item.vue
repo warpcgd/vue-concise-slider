@@ -18,13 +18,17 @@ export default {
     return {
       slideClass: {
         'slider-item': true,
-        'slider-active': false
+        'slider-active': false,
+        'slider-copy': false
       }
     }
   },
   mounted () {
     this.renderDom()
-    // console.log(options)
+    let key = this.$vnode.key + ''
+    if (key.indexOf('copy') !== -1) {
+      this.slideClass['slider-copy'] = true
+    }
   },
   methods: {
     renderDom () {

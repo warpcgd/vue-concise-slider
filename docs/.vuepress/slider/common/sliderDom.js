@@ -28,8 +28,6 @@ export default {
       }
     }
   },
-  computed: {
-  },
   mounted () {
     this.config.pageWidth = this.$el.offsetWidth
     this.config.pageHeight = this.$el.offsetHeight

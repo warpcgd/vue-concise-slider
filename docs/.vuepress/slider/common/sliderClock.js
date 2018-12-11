@@ -18,10 +18,6 @@ export default {
       }
     }
   },
-  computed: {
-  },
-  mounted () {
-  },
   methods: {
     clock: function () {
       // 暂时这么写，写了自调用，但是vue不支持，欢迎小伙伴提供新的思路

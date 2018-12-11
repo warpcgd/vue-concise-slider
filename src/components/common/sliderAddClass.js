@@ -12,7 +12,7 @@ export default function () {
     // let sliderActiveCopy = slideDom.getElementsByClassName('slider-active-copy')
     let loopedSlides = this.options.loopedSlides || 1
     let sliderLength = this.config.sliderLength
-    let children = this.$children
+    let children = this.$children[0].$children
     let currentPage = this.data.currentPage
     children = children.filter((item) => {
       return item.$options._componentTag === 'slideritem'

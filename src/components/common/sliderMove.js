@@ -30,8 +30,6 @@ export default {
       }
     }
   },
-  mounted () {
-  },
   methods: {
     swipeStart (e) {
       let that = this
