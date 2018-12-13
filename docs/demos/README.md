@@ -1,3 +1,4 @@
 ---
-layout: demo
+sidebar: false
 ---
+<demo></demo> 

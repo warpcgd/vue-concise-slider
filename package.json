@@ -1,6 +1,6 @@
 {
   "name": "vue-concise-slider",
-  "version": "3.3.2",
+  "version": "4.0.0",
   "repository": {
     "type": "git",
     "url": "git@github.com/warpcgd/vue-concise-slider.git"
@@ -30,7 +30,7 @@
     "connect-history-api-fallback": "^1.1.0",
     "cross-env": "^5.2.0",
     "cross-spawn": "^2.1.5",
-    "css-loader": "^0.23.1",
+    "css-loader": "^2.0.0",
     "ejs": ">=2.5.5",
     "eslint": "^2.10.2",
     "eslint-config-standard": "^5.1.0",
@@ -69,7 +69,7 @@
     "vue-loader": "^15.4.2",
     "vue-style-loader": "^1.0.0",
     "vue-template-compiler": "^2.5.17",
-    "vuepress": "^0.14.8",
+    "vuepress": "^1.0.0-alpha.27",
     "webpack": "^4.26.1",
     "webpack-bundle-analyzer": "^2.13.1",
     "webpack-cli": "^3.1.2",

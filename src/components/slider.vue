@@ -34,7 +34,6 @@
     </div>
 </template>
 <script>
-import detectPrefixes from '../utils/detect-prefixes.js'
 // 引入基础组件
 import sliderMove from './common/sliderMove.js'
 import sliderWrapper from './common/sliderWrapper.js'
@@ -42,7 +41,7 @@ import sliderComputed from './common/sliderComputed.js'
 import sliderEvent from './common/sliderEvent.js'
 import sliderClock from './common/sliderClock.js'
 import sliderDom from './common/sliderDom.js'
-// import sliderAddClass from './common/sliderAddClass.js'
+import sliderAddClass from './common/sliderAddClass.js'
 // 引入不同类型slider
 import sliderBasic from './effect/sliderBasic/sliderBasic.js'
 import sliderCoverflow from './effect/sliderCoverflow/sliderCoverflow.js'
@@ -64,7 +63,6 @@ export default {
       data: {
       },
       config: {
-        prefixes: detectPrefixes(),
         pageWidth: 0,
         pageHeight: 0,
         loading: false,
@@ -130,7 +128,7 @@ export default {
     },
     slide (pagenum, type) {
       this.$emit('slide', this.data)
-      // sliderAddClass.call(this, pagenum, type)
+      sliderAddClass.call(this, pagenum, type)
       // 执行动画
       this.config.animation = true
       // 无样式滚动

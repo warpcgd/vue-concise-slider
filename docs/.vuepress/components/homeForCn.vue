@@ -45,7 +45,7 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style>
   body {
     -webkit-font-smoothing: antialiased;
     color: #34495e;
@@ -53,6 +53,11 @@ export default {
     letter-spacing: 0;
     margin: 0;
     overflow-x: hidden;
+  }
+  .content:not(.custom) {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
   }
   /* .navbar {
     display: none

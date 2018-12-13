@@ -1,13 +1,4 @@
 export default {
-  props: {
-    options: {
-      type: Object,
-      // 对象或数组且一定会从一个工厂函数返回默认值
-      default: function () {
-        return {}
-      }
-    }
-  },
   name: 'sliderBasic',
   data () {
     return {
@@ -20,13 +11,13 @@ export default {
   methods: {
     transform () {
       // debugger
-      let options = this.$parent.options
-      let data = this.$parent.data
-      let config = this.$parent.config
+      let options = this.$parent.$parent.options
+      let data = this.$parent.$parent.data
+      let config = this.$parent.$parent.config
       let index = this.index
       let winWidth = config.pageWidth
       // let height = config.pageHeight
-      let width = this.$el.offsetWidth
+      let width = this.data.$el.offsetWidth
       let offsetWidth = winWidth / 2 - width / 2
       let leftWidth = offsetWidth - config.deviation + 'px'
       let rightWidth = offsetWidth + config.deviation + 'px'
@@ -77,7 +68,8 @@ export default {
           style['z-index'] = '99'
         }
       }
-      style[config.prefixes.transition + 'Duration'] = (config.animation ? options.speed || 300 : 0) + 'ms'
+      style['transitionDuration'] = (config.animation ? options.speed || 300 : 0) + 'ms'
+      style['-webkitTransitionDuration'] = (config.animation ? options.speed || 300 : 0) + 'ms'
       style['position'] = 'absolute'
       return style
     }

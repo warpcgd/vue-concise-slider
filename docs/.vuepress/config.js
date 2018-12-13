@@ -19,8 +19,11 @@ module.exports = {
         link: '/guide'
       }
     ],
-    themeConfig: {
-      sidebar: 'auto'
+    sidebar: {
+        '/demos/': [
+          '',     /* /foo/ */
+          'Basic',  /* /foo/one.html */
+        ]
+      }
     }
-  }
 }

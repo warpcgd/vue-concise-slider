@@ -74,10 +74,13 @@ export default {
         if (i === currentPage || i === currentPage + 1) {
           sliderItem[i]['style']['opacity'] = '1'
           sliderItem[i]['style']['transition-property'] = 'opacity'
-          sliderItem[i]['style'][this.config.prefixes.transition + '-duration'] = (this.config.animation ? speed || 300 : 0) + 'ms'
+          sliderItem[i]['style']['-webkit-transition-property'] = 'opacity'
+          sliderItem[i]['style']['transition-duration'] = (this.config.animation ? speed || 300 : 0) + 'ms'
+          sliderItem[i]['style']['-wekkit-transition-duration'] = (this.config.animation ? speed || 300 : 0) + 'ms'
         } else {
           sliderItem[i]['style']['opacity'] = '0'
-          sliderItem[i]['style'][this.config.prefixes.transition + '-duration'] = (this.config.animation ? speed || 300 : 0) + 'ms'
+          sliderItem[i]['style']['transition-duration'] = (this.config.animation ? speed || 300 : 0) + 'ms'
+          sliderItem[i]['style']['-webkit-transition-duration'] = (this.config.animation ? speed || 300 : 0) + 'ms'
         }
       }
     }

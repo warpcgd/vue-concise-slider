@@ -19,9 +19,7 @@
   <div>
     <div style="width:70%;margin:20px auto;height:400px">
       <slider ref="slider" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
-        <template slot-scope="coverflow">
-          <slideritem v-for="(item,index) in someList" :pageLength="someList.length" :index="index" :key="index" :style="item.style">{{item.html}}</slideritem>
-        </template>
+        <slideritem v-for="(item,index) in someList" :pageLength="someList.length" :index="index" :key="index" :style="item.style">{{item.html}}</slideritem>
         <div slot="loading">
           <div class="loadingDot">
             <i></i>

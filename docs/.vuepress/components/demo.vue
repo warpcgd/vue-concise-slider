@@ -1,60 +1,64 @@
 <template>
   <div class="demo">
-    <header class="demo__header">Demos</header>    
-    <div class="demo__content">
-      <div class="demo__basic">
-        <div class="demo__basic--title">Basic demos:</div>
-        <div class="splite__line"></div>
-        <div class="demo__basic--wrap">
-          <router-link to="/demos/foo">
-            <div class="demo__basic--item">Basic</div>
+    <section class="header">
+      <div class="demo_content"> 
+        <header class="demo_header">Demos</header> 
+      </div>
+    </section>
+    <div class="demo_content">
+      <div class="demo_basic">
+        <div class="demo_basic_title">Basic demos:</div>
+        <div class="splite_line"></div>
+        <div class="demo_basic_wrap">
+          <router-link to="/demos/Basic.html">
+            <div class="demo_basic_item">Basic</div>
           </router-link>
-          <router-link to="/demos/foo">
-            <div class="demo__basic--item">Basic</div>
+          <router-link to="/demos/Basic.html">
+            <div class="demo_basic_item">Basic</div>
           </router-link>
-          <router-link to="/demos/foo">
-            <div class="demo__basic--item">Basic</div>
+          <router-link to="/demos/Basic.html">
+            <div class="demo_basic_item">Basic</div>
           </router-link>
-          <router-link to="/demos/foo">
-            <div class="demo__basic--item">Basic</div>
+          <router-link to="/demos/Basic.html">
+            <div class="demo_basic_item">Basic</div>
           </router-link>
-          <router-link to="/demos/foo">
-            <div class="demo__basic--item">Basic</div>
+          <router-link to="/demos/Basic.html">
+            <div class="demo_basic_item">Basic</div>
           </router-link>
-          <router-link to="/demos/foo">
-            <div class="demo__basic--item">Basic</div>
+          <router-link to="/demos/Basic.html">
+            <div class="demo_basic_item">Basic</div>
           </router-link>
-          <router-link to="/demos/foo">
-            <div class="demo__basic--item">Basic</div>
+          <router-link to="/demos/Basic.html">
+            <div class="demo_basic_item">Basic</div>
           </router-link>
-          <router-link to="/demos/foo">
-            <div class="demo__basic--item">Basic</div>
+          <router-link to="/demos/Basic.html">
+            <div class="demo_basic_item">Basic</div>
           </router-link>
         </div>
       </div>
-      <div class="demo__plugins">
-        <div class="demo__plugins--title">plugins demos:</div>
-        <div class="splite__line"></div>
-        <div class="demo__plugins--wrap">
+      <div class="demo_plugins">
+        <div class="demo_plugins_title">plugins demos:</div>
+        <div class="splite_line"></div>
+        <div class="demo_plugins_wrap">
           <router-link to="/demos/plugins">
-            <div class="demo__basic--item">plugins</div>
+            <div class="demo_basic_item">plugins</div>
           </router-link>
           <router-link to="/demos/plugins">
-            <div class="demo__plugins--item">plugins</div>
+            <div class="demo_plugins_item">plugins</div>
           </router-link>
           <router-link to="/demos/plugins">
-            <div class="demo__plugins--item">plugins</div>
+            <div class="demo_plugins_item">plugins</div>
           </router-link>
           <router-link to="/demos/plugins">
-            <div class="demo__plugins--item">plugins</div>
+            <div class="demo_plugins_item">plugins</div>
           </router-link>
         </div>
       </div>
-      <div class="demo__libary">
-        <div class="demo__libary--title">libary demos:</div>
-        <div class="splite__line"></div>
+      <div class="demo_libary">
+        <div class="demo_libary_title">libary demos:</div>
+        <div class="splite_line"></div>
           <router-link to="/demos/libary">
-            <div class="demo__libary--item">libary</div>
+            <div class="demo_libary_item">libary</div>
           </router-link>
       </div>
     </div>
@@ -68,109 +72,127 @@
   }
 </script>
 <style lang="scss">
-a {
-  color: rgb(42, 46, 45);
-}
+  a {
+    color: rgb(42, 46, 45);
+  }
+  body {
+    -webkit-font-smoothing: antialiased;
+    color: #34495e;
+    font-size: 16px;
+    letter-spacing: 0;
+    margin: 0;
+    overflow-x: hidden;
+  }
+  .content:not(.custom) {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+  }
 .demo {
-  @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-  font-family: 'Open Sans', sans-serif;
   height: 100%;
   overflow: hidden;
-  &__header {
-    padding-left: 420px;
-    height: 100px;
-    line-height: 100px;
-    font-size: 32px;
-    font-weight: bold;
+  .header {
     background: linear-gradient(to left bottom, hsl(189, 100%, 85%) 0%,hsl(111, 100%, 85%) 100%);
   }
-  &__content {
+  &_header {
+    padding: 1.5rem 0;
+    font-size: 2.75rem;
+    font-weight: 300;
+  }
+  &_content {
     margin: 0 auto;
-    width: 1000px;
+    // width: 1000px;
+    max-width: 62.5rem;
   }
-  &__basic {
+  &_basic {
     margin-top: 20px;
-    &--title {
+    &_title {
       font-size: 24px;
-      font-weight: bold;
+      font-weight: 400;
       height: 80px;
       line-height: 80px;
     }
-    &--wrap{
+    &_wrap{
       display: flex;;
       justify-content: flex-start;
       flex-flow: row wrap;
     }
-    &--item{
-      margin: 20px 20px 20px 0;
-      padding: 10px 0 0 10px;
+    &_item{
+      padding: 1rem;
+      margin: 20px 20px 0 0;
       width: 190px;
       height: 70px;
       cursor: pointer;
       background: #eaeaea;
+      font-size: 1.2rem;
+      font-weight: 400;
     }
-    &--item:hover {
+    &_item:hover {
       color: #fff;
-      background-color: #1ccacd;
+      background-color:rgb(74, 191, 138);
       transition: color 200ms linear,background-color 500ms ease;
     }
   }
-  &__plugins {
+  &_plugins {
     margin-top: 20px;
-    &--title {
+    &_title {
       font-size: 24px;
-      font-weight: bold;
+      font-weight: 400;
       height: 80px;
       line-height: 80px;
     }
-    &--wrap{
+    &_wrap{
       display: flex;;
       justify-content: flex-start;
       flex-flow: row wrap;
     }
-    &--item{
-      margin: 20px 20px 20px 0;
-      padding: 10px 0 0 10px;
+    &_item{
+      padding: 1rem;
+      margin: 20px 20px 0 0;
       width: 190px;
       height: 70px;
       cursor: pointer;
       background: #eaeaea;
+      font-size: 1.2rem;
+      font-weight: 400;
     }
-    &--item:hover {
+    &_item:hover {
       color: #fff;
-      background-color: #1ccacd;
+      background-color:rgb(74, 191, 138);
       transition: color 200ms linear,background-color 500ms ease;
     }
   }
-  &__libary {
+  &_libary {
     margin-top: 20px;
-    &--title {
+    &_title {
       font-size: 24px;
-      font-weight: bold;
+      font-weight: 400;
       height: 80px;
       line-height: 80px;
     }
-    &--wrap{
+    &_wrap{
       display: flex;;
       justify-content: flex-start;
       flex-flow: row wrap;
     }
-    &--item{
-      margin: 20px 20px 20px 0;
-      padding: 10px 0 0 10px;
+    &_item{
+      padding: 1rem;
+      margin: 20px 20px 0 0;
       width: 190px;
       height: 70px;
       cursor: pointer;
       background: #eaeaea;
+      font-size: 1.2rem;
+      font-weight: 400;
     }
-    &--item:hover {
+    &_item:hover {
       color: #fff;
-      background-color: #1ccacd;
+      background-color:rgb(74, 191, 138);
       transition: color 200ms linear,background-color 500ms ease;
     }
   }
 }
-.splite__line {
+.splite_line {
   height: 1px;
   width: 100%;
   background-color: #ccc;

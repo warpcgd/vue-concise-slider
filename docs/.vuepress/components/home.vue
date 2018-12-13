@@ -38,11 +38,12 @@
   </div>
 </template>
 <script>
-  export default {
-    data () {
-      return {}
-    }
+
+export default {
+  data () {
+    return {}
   }
+}
 </script>
 <style>
   body {
@@ -53,12 +54,17 @@
     margin: 0;
     overflow-x: hidden;
   }
+  .content:not(.custom) {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+  }
   /* .navbar {
     display: none
   }
   */
   .custom-layout {
-    padding-top: 0
+    padding-top: 0;
   }
   section.cover {
       -ms-flex-align: center;

@@ -21,12 +21,6 @@ export default {
       }
     }
   },
-  computed: {
-    currentWidth () {
-      let lastPage = this.data.currentPage
-      lastPage -= 1
-    }
-  },
   methods: {
     pre () {
       let $parent = this.config.$parent

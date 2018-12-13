@@ -19,7 +19,7 @@
   <div>
     <div style="width:70%;margin:20px auto;height:400px">
       <slider ref="slider" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
-        <slideritem v-for="(item,index) in someList" :key="index" @click.native="alert(index)" :style="item.style">{{item.html}}</slideritem>
+        <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
         <div slot="loading">
           <div class="loadingDot">
             <i></i>
@@ -186,10 +186,6 @@ export default {
     },
     onInit (data) {
       console.log(data)
-    },
-    alert (index) {
-      this.$refs.slider.$emit('slideTo', index)
-      // window.alert(index)
     }
   }
 }

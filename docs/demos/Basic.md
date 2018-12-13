@@ -1,7 +1,17 @@
+---
+sidebar: false
+---
+<demoItem></demoItem> 
+::: slot name
+Basic
+:::
 
-<home></home> 
-::: slot startDemo
-```html
+::: slot content
+<demoCode>
+  <sliderBasic></sliderBasic>
+  <div slot="codeText">
+  
+   ```html
 <template>
 <!-- Make a div wrapped slider,set height and width -->
  <div style="width:100%;margin:20px auto;height:400px">
@@ -55,4 +65,9 @@ export default {
 }
 </script>
 ```
+
+  </div>
+</demoCode>
+
+ ### overview
 :::

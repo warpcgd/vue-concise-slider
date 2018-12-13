@@ -1,12 +1,15 @@
 <template>
-  <div>
-    <div style="width:100%;margin:20px auto;height:211px">
+    <div style="width:100%;height:211px">
       <slider ref="slider" :options="options">
         <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.text}}</slideritem>
       </slider>
     </div>
-  </div>
 </template>
+<style scoped>
+  .slider-item {
+    font-weight: 100;
+  }
+</style>
 <script>
 import slider from '../slider/slider.vue'
 import slideritem from '../slider/slider_item.vue'
