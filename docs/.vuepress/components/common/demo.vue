@@ -1,5 +1,5 @@
 <template>
-  <div class="demo">
+  <div class="demo fullpage">
     <section class="header">
       <div class="demo_content"> 
         <header class="demo_header">Demos</header> 
@@ -77,22 +77,16 @@
     }
   }
 </script>
-<style lang="scss">
-  a {
-    color: rgb(42, 46, 45);
-  }
-  body {
-    -webkit-font-smoothing: antialiased;
-    color: #34495e;
-    font-size: 16px;
-    letter-spacing: 0;
-    margin: 0;
-    overflow-x: hidden;
-  }
-  .content:not(.custom) {
-    max-width: 100%;
-    margin: 0 auto;
+<style lang="scss" scoped>
+.fullpage {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    margin: 0!important;
     padding: 0;
+    top: 3.6rem;
   }
 .demo {
   height: 100%;
