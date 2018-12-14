@@ -312,6 +312,8 @@ export default {
   top: 50%;
   transform: translateY(-50%);
   z-index: 999;
+  width: 100%;
+  text-align: center
 }
 .swiper-container-cursorGrab {
   cursor: grab;

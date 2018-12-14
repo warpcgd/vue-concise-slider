@@ -1,18 +1,13 @@
 <template>
-    <div style="width:100%;height:211px">
+    <div style="width:100%;height:250px">
       <slider ref="slider" :options="options">
         <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.text}}</slideritem>
       </slider>
     </div>
 </template>
-<style scoped>
-  .slider-item {
-    font-weight: 100;
-  }
-</style>
 <script>
-import slider from '../slider/slider.vue'
-import slideritem from '../slider/slider_item.vue'
+import slider from '../../slider/slider.vue'
+import slideritem from '../../slider/slider_item.vue'
 export default {
   data () {
     return {
@@ -21,7 +16,7 @@ export default {
         currentPage: 0,
         thresholdDistance: 30, // 滑动距离阈值判定
         thresholdTime: 1000, // 滑动时间阈值判定
-        loopedSlides: 3, // 多级滚动时，需要添加前后遍历数
+        infinite: 3, // 多级滚动时，需要添加前后遍历数
         slidesToScroll: 1, // 需要滚动页面的数量
         loop: true // 无限循环 // 滑动速度
         // timingFunction: 'ease', // 滑动方式
@@ -131,3 +126,11 @@ export default {
   }
 }
 </script>
+<style scoped>
+  .slider-item {
+    font-weight: 100;
+    color: #FFF;
+    text-align: center;
+    font-style: italic;
+  }
+</style>

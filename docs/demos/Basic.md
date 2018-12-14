@@ -1,14 +1,14 @@
 ---
 sidebar: false
 ---
-<demoItem></demoItem> 
+<common-demoItem></common-demoItem> 
 ::: slot name
 Basic
 :::
 
 ::: slot content
-<demoCode>
-  <sliderBasic></sliderBasic>
+<common-demoCode>
+  <effect-sliderBasic></effect-sliderBasic>
   <div slot="codeText">
   
    ```html
@@ -67,7 +67,7 @@ export default {
 ```
 
   </div>
-</demoCode>
+</common-demoCode>
 
- ### overview
+ ### Overview
 :::

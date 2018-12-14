@@ -43,13 +43,15 @@ body {
     background: linear-gradient(to left bottom, hsl(189, 100%, 85%) 0%,hsl(111, 100%, 85%) 100%);
   }
   &_header {
-    padding: 0;
+    padding: 1.5rem 0;
+    font-size: 2.75rem;
     font-weight: 300;
     p {
       margin: 0!important;
-      padding: 1.2rem 0;
+      padding: 0;
       font-weight: 300;
       margin: 0;
+      line-height: 1.5;
       font-size: 2.75rem;
     }
   }

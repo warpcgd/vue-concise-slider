@@ -23,6 +23,15 @@ module.exports = {
         '/demos/': [
           '',     /* /foo/ */
           'Basic',  /* /foo/one.html */
+          'Center',  /* /foo/one.html */
+          'CoverFlow',  /* /foo/one.html */
+          'Fade',  /* /foo/one.html */
+          'Loop',  /* /foo/one.html */
+          'Multiple',  /* /foo/one.html */
+          'Nest',  /* /foo/one.html */
+          'RenderPagination',  /* /foo/one.html */
+          'VariableWidth',  /* /foo/one.html */
+          'Vertical',  /* /foo/one.html */
         ]
       }
     }

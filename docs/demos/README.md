@@ -1,4 +1,4 @@
 ---
 sidebar: false
 ---
-<demo></demo> 
+<common-demo></common-demo> 

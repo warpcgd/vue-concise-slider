@@ -5,17 +5,17 @@
         <slot></slot>
       </div>
     </div>
-    <collapse>
+    <common-collapse>
       <div v-show="isShow" class="code-segment collapse-wrap">
         <slot name="codeText"></slot>
       </div>
-    </collapse>
+    </common-collapse>
     <div v-if="$slots.codeText" class="code-button" @click="handleToggleShow">{{codeTextBtn}}</div>
   </div>
 </template>
 
 <script>
-import collapse from './collapse.vue'
+// import collapse from './collapse.vue'
 export default {
   name: 'code',
   data() {
@@ -25,7 +25,7 @@ export default {
     }
   },
   component: {
-    collapse
+    // collapse
   },
   methods: {
     handleToggleShow() {
@@ -36,7 +36,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .code-segment pre {
   margin: 0
 }

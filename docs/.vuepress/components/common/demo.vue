@@ -13,26 +13,32 @@
           <router-link to="/demos/Basic.html">
             <div class="demo_basic_item">Basic</div>
           </router-link>
-          <router-link to="/demos/Basic.html">
-            <div class="demo_basic_item">Basic</div>
+          <router-link to="/demos/Center.html">
+            <div class="demo_basic_item">Center</div>
           </router-link>
-          <router-link to="/demos/Basic.html">
-            <div class="demo_basic_item">Basic</div>
+          <router-link to="/demos/CoverFlow.html">
+            <div class="demo_basic_item">CoverFlow</div>
           </router-link>
-          <router-link to="/demos/Basic.html">
-            <div class="demo_basic_item">Basic</div>
+          <router-link to="/demos/Fade.html">
+            <div class="demo_basic_item">Fade</div>
           </router-link>
-          <router-link to="/demos/Basic.html">
-            <div class="demo_basic_item">Basic</div>
+          <router-link to="/demos/Loop.html">
+            <div class="demo_basic_item">Loop</div>
           </router-link>
-          <router-link to="/demos/Basic.html">
-            <div class="demo_basic_item">Basic</div>
+          <router-link to="/demos/Multiple.html">
+            <div class="demo_basic_item">Multiple</div>
           </router-link>
-          <router-link to="/demos/Basic.html">
-            <div class="demo_basic_item">Basic</div>
+          <router-link to="/demos/Nest.html">
+            <div class="demo_basic_item">Nest</div>
           </router-link>
-          <router-link to="/demos/Basic.html">
-            <div class="demo_basic_item">Basic</div>
+          <router-link to="/demos/RenderPagination.html">
+            <div class="demo_basic_item">RenderPagination</div>
+          </router-link>
+          <router-link to="/demos/VariableWidth.html">
+            <div class="demo_basic_item">VariableWidth</div>
+          </router-link>
+          <router-link to="/demos/Vertical.html">
+            <div class="demo_basic_item">Vertical</div>
           </router-link>
         </div>
       </div>
@@ -98,6 +104,7 @@
     padding: 1.5rem 0;
     font-size: 2.75rem;
     font-weight: 300;
+    line-height: 1.5;
   }
   &_content {
     margin: 0 auto;

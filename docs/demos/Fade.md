@@ -1,7 +1,17 @@
+---
+sidebar: false
+---
+<common-demoItem></common-demoItem> 
+::: slot name
+Fade
+:::
 
-<common-home></common-home> 
-::: slot startDemo
-```html
+::: slot content
+<common-demoCode>
+  <effect-sliderFade></effect-sliderFade>
+  <div slot="codeText">
+  
+   ```html
 <template>
 <!-- Make a div wrapped slider,set height and width -->
  <div style="width:100%;margin:20px auto;height:400px">
@@ -55,4 +65,9 @@ export default {
 }
 </script>
 ```
+
+  </div>
+</common-demoCode>
+
+ ### Overview
 :::

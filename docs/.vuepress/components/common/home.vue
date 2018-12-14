@@ -16,7 +16,7 @@
     <section class="home-demo">
       <div class="row">
         <h3>Demo</h3>
-        <p><sliderBasic></sliderBasic></p>
+        <p><effect-sliderHome></effect-sliderHome></p>
       </div>
     </section>
     <section>
@@ -118,12 +118,6 @@ export default {
     font-size: 1.5rem;
     text-align: center;
     margin: 2rem;
-  }
-  .slider-item {
-    color: #FFF;
-    text-align: center;
-    font-style: italic;
-    font-weight: 300;
   }
   section .features {
     padding: 1.2rem 0;
