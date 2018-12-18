@@ -23,9 +23,9 @@
       <div class="row">
         <h3>Features</h3>
         <div class="features">
-          <div class="feature"><h2>简单配置</h2> <p>以vue组件为中心的结构，用最少的配置帮助你实现滑动。</p></div>
-          <div class="feature"><h2>轻量体积</h2> <p>36KB的大小，帮助你在电脑和手机端快速加载。</p></div>
-          <div class="feature"><h2>多种滑动样式</h2> <p>十种以上滑动特效，满足你产品经理所有需求</p></div>
+          <div class="feature"><h2>Simple configuration</h2> <p>A structure centered around the vue component that helps you achieve sliding with minimal configuration.</p></div>
+          <div class="feature"><h2>Lightweight volume</h2> <p>Load on demand, only 30k in size, to help you load quickly on your computer and mobile phone.</p></div>
+          <div class="feature"><h2>Multiple sliding styles</h2> <p>More than ten sliding effects to meet all your product manager needs</p></div>
         </div>
       </div>
     </section>
@@ -45,7 +45,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
   body {
     -webkit-font-smoothing: antialiased;
     color: #34495e;
@@ -64,11 +64,11 @@ export default {
     padding: 0;
     top: 3.6rem;
   }
-  /* .content:not(.custom) {
+  .content:not(.custom) {
     max-width: 100%;
     margin: 0 auto;
     padding: 0;
-  } */
+  }
   /* .navbar {
     display: none
   }

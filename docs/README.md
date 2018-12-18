@@ -1,12 +1,21 @@
 
 <common-home></common-home> 
 ::: slot startDemo
+
+```js
+  1. npm i vue-concise-slider -D
+```
+
+```js
+  2. Create your vue component
+```
+
 ```html
 <template>
 <!-- Make a div wrapped slider,set height and width -->
  <div style="width:100%;margin:20px auto;height:400px">
       <!-- Using the slider component -->
-      <slider ref="slider" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
+      <slider ref="slider" :options="options">
           <!-- slideritem wrapped package with the components you need -->
           <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
           <!-- Customizable loading -->
