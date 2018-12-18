@@ -22,15 +22,14 @@ export default {
       someList: [],
       options: {
         currentPage: 0,
-        tracking: false,
         speed: 300,
         itemAnimation: true,
         centeredSlides: true,
-        thresholdDistance: 100, // 滑动距离阈值判定
-        thresholdTime: 300, // 滑动时间阈值判定
-        infinite: 2, // 多级滚动时，需要添加前后遍历数
-        slidesToScroll: 1, // 需要滚动页面的数量
-        loop: true // 无限循环
+        thresholdDistance: 100,
+        thresholdTime: 300,
+        loopedSlides: 2,
+        slidesToScroll: 1,
+        loop: true
         // autoplay: 1000 // 自动播放:时间[ms]
       }
     }
@@ -44,21 +43,21 @@ export default {
     setTimeout(function () {
       that.someList = [
         {
-          html: '1',
+          html: 'slide1',
           style: {
             'background': '#4abf8a',
             'width': '600px'
           }
         },
         {
-          html: '2',
+          html: 'slide2',
           style: {
             'background': '#4bbfc3',
             'width': '600px'
           }
         },
         {
-          html: '3',
+          html: 'slide3',
           style: {
             'background': '#7baabe',
             'width': '600px'
@@ -124,5 +123,18 @@ export default {
   .loadingDot i:nth-child(4) {
     -webkit-animation: loading-7 .7s ease-in 0.45s infinite;
     animation: loading-7 .7s ease-in 0.45s infinite;
+  }
+  .slider-item {
+    transform:scale(0.8);
+    transition-timing-function: ease;
+    transition-duration: 300ms;
+  }
+  .slider-item.slider-active {
+    transform:scale(1.0);
+    z-index: 999;
+  }
+  .slider-item.slider-active-copy {
+    transform:scale(1.0);
+    z-index: 999;
   }
 </style>

@@ -1,96 +1,17 @@
 ---
 sidebar: auto
 ---
-## pages
 
-- Type: `Array`
-- Default value: `null`
-Array of slider list,supporting configure DOM,and style CSS
-```html
- [
-    {
-      html: '',
-      style:{
-       background:'url(src/img/testimg-1.jpg)'
-      }
-    },
-    {
-     html: '',
-     style:{
-      background:'url(src/img/testimg-2.jpg)'
-      }
-    },
-    {
-      html: 'slide3',
-      style:{
-        background:'#4bbfc3',
-      }
-    }
- ]
-```
+# options
 
-### html
-
-- Type: `String`
-- Default value: `null`
-The value is mounted on the label [v-html](https://vuejs.org/v2/api/#v-html),outputting real HTML
-```html
-  {
-    html: '<div>test</div>'
-  }
-```
-
-### style
-
-- Type: `object`
-- Default value: `null`
-
-The style pattern that works directly on each item can output background maps, background colors, each width can be customized, and automatically switch to indefinite width scrolling
-
-```html
-  {
-  style:{
-    background:'#4bbfc3'
-   }
-  }
-```
-
-### component
-
-- Type: `object`
-- Default value: `null`
-
-For the extension of each page page, you can customize the component template , and use props in the component
-
-* item : per pages
-* options: slider configuration
-* pages: array of slider list
-
-```html
-  {
-    component: {
-      props: ['item', 'options', 'pages'],
-      data () {
-        return {
-          img: 'src/img/testimg-1.jpg'
-        }
-      },
-      mounted () {
-        console.log(this.item)
-      },
-      template: '<div><img style="width: 100%" :src="img" /><p style="position: absolute; margin: 0; right: 10px; bottom: 10px; font-size: 16px;">test1</p></div>'
-    }
-  }
-```
-
-## options
+## Basic options
 
 - Type: `Object`
 - Default value: `null`
 
 Slider configuration
 
-```html
+```js
   {
     currentPage: 0,
     thresholdDistance: 500,
@@ -107,9 +28,9 @@ Slider configuration
 - Type: `string`
 - Default value: `slide`
 
-Switching effect,it Could be 'slide','fade','coverflow'
+Switching effect,it Could be  `slide`, `fade`, `coverflow`, `nest`
 
-```html
+```js
   {
     effect:'slide'
   }
@@ -120,9 +41,9 @@ Switching effect,it Could be 'slide','fade','coverflow'
 - Type: `string`
 - Default value: `horizontal`
 
-Direction setting,it Could be 'horizontal' or 'vertical' (for vertical slider)
+Direction setting,it Could be `horizontal` or `vertical` (for vertical slider)
 
-```html
+```js
   {
     direction:'horizontal'
   }
@@ -135,7 +56,7 @@ Direction setting,it Could be 'horizontal' or 'vertical' (for vertical slider)
 
 Initing current Page of slider
 
-```html
+```js
   {
     currentPage:0
   }
@@ -148,7 +69,7 @@ Initing current Page of slider
 
 Minimal distance (in px) to trigger swipe to next/previous slide during swipes
 
-```html
+```js
   {
     thresholdDistance:'100'
   }
@@ -161,7 +82,7 @@ Minimal distance (in px) to trigger swipe to next/previous slide during swipes
 
 Minimal speed (in ms) to trigger swipe to next/previous slide during swipes
 
-```html
+```js
   {
     thresholdTime:'500'
   }
@@ -174,7 +95,7 @@ Minimal speed (in ms) to trigger swipe to next/previous slide during swipes
 
 delay between transitions (in ms).
 
-```html
+```js
   {
     autoplay:'1000'
   }
@@ -187,7 +108,7 @@ delay between transitions (in ms).
 
 Set to true to enable continuous loop mode
 
-```html
+```js
   {
     loop:false
   }
@@ -200,7 +121,7 @@ Set to true to enable continuous loop mode
 
 like carousel, works with multiple slides
 
-```html
+```js
   {
     loopedSlides:1
   }
@@ -212,7 +133,7 @@ like carousel, works with multiple slides
 
 slides scrolled at once
 
-```html
+```js
   {
     slidesToScroll:1
   }
@@ -224,7 +145,7 @@ slides scrolled at once
 
 When the touch event is triggered, the entire page scrolls
 
-```html
+```js
   {
     preventDocumentMove:true
   }
@@ -237,7 +158,7 @@ When the touch event is triggered, the entire page scrolls
 
 Sliding speed[ms]
 
-```html
+```js
   {
     speed: 300
   }
@@ -250,48 +171,12 @@ Sliding speed[ms]
 
 Sliding mode
 
-```html
+```js
   {
     timingFunction: 'ease'
   }
 ```
 
-### widthScalingRatio
-
-- Type: `string`
-- Default value: `0.8`
-
-Coverflow mode configuration width scale scaling, range 0~1
-
-```html
-  {
-    widthScalingRatio: '0.8'
-  }
-```
-### heightScalingRatio
-
-- Type: `string`
-- Default value: `0.8`
-
-Coverflow mode configuration hight scale scaling, range 0~1
-
-```html
-  {
-    heightScalingRatio: '0.8'
-  }
-```
-### deviation
-
-- Type: `string`
-- Default value: `200`
-
-Configuration of sliding item offset in coverflow mode
-
-```html
-  {
-    deviation: '200'
-  }
-```
 ### pagination
 
 - Type: `boolean`
@@ -299,7 +184,7 @@ Configuration of sliding item offset in coverflow mode
 
 Whether paging is displayed in all modes
 
-```html
+```js
   {
     pagination: true
   }
@@ -312,7 +197,7 @@ Whether paging is displayed in all modes
 
 Custom paging function, the parameter is VUE's createElement function, and the current page number index
 
-```html
+```js
   {
     renderPagination: (h, index) => {
       return h('div', {
@@ -321,7 +206,6 @@ Custom paging function, the parameter is VUE's createElement function, and the c
     }
   }
 ```
-
 ### centeredSlides
 
 - Type：`boolean`
@@ -329,12 +213,11 @@ Custom paging function, the parameter is VUE's createElement function, and the c
 
 Whether to slide in the middle
 
-```html
+```js
   {
     centeredSlides: true
   }
 ```
-
 ### itemAnimation
 
 - Type：`boolean`
@@ -342,11 +225,64 @@ Whether to slide in the middle
 
 Use itemAnimation in infinite scrolling to ensure that the last one to the first (first to last) effect ends before you can continue to slide
 
-```html
+```js
   {
     itemAnimation: true
   }
 ```
+
+### freeze
+
+- Type：`boolean`
+- Default：`false`
+
+Prevent Slider sliding
+
+```js
+  {
+    freeze: false
+  }
+```
+## CoverFlow options
+
+### widthScalingRatio
+
+- Type: `string`
+- Default value: `0.8`
+
+Coverflow mode configuration width scale scaling, range `0~1`
+
+```js
+  {
+    widthScalingRatio: '0.8'
+  }
+```
+### heightScalingRatio
+
+- Type: `string`
+- Default value: `0.8`
+
+Coverflow mode configuration hight scale scaling, range `0~1`
+
+```js
+  {
+    heightScalingRatio: '0.8'
+  }
+```
+### deviation
+
+- Type: `string`
+- Default value: `200`
+
+Configuration of sliding item offset in coverflow mode
+
+```js
+  {
+    deviation: '200'
+  }
+```
+
+## Nest options
 
 ### nested
 
@@ -355,12 +291,11 @@ Use itemAnimation in infinite scrolling to ensure that the last one to the first
 
 When nesting the same direction of the swiper, when the child swiper is switched, the parent swiper will switch.
 
-```html
+```js
   {
     nested: false
   }
 ```
-
 ## Transitive events
 
 
@@ -370,7 +305,7 @@ When nesting the same direction of the swiper, when the child swiper is switched
 
 Sliding to (number) page
 
-```html
+```js
   slideTo () {
     this.$refs.slider.$emit('slideTo', num)
   }
@@ -382,7 +317,7 @@ Sliding to (number) page
 
 Sliding to the next page
 
-```html
+```js
   slideNext () {
     this.$refs.slider.$emit('slideNext')
   }
@@ -395,7 +330,7 @@ Sliding to the next page
 
 Sliding to the previous page
 
-```html
+```js
   slide () {
     this.$refs.slider.$emit('slidePre')
   }
@@ -408,7 +343,7 @@ Sliding to the previous page
 
 Opening timing carousel,Setting the carousel time
 
-```html
+```js
   this.$refs.slider.$emit('autoplayStart',1000)
 ```
 
@@ -418,11 +353,11 @@ Opening timing carousel,Setting the carousel time
 
 Pause timing carousel
 
-```html
+```js
   this.$refs.slider.$emit('autoplayStop')
 ```
 
-## Monitoring events
+## Slider monitoring events
 
 ### slide
 
@@ -430,11 +365,24 @@ Pause timing carousel
 
 The current sliding to page number, the parameter is slider basic information
 
-```html
+```js
   slide (data) {
     console.log(data)
   }
 ```
+### init
+
+- parameter: `obj`
+
+initted slider , and the parameters are slider basic information
+
+```js
+  init (data) {
+    console.log(data)
+  }
+```
+
+## SliderItem monitoring events
 
 ### tap
 
@@ -442,20 +390,8 @@ The current sliding to page number, the parameter is slider basic information
 
 tapped on page , and the parameters are slider basic information
 
-```html
+```js
   tap (data) {
-    console.log(data)
-  }
-```
-
-### init
-
-- parameter: `obj`
-
-initted slider , and the parameters are slider basic information
-
-```html
-  init (data) {
     console.log(data)
   }
 ```

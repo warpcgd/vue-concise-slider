@@ -34,19 +34,19 @@ export default {
         //data list [array]
         someList:[
           {
-            html: 'slide1',
+            html: 'slider1',
             style: {
-              'background': '#1bbc9b'
+              'background': '#4abf8a'
             }
           },
           {
-            html: 'slide2',
+            html: 'slider2',
             style: {
               'background': '#4bbfc3'
             }
           },
           {
-            html: 'slide3',
+            html: 'slider3',
             style: {
               'background': '#7baabe'
             }
@@ -70,4 +70,11 @@ export default {
 </common-demoCode>
 
  ### Overview
+  vue-concise-slider 实现例子
+  1. 通过配置options
+``` js
+options: {
+  loop: true
+}
+```
 :::

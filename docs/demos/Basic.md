@@ -54,7 +54,14 @@ export default {
         ],
         //Slider configuration [obj]
         options: {
-          currentPage: 0
+          pagination: true,
+          thresholdDistance: 100, // Sliding distance threshold
+          thresholdTime: 300, // Sliding time threshold decision
+          grabCursor: true, // Scratch style
+          speed: 300 // Sliding speed
+          // timingFunction: 'ease', // Sliding mode
+          // loop: false, // Infinite loop
+          // autoplay: 0 // Auto play[ms]
         }
       }
     },
@@ -70,4 +77,8 @@ export default {
 </common-demoCode>
 
  ### Overview
+  vue-concise-slider 实现的基础例子
+  1. 通过options配置slider效果
+  2. 通过slideritem包裹需要滑动的内容
+  3. 设置loading slot配置loading信息
 :::

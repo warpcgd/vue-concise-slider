@@ -22,10 +22,10 @@ export default {
       someList: [],
       options: {
         effect: 'coverflow',
-        currentPage: 1,
+        currentPage: 0,
         thresholdDistance: 100, // 滑动距离阈值判定
         thresholdTime: 300, // 滑动时间阈值判定
-        deviation: 300, // 偏移值
+        deviation: 200, // 偏移值
         widthScalingRatio: 0.8, // 宽度缩放比例
         heightScalingRatio: 0.8, // 高度缩放比例
         infinite: 2, // 多级滚动时，需要添加前后遍历数
@@ -44,42 +44,42 @@ export default {
     setTimeout(function () {
       that.someList = [
         {
-          html: '1',
+          html: 'slider1',
           style: {
             'background': '#4abf8a',
             'width': '33.33333333%'
           }
         },
         {
-          html: '2',
+          html: 'slider2',
           style: {
             'background': '#4bbfc3',
             'width': '33.33333333%'
           }
         },
         {
-          html: '3',
+          html: 'slider3',
           style: {
             'background': '#7baabe',
             'width': '33.33333333%'
           }
         },
         {
-          html: '4',
+          html: 'slider4',
           style: {
             'background': '#4abf8a',
             'width': '33.33333333%'
           }
         },
         {
-          html: '5',
+          html: 'slider5',
           style: {
             'background': '#4bbfc3',
             'width': '33.33333333%'
           }
         },
         {
-          html: '6',
+          html: 'slider6',
           style: {
             'background': '#7baabe',
             'width': '33.33333333%'

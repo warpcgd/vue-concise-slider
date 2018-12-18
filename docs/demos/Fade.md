@@ -34,27 +34,27 @@ export default {
         //data list [array]
         someList:[
           {
-            html: 'slide1',
+          html: 'slider1',
+          style: {
+            'background': '#4abf8a'
+          }
+          },
+          {
+            html: 'slider2',
             style: {
-              'background': '#1bbc9b'
+              background: '#4bbfc3'
             }
           },
           {
-            html: 'slide2',
+            html: 'slider3',
             style: {
-              'background': '#4bbfc3'
-            }
-          },
-          {
-            html: 'slide3',
-            style: {
-              'background': '#7baabe'
+              background: '#333'
             }
           }
         ],
-        //Slider configuration [obj]
         options: {
-          currentPage: 0
+          effect: 'fade',
+          loop: true
         }
       }
     },
@@ -70,4 +70,12 @@ export default {
 </common-demoCode>
 
  ### Overview
+  vue-concise-slider 实现例子
+  1. 通过配置options
+``` js
+options: {
+  effect: 'fade',
+  loop: true
+}
+```
 :::

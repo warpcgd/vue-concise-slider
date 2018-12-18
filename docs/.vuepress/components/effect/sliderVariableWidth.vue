@@ -21,7 +21,7 @@ export default {
     return {
       someList: [],
       options: {
-        currentPage: 1
+        currentPage: 0
         // tracking: false,
         // thresholdDistance: 100, // 滑动距离阈值判定
         // thresholdTime: 300 // 滑动时间阈值判定

@@ -54,7 +54,14 @@ export default {
         ],
         //Slider configuration [obj]
         options: {
-          currentPage: 0
+          currentPage: 0,
+          pagination: true,
+          renderPagination: (h, index) => {
+            return h('div', {
+              class: 'swiper-pagination-bullet'
+            }, [index])
+          },
+          loop: true // 无限循环
         }
       }
     },
@@ -70,4 +77,16 @@ export default {
 </common-demoCode>
 
  ### Overview
+  vue-concise-slider 实现例子
+  1. 通过配置options
+``` js
+options: {
+  renderPagination: (h, index) => {
+    return h('div', {
+      class: 'swiper-pagination-bullet'
+    }, [index])
+  },
+  pagination: true
+}
+```
 :::

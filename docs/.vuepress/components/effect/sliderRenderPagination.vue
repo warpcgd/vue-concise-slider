@@ -47,19 +47,19 @@ export default {
     setTimeout(function () {
       that.someList = [
         {
-          html: '1',
+          html: 'slider1',
           style: {
             'background': '#4abf8a'
           }
         },
         {
-          html: '2',
+          html: 'slider2',
           style: {
             'background': '#4bbfc3'
           }
         },
         {
-          html: '3',
+          html: 'slider3',
           style: {
             'background': '#7baabe'
           }
@@ -69,7 +69,26 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style>
+  /* 重写分页器样式 */
+  .swiper-pagination-bullet {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    color: #000;
+    opacity: 1;
+    background: rgba(0,0,0,0.2);
+    display: inline-block;
+    border-radius: 100%;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  .slider-pagination-bullet-active-render {
+    color: #fff;
+    background: #007aff;
+  }
   @keyframes loading-7{ 
   0%{margin-bottom:0}
   50%{margin-bottom:20px;}
@@ -103,24 +122,5 @@ export default {
   .loadingDot i:nth-child(4) {
     -webkit-animation: loading-7 .7s ease-in 0.45s infinite;
     animation: loading-7 .7s ease-in 0.45s infinite;
-  }
-  /* 重写分页器样式 */
-  .swiper-pagination-bullet {
-    width: 20px;
-    height: 20px;
-    text-align: center;
-    line-height: 20px;
-    font-size: 12px;
-    color: #000;
-    opacity: 1;
-    background: rgba(0,0,0,0.2);
-    display: inline-block;
-    border-radius: 100%;
-    margin-right: 5px;
-    cursor: pointer;
-  }
-  .slider-pagination-bullet-active-render {
-    color: #fff;
-    background: #007aff;
   }
 </style>

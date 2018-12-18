@@ -36,19 +36,25 @@ export default {
           {
             html: 'slide1',
             style: {
-              'background': '#1bbc9b'
+              'background': '#1bbc9b',
+              'width': '80%',
+              'margin-right': '20px'
             }
           },
           {
             html: 'slide2',
             style: {
-              'background': '#4bbfc3'
+              'background': '#4bbfc3',
+              'width': '60%',
+              'margin-right': '20px'
             }
           },
           {
             html: 'slide3',
             style: {
-              'background': '#7baabe'
+              'background': '#7baabe',
+              'width': '40%',
+              'margin-right': '20px'
             }
           }
         ],
@@ -70,4 +76,13 @@ export default {
 </common-demoCode>
 
  ### Overview
+  vue-concise-slider 实现例子
+  1. 通过设置slideritem的style,实现一行三列的排版
+```html
+style: {
+  'background': '#1bbc9b',
+  'width': '80%',
+  'margin-right': '20px'
+}
+```
 :::

@@ -42,7 +42,7 @@
           </router-link>
         </div>
       </div>
-      <div class="demo_plugins">
+      <!-- <div class="demo_plugins">
         <div class="demo_plugins_title">plugins demos:</div>
         <div class="splite_line"></div>
         <div class="demo_plugins_wrap">
@@ -66,7 +66,7 @@
           <router-link to="/demos/libary">
             <div class="demo_libary_item">libary</div>
           </router-link>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -79,18 +79,24 @@
 </script>
 <style lang="scss" scoped>
 .fullpage {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    right: 0;
-    margin: 0!important;
-    padding: 0;
-    top: 3.6rem;
-  }
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  margin: 0!important;
+  padding: 0;
+  top: 0;
+  box-sizing: border-box;
+  padding-top: 3.6rem;
+}
 .demo {
   height: 100%;
-  overflow: hidden;
+  // overflow: hidden;
+  a {
+    color: #2c3e50;
+    text-decoration: none;
+  }
   .header {
     background: linear-gradient(to left bottom, hsl(189, 100%, 85%) 0%,hsl(111, 100%, 85%) 100%);
   }
@@ -98,7 +104,7 @@
     padding: 1.5rem 0;
     font-size: 2.75rem;
     font-weight: 300;
-    line-height: 1.5;
+    line-height: 1.7;
   }
   &_content {
     margin: 0 auto;

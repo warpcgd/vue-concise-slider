@@ -36,19 +36,19 @@ export default {
     setTimeout(function () {
       that.someList = [
         {
-          html: '1',
+          html: 'slider1',
           style: {
             'background': '#4abf8a'
           }
         },
         {
-          html: '2',
+          html: 'slider2',
           style: {
             background: '#4bbfc3'
           }
         },
         {
-          html: '3',
+          html: 'slider3',
           style: {
             background: '#333'
           }

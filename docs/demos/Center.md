@@ -34,27 +34,59 @@ export default {
         //data list [array]
         someList:[
           {
-            html: 'slide1',
+            html: 'slider1',
             style: {
-              'background': '#1bbc9b'
+              'background': '#4abf8a',
+              'width': '600px'
             }
           },
           {
-            html: 'slide2',
+            html: 'slider2',
             style: {
-              'background': '#4bbfc3'
+              'background': '#4bbfc3',
+              'width': '600px'
             }
           },
           {
-            html: 'slide3',
+            html: 'slider3',
             style: {
-              'background': '#7baabe'
+              'background': '#7baabe',
+              'width': '600px'
+            }
+          },
+          {
+            html: 'slide4',
+            style: {
+              'background': '#4abf8a',
+              'width': '600px'
+            }
+          },
+          {
+            html: 'slide5',
+            style: {
+              'background': '#4bbfc3',
+              'width': '600px'
+            }
+          },
+          {
+            html: 'slide6',
+            style: {
+              'background': '#7baabe',
+              'width': '600px'
             }
           }
         ],
         //Slider configuration [obj]
         options: {
-          currentPage: 0
+          currentPage: 0,
+          speed: 300,
+          itemAnimation: true,
+          centeredSlides: true,
+          thresholdDistance: 100,
+          thresholdTime: 300,
+          loopedSlides: 2,
+          slidesToScroll: 1,
+          loop: true
         }
       }
     },
@@ -70,4 +102,31 @@ export default {
 </common-demoCode>
 
  ### Overview
+  vue-concise-slider 实现的基础例子
+  1. 通过配置options
+``` js
+options: {
+  itemAnimation: true,
+  centeredSlides: true,
+  loopedSlides: 2,
+  slidesToScroll: 1
+}
+```
+  2. 设置css
+``` html
+.slider-item {
+  transform:scale(0.8);
+  transition-timing-function: ease;
+  transition-duration: 300ms;
+}
+.slider-item.slider-active {
+  transform:scale(1.0);
+  z-index: 999;
+}
+.slider-item.slider-active-copy {
+  transform:scale(1.0);
+  z-index: 999;
+}
+```
+
 :::

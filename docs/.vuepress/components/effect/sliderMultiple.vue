@@ -41,7 +41,7 @@ export default {
     setTimeout(function () {
       that.someList = [
         {
-          html: '1',
+          html: 'slider1',
           style: {
             'background': '#4abf8a',
             'width': '23.5%',
@@ -49,7 +49,7 @@ export default {
           }
         },
         {
-          html: '2',
+          html: 'slider2',
           style: {
             'background': '#4bbfc3',
             'width': '23.5%',
@@ -57,7 +57,7 @@ export default {
           }
         },
         {
-          html: '3',
+          html: 'slider3',
           style: {
             'background': '#7baabe',
             'width': '23.5%',
@@ -65,7 +65,7 @@ export default {
           }
         },
         {
-          html: '4',
+          html: 'slider4',
           style: {
             'background': '#7caabe',
             'width': '23.5%',
@@ -73,7 +73,7 @@ export default {
           }
         },
         {
-          html: '5',
+          html: 'slider5',
           style: {
             'background': '#4abf8a',
             'width': '23.5%',
@@ -81,7 +81,7 @@ export default {
           }
         },
         {
-          html: '6',
+          html: 'slider6',
           style: {
             'background': '#4bbfc3',
             'width': '23.5%',
@@ -89,7 +89,7 @@ export default {
           }
         },
         {
-          html: '7',
+          html: 'slider7',
           style: {
             'background': '#7baabe',
             'width': '23.5%',
@@ -97,7 +97,7 @@ export default {
           }
         },
         {
-          html: '8',
+          html: 'slider8',
           style: {
             'background': '#7caabe',
             'width': '23.5%',

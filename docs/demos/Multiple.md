@@ -32,29 +32,81 @@ export default {
    data () {
       return {
         //data list [array]
-        someList:[
+        that.someList = [
           {
-            html: 'slide1',
+            html: 'slider1',
             style: {
-              'background': '#1bbc9b'
+              'background': '#4abf8a',
+              'width': '23.5%',
+              'margin-right': '2%'
             }
           },
           {
-            html: 'slide2',
+            html: 'slider2',
             style: {
-              'background': '#4bbfc3'
+              'background': '#4bbfc3',
+              'width': '23.5%',
+              'margin-right': '2%'
             }
           },
           {
-            html: 'slide3',
+            html: 'slider3',
             style: {
-              'background': '#7baabe'
+              'background': '#7baabe',
+              'width': '23.5%',
+              'margin-right': '2%'
+            }
+          },
+          {
+            html: 'slider4',
+            style: {
+              'background': '#7caabe',
+              'width': '23.5%',
+              'margin-right': '2%'
+            }
+          },
+          {
+            html: 'slider5',
+            style: {
+              'background': '#4abf8a',
+              'width': '23.5%',
+              'margin-right': '2%'
+            }
+          },
+          {
+            html: 'slider6',
+            style: {
+              'background': '#4bbfc3',
+              'width': '23.5%',
+              'margin-right': '2%'
+            }
+          },
+          {
+            html: 'slider7',
+            style: {
+              'background': '#7baabe',
+              'width': '23.5%',
+              'margin-right': '2%'
+            }
+          },
+          {
+            html: 'slider8',
+            style: {
+              'background': '#7caabe',
+              'width': '23.5%',
+              'margin-right': '2%'
             }
           }
-        ],
+        ]
         //Slider configuration [obj]
         options: {
-          currentPage: 0
+          currentPage: 0,
+          tracking: false,
+          thresholdDistance: 100,
+          thresholdTime: 300,
+          infinite: 4,
+          slidesToScroll: 4,
+          loop: true
         }
       }
     },
@@ -70,4 +122,22 @@ export default {
 </common-demoCode>
 
  ### Overview
+  vue-concise-slider 实现例子
+  1. 通过配置options
+``` js
+options: {
+  currentPage: 0,
+  infinite: 4,
+  slidesToScroll: 4,
+  loop: true
+}
+```
+  2. 通过设置slideritem的style,实现一行三列的排版
+```html
+style: {
+  'background': '#7caabe',
+  'width': '23.5%',
+  'margin-right': '2%'
+}
+```
 :::

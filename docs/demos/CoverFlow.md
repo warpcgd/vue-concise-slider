@@ -34,27 +34,59 @@ export default {
         //data list [array]
         someList:[
           {
-            html: 'slide1',
+            html: 'slider1',
             style: {
-              'background': '#1bbc9b'
+              'background': '#4abf8a',
+              'width': '33.33333333%'
             }
           },
           {
-            html: 'slide2',
+            html: 'slider2',
             style: {
-              'background': '#4bbfc3'
+              'background': '#4bbfc3',
+              'width': '33.33333333%'
             }
           },
           {
-            html: 'slide3',
+            html: 'slider3',
             style: {
-              'background': '#7baabe'
+              'background': '#7baabe',
+              'width': '33.33333333%'
+            }
+          },
+          {
+            html: 'slider4',
+            style: {
+              'background': '#4abf8a',
+              'width': '33.33333333%'
+            }
+          },
+          {
+            html: 'slider5',
+            style: {
+              'background': '#4bbfc3',
+              'width': '33.33333333%'
+            }
+          },
+          {
+            html: 'slider6',
+            style: {
+              'background': '#7baabe',
+              'width': '33.33333333%'
             }
           }
         ],
         //Slider configuration [obj]
         options: {
-          currentPage: 0
+          effect: 'coverflow',
+          currentPage: 0,
+          thresholdDistance: 100, 
+          thresholdTime: 300, 
+          deviation: 200, 
+          widthScalingRatio: 0.8, 
+          heightScalingRatio: 0.8, 
+          slidesToScroll: 1, 
+          loop: true
         }
       }
     },
@@ -70,4 +102,21 @@ export default {
 </common-demoCode>
 
  ### Overview
+  vue-concise-slider 实现例子
+  1. 通过配置options
+``` js
+options: {
+  effect: 'coverflow',
+  deviation: 200,
+  loop: true,
+  widthScalingRatio: 0.8,
+  heightScalingRatio: 0.8
+}
+```
+  2. 通过设置slideritem的style,实现一行三列的排版
+```html
+style: {
+  'width': '33.33333333%'
+}
+```
 :::

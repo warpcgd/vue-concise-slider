@@ -70,4 +70,12 @@ export default {
 </common-demoCode>
 
  ### Overview
+  vue-concise-slider 实现例子
+
+  1. 通过配置options
+``` js
+options: {
+  direction: 'vertical'
+}
+```
 :::
