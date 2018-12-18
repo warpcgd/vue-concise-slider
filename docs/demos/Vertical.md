@@ -70,9 +70,9 @@ export default {
 </common-demoCode>
 
  ### Overview
-  vue-concise-slider 实现例子
+  vue-concise-slider example
 
-  1. 通过配置options
+  1. By configuring options
 ``` js
 options: {
   direction: 'vertical'

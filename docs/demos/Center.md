@@ -103,7 +103,7 @@ export default {
 
  ### Overview
   vue-concise-slider 实现的基础例子
-  1. 通过配置options
+  1. By configuring options
 ``` js
 options: {
   itemAnimation: true,
@@ -112,7 +112,7 @@ options: {
   slidesToScroll: 1
 }
 ```
-  2. 设置css
+  2. Set css
 ``` html
 .slider-item {
   transform:scale(0.8);

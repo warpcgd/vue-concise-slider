@@ -43,7 +43,7 @@
   </div>
 </template>
 <script>
-import slider from '../components/slider'
+import slider from '../components/sliderCoverFlow'
 import slideritem from '../components/slider_item'
 export default {
   el: '#slidercoverFlow',

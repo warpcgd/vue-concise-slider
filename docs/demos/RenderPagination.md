@@ -77,8 +77,8 @@ export default {
 </common-demoCode>
 
  ### Overview
-  vue-concise-slider 实现例子
-  1. 通过配置options
+  vue-concise-slider example
+  1. By configuring options
 ``` js
 options: {
   renderPagination: (h, index) => {

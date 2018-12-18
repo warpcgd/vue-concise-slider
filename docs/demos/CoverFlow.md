@@ -102,8 +102,8 @@ export default {
 </common-demoCode>
 
  ### Overview
-  vue-concise-slider 实现例子
-  1. 通过配置options
+  vue-concise-slider example
+  1. By configuring options
 ``` js
 options: {
   effect: 'coverflow',
@@ -113,7 +113,7 @@ options: {
   heightScalingRatio: 0.8
 }
 ```
-  2. 通过设置slideritem的style,实现一行三列的排版
+  2. Implement a layout of three columns by setting the style of the slideritem
 ```html
 style: {
   'width': '33.33333333%'

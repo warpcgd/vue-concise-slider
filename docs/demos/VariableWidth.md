@@ -76,8 +76,8 @@ export default {
 </common-demoCode>
 
  ### Overview
-  vue-concise-slider 实现例子
-  1. 通过设置slideritem的style,实现一行三列的排版
+  vue-concise-slider example
+  1. Implement a layout of three columns by setting the style of the slideritem
 ```html
 style: {
   'background': '#1bbc9b',

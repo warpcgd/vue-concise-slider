@@ -38,8 +38,8 @@ import sliderClock from './common/sliderClock.js'
 import sliderDom from './common/sliderDom.js'
 import sliderAddClass from './common/sliderAddClass.js'
 // 引入不同类型slider
-import sliderBasic from './effect/sliderBasic/sliderBasic.js'
-import sliderCoverflow from './effect/sliderCoverflow/sliderCoverflow.js'
+// import sliderBasic from './effect/sliderBasic/sliderBasic.js'
+// import sliderCoverflow from './effect/sliderCoverflow/sliderCoverflow.js'
 import sliderFade from './effect/sliderFade/sliderFade.js'
 export default {
   props: {
@@ -51,8 +51,8 @@ export default {
       }
     }
   },
-  name: 'slider',
-  mixins: [sliderDom, sliderMove, sliderClock, sliderEvent, sliderComputed, sliderBasic, sliderCoverflow, sliderFade],
+  name: 'sliderFade',
+  mixins: [sliderDom, sliderMove, sliderClock, sliderEvent, sliderComputed, sliderFade],
   data () {
     return {
       data: {
@@ -87,9 +87,6 @@ export default {
     },
     swipeMove (e) {
       sliderMove.methods.swipeMove.call(this, e)
-      if (this.config.effect === 'slide' || this.config.effect === 'nest') {
-        sliderBasic.methods.swipeMove.call(this, e)
-      }
     },
     swipeEnd (e) {
       sliderMove.methods.swipeEnd.call(this, e)
@@ -99,24 +96,24 @@ export default {
     },
     pre () {
       this.data.direction = 'left'
-      if (this.config.effect === 'slide' || this.config.effect === 'nest') {
-        sliderBasic.methods.pre.call(this)
-      }
-      if (this.config.effect === 'coverflow') {
-        sliderCoverflow.methods.pre.call(this)
-      }
+      // if (this.config.effect === 'slide' || this.config.effect === 'nest') {
+      //   sliderBasic.methods.pre.call(this)
+      // }
+      // if (this.config.effect === 'coverflow') {
+      //   sliderCoverflow.methods.pre.call(this)
+      // }
       if (this.config.effect === 'fade') {
         sliderFade.methods.pre.call(this)
       }
     },
     next () {
       this.data.direction = 'right'
-      if (this.config.effect === 'slide' || this.config.effect === 'nest') {
-        sliderBasic.methods.next.call(this)
-      }
-      if (this.config.effect === 'coverflow') {
-        sliderCoverflow.methods.next.call(this)
-      }
+      // if (this.config.effect === 'slide' || this.config.effect === 'nest') {
+      //   sliderBasic.methods.next.call(this)
+      // }
+      // if (this.config.effect === 'coverflow') {
+      //   sliderCoverflow.methods.next.call(this)
+      // }
       if (this.config.effect === 'fade') {
         sliderFade.methods.next.call(this)
       }
@@ -133,9 +130,9 @@ export default {
       if (pagenum || pagenum === 0) {
         this.data.currentPage = pagenum
       }
-      if (this.config.effect === 'slide' || this.config.effect === 'nest') {
-        sliderBasic.methods.slide.call(this, pagenum, type)
-      }
+      // if (this.config.effect === 'slide' || this.config.effect === 'nest') {
+      //   sliderBasic.methods.slide.call(this, pagenum, type)
+      // }
       if (this.config.effect === 'fade') {
         sliderFade.methods.slide.call(this, pagenum, type)
       }

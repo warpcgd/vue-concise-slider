@@ -97,6 +97,9 @@
     color: #2c3e50;
     text-decoration: none;
   }
+  a:hover {
+    text-decoration: none;
+  }
   .header {
     background: linear-gradient(to left bottom, hsl(189, 100%, 85%) 0%,hsl(111, 100%, 85%) 100%);
   }
@@ -129,15 +132,17 @@
       margin: 20px 20px 0 0;
       width: 190px;
       height: 70px;
-      cursor: pointer;
+      // cursor: pointer;
       background: #eaeaea;
       font-size: 1.2rem;
       font-weight: 400;
+      text-decoration: none;
     }
     &_item:hover {
       color: #fff;
       background-color:rgb(74, 191, 138);
       transition: color 200ms linear,background-color 500ms ease;
+      text-decoration: none;
     }
   }
   &_plugins {

@@ -17,8 +17,6 @@ export default {
       config: {
         slidesToScroll: this.options.slidesToScroll || 1,
         effect: this.options.effect || 'slide',
-        thresholdDistance: this.options.thresholdDistance || 50,
-        thresholdTime: this.options.thresholdTime || 1000,
         direction: this.options.direction || 'horizontal',
         transitionEnding: false,
         itemTransitionEnding: false,
