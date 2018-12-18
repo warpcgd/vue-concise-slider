@@ -243,6 +243,19 @@ Prevent Slider sliding
     freeze: false
   }
 ```
+### preventRebound
+
+- Type：`boolean`
+- Default：`false`
+
+Stop rebound
+
+```js
+  {
+    preventRebound: false
+  }
+```
+
 ## CoverFlow options
 
 ### widthScalingRatio
