@@ -1,8 +1,10 @@
 const path = require('path')
 const webpack = require('webpack')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const resolve = dir => path.join(__dirname, '..', dir)
 module.exports = {
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   devtool: process.env.NODE_ENV === 'production' ? '' : 'inline-source-map',
   devServer: { // 检测代码变化并自动重新编译并自动刷新浏览器
     contentBase: path.resolve(__dirname, 'dist'), // 设置静态资源的根目录
@@ -62,6 +64,7 @@ module.exports = {
   },
   plugins: [
     // new webpack.optimize.UglifyJsPlugin(),
+    new VueLoaderPlugin(),
     new BundleAnalyzerPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ]

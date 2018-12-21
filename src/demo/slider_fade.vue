@@ -44,7 +44,7 @@
   </div>
 </template>
 <script>
-import slider from '../components/slider'
+import slider from '../components/sliderFade'
 import slideritem from '../components/slider_item'
 export default {
   el: '#sliderfade',

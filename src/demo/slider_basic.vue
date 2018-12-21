@@ -43,7 +43,7 @@
   </div>
 </template>
 <script>
-import slider from '../components/slider'
+import slider from '../components/slider.vue'
 import slideritem from '../components/slider_item'
 export default {
   el: '#sliderbasic',
