@@ -11,7 +11,8 @@ English | [中文](README.md)
 vue-concise-slider,A simple sliding component,has easy configuration,supported self-adaption / fullscreen / button / page,and is compatible with mobile and PC terminal
 
 ### version
-[v3.3.0](https://github.com/warpcgd/vue-concise-slider/issues/29)  Supported vue2.0+
+[v3.3.6](https://github.com/warpcgd/vue-concise-slider/issues/29)  Supported vue2.0+
+[v4.0.0](https://github.com/warpcgd/vue-concise-slider/issues/29)  beta
 
 ### Features
 
