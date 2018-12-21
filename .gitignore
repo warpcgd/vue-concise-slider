@@ -49,3 +49,7 @@ Temporary Items
 #node_modules
 /node_modules/*
 .history/
+
+/docs/.vuepress/dist/*
+*.bat
+*.sh
