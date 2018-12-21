@@ -42,6 +42,7 @@ vue-concise-slider,A simple sliding component,has easy configuration,supported s
 ### Links
 
 - [Documentation](https://warpcgd.github.io/vue-concise-slider/)
+
 - [demo](https://warpcgd.github.io/vue-concise-slider/demo/)
 
 ### Installation

@@ -12,6 +12,7 @@ vue-concise-slider,一个简单的滑动组件,配置简单,支持自适应/全�
 
 ## 版本
 [v3.3.6](https://github.com/warpcgd/vue-concise-slider/issues/29) 支持vue2.0+
+
 [v4.0.0](https://github.com/warpcgd/vue-concise-slider/issues/29) beta版本
 
 ## 特点
