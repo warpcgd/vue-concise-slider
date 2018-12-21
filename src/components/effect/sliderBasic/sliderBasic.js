@@ -46,7 +46,7 @@ export default {
           this.data.poswidth = -(this.currentWidth) + this.data.end.x - this.data.start.x
         }
       }
-      if (this.config.effect === 'nest') {
+      if (this.config.tracking && this.config.effect === 'nest') {
         sliderNest.methods.swipeMove.call(this, e)
       }
     },

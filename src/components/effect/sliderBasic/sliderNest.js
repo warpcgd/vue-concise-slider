@@ -46,18 +46,22 @@ export default {
       }
       if (this.config.tracking) {
         if (this.config.direction === 'vertical') {
-          if ($parent && $parent.options.direction === 'vertical' && this.data.currentPage === 0 && this.data.end.y - this.data.start.y >= 0 && $parent.config.nested) {
+          if ($parent && $parent.options.direction === 'vertical' && this.data.currentPage === 0 && this.data.end.y - this.data.start.y >= 0 && $parent.config.nested && !($parent.options.preventRebound && $parent.data.currentPage === 0)) {
             $parent.data.posheight = -($parent.currentHeight) + this.data.end.y - this.data.start.y
           } else if ($parent && $parent.options.direction === 'vertical' && this.data.currentPage === this.config.sliderLength - 1 && this.data.end.y - this.data.start.y <= 0 && $parent.config.nested) {
             $parent.data.posheight = -($parent.currentHeight) + this.data.end.y - this.data.start.y
+          } else if (this.options.preventRebound && !this.options.loop) {
+            return
           } else {
             this.data.posheight = -(this.currentHeight) + this.data.end.y - this.data.start.y
           }
         } else {
-          if ($parent && $parent.options.direction !== 'vertical' && this.data.currentPage === 0 && this.data.end.x - this.data.start.x >= 0 && $parent.config.nested) {
+          if ($parent && $parent.options.direction !== 'vertical' && this.data.currentPage === 0 && this.data.end.x - this.data.start.x >= 0 && $parent.config.nested && !($parent.options.preventRebound && $parent.data.currentPage === 0)) {
             $parent.data.poswidth = -($parent.currentWidth) + this.data.end.x - this.data.start.x
           } else if ($parent && $parent.options.direction !== 'vertical' && this.data.currentPage === this.config.sliderLength - 1 && this.data.end.x - this.data.start.x <= 0 && $parent.config.nested) {
             $parent.data.poswidth = -($parent.currentWidth) + this.data.end.x - this.data.start.x
+          } else if (this.options.preventRebound && !this.options.loop) {
+            return
           } else {
             this.data.poswidth = -(this.currentWidth) + this.data.end.x - this.data.start.x
           }
