@@ -416,7 +416,7 @@ export default {
           } else if ($parent && $parent.options.direction === 'vertical' && this.data.currentPage === this.s_data.sliderLength - 1 && this.data.end.y - this.data.start.y <= 0 && $parent.s_data.nested && !($parent.options.preventRebound && $parent.data.currentPage === $parent.s_data.sliderLength - 1)) {
             $parent.data.posheight = -($parent.currentHeight) + this.data.end.y - this.data.start.y
           } else if (this.options.preventRebound && !this.options.loop) {
-            return
+
           } else {
             this.data.posheight = -(this.currentHeight) + this.data.end.y - this.data.start.y
           }
@@ -430,7 +430,7 @@ export default {
           } else if ($parent && $parent.options.direction !== 'vertical' && this.data.currentPage === this.s_data.sliderLength - 1 && this.data.end.x - this.data.start.x <= 0 && $parent.s_data.nested && !($parent.options.preventRebound && $parent.data.currentPage === $parent.s_data.sliderLength - 1)) {
             $parent.data.poswidth = -($parent.currentWidth) + this.data.end.x - this.data.start.x
           } else if (this.options.preventRebound && !this.options.loop) {
-            return
+
           } else {
             this.data.poswidth = -(this.currentWidth) + this.data.end.x - this.data.start.x
           }
@@ -463,11 +463,11 @@ export default {
         return false
       } else if (this.options.direction !== 'vertical') {
         // 为了平滑滑动，修改y轴限制
-        if ((deltaX > thresholdDistance) && (Math.abs(deltaY) < thresholdDistance)) {
+        if ((deltaX > thresholdDistance) && (Math.abs(deltaY) < Math.abs(deltaX))) {
           // swipe right
           this.pre()
           return false
-        } else if ((-deltaX > thresholdDistance) && (Math.abs(deltaY) < thresholdDistance)) {
+        } else if ((-deltaX > thresholdDistance) && (Math.abs(deltaY) < Math.abs(deltaX))) {
           // swipe left
           this.next()
           return false
@@ -482,11 +482,11 @@ export default {
         }
         // 垂直判定
       } else {
-        if ((deltaY > thresholdDistance) && (Math.abs(deltaX) < thresholdDistance)) {
+        if ((deltaY > thresholdDistance) && (Math.abs(deltaX) < Math.abs(deltaY))) {
           // swipe right
           this.pre()
           return false
-        } else if ((-deltaY > thresholdDistance) && (Math.abs(deltaX) < thresholdDistance)) {
+        } else if ((-deltaY > thresholdDistance) && (Math.abs(deltaX) < Math.abs(deltaY))) {
           // swipe left
           this.next()
           return false
