@@ -624,7 +624,7 @@ export default {
         let children = this.$children
         let currentPage = this.data.currentPage
         children = children.filter((item) => {
-          return item.$options._componentTag === 'slideritem'
+          return item.$options.name === 'slideritem'
         })
         children.forEach(element => {
           element.removeActive()
@@ -730,12 +730,6 @@ export default {
         let sliderItem = children.filter((item) => {
           return item.className.indexOf('slider-item') !== -1
         })
-        // debugger
-        // children = children.filter((item) => {
-        //   return item.$options._componentTag === 'slideritem'
-        // })
-        // that.s_data.sliderLength = sliderItem.length
-        // loop && effect !== 'fade'
         if (that.s_data.sliderLength >= 1 && that.options.loop && that.options.effect !== 'fade' && that.options.effect !== 'coverflow') {
           // 先清空上次添加的节点
           let sliderCopy = slideDom.getElementsByClassName('slider-copy')
@@ -791,7 +785,7 @@ export default {
       }
     },
     judgeParentSlider (that) {
-      if (that.$parent && that.$parent.$vnode && that.$parent.$options._componentTag === 'slider') {
+      if (that.$parent && that.$parent.$vnode && that.$parent.$options.name === 'slider') {
         return that.$parent
       } else if (that.$parent && that.$parent.$vnode === undefined) {
         return false
