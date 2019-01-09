@@ -1,3 +1,4 @@
+import sliderFree from '../effect/sliderBasic/sliderFree.js'
 export default {
   props: {
     options: {
@@ -92,14 +93,10 @@ export default {
         }
         // 处理嵌套滚动
         if (this.config.direction === 'vertical' && deltaX > deltaY) {
-          console.log(this.config.direction)
-            console.log('1')
-            return false
-        } 
+          return false
+        }
         if (this.config.direction === 'horizontal' && deltaX < deltaY) {
-            console.log(this.config.direction)
-            console.log('2')
-            return false
+          return false
         }
       }
     },
@@ -111,6 +108,9 @@ export default {
       let deltaX = this.data.end.x - this.data.start.x
       let deltaY = this.data.end.y - this.data.start.y
       let thresholdDistance = this.config.thresholdDistance
+      if (this.options.freeMode) {
+        return
+      }
       // 自动滚动重启
       if (this.options.autoplay) {
         let that = this
@@ -169,6 +169,9 @@ export default {
       }
     },
     onTransitionEnd (e, type) {
+      if (this.config.freeMode) {
+        sliderFree.methods.onTransitionEnd.call(this, e)
+      }
       if (!this.options.loop || (this.data.currentPage > 0 && this.data.currentPage < this.config.sliderLength)) {
         return
       }

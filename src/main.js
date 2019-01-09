@@ -18,6 +18,7 @@ import slidercoverFlow from './demo/slider_coverFlow'
 import slidernest from './demo/slider_nest'
 // // // 自定义pageation
 import sliderrenderPagination from './demo/slider_renderPagination'
+import sliderfree from './demo/slider_free'
 
 // // // 实例vue
 new Vue(sliderfade) // eslint-disable-line
@@ -30,4 +31,5 @@ new Vue(slidercoverFlow) // eslint-disable-line
 new Vue(sliderrenderPagination) // eslint-disable-line
 new Vue(sliderCenter) // eslint-disable-line
 new Vue(slidernest) // eslint-disable-line
+new Vue(sliderfree) // eslint-disable-line
 

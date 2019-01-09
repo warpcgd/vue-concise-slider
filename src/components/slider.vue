@@ -104,6 +104,9 @@ export default {
     },
     swipeStart (e) {
       sliderMove.methods.swipeStart.call(this, e)
+      if (this.config.effect === 'slide' || this.config.effect === 'nest') {
+        sliderBasic.methods.swipeStart.call(this, e)
+      }
     },
     swipeMove (e) {
       sliderMove.methods.swipeMove.call(this, e)
@@ -113,6 +116,9 @@ export default {
     },
     swipeEnd (e) {
       sliderMove.methods.swipeEnd.call(this, e)
+      if (this.config.effect === 'slide' || this.config.effect === 'nest') {
+        sliderBasic.methods.swipeEnd.call(this, e)
+      }
     },
     swipeOut (e) {
       sliderMove.methods.swipeOut.call(this, e)
@@ -154,6 +160,8 @@ export default {
       if (pagenum || pagenum === 0) {
         this.data.currentPage = pagenum
       }
+      this.config.speed = this.options.speed || 300
+
       if (this.config.effect === 'slide' || this.config.effect === 'nest') {
         sliderBasic.methods.slide.call(this, pagenum, type)
       }
@@ -190,17 +198,14 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .slider-container {
   margin: 0 auto;
   overflow: hidden;
   position: relative;
   z-index: 1;
-}
-.slider-container {
   height: 100%;
   width: 100%;
-  position: relative;
   white-space: nowrap;
 }
 .slider-center-center {
@@ -221,7 +226,7 @@ export default {
   height: 100%;
   position: relative;
   transition-property: transform;
-  width: 100%;
+  width: auto;
   z-index: 1;
   align-items: center;
   /*flex-direction: column;*/
@@ -241,7 +246,7 @@ export default {
   height: 100%;
   position: relative;
   transition-property: transform;
-  width: 100%;
+  width: auto;
   z-index: 1;
   align-items: center;
   /*flex-direction: column;*/

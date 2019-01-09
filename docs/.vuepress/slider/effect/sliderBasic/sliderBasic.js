@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     judgeParentSlider (that) {
-      if (that.$parent && that.$parent.$vnode && that.$parent.$options._componentTag === 'slider') {
+      if (that.$parent && that.$parent.$vnode && that.$parent.$options.name === 'slider') {
         return that.$parent
       } else if (that.$parent && that.$parent.$vnode === undefined) {
         return false

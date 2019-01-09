@@ -26,7 +26,7 @@
         overflow-y: scroll;
         width: 100%;
     }
-    body div{
+    body .main > div{
         width: 100%;
     }
     .main {
@@ -78,6 +78,8 @@
 <body>
 
     <div class="main" ontouchstart="iosScrollBug()">
+        <h3>自由滑动/free</h3>
+        <div id="sliderfree"></div>
         <h3>渐变滚动/fade</h3>
         <div id="sliderfade"></div>
         <h3>基本例子/basic</h3>
@@ -98,6 +100,8 @@
         <div id="slidercoverFlow"></div>
         <h3>自定义分页器</h3>
         <div id="sliderRenderPagination"></div>
+        <h3>free模式</h3>
+        <div id="sliderfree"></div>
     </div>
 </body>
 <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>

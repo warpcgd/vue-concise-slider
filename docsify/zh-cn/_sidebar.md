@@ -1,3 +1,0 @@
-- [快速开始](zh-cn/)
-- [配置](zh-cn/config)
-- [指南](zh-cn/guide)

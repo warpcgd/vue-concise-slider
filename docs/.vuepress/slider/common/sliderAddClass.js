@@ -8,7 +8,7 @@ export default function () {
     let currentPage = this.data.currentPage
     let realChildren = children.filter((item) => {
       let isCloned = item.$vnode.isCloned
-      return item.$options._componentTag === 'slideritem' && !isCloned
+      return item.$options.name === 'slideritem' && !isCloned
     })
     children.forEach(element => {
       element.removeActive()

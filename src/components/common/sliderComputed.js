@@ -1,13 +1,20 @@
 export default {
   name: 'sliderComputed',
+  data () {
+    return {
+      config: {
+        speed: this.options.speed || 300
+      } 
+    }
+  },
   computed: {
     styleobj () {
       let style = {}
       style['transform'] = 'translate3D(' + this.data.poswidth + 'px' + ',' + this.data.posheight + 'px' + ',0)'
       style['transitionTimingFunction'] = this.options.timingFunction || 'ease'
       style['-webkitTransitionTimingFunction'] = this.options.timingFunction || 'ease'
-      style['transitionDuration'] = (this.config.animation ? this.options.speed || 300 : 0) + 'ms'
-      style['-webkitTransitionDuration'] = (this.config.animation ? this.options.speed || 300 : 0) + 'ms'
+      style['transitionDuration'] = (this.config.animation ? this.config.speed || 300 : 0) + 'ms'
+      style['-webkitTransitionDuration'] = (this.config.animation ? this.config.speed || 300 : 0) + 'ms'
       if (this.config.effect === 'fade') {
         return {}
       }
