@@ -1,5 +1,4 @@
 import sliderNest from './sliderNest.js'
-import sliderFree from './sliderFree.js'
 export default {
   props: {
     options: {
@@ -11,7 +10,6 @@ export default {
     }
   },
   name: 'sliderBasic',
-  mixins: [sliderFree],
   data () {
     return {
       data: {
@@ -39,13 +37,8 @@ export default {
         return this.judgeParentSlider(that.$parent)
       }
     },
-    swipeStart (e) {
-      if (this.config.freeMode) {
-        sliderFree.methods.swipeStart.call(this, e)
-      }
-    },
     swipeMove (e) {
-      if (this.config.tracking && this.config.effect === 'slide' && !this.config.freeMode) {
+      if (this.config.tracking && this.config.effect === 'slide') {
         if (this.config.direction === 'vertical') {
           // 处理嵌套滚动
           this.data.posheight = -(this.currentHeight) + this.data.end.y - this.data.start.y
@@ -55,14 +48,6 @@ export default {
       }
       if (this.config.tracking && this.config.effect === 'nest') {
         sliderNest.methods.swipeMove.call(this, e)
-      }
-      if (this.config.tracking && this.config.freeMode) {
-        sliderFree.methods.swipeMove.call(this, e)
-      }
-    },
-    swipeEnd (e) {
-      if (this.config.freeMode) {
-        sliderFree.methods.swipeEnd.call(this, e)
       }
     },
     pre () {

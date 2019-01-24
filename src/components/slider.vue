@@ -41,6 +41,7 @@ import sliderAddClass from './common/sliderAddClass.js'
 import sliderBasic from './effect/sliderBasic/sliderBasic.js'
 import sliderCoverflow from './effect/sliderCoverflow/sliderCoverflow.js'
 import sliderFade from './effect/sliderFade/sliderFade.js'
+import sliderFree from './effect/sliderFree/sliderFree.js'
 export default {
   props: {
     options: {
@@ -52,7 +53,7 @@ export default {
     }
   },
   name: 'slider',
-  mixins: [sliderDom, sliderMove, sliderClock, sliderEvent, sliderComputed, sliderBasic, sliderCoverflow, sliderFade],
+  mixins: [sliderDom, sliderMove, sliderClock, sliderEvent, sliderComputed, sliderBasic, sliderCoverflow, sliderFade, sliderFree],
   data () {
     return {
       data: {
@@ -103,30 +104,42 @@ export default {
       this.slide(this.data.currentPage, 'animationnone')
     },
     swipeStart (e) {
-      sliderMove.methods.swipeStart.call(this, e)
-      if (this.config.effect === 'slide' || this.config.effect === 'nest') {
-        sliderBasic.methods.swipeStart.call(this, e)
+      let commonSwipeStart = sliderMove.methods.swipeStart.call(this, e)
+      if (commonSwipeStart && this.config.effect === 'free') {
+        sliderFree.methods.swipeStart.call(this, e)
       }
     },
     swipeMove (e) {
-      sliderMove.methods.swipeMove.call(this, e)
-      if (this.config.effect === 'slide' || this.config.effect === 'nest') {
+      let commonSwipeMove = sliderMove.methods.swipeMove.call(this, e)
+      if (commonSwipeMove && this.config.effect === 'slide' || this.config.effect === 'nest') {
         sliderBasic.methods.swipeMove.call(this, e)
+      }
+      if (commonSwipeMove && this.config.effect === 'free') {
+        sliderFree.methods.swipeMove.call(this, e)
       }
     },
     swipeEnd (e) {
       sliderMove.methods.swipeEnd.call(this, e)
-      if (this.config.effect === 'slide' || this.config.effect === 'nest') {
-        sliderBasic.methods.swipeEnd.call(this, e)
+      if (this.config.effect === 'free') {
+        sliderFree.methods.swipeEnd.call(this, e)
       }
     },
     swipeOut (e) {
       sliderMove.methods.swipeOut.call(this, e)
     },
+    onTransitionEnd (e) {
+      sliderMove.methods.onTransitionEnd.call(this, e)
+      if (this.config.effect === 'free') {
+        sliderFree.methods.onTransitionEnd.call(this, e)
+      }
+    },
+    onItemTransitionEnd (e) {
+      sliderMove.methods.onItemTransitionEnd.call(this, e)
+    },
     pre () {
       // debugger
       this.data.direction = 'left'
-      if (this.config.effect === 'slide' || this.config.effect === 'nest') {
+      if (this.config.effect === 'slide' || this.config.effect === 'nest' || this.config.effect === 'free') {
         sliderBasic.methods.pre.call(this)
       }
       if (this.config.effect === 'coverflow') {
@@ -138,7 +151,7 @@ export default {
     },
     next () {
       this.data.direction = 'right'
-      if (this.config.effect === 'slide' || this.config.effect === 'nest') {
+      if (this.config.effect === 'slide' || this.config.effect === 'nest' || this.config.effect === 'free') {
         sliderBasic.methods.next.call(this)
       }
       if (this.config.effect === 'coverflow') {
@@ -162,7 +175,7 @@ export default {
       }
       this.config.speed = this.options.speed || 300
 
-      if (this.config.effect === 'slide' || this.config.effect === 'nest') {
+      if (this.config.effect === 'slide' || this.config.effect === 'nest' || this.config.effect === 'free') {
         sliderBasic.methods.slide.call(this, pagenum, type)
       }
       if (this.config.effect === 'fade') {

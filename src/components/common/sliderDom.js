@@ -44,6 +44,8 @@ export default {
       this.config.renderTime = setTimeout(() => {
         that.config.renderTime = undefined
         that.$emit('hasRenderDom', that.data)
+        // 存节点
+        that.config.$sliderItem = that.$el.querySelectorAll('.slider-item')
         that.$nextTick(() => {
           that.slide(that.data.currentPage, 'animationnone')
         })

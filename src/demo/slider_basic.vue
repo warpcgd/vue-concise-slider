@@ -55,7 +55,8 @@ export default {
         thresholdDistance: 100, // 滑动距离阈值判定
         thresholdTime: 300, // 滑动时间阈值判定
         grabCursor: true, // 抓标样式
-        speed: 300 // 滑动速度
+        speed: 300, // 滑动速度
+        preventRebound: true
         // timingFunction: 'ease', // 滑动方式
         // loop: false, // 无限循环
         // autoplay: 0 // 自动播放:时间[ms]
