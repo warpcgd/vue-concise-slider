@@ -1,4 +1,5 @@
 import { getTranformMaxWidth } from '../../../utils/index.js'
+import sliderAddClass from '../../common/sliderAddClass.js'
 function getBaseLog (x, y) {
   return Math.log(y) / Math.log(x)
 }
@@ -30,7 +31,6 @@ export default {
         freeModeMomentum: this.options.freeModeMomentum === undefined ? true : this.options.freeModeMomentum, // free模式动量。free模式下，若设置为false则关闭动量，释放slide之后立即停止不会滑动。
         freeModeMomentumRatio: this.options.freeModeMomentumRatio === undefined ? 1000 : this.options.freeModeMomentumRatio,
         freeModeMomentumVelocityRatio: this.options.freeModeMomentumVelocityRatio === undefined ? 1 : this.options.freeModeMomentumVelocityRatio,
-        freeModeSticky: this.options.freeModeSticky === undefined ? false : this.options.freeModeSticky,
         preventRebound: this.options.preventRebound === undefined ? false : this.options.preventRebound,
         freePosWidth: 0,
         freePosHeight: 0
@@ -127,12 +127,14 @@ export default {
           let offsetLeft = $sliderItem[i].offsetLeft
           let offsetWidth = $el.offsetWidth
           let centerOffsetLeft = offsetLeft - offsetWidth / 2
-          if (centerOffsetLeft > Math.abs(posWidth)) {
+          if (centerOffsetLeft > -posWidth) {
             this.data.currentPage = i - 1
+            sliderAddClass.call(this)
             break
           }
-          if (Math.abs(posWidth) >= centerOffsetLeft && i === $sliderItem.length - 1) {
+          if (-posWidth >= centerOffsetLeft && i === $sliderItem.length - 1) {
             this.data.currentPage = i
+            sliderAddClass.call(this)
             break
           }
         }

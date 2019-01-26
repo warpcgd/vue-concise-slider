@@ -173,7 +173,7 @@ export default {
       if (pagenum || pagenum === 0) {
         this.data.currentPage = pagenum
       }
-      this.config.speed = this.options.speed || 300
+      this.config.speed = this.options.speed || this.config.speed || 300
 
       if (this.config.effect === 'slide' || this.config.effect === 'nest' || this.config.effect === 'free') {
         sliderBasic.methods.slide.call(this, pagenum, type)

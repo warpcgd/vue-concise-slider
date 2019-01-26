@@ -100,8 +100,6 @@ export default {
         } else {
           this.config.gestureDirection = 'left'
         }
-        console.log('start', this.data.start.x)
-        console.log('end', this.data.end.x)
         if (this.config.preventRebound && !this.config.loop && ((this.config.gestureDirection === 'right' && this.data.poswidth === 0) || (this.config.gestureDirection === 'left' && this.data.poswidth === -tranformMaxWidth))) {
           this.data.start.x = this.data.end.x
           let transform = window.getComputedStyle(e.currentTarget).getPropertyValue('transform')
@@ -109,8 +107,6 @@ export default {
           let transformY = parseFloat(transform.substring(7).split(',')[5])
           this.config.freePosWidth = transformX
           this.config.freePosHeight = transformY
-          console.log('startXEnd', this.data.start.x)
-          console.log('endXEnd', this.data.end.x)
           return false
         }
         // 处理嵌套滚动
