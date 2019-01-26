@@ -19,7 +19,7 @@ export default {
         pageHeight: '',
         sliderLength: 0,
         renderTime: '',
-        loop: this.options.loop,
+        loop: this.options.loop || false,
         loopedSlides: this.options.loopedSlides || 1,
         pagination: this.options.pagination === undefined ? true : this.options.pagination
       }

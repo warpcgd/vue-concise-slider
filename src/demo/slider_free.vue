@@ -1,20 +1,3 @@
-<style>
-.sliderButton{
-  text-align: center;
-}
-.sliderButton button{
-  display: inline-block;
-  background: #fff;
-  border-radius: 3px;
-  /*width: 100px;*/
-  height: 30px;
-  border: 1px solid #333;
-  line-height: 30px;
-  margin-left: 10px;
-  padding: 0 15px;
-  margin-top: 10px;
-}
-</style>
 <template>
   <div>
     <div style="width:70%;margin:20px auto;height:400px">
@@ -56,6 +39,7 @@ export default {
         thresholdDistance: 100, // 滑动距离阈值判定
         thresholdTime: 300, // 滑动时间阈值判定
         grabCursor: true, // 抓标样式
+        centeredSlides: true,
         // speed: 300, // 滑动速度
         freeMode: true,
         freeModeSticky: true
@@ -73,19 +57,65 @@ export default {
         {
           html: 'slide1',
           style: {
-            'background': '#1bbc9b'
+            'background': '#1bbc9b',
+            'width': '23.5%',
+            'margin-right': '2%'
           }
         },
         {
           html: 'slide2',
           style: {
-            'background': '#4bbfc3'
+            'background': '#4bbfc3',
+            'width': '23.5%',
+            'margin-right': '2%'
           }
         },
         {
           html: 'slide3',
           style: {
-            'background': '#7baabe'
+            'background': '#7baabe',
+            'width': '23.5%',
+            'margin-right': '2%'
+          }
+        },
+        {
+          html: 'slide4',
+          style: {
+            'background': '#7caabe',
+            'width': '23.5%',
+            'margin-right': '2%'
+          }
+        },
+        {
+          html: 'slide5',
+          style: {
+            'background': '#1bbc9b',
+            'width': '23.5%',
+            'margin-right': '2%'
+          }
+        },
+        {
+          html: 'slide6',
+          style: {
+            'background': '#4bbfc3',
+            'width': '23.5%',
+            'margin-right': '2%'
+          }
+        },
+        {
+          html: 'slide7',
+          style: {
+            'background': '#7baabe',
+            'width': '23.5%',
+            'margin-right': '2%'
+          }
+        },
+        {
+          html: 'slide8',
+          style: {
+            'background': '#7caabe',
+            'width': '23.5%',
+            'margin-right': '2%'
           }
         }
       ]
@@ -146,3 +176,20 @@ export default {
   }
 }
 </script>
+<style>
+.sliderButton{
+  text-align: center;
+}
+.sliderButton button{
+  display: inline-block;
+  background: #fff;
+  border-radius: 3px;
+  /*width: 100px;*/
+  height: 30px;
+  border: 1px solid #333;
+  line-height: 30px;
+  margin-left: 10px;
+  padding: 0 15px;
+  margin-top: 10px;
+}
+</style>

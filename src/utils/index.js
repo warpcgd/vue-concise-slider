@@ -6,8 +6,8 @@ export function getTranformMaxWidth ($el) {
   })
   let width = 0
   sliderItem.length && sliderItem.forEach((element, index) => {
-    if (index !== sliderItem.length - 1) {
-      width += element.offsetWidth
+    if (index === sliderItem.length - 1) {
+      width = element.offsetLeft
     }
   })
   return width
@@ -21,8 +21,8 @@ export function getTranformMaxHeight ($el) {
   })
   let width = 0
   sliderItem.length && sliderItem.forEach((element, index) => {
-    if (index !== sliderItem.length - 1) {
-      width += element.offsetHeight
+    if (index === sliderItem.length - 1) {
+      width = element.offsetTop
     }
   })
   return width

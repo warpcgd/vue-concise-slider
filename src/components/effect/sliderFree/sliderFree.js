@@ -70,13 +70,16 @@ export default {
       let preX = deltaX >= 0 ? -1 : 1
       let freeModeMomentumVelocityRatio = this.config.freeModeMomentumVelocityRatio
       let preventRebound = this.config.preventRebound
+      let loop = this.config.loop
       // let preY = deltaY >= 0 ? -1 : 1
       let Vx = preX * Math.pow((Math.abs(deltaX) * 1000 * freeModeMomentumVelocityRatio / deltaTime), 2) / 2
       // let Vy = preY * Math.pow((Math.abs(deltaY) * 1000 / deltaTime), 2) / 2
       let tranformMaxWidth = getTranformMaxWidth(this.$el)
       let $sliderItem = this.config.$sliderItem
+      let leftCritical = 0 + this.options.centeredSlides ? this.config.pageWidth / 2 : 0
+      // debugger
       // let thresholdDistance = this.config.thresholdDistance
-      let condition = (this.data.poswidth >= 0 && this.config.gestureDirection === 'right') || (this.data.poswidth <= -tranformMaxWidth && this.config.gestureDirection === 'left')
+      let condition = (this.data.poswidth >= leftCritical && this.data.currentPage === 0 && this.config.gestureDirection === 'right') || (this.data.poswidth <= -tranformMaxWidth && this.data.currentPage === this.config.sliderLength - 1 && this.config.gestureDirection === 'left')
       // if (this.config.freeModeMomentum && this.data.currentPage !== 0 && this.data.currentPage !== this.config.sliderLength - 1) {
       if (this.config.freeModeMomentum && !condition) {
         this.config.animation = true
@@ -84,7 +87,7 @@ export default {
         this.config.speed = this.config.freeModeMomentumRatio
         let calX = this.data.poswidth - Vx / 1000
         // let calY = this.data.posheight - Vy / 1000
-        if (preventRebound) {
+        if (preventRebound && !loop) {
           if (calX > 0) {
             this.data.poswidth = 0
           } else if (calX < -tranformMaxWidth) {
@@ -93,10 +96,10 @@ export default {
             this.data.poswidth = this.data.poswidth - Vx / 1000
           }
         } else {
-          if (calX > 0) {
-            let offsetX = getBaseLog(1.1, calX)
+          if (calX > leftCritical && !loop) {
+            let offsetX = getBaseLog(1.1, calX) + leftCritical
             this.data.poswidth = offsetX
-          } else if (calX < -tranformMaxWidth) {
+          } else if (calX < -tranformMaxWidth && !loop) {
             let offsetX = getBaseLog(1.1, -calX)
             this.data.poswidth = -tranformMaxWidth - offsetX
           } else {
@@ -122,11 +125,14 @@ export default {
       // 确认currentPage
       if ($sliderItem.length) {
         let posWidth = this.data.poswidth
-        let $el = this.$el
+        let pageWidth = this.config.pageWidth
         for (let i = 0; i < $sliderItem.length; i++) {
           let offsetLeft = $sliderItem[i].offsetLeft
-          let offsetWidth = $el.offsetWidth
+          let offsetWidth = $sliderItem[i].offsetWidth
           let centerOffsetLeft = offsetLeft - offsetWidth / 2
+          if (this.options.centeredSlides) {
+            centerOffsetLeft = offsetLeft - pageWidth / 2 + offsetWidth / 2
+          }
           if (centerOffsetLeft > -posWidth) {
             this.data.currentPage = i - 1
             sliderAddClass.call(this)
@@ -143,10 +149,11 @@ export default {
     onTransitionEnd () {
       this.config.tracking = false
       let tranformMaxWidth = getTranformMaxWidth(this.$el)
+      let leftCritical = 0 + this.options.centeredSlides ? this.config.pageWidth / 2 : 0
       if (!this.config.loop) {
-        if (this.data.poswidth > 0) {
+        if (this.data.poswidth > leftCritical) {
           this.config.speed = 300
-          this.data.poswidth = 0
+          this.data.poswidth = leftCritical
         }
         if (this.data.poswidth < -tranformMaxWidth) {
           this.config.speed = 300

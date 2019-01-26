@@ -4,7 +4,7 @@ export default {
     return {
       config: {
         speed: this.options.speed || 300
-      } 
+      }
     }
   },
   computed: {
