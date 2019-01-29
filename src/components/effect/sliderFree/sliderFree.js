@@ -55,8 +55,16 @@ export default {
           this.data.posheight = posheight + this.data.end.y - this.data.start.y
         } else {
           this.data.poswidth = poswidth + this.data.end.x - this.data.start.x
-          if (preventRebound && this.data.poswidth >= 0) {
-            this.data.poswidth = 0
+          if (preventRebound) {
+            let tranformMaxWidth = getTranformMaxWidth(this.$el)
+            let $sliderItem = this.config.$sliderItem
+            let critical = 0 + this.options.centeredSlides ? this.config.pageWidth / 2 - $sliderItem[$sliderItem.length - 1]['offsetWidth'] / 2 : 0
+            if (this.data.poswidth >= critical) {
+              this.data.poswidth = critical
+            }
+            if (this.data.poswidth <= -tranformMaxWidth + critical) {
+              this.data.poswidth = -tranformMaxWidth + critical
+            }
           }
         }
       }
@@ -76,32 +84,36 @@ export default {
       // let Vy = preY * Math.pow((Math.abs(deltaY) * 1000 / deltaTime), 2) / 2
       let tranformMaxWidth = getTranformMaxWidth(this.$el)
       let $sliderItem = this.config.$sliderItem
-      let leftCritical = 0 + this.options.centeredSlides ? this.config.pageWidth / 2 : 0
+      // center的临界值
+      let pageCritical = 0 + this.options.centeredSlides ? this.config.pageWidth / 2 : 0
+      let leftCritical = 0 + this.options.centeredSlides ? (this.config.pageWidth / 2 - $sliderItem[0]['offsetWidth'] / 2) : 0
+      let rightCritical = 0 + this.options.centeredSlides ? (this.config.pageWidth / 2 - $sliderItem[$sliderItem.length - 1]['offsetWidth'] / 2) : 0
+      let sliderLength = this.config.sliderLength
+      let calX = this.data.poswidth - Vx / 1000
       // debugger
       // let thresholdDistance = this.config.thresholdDistance
-      let condition = (this.data.poswidth >= leftCritical && this.data.currentPage === 0 && this.config.gestureDirection === 'right') || (this.data.poswidth <= -tranformMaxWidth && this.data.currentPage === this.config.sliderLength - 1 && this.config.gestureDirection === 'left')
+      let condition = (this.data.poswidth >= pageCritical && this.data.currentPage === 0 && this.config.gestureDirection === 'right') || (this.data.poswidth <= -tranformMaxWidth + pageCritical && this.data.currentPage === this.config.sliderLength - 1 && this.config.gestureDirection === 'left')
       // if (this.config.freeModeMomentum && this.data.currentPage !== 0 && this.data.currentPage !== this.config.sliderLength - 1) {
       if (this.config.freeModeMomentum && !condition) {
         this.config.animation = true
         // freeModeMomentumRatio
         this.config.speed = this.config.freeModeMomentumRatio
-        let calX = this.data.poswidth - Vx / 1000
         // let calY = this.data.posheight - Vy / 1000
         if (preventRebound && !loop) {
-          if (calX > 0) {
-            this.data.poswidth = 0
-          } else if (calX < -tranformMaxWidth) {
-            this.data.poswidth = -tranformMaxWidth
+          if (calX > pageCritical) {
+            this.data.poswidth = leftCritical
+          } else if (calX < -tranformMaxWidth + pageCritical) {
+            this.data.poswidth = -tranformMaxWidth + rightCritical
           } else {
             this.data.poswidth = this.data.poswidth - Vx / 1000
           }
         } else {
-          if (calX > leftCritical && !loop) {
+          if (calX > pageCritical && !loop) {
             let offsetX = getBaseLog(1.1, calX) + leftCritical
             this.data.poswidth = offsetX
-          } else if (calX < -tranformMaxWidth && !loop) {
+          } else if (calX < -tranformMaxWidth + pageCritical && !loop) {
             let offsetX = getBaseLog(1.1, -calX)
-            this.data.poswidth = -tranformMaxWidth - offsetX
+            this.data.poswidth = -tranformMaxWidth - offsetX + rightCritical
           } else {
             this.data.poswidth = this.data.poswidth - Vx / 1000
           }
@@ -121,9 +133,8 @@ export default {
         this.config.freePosWidth = this.data.poswidth
         this.config.freePosHeight = this.data.posheight
       }
-
       // 确认currentPage
-      if ($sliderItem.length) {
+      if (sliderLength) {
         let posWidth = this.data.poswidth
         let pageWidth = this.config.pageWidth
         for (let i = 0; i < $sliderItem.length; i++) {
@@ -134,30 +145,50 @@ export default {
             centerOffsetLeft = offsetLeft - pageWidth / 2 + offsetWidth / 2
           }
           if (centerOffsetLeft > -posWidth) {
-            this.data.currentPage = i - 1
+            currentPage = (i - 1) < 0 ? 0 : i - 1
             sliderAddClass.call(this)
             break
           }
           if (-posWidth >= centerOffsetLeft && i === $sliderItem.length - 1) {
-            this.data.currentPage = i
+            currentPage = i
             sliderAddClass.call(this)
             break
           }
         }
       }
+      // debugger
+      // sliderpreview
+      let slidesPerView = this.options.slidesPerView
+      if (slidesPerView) {
+        if (currentPage + slidesPerView > sliderLength && this.data.poswidth < -1 * $sliderItem[sliderLength - slidesPerView].offsetLeft) {
+          let offsetX = getBaseLog(1.1, -calX)
+          this.data.poswidth = -1 * $sliderItem[sliderLength - slidesPerView].offsetLeft - offsetX
+        }
+      }
+      this.data.currentPage = currentPage
     },
     onTransitionEnd () {
       this.config.tracking = false
+      let $sliderItem = this.config.$sliderItem
+      let currentPage = this.data.currentPage
       let tranformMaxWidth = getTranformMaxWidth(this.$el)
-      let leftCritical = 0 + this.options.centeredSlides ? this.config.pageWidth / 2 : 0
+      let critical = 0 + this.options.centeredSlides ? this.config.pageWidth / 2 - $sliderItem[currentPage]['offsetWidth'] / 2 : 0
+      let leftCritical = 0 + this.options.centeredSlides ? (this.config.pageWidth / 2 - $sliderItem[0]['offsetWidth'] / 2) : 0
+      let rightCritical = 0 + this.options.centeredSlides ? (this.config.pageWidth / 2 - $sliderItem[$sliderItem.length - 1]['offsetWidth'] / 2) : 0
+      let slidesPerView = this.options.slidesPerView
+      let sliderLength = this.config.sliderLength
       if (!this.config.loop) {
         if (this.data.poswidth > leftCritical) {
           this.config.speed = 300
-          this.data.poswidth = leftCritical
+          this.data.poswidth = critical
         }
-        if (this.data.poswidth < -tranformMaxWidth) {
+        if (this.data.poswidth < -tranformMaxWidth + rightCritical && !slidesPerView) {
           this.config.speed = 300
-          this.data.poswidth = -tranformMaxWidth
+          this.data.poswidth = -tranformMaxWidth + critical
+        }
+        if (slidesPerView && currentPage + slidesPerView > sliderLength && this.data.poswidth < -1 * $sliderItem[sliderLength - slidesPerView].offsetLeft) {
+          this.config.speed = 300
+          this.data.poswidth = -1 * $sliderItem[sliderLength - slidesPerView].offsetLeft
         }
       }
     },

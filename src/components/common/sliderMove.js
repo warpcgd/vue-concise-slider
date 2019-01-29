@@ -100,6 +100,7 @@ export default {
         } else {
           this.config.gestureDirection = 'left'
         }
+        // 处理free模式
         if (this.config.preventRebound && !this.config.loop && ((this.config.gestureDirection === 'right' && this.data.poswidth === 0) || (this.config.gestureDirection === 'left' && this.data.poswidth === -tranformMaxWidth))) {
           this.data.start.x = this.data.end.x
           let transform = window.getComputedStyle(e.currentTarget).getPropertyValue('transform')
