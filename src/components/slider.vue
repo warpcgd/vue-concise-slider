@@ -1,5 +1,5 @@
 <template>
-    <div class='slider-container' :class = 'config.containerClass' @mouseleave="swipeOut">
+    <div class='slider-container' :class='config.containerClass' @mouseleave="swipeOut">
       <div class='slider-touch'
       :style="styleobj"
       @touchmove="swipeMove"

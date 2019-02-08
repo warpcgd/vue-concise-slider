@@ -21,7 +21,8 @@ export default {
         renderTime: '',
         loop: this.options.loop || false,
         loopedSlides: this.options.loopedSlides || 1,
-        pagination: this.options.pagination === undefined ? true : this.options.pagination
+        pagination: this.options.pagination === undefined ? true : this.options.pagination,
+        virtual: this.options.virtual === undefined ? false : this.options.virtual
       }
     }
   },

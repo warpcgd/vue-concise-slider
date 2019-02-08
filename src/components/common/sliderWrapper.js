@@ -38,21 +38,56 @@ export default {
       }
     }
   },
+  computed: {
+    styleobj () {
+      let virtual = this.$parent.config.virtual
+      let $sliderItem = this.$parent.config.$sliderItem
+      let currentPage = this.$parent.data.currentPage
+      if (!virtual || !$sliderItem || currentPage < 1) {
+        return {}
+      }
+      let style = {}
+      let poswidth = $sliderItem[currentPage - 1].offsetLeft
+      style['transform'] = 'translate3D(' + poswidth + 'px' + ',' + 0 + 'px' + ',0)'
+      if (this.$parent.config.effect === 'fade') {
+        return {}
+      }
+      if (this.$parent.config.effect === 'coverflow') {
+        return {}
+      }
+      return style
+    }
+  },
   render (h) {
     let slots = this.$slots.default
     if (!slots) {
       return ''
     }
-    // debugger
+    let slotsFilter = slots.filter((item) => {
+      return item.componentOptions ? item.componentOptions.tag === 'slideritem' : false
+    })
     let loopedSlides = this.$parent.config.loopedSlides
+    let virtual = this.$parent.config.virtual
+    let currentPage = this.$parent.data.currentPage
     let copeBefore = []
     let copeAfter = []
+    // 虚拟节点
+    if (virtual) {
+      let lastVirtual = currentPage - 1 < 0 ? null : currentPage - 1
+      let nextVirtual = currentPage + 1 >= slotsFilter.length ? null : currentPage + 1
+      let newSlots = []
+      if (lastVirtual !== null) {
+        newSlots.push(slotsFilter[lastVirtual])
+      }
+      newSlots.push(slotsFilter[currentPage])
+      if (nextVirtual !== null) {
+        newSlots.push(slotsFilter[nextVirtual])
+      }
+      console.log(lastVirtual)
+      slotsFilter = newSlots
+      slots = newSlots
+    }
     if (this.$parent.config.loop && this.$parent.config.effect !== 'fade' && this.$parent.config.effect !== 'coverflow') {
-      // let slotsFilter = deepClone(slots, h)
-      // debugger
-      let slotsFilter = slots.filter((item) => {
-        return item.componentOptions ? item.componentOptions.tag === 'slideritem' : false
-      })
       if (slotsFilter && slotsFilter.length >= 2) {
         let length = slotsFilter ? slotsFilter.length : 0
         for (let j = 0; j < length; j++) {
@@ -72,6 +107,7 @@ export default {
         'slider-wrapper': true,
         'slider-fade': this.$parent.config.effect === 'fade'
       },
+      style: this.styleobj,
       scopedSlots: this.$scopedSlots
     }, [...copeBefore, ...slots, ...copeAfter])
   }

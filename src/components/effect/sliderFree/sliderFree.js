@@ -156,7 +156,6 @@ export default {
           }
         }
       }
-      // debugger
       // sliderpreview
       let slidesPerView = this.options.slidesPerView
       if (slidesPerView) {

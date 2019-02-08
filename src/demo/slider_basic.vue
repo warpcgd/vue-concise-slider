@@ -56,7 +56,8 @@ export default {
         thresholdTime: 300, // 滑动时间阈值判定
         grabCursor: true, // 抓标样式
         speed: 300, // 滑动速度
-        preventRebound: true
+        preventRebound: true,
+        virtual: true
         // timingFunction: 'ease', // 滑动方式
         // loop: false, // 无限循环
         // autoplay: 0 // 自动播放:时间[ms]
@@ -83,6 +84,18 @@ export default {
           html: 'slide3',
           style: {
             'background': '#7baabe'
+          }
+        },
+        {
+          html: 'slide4',
+          style: {
+            'background': '#1bbc9b'
+          }
+        },
+        {
+          html: 'slide5',
+          style: {
+            'background': '#4bbfc3'
           }
         }
       ]
