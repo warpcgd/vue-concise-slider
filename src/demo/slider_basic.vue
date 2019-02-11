@@ -56,7 +56,6 @@ export default {
         thresholdTime: 300, // 滑动时间阈值判定
         grabCursor: true, // 抓标样式
         speed: 300, // 滑动速度
-        preventRebound: true,
         virtual: true
         // timingFunction: 'ease', // 滑动方式
         // loop: false, // 无限循环

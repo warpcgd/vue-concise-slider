@@ -33,10 +33,10 @@ export default {
       if (this.config.effect === 'coverflow') {
         return 0
       }
-      let $slider
       let lastPage = this.data.currentPage
       let pageWidth = this.config.pageWidth
       let loopedSlides = this.options.loopedSlides || 1
+      let virtual = this.config.virtual
       // let srollbar = false
       if (this.options.loop) {
         if (loopedSlides) {
@@ -50,17 +50,14 @@ export default {
         let lastPage = this.data.currentPage
         lastPage -= 1
       }
-      // 获取slideritem子集
-      for (let item in this.$el.children) {
-        if (/slider-touch/ig.test(this.$el.children[item].className)) {
-          $slider = this.$el.children[item]
-        }
-      }
       // 遍历子集
-      let $sliderChildren = $slider.children[0].children
-      let offsetLeft = $sliderChildren[lastPage] ? $sliderChildren[lastPage].offsetLeft : 0
+      let $sliderChildren = this.config.slotsFilter
+      if (virtual) {
+        console.log($sliderChildren)
+      }
+      let offsetLeft = $sliderChildren[lastPage] ? $sliderChildren[lastPage]['elm'].offsetLeft : 0
       // 居中滚动
-      let offsetWidth = $sliderChildren[lastPage] ? $sliderChildren[lastPage].offsetWidth : 0
+      let offsetWidth = $sliderChildren[lastPage] ? $sliderChildren[lastPage]['elm'].offsetWidth : 0
       let slidesPerView = this.options.slidesPerView
       let sliderLength = this.config.sliderLength
       if (this.options.centeredSlides) {
@@ -74,7 +71,7 @@ export default {
           } else {
             currentPage = currentPage - cent
           }
-          offsetLeft = $sliderChildren[currentPage].offsetLeft
+          offsetLeft = $sliderChildren[currentPage]['elm'].offsetLeft
         } else {
           offsetLeft = offsetLeft - pageWidth / 2 + offsetWidth / 2
         }
@@ -84,9 +81,10 @@ export default {
         let currentPage = this.data.currentPage
         let slidesToScroll = this.options.slidesToScroll || 1
         if (currentPage + slidesToScroll >= sliderLength) {
-          offsetLeft = $sliderChildren[sliderLength - slidesToScroll].offsetLeft
+          offsetLeft = $sliderChildren[sliderLength - slidesToScroll]['elm'].offsetLeft
         }
       }
+      if ()
       return offsetLeft + pageWidth - pageWidth
     },
     currentHeight () {

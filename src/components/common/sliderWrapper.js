@@ -41,7 +41,7 @@ export default {
   computed: {
     styleobj () {
       let virtual = this.$parent.config.virtual
-      let $sliderItem = this.$parent.config.$sliderItem
+      let $sliderItem = this.$parent.$el　&&　this.$parent.$el.querySelectorAll('.slider-item')
       let currentPage = this.$parent.data.currentPage
       if (!virtual || !$sliderItem || currentPage < 1) {
         return {}
@@ -66,6 +66,7 @@ export default {
     let slotsFilter = slots.filter((item) => {
       return item.componentOptions ? item.componentOptions.tag === 'slideritem' : false
     })
+    this.$parent.config.slotsFilter = slotsFilter
     let loopedSlides = this.$parent.config.loopedSlides
     let virtual = this.$parent.config.virtual
     let currentPage = this.$parent.data.currentPage
@@ -73,6 +74,7 @@ export default {
     let copeAfter = []
     // 虚拟节点
     if (virtual) {
+      console.log(slotsFilter)
       let lastVirtual = currentPage - 1 < 0 ? null : currentPage - 1
       let nextVirtual = currentPage + 1 >= slotsFilter.length ? null : currentPage + 1
       let newSlots = []
@@ -83,8 +85,6 @@ export default {
       if (nextVirtual !== null) {
         newSlots.push(slotsFilter[nextVirtual])
       }
-      console.log(lastVirtual)
-      slotsFilter = newSlots
       slots = newSlots
     }
     if (this.$parent.config.loop && this.$parent.config.effect !== 'fade' && this.$parent.config.effect !== 'coverflow') {
