@@ -18,7 +18,7 @@
       </sliderWrapper>
       </div>
       <div v-if="config.pagination" class="slider-pagination slider-pagination-bullets">
-        <template v-for="n in config.sliderLength">
+        <template v-for="n in config.$sliderItemReal.length">
           <span v-if="!options.renderPagination" @click='slide(n-1)' :key="n" class="slider-pagination-bullet" :class="n-1 === data.currentPage? 'slider-pagination-bullet-active':''"></span>
           <renderpagination v-if="options.renderPagination"  @click.native='slide(n-1)' :key="n" :class="n-1 === data.currentPage? 'slider-pagination-bullet-active-render':''" :index="n" :options="options" ></renderpagination>
         </template>

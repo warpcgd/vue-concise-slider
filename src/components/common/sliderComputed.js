@@ -44,6 +44,7 @@ export default {
         } else {
           lastPage = lastPage + 1
         }
+        // debugger
       }
       // coverflow
       if (this.options.effect === 'coverflow') {
@@ -51,13 +52,10 @@ export default {
         lastPage -= 1
       }
       // 遍历子集
-      let $sliderChildren = this.config.slotsFilter
-      if (virtual) {
-        console.log($sliderChildren)
-      }
-      let offsetLeft = $sliderChildren[lastPage] ? $sliderChildren[lastPage]['elm'].offsetLeft : 0
+      let $sliderChildren = this.config.$sliderItem
+      let offsetLeft = $sliderChildren[lastPage] ? $sliderChildren[lastPage].offsetLeft : 0
       // 居中滚动
-      let offsetWidth = $sliderChildren[lastPage] ? $sliderChildren[lastPage]['elm'].offsetWidth : 0
+      let offsetWidth = $sliderChildren[lastPage] ? $sliderChildren[lastPage].offsetWidth : 0
       let slidesPerView = this.options.slidesPerView
       let sliderLength = this.config.sliderLength
       if (this.options.centeredSlides) {
@@ -71,7 +69,7 @@ export default {
           } else {
             currentPage = currentPage - cent
           }
-          offsetLeft = $sliderChildren[currentPage]['elm'].offsetLeft
+          offsetLeft = $sliderChildren[currentPage].offsetLeft
         } else {
           offsetLeft = offsetLeft - pageWidth / 2 + offsetWidth / 2
         }
@@ -81,10 +79,13 @@ export default {
         let currentPage = this.data.currentPage
         let slidesToScroll = this.options.slidesToScroll || 1
         if (currentPage + slidesToScroll >= sliderLength) {
-          offsetLeft = $sliderChildren[sliderLength - slidesToScroll]['elm'].offsetLeft
+          offsetLeft = $sliderChildren[sliderLength - slidesToScroll].offsetLeft
         }
       }
-      if ()
+      // 虚拟节点
+      if (virtual) {
+        offsetLeft = lastPage * pageWidth
+      }
       return offsetLeft + pageWidth - pageWidth
     },
     currentHeight () {

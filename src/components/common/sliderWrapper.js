@@ -41,13 +41,15 @@ export default {
   computed: {
     styleobj () {
       let virtual = this.$parent.config.virtual
-      let $sliderItem = this.$parent.$el　&&　this.$parent.$el.querySelectorAll('.slider-item')
+      let $sliderItem = this.$parent.$el && this.$parent.$el.querySelectorAll('.slider-item')
       let currentPage = this.$parent.data.currentPage
-      if (!virtual || !$sliderItem || currentPage < 1) {
+      let pageWidth = this.$parent.config.pageWidth
+      if (!pageWidth || !virtual || !$sliderItem || currentPage < 1) {
         return {}
       }
       let style = {}
-      let poswidth = $sliderItem[currentPage - 1].offsetLeft
+      // 默认使用$el的宽度进行计算
+      let poswidth = pageWidth * [currentPage - 1]
       style['transform'] = 'translate3D(' + poswidth + 'px' + ',' + 0 + 'px' + ',0)'
       if (this.$parent.config.effect === 'fade') {
         return {}
@@ -74,7 +76,6 @@ export default {
     let copeAfter = []
     // 虚拟节点
     if (virtual) {
-      console.log(slotsFilter)
       let lastVirtual = currentPage - 1 < 0 ? null : currentPage - 1
       let nextVirtual = currentPage + 1 >= slotsFilter.length ? null : currentPage + 1
       let newSlots = []

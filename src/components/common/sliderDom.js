@@ -22,7 +22,9 @@ export default {
         loop: this.options.loop || false,
         loopedSlides: this.options.loopedSlides || 1,
         pagination: this.options.pagination === undefined ? true : this.options.pagination,
-        virtual: this.options.virtual === undefined ? false : this.options.virtual
+        virtual: this.options.virtual === undefined ? false : this.options.virtual,
+        $sliderItem: '',
+        $sliderItemReal: ''
       }
     }
   },
@@ -47,6 +49,9 @@ export default {
         that.$emit('hasRenderDom', that.data)
         // 存节点
         that.config.$sliderItem = that.$el.querySelectorAll('.slider-item')
+        that.config.$sliderItemReal = Array.prototype.slice.call(that.config.$sliderItem).filter((item) => {
+          return item.className.indexOf('slider-copy') === -1
+        })
         that.$nextTick(() => {
           that.slide(that.data.currentPage, 'animationnone')
         })

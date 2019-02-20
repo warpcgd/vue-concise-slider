@@ -19,7 +19,7 @@
   <div>
     <div style="width:70%;margin:20px auto;height:400px">
       <slider ref="slider" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
-        <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
+        <slideritem v-for="(item,index) in someList" :key="index" width="100%" :style="item.style">{{item.html}}</slideritem>
         <div slot="loading">
           <div class="loadingDot">
             <i></i>
@@ -56,9 +56,9 @@ export default {
         thresholdTime: 300, // 滑动时间阈值判定
         grabCursor: true, // 抓标样式
         speed: 300, // 滑动速度
-        virtual: true
+        virtual: true, // 虚拟节点
         // timingFunction: 'ease', // 滑动方式
-        // loop: false, // 无限循环
+        loop: true // 无限循环
         // autoplay: 0 // 自动播放:时间[ms]
       }
     }
