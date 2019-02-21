@@ -50,6 +50,7 @@ export default {
   mounted () {
     this.data.$el = this.$el
     if (this.$vnode.isCloned) {
+      console.log('$vnode', this.$vnode)
       this.slideClass['slider-copy'] = true
     } else {
       this.renderDom()

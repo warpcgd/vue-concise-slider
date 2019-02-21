@@ -198,6 +198,7 @@ export default {
         let currentPage = that.data.currentPage
         let sliderLength = that.config.sliderLength
         that.config.transitionEnding = false
+        // debugger
         if (currentPage < 0) {
           that.slide(sliderLength + currentPage, 'animationnone')
         } else if (currentPage >= sliderLength) {

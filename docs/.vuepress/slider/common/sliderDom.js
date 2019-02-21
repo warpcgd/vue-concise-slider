@@ -32,7 +32,7 @@ export default {
       if (this.config.renderTime) {
         clearTimeout(this.config.renderTime)
       }
-      this.config.sliderLength += 1
+      // this.config.sliderLength += 1
       // fade添加z-index
       if (that.config.sliderLength >= 1 && that.options.effect === 'fade') {
         if (item.previousSibling) {
@@ -42,6 +42,7 @@ export default {
         }
       }
       this.config.renderTime = setTimeout(() => {
+        this.config.sliderLength = this.config.slotsFilter.length
         that.config.renderTime = undefined
         that.$emit('hasRenderDom', that.data)
         that.$nextTick(() => {

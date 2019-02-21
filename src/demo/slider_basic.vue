@@ -19,7 +19,7 @@
   <div>
     <div style="width:70%;margin:20px auto;height:400px">
       <slider ref="slider" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
-        <slideritem v-for="(item,index) in someList" :key="index" width="100%" :style="item.style">{{item.html}}</slideritem>
+        <slideritem v-for="(item,index) in someList" :key="item.html" width="100%" :style="item.style">{{item.html}}</slideritem>
         <div slot="loading">
           <div class="loadingDot">
             <i></i>
@@ -34,7 +34,7 @@
       <button @click="slidePre">上一页/pre</button>
       <button @click="slideNext">下一页/next</button>
       <button @click="appendslider">添加一页/append</button>
-      <button @click="turnTo(2)">跳转到第三页/turnTo</button>
+      <button @click="turnTo(4)">跳转到第三页/turnTo</button>
       <button @click="autoplayStart">启动自动滚动/autoplayStart</button>
       <button @click="autoplayStop">停止自动滚动/autoplayStop</button>
       <button @click="loadingShow">loading显示/loadingShow</button>

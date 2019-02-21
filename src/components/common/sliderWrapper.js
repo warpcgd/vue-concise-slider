@@ -76,6 +76,8 @@ export default {
     let copeAfter = []
     // 虚拟节点
     if (virtual) {
+      // console.log('slotsFilter', slotsFilter)
+      // debugger
       let lastVirtual = currentPage - 1 < 0 ? null : currentPage - 1
       let nextVirtual = currentPage + 1 >= slotsFilter.length ? null : currentPage + 1
       let newSlots = []
@@ -88,6 +90,7 @@ export default {
       }
       slots = newSlots
     }
+    // 前后添加节点
     if (this.$parent.config.loop && this.$parent.config.effect !== 'fade' && this.$parent.config.effect !== 'coverflow') {
       if (slotsFilter && slotsFilter.length >= 2) {
         let length = slotsFilter ? slotsFilter.length : 0
