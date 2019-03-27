@@ -287,7 +287,7 @@ export default {
     this.$on('loadingHide', () => {
       this.s_data.loading = false
     })
-    if (this.options.autoplay) {
+    if (this.options.autoplay && this.s_data.sliderLength) {
       // 自动轮播 支持无缝滚动
       this.clock().begin(that)
     }
@@ -641,7 +641,7 @@ export default {
             sliderItem[currentPage + loopedSlides].classList.add('slider-active-copy')
           }
           let lastPage = currentPage < 0 ? (this.pagenums || sliderLength) + currentPage : 0 + currentPage - (this.pagenums || sliderLength)
-          children[lastPage].addActive()
+          children[lastPage] && children[lastPage].addActive()
         } else {
           for (let index = 0; index < sliderActiveCopy.length; index++) {
             const item = sliderActiveCopy[index]
@@ -765,6 +765,10 @@ export default {
         }
         that.$nextTick(() => {
           that.slide(that.data.currentPage, 'animationnone')
+          if (that.options.autoplay && this.s_data.sliderLength) {
+            // 自动轮播 支持无缝滚动
+            that.clock().begin(that)
+          }
         })
       }, 0)
     },
