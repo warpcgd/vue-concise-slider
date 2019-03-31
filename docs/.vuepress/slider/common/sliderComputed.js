@@ -1,13 +1,20 @@
 export default {
   name: 'sliderComputed',
+  data () {
+    return {
+      config: {
+        speed: this.options.speed || 300
+      }
+    }
+  },
   computed: {
     styleobj () {
       let style = {}
       style['transform'] = 'translate3D(' + this.data.poswidth + 'px' + ',' + this.data.posheight + 'px' + ',0)'
       style['transitionTimingFunction'] = this.options.timingFunction || 'ease'
       style['-webkitTransitionTimingFunction'] = this.options.timingFunction || 'ease'
-      style['transitionDuration'] = (this.config.animation ? this.options.speed || 300 : 0) + 'ms'
-      style['-webkitTransitionDuration'] = (this.config.animation ? this.options.speed || 300 : 0) + 'ms'
+      style['transitionDuration'] = (this.config.animation ? this.config.speed || 300 : 0) + 'ms'
+      style['-webkitTransitionDuration'] = (this.config.animation ? this.config.speed || 300 : 0) + 'ms'
       if (this.config.effect === 'fade') {
         return {}
       }
@@ -26,10 +33,10 @@ export default {
       if (this.config.effect === 'coverflow') {
         return 0
       }
-      let $slider
       let lastPage = this.data.currentPage
       let pageWidth = this.config.pageWidth
       let loopedSlides = this.options.loopedSlides || 1
+      let virtual = this.config.virtual
       // let srollbar = false
       if (this.options.loop) {
         if (loopedSlides) {
@@ -37,20 +44,15 @@ export default {
         } else {
           lastPage = lastPage + 1
         }
+        // debugger
       }
       // coverflow
       if (this.options.effect === 'coverflow') {
         let lastPage = this.data.currentPage
         lastPage -= 1
       }
-      // 获取slideritem子集
-      for (let item in this.$el.children) {
-        if (/slider-touch/ig.test(this.$el.children[item].className)) {
-          $slider = this.$el.children[item]
-        }
-      }
       // 遍历子集
-      let $sliderChildren = $slider.children[0].children
+      let $sliderChildren = this.config.$sliderItem
       let offsetLeft = $sliderChildren[lastPage] ? $sliderChildren[lastPage].offsetLeft : 0
       // 居中滚动
       let offsetWidth = $sliderChildren[lastPage] ? $sliderChildren[lastPage].offsetWidth : 0
@@ -79,6 +81,10 @@ export default {
         if (currentPage + slidesToScroll >= sliderLength) {
           offsetLeft = $sliderChildren[sliderLength - slidesToScroll].offsetLeft
         }
+      }
+      // 虚拟节点
+      if (virtual) {
+        offsetLeft = lastPage * pageWidth
       }
       return offsetLeft + pageWidth - pageWidth
     },

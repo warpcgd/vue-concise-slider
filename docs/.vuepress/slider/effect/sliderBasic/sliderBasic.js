@@ -17,8 +17,6 @@ export default {
       config: {
         slidesToScroll: this.options.slidesToScroll || 1,
         effect: this.options.effect || 'slide',
-        thresholdDistance: this.options.thresholdDistance || 50,
-        thresholdTime: this.options.thresholdTime || 1000,
         direction: this.options.direction || 'horizontal',
         transitionEnding: false,
         itemTransitionEnding: false,
@@ -48,7 +46,7 @@ export default {
           this.data.poswidth = -(this.currentWidth) + this.data.end.x - this.data.start.x
         }
       }
-      if (this.config.effect === 'nest') {
+      if (this.config.tracking && this.config.effect === 'nest') {
         sliderNest.methods.swipeMove.call(this, e)
       }
     },

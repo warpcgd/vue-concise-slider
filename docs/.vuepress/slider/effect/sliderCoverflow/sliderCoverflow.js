@@ -14,6 +14,13 @@ export default {
       data: {
       },
       config: {
+        slidesToScroll: this.options.slidesToScroll || 1,
+        effect: this.options.effect || 'slide',
+        direction: this.options.direction || 'horizontal',
+        transitionEnding: false,
+        itemTransitionEnding: false,
+        animation: false,
+        slidesPerView: this.options.slidesPerView === undefined ? 0 : this.options.slidesPerView,
         thresholdDistance: this.options.thresholdDistance || 50,
         widthScalingRatio: this.options.widthScalingRatio || 0.8,
         heightScalingRatio: this.options.heightScalingRatio || 0.8,

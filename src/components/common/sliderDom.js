@@ -48,7 +48,7 @@ export default {
         that.config.renderTime = undefined
         that.$emit('hasRenderDom', that.data)
         // 存节点
-        that.config.$sliderItem = that.$el.querySelectorAll('.slider-item')
+        that.config.$sliderItem = that.$el.querySelectorAll(':scope > .slider-touch > .slider-wrapper > .slider-item')
         that.config.$sliderItemReal = Array.prototype.slice.call(that.config.$sliderItem).filter((item) => {
           return item.className.indexOf('slider-copy') === -1
         })

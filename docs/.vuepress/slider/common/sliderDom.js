@@ -19,9 +19,12 @@ export default {
         pageHeight: '',
         sliderLength: 0,
         renderTime: '',
-        loop: this.options.loop,
+        loop: this.options.loop || false,
         loopedSlides: this.options.loopedSlides || 1,
-        pagination: this.options.pagination === undefined ? true : this.options.pagination
+        pagination: this.options.pagination === undefined ? true : this.options.pagination,
+        virtual: this.options.virtual === undefined ? false : this.options.virtual,
+        $sliderItem: '',
+        $sliderItemReal: ''
       }
     }
   },
@@ -32,7 +35,7 @@ export default {
       if (this.config.renderTime) {
         clearTimeout(this.config.renderTime)
       }
-      // this.config.sliderLength += 1
+      this.config.sliderLength += 1
       // fade添加z-index
       if (that.config.sliderLength >= 1 && that.options.effect === 'fade') {
         if (item.previousSibling) {
@@ -42,9 +45,13 @@ export default {
         }
       }
       this.config.renderTime = setTimeout(() => {
-        this.config.sliderLength = this.config.slotsFilter.length
         that.config.renderTime = undefined
         that.$emit('hasRenderDom', that.data)
+        // 存节点
+        that.config.$sliderItem = that.$el.querySelectorAll(':scope > .slider-touch > .slider-wrapper > .slider-item')
+        that.config.$sliderItemReal = Array.prototype.slice.call(that.config.$sliderItem).filter((item) => {
+          return item.className.indexOf('slider-copy') === -1
+        })
         that.$nextTick(() => {
           that.slide(that.data.currentPage, 'animationnone')
         })

@@ -64,7 +64,7 @@ export default {
     padding: 0;
     top: 3.6rem;
   }
-  .content:not(.custom) {
+  section .content:not(.custom) {
     max-width: 100%;
     margin: 0 auto;
     padding: 0;

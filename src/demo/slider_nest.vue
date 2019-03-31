@@ -19,13 +19,13 @@
   <div>
     <div style="width:70%;margin:20px auto;height:400px">
       <slider ref="slider" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
-        <slideritem v-for="(item,index) in someList" :key="item.html" :style="item.style">{{item.html}}</slideritem>
+        <slideritem v-for="(item) in someList1" :key="item.html" :style="item.style">{{item.html}}</slideritem>
         <slideritem>
           <slider ref="slider" :options="options1">
-            <slideritem v-for="(item,index) in someList1" :key="item.html" :style="item.style">{{item.html}}</slideritem>
+            <slideritem v-for="(item) in someList2" :key="item.html" :style="item.style">{{item.html}}</slideritem>
           </slider>
         </slideritem>
-        <slideritem v-for="(item,index) in someList" :key="item.html + 3" :style="item.style">{{item.html}}</slideritem>
+        <slideritem v-for="(item) in someList3" :key="item.html + 3" :style="item.style">{{item.html}}</slideritem>
         <div slot="loading">
           <div class="loadingDot">
             <i></i>
@@ -55,8 +55,9 @@ export default {
   el: '#slidernest',
   data () {
     return {
-      someList: [],
       someList1: [],
+      someList2: [],
+      someList3: [],
       options: {
         // direction: 'vertical',
         effect: 'nest',
@@ -87,7 +88,7 @@ export default {
   mounted () {
     let that = this
     setTimeout(function () {
-      that.someList = [
+      that.someList1 = [
         {
           html: 'slide1',
           style: {
@@ -95,7 +96,7 @@ export default {
           }
         }
       ]
-      that.someList1 = [
+      that.someList2 = [
         {
           html: 'slide1-1',
           style: {
@@ -112,6 +113,14 @@ export default {
           html: 'slide3-3',
           style: {
             'background': '#7baabe'
+          }
+        }
+      ],
+      that.someList3 = [
+        {
+          html: 'slide3',
+          style: {
+            'background': '#1bbc9b'
           }
         }
       ]

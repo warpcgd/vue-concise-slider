@@ -38,21 +38,60 @@ export default {
       }
     }
   },
+  computed: {
+    styleobj () {
+      let virtual = this.$parent.config.virtual
+      let $sliderItem = this.$parent.$el && this.$parent.$el.querySelectorAll('.slider-item')
+      let currentPage = this.$parent.data.currentPage
+      let pageWidth = this.$parent.config.pageWidth
+      if (!pageWidth || !virtual || !$sliderItem || currentPage < 1) {
+        return {}
+      }
+      let style = {}
+      // 默认使用$el的宽度进行计算
+      let poswidth = pageWidth * [currentPage - 1]
+      style['transform'] = 'translate3D(' + poswidth + 'px' + ',' + 0 + 'px' + ',0)'
+      if (this.$parent.config.effect === 'fade') {
+        return {}
+      }
+      if (this.$parent.config.effect === 'coverflow') {
+        return {}
+      }
+      return style
+    }
+  },
   render (h) {
     let slots = this.$slots.default
     if (!slots) {
       return ''
     }
-    // debugger
+    let slotsFilter = slots.filter((item) => {
+      return item.componentOptions ? item.componentOptions.tag === 'slideritem' : false
+    })
+    this.$parent.config.slotsFilter = slotsFilter
     let loopedSlides = this.$parent.config.loopedSlides
+    let virtual = this.$parent.config.virtual
+    let currentPage = this.$parent.data.currentPage
     let copeBefore = []
     let copeAfter = []
-    if (this.$parent.config.loop && this.$parent.config.effect !== 'fade' && this.$parent.config.effect !== 'coverflow') {
-      // let slotsFilter = deepClone(slots, h)
+    // 虚拟节点
+    if (virtual) {
+      // console.log('slotsFilter', slotsFilter)
       // debugger
-      let slotsFilter = slots.filter((item) => {
-        return item.componentOptions ? item.componentOptions.tag === 'slideritem' : false
-      })
+      let lastVirtual = currentPage - 1 < 0 ? null : currentPage - 1
+      let nextVirtual = currentPage + 1 >= slotsFilter.length ? null : currentPage + 1
+      let newSlots = []
+      if (lastVirtual !== null) {
+        newSlots.push(slotsFilter[lastVirtual])
+      }
+      newSlots.push(slotsFilter[currentPage])
+      if (nextVirtual !== null) {
+        newSlots.push(slotsFilter[nextVirtual])
+      }
+      slots = newSlots
+    }
+    // 前后添加节点
+    if (this.$parent.config.loop && this.$parent.config.effect !== 'fade' && this.$parent.config.effect !== 'coverflow') {
       if (slotsFilter && slotsFilter.length >= 2) {
         let length = slotsFilter ? slotsFilter.length : 0
         for (let j = 0; j < length; j++) {
@@ -72,6 +111,7 @@ export default {
         'slider-wrapper': true,
         'slider-fade': this.$parent.config.effect === 'fade'
       },
+      style: this.styleobj,
       scopedSlots: this.$scopedSlots
     }, [...copeBefore, ...slots, ...copeAfter])
   }

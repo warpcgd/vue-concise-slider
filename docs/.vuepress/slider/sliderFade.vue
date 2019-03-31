@@ -1,5 +1,5 @@
 <template>
-    <div class='slider-container' :class='config.containerClass' @mouseleave="swipeOut">
+    <div class='slider-container' :class = 'config.containerClass' @mouseleave="swipeOut">
       <div class='slider-touch'
       :style="styleobj"
       @touchmove="swipeMove"
@@ -18,7 +18,7 @@
       </sliderWrapper>
       </div>
       <div v-if="config.pagination" class="slider-pagination slider-pagination-bullets">
-        <template v-for="n in config.$sliderItemReal.length">
+        <template v-for="n in config.sliderLength">
           <span v-if="!options.renderPagination" @click='slide(n-1)' :key="n" class="slider-pagination-bullet" :class="n-1 === data.currentPage? 'slider-pagination-bullet-active':''"></span>
           <renderpagination v-if="options.renderPagination"  @click.native='slide(n-1)' :key="n" :class="n-1 === data.currentPage? 'slider-pagination-bullet-active-render':''" :index="n" :options="options" ></renderpagination>
         </template>
@@ -38,10 +38,9 @@ import sliderClock from './common/sliderClock.js'
 import sliderDom from './common/sliderDom.js'
 import sliderAddClass from './common/sliderAddClass.js'
 // 引入不同类型slider
-import sliderBasic from './effect/sliderBasic/sliderBasic.js'
-import sliderCoverflow from './effect/sliderCoverflow/sliderCoverflow.js'
+// import sliderBasic from './effect/sliderBasic/sliderBasic.js'
+// import sliderCoverflow from './effect/sliderCoverflow/sliderCoverflow.js'
 import sliderFade from './effect/sliderFade/sliderFade.js'
-import sliderFree from './effect/sliderFree/sliderFree.js'
 export default {
   props: {
     options: {
@@ -52,8 +51,8 @@ export default {
       }
     }
   },
-  name: 'slider',
-  mixins: [sliderDom, sliderMove, sliderClock, sliderEvent, sliderComputed, sliderBasic, sliderCoverflow, sliderFade, sliderFree],
+  name: 'sliderFade',
+  mixins: [sliderDom, sliderMove, sliderClock, sliderEvent, sliderComputed, sliderFade],
   data () {
     return {
       data: {
@@ -81,82 +80,40 @@ export default {
     } else {
       this.config.containerClass['swiper-container-horizontal'] = true
     }
-    document.removeEventListener('visibilitychange', this.visibilitychange, false)
-    window.removeEventListener('resize', this.resize)
   },
   methods: {
-    visibilitychange () {
-      let that = this
-      if (document.hidden) {
-        that.options.autoplay && that.clock().stop(that)
-      } else {
-        that.options.autoplay && that.clock().begin(that)
-      }
-    },
-    resize () {
-      this.s_data.pageWidth = this.$el.offsetWidth
-      this.s_data.pageHeight = this.$el.offsetHeight
-      // 修复循环切换bug
-      if (this.data.currentPage >= this.s_data.sliderLength && this.options.loop) {
-        this.slide(0, 'animationnone')
-        return false
-      }
-      this.slide(this.data.currentPage, 'animationnone')
-    },
     swipeStart (e) {
-      let commonSwipeStart = sliderMove.methods.swipeStart.call(this, e)
-      if (commonSwipeStart && this.config.effect === 'free') {
-        sliderFree.methods.swipeStart.call(this, e)
-      }
+      sliderMove.methods.swipeStart.call(this, e)
     },
     swipeMove (e) {
-      let commonSwipeMove = sliderMove.methods.swipeMove.call(this, e)
-      if (commonSwipeMove && this.config.effect === 'slide' || this.config.effect === 'nest') {
-        sliderBasic.methods.swipeMove.call(this, e)
-      }
-      if (commonSwipeMove && this.config.effect === 'free') {
-        sliderFree.methods.swipeMove.call(this, e)
-      }
+      sliderMove.methods.swipeMove.call(this, e)
     },
     swipeEnd (e) {
       sliderMove.methods.swipeEnd.call(this, e)
-      if (this.config.effect === 'free') {
-        sliderFree.methods.swipeEnd.call(this, e)
-      }
     },
     swipeOut (e) {
       sliderMove.methods.swipeOut.call(this, e)
     },
-    onTransitionEnd (e) {
-      sliderMove.methods.onTransitionEnd.call(this, e)
-      if (this.config.effect === 'free') {
-        sliderFree.methods.onTransitionEnd.call(this, e)
-      }
-    },
-    onItemTransitionEnd (e) {
-      sliderMove.methods.onItemTransitionEnd.call(this, e)
-    },
     pre () {
-      // debugger
       this.data.direction = 'left'
-      if (this.config.effect === 'slide' || this.config.effect === 'nest' || this.config.effect === 'free') {
-        sliderBasic.methods.pre.call(this)
-      }
-      if (this.config.effect === 'coverflow') {
-        sliderCoverflow.methods.pre.call(this)
-      }
+      // if (this.config.effect === 'slide' || this.config.effect === 'nest') {
+      //   sliderBasic.methods.pre.call(this)
+      // }
+      // if (this.config.effect === 'coverflow') {
+      //   sliderCoverflow.methods.pre.call(this)
+      // }
       if (this.config.effect === 'fade') {
         sliderFade.methods.pre.call(this)
       }
     },
     next () {
       this.data.direction = 'right'
-      if (this.config.effect === 'slide' || this.config.effect === 'nest' || this.config.effect === 'free') {
-        sliderBasic.methods.next.call(this)
-      }
-      if (this.config.effect === 'coverflow') {
-        sliderCoverflow.methods.next.call(this)
-      }
+      // if (this.config.effect === 'slide' || this.config.effect === 'nest') {
+      //   sliderBasic.methods.next.call(this)
+      // }
+      // if (this.config.effect === 'coverflow') {
+      //   sliderCoverflow.methods.next.call(this)
+      // }
       if (this.config.effect === 'fade') {
         sliderFade.methods.next.call(this)
       }
@@ -173,11 +130,9 @@ export default {
       if (pagenum || pagenum === 0) {
         this.data.currentPage = pagenum
       }
-      this.config.speed = this.options.speed || this.config.speed || 300
-
-      if (this.config.effect === 'slide' || this.config.effect === 'nest' || this.config.effect === 'free') {
-        sliderBasic.methods.slide.call(this, pagenum, type)
-      }
+      // if (this.config.effect === 'slide' || this.config.effect === 'nest') {
+      //   sliderBasic.methods.slide.call(this, pagenum, type)
+      // }
       if (this.config.effect === 'fade') {
         sliderFade.methods.slide.call(this, pagenum, type)
       }
@@ -211,14 +166,17 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .slider-container {
   margin: 0 auto;
   overflow: hidden;
   position: relative;
   z-index: 1;
+}
+.slider-container {
   height: 100%;
   width: 100%;
+  position: relative;
   white-space: nowrap;
 }
 .slider-center-center {
@@ -239,7 +197,7 @@ export default {
   height: 100%;
   position: relative;
   transition-property: transform;
-  width: auto;
+  width: 100%;
   z-index: 1;
   align-items: center;
   /*flex-direction: column;*/
@@ -259,7 +217,7 @@ export default {
   height: 100%;
   position: relative;
   transition-property: transform;
-  width: auto;
+  width: 100%;
   z-index: 1;
   align-items: center;
   /*flex-direction: column;*/

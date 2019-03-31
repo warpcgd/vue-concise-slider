@@ -1,10 +1,10 @@
 <template>
   <div class="demo fullpage">
     <section class="header">
-      <div class="demo_content"> 
+      <div class="demo_content">
         <header class="demo_header">
           <Content slot-key="name"/>
-        </header> 
+        </header>
       </div>
     </section>
     <div class="demo_content demoItem">
@@ -44,7 +44,7 @@ body {
   overflow-x: hidden;
 }
 .content:not(.custom) {
-  max-width: 100%;
+  // max-width: 100%;
   margin: 0 auto;
   padding: 0;
   margin-top: -3.6rem;

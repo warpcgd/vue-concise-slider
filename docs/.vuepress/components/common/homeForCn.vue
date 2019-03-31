@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fullpage">
     <section class="cover">
       <div class="cover-main">
         <h1>vue-concise-slider</h1>
@@ -16,7 +16,7 @@
     <section class="home-demo">
       <div class="row">
         <h3>Demo</h3>
-        <p><sliderBasic></sliderBasic></p>
+        <p><effect-sliderHome></effect-sliderHome></p>
       </div>
     </section>
     <section>
@@ -45,7 +45,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
   body {
     -webkit-font-smoothing: antialiased;
     color: #34495e;
@@ -54,7 +54,17 @@ export default {
     margin: 0;
     overflow-x: hidden;
   }
-  .content:not(.custom) {
+  .fullpage {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    margin: 0!important;
+    padding: 0;
+    top: 3.6rem;
+  }
+  section .content:not(.custom) {
     max-width: 100%;
     margin: 0 auto;
     padding: 0;
@@ -118,12 +128,6 @@ export default {
     font-size: 1.5rem;
     text-align: center;
     margin: 2rem;
-  }
-  .slider-item {
-    color: #FFF;
-    text-align: center;
-    font-style: italic;
-    font-weight: 300;
   }
   section .features {
     padding: 1.2rem 0;
