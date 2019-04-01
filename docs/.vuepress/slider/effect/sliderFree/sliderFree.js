@@ -1,4 +1,4 @@
-import { getTranformMaxWidth } from '../../../utils/index.js'
+import { getTranformMaxWidth } from '../../utils/index.js'
 import sliderAddClass from '../../common/sliderAddClass.js'
 function getBaseLog (x, y) {
   return Math.log(y) / Math.log(x)

@@ -1,4 +1,4 @@
-import { getTranformMaxWidth } from '../../utils/index.js'
+import { getTranformMaxWidth } from '../utils/index.js'
 export default {
   props: {
     options: {
