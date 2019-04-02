@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>快速开始 | vue-concise-slider</title>
+    <meta name="description" content="vue-concise-slider,A simple sliding component,has easy configuration,support self-adaption / fullscreen / button / page,and is compatible with mobile and PC terminal">
+    
+    
+    <link rel="preload" href="/vue-concise-slider/assets/css/0.styles.e005f4b4.css" as="style"><link rel="preload" href="/vue-concise-slider/assets/js/app.2516168d.js" as="script"><link rel="preload" href="/vue-concise-slider/assets/js/3.e635a1ec.js" as="script"><link rel="preload" href="/vue-concise-slider/assets/js/50.f688d5bd.js" as="script"><link rel="prefetch" href="/vue-concise-slider/assets/js/1.11045382.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/10.53724119.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/11.326e2f90.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/12.67c713ef.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/13.3866894c.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/14.9f0de2cc.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/15.c0534bf1.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/16.8a44919f.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/17.5277f5a4.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/18.49fbcaf1.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/19.512b77ef.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/20.ad515882.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/21.330919b1.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/22.5645fcdb.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/23.dd2206c7.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/24.cd055abd.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/25.6b642321.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/26.0a22bd46.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/27.aa7c42f4.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/28.caaefb79.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/29.8edc6c9b.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/30.bc7978f9.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/31.4def60fa.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/32.993e8efd.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/33.4218becf.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/34.14cd4967.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/35.3634cf94.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/36.49445464.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/37.ac0b9875.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/38.122614be.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/39.bb323460.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/4.d04e0090.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/40.a14283f0.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/41.a962417f.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/42.2c606842.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/43.1e45802c.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/44.0128d09b.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/45.927b54ff.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/46.e5d92907.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/47.866aa77d.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/48.40fe9f9d.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/49.6e48c827.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/5.87c4a993.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/51.f1157447.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/6.4c6ef4a4.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/7.e05ffae0.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/8.52dcac19.js"><link rel="prefetch" href="/vue-concise-slider/assets/js/9.dcfe2a08.js">
+    <link rel="stylesheet" href="/vue-concise-slider/assets/css/0.styles.e005f4b4.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/vue-concise-slider/zh/" class="home-link router-link-active"><!----> <span class="site-name">vue-concise-slider</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/vue-concise-slider/zh/" class="nav-link">首页</a></div><div class="nav-item"><a href="/vue-concise-slider/zh/demos/" class="nav-link">示例</a></div><div class="nav-item"><a href="/vue-concise-slider/zh/docs.html" class="nav-link">文档</a></div><div class="nav-item"><a href="/vue-concise-slider/zh/guide.html" class="nav-link router-link-exact-active router-link-active">教程</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/vue-concise-slider/guide.html" class="nav-link">English</a></li><li class="dropdown-item"><!----> <a href="/vue-concise-slider/zh/guide.html" class="nav-link router-link-exact-active router-link-active">简体中文</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/vue-concise-slider/zh/" class="nav-link">首页</a></div><div class="nav-item"><a href="/vue-concise-slider/zh/demos/" class="nav-link">示例</a></div><div class="nav-item"><a href="/vue-concise-slider/zh/docs.html" class="nav-link">文档</a></div><div class="nav-item"><a href="/vue-concise-slider/zh/guide.html" class="nav-link router-link-exact-active router-link-active">教程</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/vue-concise-slider/guide.html" class="nav-link">English</a></li><li class="dropdown-item"><!----> <a href="/vue-concise-slider/zh/guide.html" class="nav-link router-link-exact-active router-link-active">简体中文</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading open"><span>快速开始</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/vue-concise-slider/zh/guide.html#快速开始" class="sidebar-link">快速开始</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/vue-concise-slider/zh/guide.html#使用slot渲染自定义page" class="sidebar-link">使用slot渲染自定义page</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/vue-concise-slider/zh/guide.html#配置loading" class="sidebar-link">配置loading</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/vue-concise-slider/zh/guide.html#异步加载" class="sidebar-link">异步加载</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/vue-concise-slider/zh/guide.html#渐变滚动" class="sidebar-link">渐变滚动</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/vue-concise-slider/zh/guide.html#旋转滚动" class="sidebar-link">旋转滚动</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/vue-concise-slider/zh/guide.html#使用自定义分页" class="sidebar-link">使用自定义分页</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/vue-concise-slider/zh/guide.html#嵌套轮播" class="sidebar-link">嵌套轮播</a><ul class="sidebar-sub-headers"></ul></li></ul></div></li></ul> </div> <div class="page"> <div class="content default"><h2 id="快速开始"><a href="#快速开始" aria-hidden="true" class="header-anchor">#</a> 快速开始</h2> <p>1.安装 <code>vue-concise-slider</code></p> <div class="language-html extra-class"><pre class="language-html"><code>  npm install vue-concise-slider --save
+</code></pre></div><p>2.配置</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+<span class="token comment">&lt;!-- 制作一个框架包裹slider --&gt;</span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value"><span class="token property">width</span><span class="token punctuation">:</span>70%<span class="token punctuation">;</span><span class="token property">margin</span><span class="token punctuation">:</span>20px auto<span class="token punctuation">;</span><span class="token property">height</span><span class="token punctuation">:</span>400px</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token comment">&lt;!-- 配置slider组件 --&gt;</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slider</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>slider<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:options</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>options<span class="token punctuation">&quot;</span></span> <span class="token attr-name">@slide</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>slide<span class="token punctuation">'</span></span> <span class="token attr-name">@tap</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>onTap<span class="token punctuation">'</span></span> <span class="token attr-name">@init</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>onInit<span class="token punctuation">'</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slideritem</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>(item,index) in pages<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>index<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:</span><span class="token style-attr language-css"><span class="token attr-name"><span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value">item.style</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>{{item.html}}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slideritem</span><span class="token punctuation">&gt;</span></span>
+          <span class="token comment">&lt;!-- 设置loading,可自定义 --&gt;</span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>loading<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>loading...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slider</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> slider<span class="token punctuation">,</span> slideritem <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-concise-slider'</span> <span class="token comment">// 引入slider组件</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+   el<span class="token punctuation">:</span> <span class="token string">'#app'</span><span class="token punctuation">,</span>
+   <span class="token function">data</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span>
+        <span class="token comment">//图片列表[arr]</span>
+        pages<span class="token punctuation">:</span><span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+          html<span class="token punctuation">:</span> <span class="token string">'&lt;div class=&quot;slider1&quot;&gt;slider1&lt;/div&gt;'</span><span class="token punctuation">,</span>
+          style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#1bbc9b'</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span>
+            html<span class="token punctuation">:</span> <span class="token string">'&lt;div class=&quot;slider2&quot;&gt;slider2&lt;/div&gt;'</span><span class="token punctuation">,</span>
+            style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#4bbfc3'</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span>
+            html<span class="token punctuation">:</span> <span class="token string">'&lt;div class=&quot;slider3&quot;&gt;slider3&lt;/div&gt;'</span><span class="token punctuation">,</span>
+            style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#7baabe'</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token comment">//滑动配置[obj]</span>
+        options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          currentPage<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token comment">//当前页码</span>
+          thresholdDistance<span class="token punctuation">:</span> <span class="token number">500</span><span class="token punctuation">,</span><span class="token comment">//滑动判定距离</span>
+          thresholdTime<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span><span class="token comment">//滑动判定时间</span>
+          autoplay<span class="token punctuation">:</span><span class="token number">1000</span><span class="token punctuation">,</span><span class="token comment">//自动滚动[ms]</span>
+          loop<span class="token punctuation">:</span><span class="token boolean">true</span><span class="token punctuation">,</span><span class="token comment">//循环滚动</span>
+          direction<span class="token punctuation">:</span><span class="token string">'vertical'</span><span class="token punctuation">,</span><span class="token comment">//方向设置，垂直滚动</span>
+          loopedSlides<span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token comment">//无限滚动前后遍历数</span>
+          slidesToScroll<span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token comment">//每次滑动项数</span>
+          timingFunction<span class="token punctuation">:</span> <span class="token string">'ease'</span><span class="token punctuation">,</span> <span class="token comment">// 滑动方式</span>
+          speed<span class="token punctuation">:</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token comment">// 滑动时间</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    components<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        slider
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    methods<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 监听事件</span>
+      <span class="token function">slide</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token function">onTap</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token function">onInit</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h2 id="使用slot渲染自定义page"><a href="#使用slot渲染自定义page" aria-hidden="true" class="header-anchor">#</a> 使用slot渲染自定义page</h2> <ol><li>引入slider和slideritem</li> <li>不传入page数组，直接使用slideritem替代</li> <li>coverflow模式下不可使用</li></ol> <div class="language-html extra-class"><pre class="language-html"><code>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value"><span class="token property">width</span><span class="token punctuation">:</span>70%<span class="token punctuation">;</span><span class="token property">margin</span><span class="token punctuation">:</span>20px auto<span class="token punctuation">;</span><span class="token property">height</span><span class="token punctuation">:</span>400px</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slider</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>slider<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:options</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>options<span class="token punctuation">&quot;</span></span> <span class="token attr-name">@slide</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>slide<span class="token punctuation">'</span></span> <span class="token attr-name">@tap</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>onTap<span class="token punctuation">'</span></span> <span class="token attr-name">@init</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>onInit<span class="token punctuation">'</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slideritem</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>(item,index) in someList<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>index<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:</span><span class="token style-attr language-css"><span class="token attr-name"><span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value">item.style</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>{{item.html}}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slideritem</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slider</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> slider<span class="token punctuation">,</span> slideritem <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-concise-slider'</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  el<span class="token punctuation">:</span> <span class="token string">'#sliderbasic'</span><span class="token punctuation">,</span>
+  <span class="token function">data</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      someList<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        pagination<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        thresholdDistance<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token comment">// 滑动距离阈值判定</span>
+        thresholdTime<span class="token punctuation">:</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token comment">// 滑动时间阈值判定</span>
+        speed<span class="token punctuation">:</span> <span class="token number">300</span> <span class="token comment">// 滑动速度</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">mounted</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> that <span class="token operator">=</span> <span class="token keyword">this</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      that<span class="token punctuation">.</span>someList <span class="token operator">=</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          html<span class="token punctuation">:</span> <span class="token string">'slide1'</span><span class="token punctuation">,</span>
+          style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#1bbc9b'</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          html<span class="token punctuation">:</span> <span class="token string">'slide2'</span><span class="token punctuation">,</span>
+          style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#4bbfc3'</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          html<span class="token punctuation">:</span> <span class="token string">'slide3'</span><span class="token punctuation">,</span>
+          style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#7baabe'</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  components<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    slider<span class="token punctuation">,</span>
+    slideritem
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h2 id="配置loading"><a href="#配置loading" aria-hidden="true" class="header-anchor">#</a> 配置loading</h2> <p><code>&lt;div slot=&quot;loading&quot;&gt;&lt;/div&gt;</code>里面包裹自定义的loading</p> <div class="language-html extra-class"><pre class="language-html"><code>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style language-css">
+    <span class="token comment">/*loadin特效*/</span>
+    <span class="token atrule"><span class="token rule">@-webkit-keyframes</span> loading-7</span><span class="token punctuation">{</span>
+      <span class="token selector">0%</span><span class="token punctuation">{</span><span class="token property">margin-bottom</span><span class="token punctuation">:</span>0<span class="token punctuation">}</span>
+      <span class="token selector">50%</span><span class="token punctuation">{</span><span class="token property">margin-bottom</span><span class="token punctuation">:</span>20px<span class="token punctuation">;</span><span class="token punctuation">}</span>
+      <span class="token selector">100%</span><span class="token punctuation">{</span><span class="token property">margin-bottom</span><span class="token punctuation">:</span>0px<span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token selector">.loadingDot .loading-7 i</span> <span class="token punctuation">{</span>
+      <span class="token property">display</span><span class="token punctuation">:</span> inline-block<span class="token punctuation">;</span>
+      <span class="token property">margin-left</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+      <span class="token property">background</span><span class="token punctuation">:</span> #333<span class="token punctuation">;</span>
+      <span class="token property">width</span><span class="token punctuation">:</span> 16px<span class="token punctuation">;</span>
+      <span class="token property">height</span><span class="token punctuation">:</span> 16px<span class="token punctuation">;</span>
+      <span class="token property">border-radius</span><span class="token punctuation">:</span> 50%<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token selector">.loadingDot i:nth-child(1)</span> <span class="token punctuation">{</span>
+      <span class="token property">-webkit-animation</span><span class="token punctuation">:</span> loading-7 .7s ease-in 0s loopedSlides<span class="token punctuation">;</span>
+      <span class="token property">animation</span><span class="token punctuation">:</span> loading-7 .7s ease-in 0s loopedSlides<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token selector">.loadingDot i:nth-child(2)</span> <span class="token punctuation">{</span>
+      <span class="token property">-webkit-animation</span><span class="token punctuation">:</span> loading-7 .7s ease-in 0.15s loopedSlides<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token selector">.loadingDot i:nth-child(3)</span> <span class="token punctuation">{</span>
+      <span class="token property">-webkit-animation</span><span class="token punctuation">:</span> loading-7 .7s ease-in 0.3s loopedSlides<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token selector">.loadingDot i:nth-child(4)</span> <span class="token punctuation">{</span>
+      <span class="token property">-webkit-animation</span><span class="token punctuation">:</span> loading-7 .7s ease-in 0.45s loopedSlides<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slider</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>slider<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:pages</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>someList<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:options</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>options<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token comment">&lt;!-- 设置loading,可自定义loadin特效 --&gt;</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>loading<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>loadingDot<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slider</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h2 id="异步加载"><a href="#异步加载" aria-hidden="true" class="header-anchor">#</a> 异步加载</h2> <p>1.someList设置<code>空数组([])</code></p> <p>2.异步的数据直接按格式赋值someList</p> <div class="language-html extra-class"><pre class="language-html"><code>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value"><span class="token property">width</span><span class="token punctuation">:</span>70%<span class="token punctuation">;</span><span class="token property">margin</span><span class="token punctuation">:</span>20px auto<span class="token punctuation">;</span><span class="token property">height</span><span class="token punctuation">:</span>400px</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slider</span> <span class="token attr-name">:options</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>options<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slideritem</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>(item,index) in someList<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>index<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:</span><span class="token style-attr language-css"><span class="token attr-name"><span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value">item.style</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>{{item.html}}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slideritem</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slider</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript">
+  <span class="token keyword">import</span> <span class="token punctuation">{</span> slider<span class="token punctuation">,</span> slideritem <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-concise-slider'</span>
+  <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    el<span class="token punctuation">:</span> <span class="token string">'#sliderbasic'</span><span class="token punctuation">,</span>
+    <span class="token function">data</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span>
+        <span class="token comment">// someList留空</span>
+        someList<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          currentPage<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token comment">//当前页面</span>
+          thresholdDistance<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token comment">// 滑动距离阈值判定</span>
+          thresholdTime<span class="token punctuation">:</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token comment">// 滑动时间阈值判定</span>
+          speed<span class="token punctuation">:</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token comment">// 滑动速度</span>
+          timingFunction<span class="token punctuation">:</span> <span class="token string">'ease'</span><span class="token punctuation">,</span> <span class="token comment">// 滑动方式</span>
+          loop<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// 无限循环</span>
+          autoplay<span class="token punctuation">:</span> <span class="token number">0</span> <span class="token comment">// 自动播放:时间[ms]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">mounted</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">let</span> that <span class="token operator">=</span> <span class="token keyword">this</span>
+      <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 拿回来的图片数据可以直接赋值someList</span>
+        that<span class="token punctuation">.</span>someList <span class="token operator">=</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            html<span class="token punctuation">:</span> <span class="token string">'&lt;div class=&quot;slide1&quot;&gt;slide1&lt;/div&gt;'</span><span class="token punctuation">,</span>
+            style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#1bbc9b'</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span>
+            html<span class="token punctuation">:</span> <span class="token string">'slide2'</span><span class="token punctuation">,</span>
+            style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#4bbfc3'</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span>
+            html<span class="token punctuation">:</span> <span class="token string">'slide3'</span><span class="token punctuation">,</span>
+            style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#7baabe'</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    components<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      slider
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h2 id="渐变滚动"><a href="#渐变滚动" aria-hidden="true" class="header-anchor">#</a> 渐变滚动</h2> <p>1.effect配置<code>fade</code>,可设置loop为<code>true</code>,开启循环滑动</p> <div class="language-html extra-class"><pre class="language-html"><code>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value"><span class="token property">width</span><span class="token punctuation">:</span>70%<span class="token punctuation">;</span><span class="token property">margin</span><span class="token punctuation">:</span>20px auto<span class="token punctuation">;</span><span class="token property">height</span><span class="token punctuation">:</span>400px</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slider</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>slider<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:options</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>options<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slideritem</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>(item,index) in someList<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>index<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:</span><span class="token style-attr language-css"><span class="token attr-name"><span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value">item.style</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>{{item.html}}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slideritem</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slider</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript">
+  <span class="token keyword">import</span> <span class="token punctuation">{</span> slider<span class="token punctuation">,</span> slideritem <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-concise-slider'</span>
+  <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    el<span class="token punctuation">:</span> <span class="token string">'#sliderbasic'</span><span class="token punctuation">,</span>
+    <span class="token function">data</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span>
+        <span class="token comment">// someList留空</span>
+        someList<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          effect<span class="token punctuation">:</span> <span class="token string">'fade'</span><span class="token punctuation">,</span><span class="token comment">//滑动方式</span>
+          currentPage<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token comment">//当前页面</span>
+          thresholdDistance<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token comment">// 滑动距离阈值判定</span>
+          thresholdTime<span class="token punctuation">:</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token comment">// 滑动时间阈值判定</span>
+          speed<span class="token punctuation">:</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token comment">// 滑动速度</span>
+          timingFunction<span class="token punctuation">:</span> <span class="token string">'ease'</span><span class="token punctuation">,</span> <span class="token comment">// 滑动方式</span>
+          loop<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// 无限循环</span>
+          autoplay<span class="token punctuation">:</span> <span class="token number">0</span> <span class="token comment">// 自动播放:时间[ms]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">mounted</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">let</span> that <span class="token operator">=</span> <span class="token keyword">this</span>
+      <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 拿回来的图片数据可以直接赋值someList</span>
+        that<span class="token punctuation">.</span>someList <span class="token operator">=</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            html<span class="token punctuation">:</span> <span class="token string">'&lt;div class=&quot;slide1&quot;&gt;slide1&lt;/div&gt;'</span><span class="token punctuation">,</span>
+            style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#1bbc9b'</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span>
+            html<span class="token punctuation">:</span> <span class="token string">'slide2'</span><span class="token punctuation">,</span>
+            style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#4bbfc3'</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span>
+            html<span class="token punctuation">:</span> <span class="token string">'slide3'</span><span class="token punctuation">,</span>
+            style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#7baabe'</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    components<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      slider
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h2 id="旋转滚动"><a href="#旋转滚动" aria-hidden="true" class="header-anchor">#</a> 旋转滚动</h2> <ol><li>effect配置<code>coverflow</code>,可设置loop为<code>true</code>,开启循环滑动</li> <li>必须使用<code>template</code>包裹<code>slideritem</code></li> <li>slideritem需要传入总页数<code>pageLength</code>，以及当前序号<code>index</code></li></ol> <div class="language-html extra-class"><pre class="language-html"><code>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value"><span class="token property">width</span><span class="token punctuation">:</span>70%<span class="token punctuation">;</span><span class="token property">margin</span><span class="token punctuation">:</span>20px auto<span class="token punctuation">;</span><span class="token property">height</span><span class="token punctuation">:</span>400px</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slider</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>slider<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:options</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>options<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">slot-scope</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>coverflow<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slideritem</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>(item,index) in someList<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:pageLength</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>someList.length<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:index</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>index<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>index<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:</span><span class="token style-attr language-css"><span class="token attr-name"><span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value">item.style</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>{{item.html}}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slideritem</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slider</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript">
+  <span class="token keyword">import</span> <span class="token punctuation">{</span> slider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-concise-slider'</span>
+  <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    el<span class="token punctuation">:</span> <span class="token string">'#slidercoverflow'</span><span class="token punctuation">,</span>
+    <span class="token function">data</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      someList<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          effect<span class="token punctuation">:</span> <span class="token string">'coverflow'</span><span class="token punctuation">,</span>
+          currentPage<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+          tracking<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+          thresholdDistance<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token comment">// 滑动距离阈值判定</span>
+          thresholdTime<span class="token punctuation">:</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token comment">// 滑动时间阈值判定</span>
+          deviation<span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token comment">// 偏移值</span>
+          widthScalingRatio<span class="token punctuation">:</span> <span class="token number">0.8</span><span class="token punctuation">,</span> <span class="token comment">// 宽度缩放比例</span>
+          heightScalingRatio<span class="token punctuation">:</span> <span class="token number">0.8</span><span class="token punctuation">,</span> <span class="token comment">// 高度缩放比例</span>
+          loopedSlides<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token comment">// 多级滚动时，需要添加前后遍历数</span>
+          slidesToScroll<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token comment">// 需要滚动页面的数量</span>
+          loop<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token comment">// 无限循环</span>
+          <span class="token comment">// autoplay: 1000 // 自动播放:时间[ms]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">mounted</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">let</span> that <span class="token operator">=</span> <span class="token keyword">this</span>
+      <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 拿回来的图片数据可以直接赋值someList</span>
+        that<span class="token punctuation">.</span>someList <span class="token operator">=</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            html<span class="token punctuation">:</span> <span class="token string">'slide1'</span><span class="token punctuation">,</span>
+            style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#1bbc9b'</span><span class="token punctuation">,</span>
+              <span class="token string">'width'</span><span class="token punctuation">:</span> <span class="token string">'33.33333333%'</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span>
+            html<span class="token punctuation">:</span> <span class="token string">'slide2'</span><span class="token punctuation">,</span>
+            style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#4bbfc3'</span><span class="token punctuation">,</span>
+              <span class="token string">'width'</span><span class="token punctuation">:</span> <span class="token string">'33.33333333%'</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span>
+            html<span class="token punctuation">:</span> <span class="token string">'slide3'</span><span class="token punctuation">,</span>
+            style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#7baabe'</span><span class="token punctuation">,</span>
+              <span class="token string">'width'</span><span class="token punctuation">:</span> <span class="token string">'33.33333333%'</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span>
+            html<span class="token punctuation">:</span> <span class="token string">'slide4'</span><span class="token punctuation">,</span>
+            style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#1bbc9b'</span><span class="token punctuation">,</span>
+              <span class="token string">'width'</span><span class="token punctuation">:</span> <span class="token string">'33.33333333%'</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span>
+            html<span class="token punctuation">:</span> <span class="token string">'slide5'</span><span class="token punctuation">,</span>
+            style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#4bbfc3'</span><span class="token punctuation">,</span>
+              <span class="token string">'width'</span><span class="token punctuation">:</span> <span class="token string">'33.33333333%'</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span>
+            html<span class="token punctuation">:</span> <span class="token string">'slide6'</span><span class="token punctuation">,</span>
+            style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#7baabe'</span><span class="token punctuation">,</span>
+              <span class="token string">'width'</span><span class="token punctuation">:</span> <span class="token string">'33.33333333%'</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    components<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      slider
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h2 id="使用自定义分页"><a href="#使用自定义分页" aria-hidden="true" class="header-anchor">#</a> 使用自定义分页</h2> <ol><li>pagination 设为 true</li> <li>设置renderPagination函数</li></ol> <div class="language-html extra-class"><pre class="language-html"><code>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value"><span class="token property">width</span><span class="token punctuation">:</span>70%<span class="token punctuation">;</span><span class="token property">margin</span><span class="token punctuation">:</span>20px auto<span class="token punctuation">;</span><span class="token property">height</span><span class="token punctuation">:</span>400px</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slider</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>slider<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:options</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>options<span class="token punctuation">&quot;</span></span> <span class="token attr-name">@slide</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>slide<span class="token punctuation">'</span></span> <span class="token attr-name">@tap</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>onTap<span class="token punctuation">'</span></span> <span class="token attr-name">@init</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>onInit<span class="token punctuation">'</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slideritem</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>(item,index) in someList<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>index<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:</span><span class="token style-attr language-css"><span class="token attr-name"><span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value">item.style</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>{{item.html}}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slideritem</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slider</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> slider<span class="token punctuation">,</span> slideritem <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../../dist/module.js'</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  el<span class="token punctuation">:</span> <span class="token string">'#sliderbasic'</span><span class="token punctuation">,</span>
+  <span class="token function">data</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      someList<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        pagination<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        thresholdDistance<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token comment">// 滑动距离阈值判定</span>
+        thresholdTime<span class="token punctuation">:</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token comment">// 滑动时间阈值判定</span>
+        speed<span class="token punctuation">:</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token comment">// 滑动速度</span>
+        renderPagination<span class="token punctuation">:</span> <span class="token punctuation">(</span>h<span class="token punctuation">,</span> index<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+          <span class="token keyword">return</span> <span class="token function">h</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+            <span class="token keyword">class</span><span class="token punctuation">:</span> <span class="token string">'swiper-pagination-bullet'</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">mounted</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> that <span class="token operator">=</span> <span class="token keyword">this</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      that<span class="token punctuation">.</span>someList <span class="token operator">=</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          html<span class="token punctuation">:</span> <span class="token string">'slide1'</span><span class="token punctuation">,</span>
+          style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#1bbc9b'</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          html<span class="token punctuation">:</span> <span class="token string">'slide2'</span><span class="token punctuation">,</span>
+          style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#4bbfc3'</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          html<span class="token punctuation">:</span> <span class="token string">'slide3'</span><span class="token punctuation">,</span>
+          style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#7baabe'</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  components<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    slider<span class="token punctuation">,</span>
+    slideritem
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h2 id="嵌套轮播"><a href="#嵌套轮播" aria-hidden="true" class="header-anchor">#</a> 嵌套轮播</h2> <ol><li>effect设置为'nest'</li> <li>slideritem进行嵌套</li></ol> <div class="language-html extra-class"><pre class="language-html"><code>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value"><span class="token property">width</span><span class="token punctuation">:</span>70%<span class="token punctuation">;</span><span class="token property">margin</span><span class="token punctuation">:</span>20px auto<span class="token punctuation">;</span><span class="token property">height</span><span class="token punctuation">:</span>400px</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slider</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>slider<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:options</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>options<span class="token punctuation">&quot;</span></span> <span class="token attr-name">@slide</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>slide<span class="token punctuation">'</span></span> <span class="token attr-name">@tap</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>onTap<span class="token punctuation">'</span></span> <span class="token attr-name">@init</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>onInit<span class="token punctuation">'</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slideritem</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>(item,index) in someList<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>index<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:</span><span class="token style-attr language-css"><span class="token attr-name"><span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value">item.style</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>{{item.html}}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slideritem</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slideritem</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slider</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>slider<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:options</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>options1<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slideritem</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>(item,index) in someList1<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>index<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:</span><span class="token style-attr language-css"><span class="token attr-name"><span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value">item.style</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>{{item.html}}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slideritem</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slider</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slideritem</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slideritem</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>(item,index) in someList<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>index + 3<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:</span><span class="token style-attr language-css"><span class="token attr-name"><span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value">item.style</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>{{item.html}}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slideritem</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>loading<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>loadingDot<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slider</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> slider<span class="token punctuation">,</span> slideritem <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../../dist/module.js'</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  el<span class="token punctuation">:</span> <span class="token string">'#slidernest'</span><span class="token punctuation">,</span>
+  <span class="token function">data</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      someList<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      someList1<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token comment">// direction: 'vertical',</span>
+        effect<span class="token punctuation">:</span> <span class="token string">'nest'</span><span class="token punctuation">,</span>
+        pagination<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token comment">// nested: false, // 嵌套</span>
+        thresholdDistance<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token comment">// 滑动距离阈值判定</span>
+        thresholdTime<span class="token punctuation">:</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token comment">// 滑动时间阈值判定</span>
+        grabCursor<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// 抓标样式</span>
+        speed<span class="token punctuation">:</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token comment">// 滑动速度</span>
+        <span class="token comment">// timingFunction: 'ease', // 滑动方式</span>
+        loop<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token comment">// 无限循环</span>
+        <span class="token comment">// autoplay: 0 // 自动播放:时间[ms]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      options1<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        direction<span class="token punctuation">:</span> <span class="token string">'vertical'</span><span class="token punctuation">,</span>
+        pagination<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        thresholdDistance<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token comment">// 滑动距离阈值判定</span>
+        thresholdTime<span class="token punctuation">:</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token comment">// 滑动时间阈值判定</span>
+        grabCursor<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// 抓标样式</span>
+        speed<span class="token punctuation">:</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token comment">// 滑动速度</span>
+        <span class="token comment">// timingFunction: 'ease', // 滑动方式</span>
+        loop<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token comment">// 无限循环</span>
+        <span class="token comment">// autoplay: 0 // 自动播放:时间[ms]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">mounted</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> that <span class="token operator">=</span> <span class="token keyword">this</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      that<span class="token punctuation">.</span>someList <span class="token operator">=</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          html<span class="token punctuation">:</span> <span class="token string">'slide1'</span><span class="token punctuation">,</span>
+          style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#1bbc9b'</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+      that<span class="token punctuation">.</span>someList1 <span class="token operator">=</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          html<span class="token punctuation">:</span> <span class="token string">'slide1-1'</span><span class="token punctuation">,</span>
+          style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#1bbc9b'</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          html<span class="token punctuation">:</span> <span class="token string">'slide2-2'</span><span class="token punctuation">,</span>
+          style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#4bbfc3'</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          html<span class="token punctuation">:</span> <span class="token string">'slide3-3'</span><span class="token punctuation">,</span>
+          style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">'background'</span><span class="token punctuation">:</span> <span class="token string">'#7baabe'</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div></div> <div class="page-edit"><!----> <!----></div> <!----> </div></div><div class="global-ui"></div></div>
+    <script src="/vue-concise-slider/assets/js/app.2516168d.js" defer></script><script src="/vue-concise-slider/assets/js/3.e635a1ec.js" defer></script><script src="/vue-concise-slider/assets/js/50.f688d5bd.js" defer></script>
+  </body>
+</html>
