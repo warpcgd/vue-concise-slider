@@ -58,19 +58,19 @@ module.exports = {
         // 该语言在下拉菜单中的标签
         label: '简体中文',
         nav: [{
-            text: 'Home',
+            text: '首页',
             link: '/zh/'
           },
           {
-            text: 'Demos',
+            text: '示例',
             link: '/zh/demos/'
           },
           {
-            text: 'Docs',
+            text: '文档',
             link: '/zh/docs'
           },
           {
-            text: 'Guide',
+            text: '教程',
             link: '/zh/guide'
           }
         ],

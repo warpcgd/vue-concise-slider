@@ -2,98 +2,16 @@
 sidebar: auto
 ---
 
-## pages
+# options
 
-- 类型：`Array`
-- 默认值：`null`
-
-滑动列表,支持各项单独配置dom，以及样式css
-
-```html
-[
-  {
-    html: '',
-    style:{
-     background:'url(src/img/testimg-1.jpg)'
-    }
-  },
-  {
-   html: '',
-   style:{
-    background:'url(src/img/testimg-2.jpg)'
-    }
-  },
-  {
-    html: 'slide3',
-    style:{
-      background:'#4bbfc3',
-    }
-  }
-]
-```
-
-### html
-
-- 类型：`String`
-- 默认值：`null`
-
-值挂载在[v-html](https://vuejs.org/v2/api/#v-html)标签上,输出真正的 HTML
-
-```html
-  {
-  html: '<div>test</div>'
-  }
-```
-
-### style
-
-- 类型：`object`
-- 默认值：`null`
-
-直接作用在每个item上的style样式，可以输出背景图，背景色，每项宽度可自定义，自动切换为不定宽滚动
-
-```html
-  {
-  style:{
-    background:'#4bbfc3'
-   }
-  }
-```
-### component
-
-- 类型：`object`
-- 默认值：`null`
-
-对每页page的扩展，可以自定义component模板，支持传入props
-* item : 每项pages
-* options: slider配置
-* pages: 滑动列表
-
-```html
-  {
-    component: {
-      props: ['item', 'options', 'pages'],
-      data () {
-        return {
-          img: 'src/img/testimg-1.jpg'
-        }
-      },
-      mounted () {
-        console.log(this.item)
-      },
-      template: '<div><img style="width: 100%" :src="img" /><p style="position: absolute; margin: 0; right: 10px; bottom: 10px; font-size: 16px;">test1</p></div>'
-    }
-  }
-```
-
-## options
+## 基础信息
 
 - 类型：`Object`
 - 默认值：`null`
 
 滑动配置
 
-```html
+```js
   {
     currentPage: 0,//当前页码
     thresholdDistance: 500,//滑动判定距离
@@ -105,10 +23,11 @@ sidebar: auto
     slidesToScroll:1,//每次滑动项数
   }
 ```
+
 ### effect
 
 - 类型：`string`
-- 默认值：`fade`
+- 默认值：`slide`
 
 切换效果，默认为滚动滑动('slide'),可设置为渐变滑动('fade'),旋转滚动('coverflow')
 
@@ -258,42 +177,7 @@ loop设置为true时,设置前后复制页面的数量
     timingFunction: 'ease'
   }
 ```
-### widthScalingRatio
 
-- 类型：`string`
-- 默认值：`0.8`
-
-coverflow模式下配置宽度比例缩放,范围0~1
-
-```html
-  {
-    widthScalingRatio: '0.8'
-  }
-```
-### heightScalingRatio
-
-- 类型：`string`
-- 默认值：`0.8`
-
-coverflow模式下配置高度比例缩放,范围0~1
-
-```html
-  {
-    heightScalingRatio: '0.8'
-  }
-```
-### deviation
-
-- 类型：`string`
-- 默认值：`200`
-
-coverflow模式下配置滑动项偏移
-
-```html
-  {
-    deviation: '200'
-  }
-```
 ### pagination
 
 - 类型：`boolean`
@@ -349,6 +233,71 @@ coverflow模式下配置滑动项偏移
     itemAnimation: true
   }
 ```
+### freeze
+
+- 类型：`boolean`
+- 默认值：`false`
+
+阻止touch滑动
+
+```js
+  {
+    freeze: false
+  }
+```
+### preventRebound
+
+- 类型：`boolean`
+- 默认值：`false`
+
+阻止回弹
+
+```js
+  {
+    preventRebound: false
+  }
+```
+
+## CoverFlow options
+
+### widthScalingRatio
+
+- 类型：`string`
+- 默认值：`0.8`
+
+coverflow模式下配置宽度比例缩放,范围0~1
+
+```html
+  {
+    widthScalingRatio: '0.8'
+  }
+```
+### heightScalingRatio
+
+- 类型：`string`
+- 默认值：`0.8`
+
+coverflow模式下配置高度比例缩放,范围0~1
+
+```html
+  {
+    heightScalingRatio: '0.8'
+  }
+```
+### deviation
+
+- 类型：`string`
+- 默认值：`200`
+
+coverflow模式下配置滑动项偏移
+
+```html
+  {
+    deviation: '200'
+  }
+```
+
+## 嵌套配置
 
 ### nested
 

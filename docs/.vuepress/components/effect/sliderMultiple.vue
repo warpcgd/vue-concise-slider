@@ -25,7 +25,7 @@ export default {
         tracking: false,
         thresholdDistance: 100, // 滑动距离阈值判定
         thresholdTime: 300, // 滑动时间阈值判定
-        infinite: 4, // 多级滚动时，需要添加前后遍历数
+        loopedSlides: 4, // 多级滚动时，需要添加前后遍历数
         slidesToScroll: 4, // 需要滚动页面的数量
         loop: true // 无限循环
         // autoplay: 1000 // 自动播放:时间[ms]

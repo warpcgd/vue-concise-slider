@@ -46,42 +46,42 @@ export default {
           html: 'slide1',
           style: {
             'background': '#4abf8a',
-            'width': '600px'
+            'width': '500px'
           }
         },
         {
           html: 'slide2',
           style: {
             'background': '#4bbfc3',
-            'width': '600px'
+            'width': '500px'
           }
         },
         {
           html: 'slide3',
           style: {
             'background': '#7baabe',
-            'width': '600px'
+            'width': '500px'
           }
         },
         {
           html: 'slide4',
           style: {
             'background': '#4abf8a',
-            'width': '600px'
+            'width': '500px'
           }
         },
         {
           html: 'slide5',
           style: {
             'background': '#4bbfc3',
-            'width': '600px'
+            'width': '500px'
           }
         },
         {
           html: 'slide6',
           style: {
             'background': '#7baabe',
-            'width': '600px'
+            'width': '500px'
           }
         }
       ]

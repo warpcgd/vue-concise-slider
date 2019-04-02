@@ -211,7 +211,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .slider-container {
   margin: 0 auto;
   overflow: hidden;

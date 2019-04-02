@@ -18,7 +18,9 @@ CoverFlow
       <!-- Using the slider component -->
       <slider ref="slider" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
           <!-- slideritem wrapped package with the components you need -->
-          <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
+          <template slot-scope="coverflow">
+              <slideritem v-for="(item,index) in someList" :pageLength="someList.length" :index="index" :key="index" :style="item.style">{{item.html}}</slideritem>
+          </template>
           <!-- Customizable loading -->
           <div slot="loading">loading...</div>
       </slider>
