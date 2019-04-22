@@ -155,5 +155,5 @@ export default {
 ### BUG？oh no!
 可以在这里提交,会尽快处理:https://github.com/warpcgd/vue-concise-slider/issues/2
 
-### 联系作者
-Webchat: warpcgd
+### 反馈
+![](webchat.jpg)
