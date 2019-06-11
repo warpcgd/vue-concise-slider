@@ -95,7 +95,8 @@ export default {
         freeze: this.options.freeze === undefined ? false : this.options.freeze,
         slidesPerView: this.options.slidesPerView === undefined ? 0 : this.options.slidesPerView,
         $parent: this.judgeParentSlider(this),
-        route: false
+        route: false,
+        lastPage: this.options.currentPage || 0
       }
     }
   },
@@ -169,40 +170,53 @@ export default {
             $slider = this.$el.children[item]
           }
         }
-        // 遍历子集
-        let $sliderChildren = $slider.children[0].children
-        let offsetLeft = $sliderChildren[lastPage].offsetLeft
-        if (this.options.loop) {
-          offsetLeft = $sliderChildren[lastPage].offsetLeft
-        }
-        // 居中
-        let offsetWidth = $sliderChildren[lastPage].offsetWidth
-        let slidesPerView = this.options.slidesPerView
-        let sliderLength = this.s_data.sliderLength
-        if (this.options.centeredSlides) {
-          if (slidesPerView) {
-            let currentPage = this.data.currentPage
-            let cent = parseInt((slidesPerView - 1) / 2)
-            if (currentPage - cent <= 0) {
-              currentPage = 0
-            } else if (currentPage + cent >= sliderLength) {
-              currentPage = sliderLength - slidesPerView
+        try {
+          // 遍历子集
+          let $sliderChildren = $slider.children[0].children
+          let offsetLeft = $sliderChildren[lastPage].offsetLeft
+          if (this.options.loop) {
+            offsetLeft = $sliderChildren[lastPage].offsetLeft
+          }
+          // 居中
+          let offsetWidth = $sliderChildren[lastPage].offsetWidth
+          if (!offsetWidth) {
+            throw new Error('找不到当前滑动元素，停止滑动')
+          }
+          let slidesPerView = this.options.slidesPerView
+          let sliderLength = this.s_data.sliderLength
+          if (this.options.centeredSlides) {
+            if (slidesPerView) {
+              let currentPage = this.data.currentPage
+              let cent = parseInt((slidesPerView - 1) / 2)
+              if (currentPage - cent <= 0) {
+                currentPage = 0
+              } else if (currentPage + cent >= sliderLength) {
+                currentPage = sliderLength - slidesPerView
+              } else {
+                currentPage = currentPage - cent
+              }
+              offsetLeft = $sliderChildren[currentPage].offsetLeft
             } else {
-              currentPage = currentPage - cent
+              offsetLeft = offsetLeft - pageWidth / 2 + offsetWidth / 2
             }
-            offsetLeft = $sliderChildren[currentPage].offsetLeft
-          } else {
-            offsetLeft = offsetLeft - pageWidth / 2 + offsetWidth / 2
           }
-        }
-        if (!this.options.centeredSlides && slidesPerView) {
-          let currentPage = this.data.currentPage
-          let slidesToScroll = this.options.slidesToScroll || 1
-          if (currentPage + slidesToScroll >= sliderLength) {
-            offsetLeft = $sliderChildren[sliderLength - slidesToScroll].offsetLeft
+          if (!this.options.centeredSlides && slidesPerView) {
+            let currentPage = this.data.currentPage
+            let slidesToScroll = this.options.slidesToScroll || 1
+            if (currentPage + slidesToScroll >= sliderLength) {
+              offsetLeft = $sliderChildren[sliderLength - slidesToScroll].offsetLeft
+            }
           }
+          return offsetLeft + pageWidth - pageWidth
+        } catch (error) {
+          let that = this
+          console.warn(error)
+          console.warn('滑动报错，停止滑动及轮播')
+          // 页码重置
+          this.data.currentPage = this.s_data.lastPage
+          this.options.autoplay = 0
+          this.clock().stop(that)
         }
-        return offsetLeft + pageWidth - pageWidth
       }
     },
     currentHeight () {
@@ -506,6 +520,7 @@ export default {
     },
     pre () {
       // debugger
+      this.s_data.lastPage = this.data.currentPage
       this.data.direction = 'left'
       let sliderLength = this.s_data.sliderLength
       let slidesToScroll = this.options.slidesToScroll || 1
@@ -536,7 +551,8 @@ export default {
     },
     next () {
       this.data.direction = 'right'
-      var sliderLength = this.s_data.sliderLength
+      this.s_data.lastPage = this.data.currentPage
+      let sliderLength = this.s_data.sliderLength
       let $parent = this.s_data.$parent
       let slidesToScroll = this.options.slidesToScroll || 1
       // let slidesPerView = this.s_data.slidesPerView ? (this.options.loop ? 0 : ((sliderLength - this.s_data.slidesPerView) / slidesToScroll)) : 0
