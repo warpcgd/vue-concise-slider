@@ -10,8 +10,6 @@
       @mousemove="swipeMove"
       @webkit-transition-end="onTransitionEnd"
       @transitionend="onTransitionEnd"
-      @transitioncancel="onTransitionEnd"
-      @webkit-transition-cancel="onTransitionEnd"
       >
       <div class="slider-wrapper" :class="classObject" v-if="pages.length === 0">
         <slot></slot>
@@ -559,7 +557,7 @@ export default {
       if (this.data.currentPage < (this.pagenums || sliderLength) - 1 && this.data.currentPage + slidesToScroll <= sliderLength - 1) {
         this.data.currentPage += this.options.slidesToScroll || 1
         this.slide()
-      } else if (this.options.loop && this.data.currentPage + slidesToScroll > sliderLength - 1 && (!$parent || !$parent.s_data.nested)) {
+      } else if (this.options.loop && this.data.currentPage + slidesToScroll > sliderLength - 1 && this.data.currentPage + slidesToScroll <= sliderLength && (!$parent || !$parent.s_data.nested)) {
         this.data.currentPage += this.options.slidesToScroll || 1
         this.s_data.transitionEnding = true
         this.s_data.itemTransitionEnding = true
