@@ -742,8 +742,9 @@ export default {
         let slideDom = that.$el.getElementsByClassName('slider-wrapper')[0]
         let children = Array.prototype.slice.call(slideDom.children)
         let sliderItem = children.filter((item) => {
-          return item.className.indexOf('slider-item') !== -1
+          return item.className.indexOf('slider-item') !== -1 && item.className.indexOf('slider-copy') === -1
         })
+        that.s_data.sliderLength = sliderItem.length || 0
         if (that.s_data.sliderLength >= 1 && that.options.loop && that.options.effect !== 'fade' && that.options.effect !== 'coverflow') {
           // 先清空上次添加的节点
           let sliderCopy = slideDom.getElementsByClassName('slider-copy')
@@ -753,7 +754,7 @@ export default {
           // debugger
           let children = Array.prototype.slice.call(slideDom.children)
           // 批量复制添加
-          sliderItem = children.filter((item) => {
+          let sliderItem = children.filter((item) => {
             return item.className.indexOf('slider-item') !== -1
           })
           let length = sliderItem.length
