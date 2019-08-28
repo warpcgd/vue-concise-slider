@@ -42,7 +42,7 @@ export default {
   beforeDestroy () {
     this.options.autoplay && this.clock().stop(this)
     if (this.options.preventDocumentMove === true) {
-      document.removeEventListener('touchmove', this.preventDefault())
+      document.removeEventListener('touchmove', this.preventDefault(e))
     }
     document.removeEventListener('visibilitychange', this.visibilitychange, false)
     window.removeEventListener('resize', this.resize)
