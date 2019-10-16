@@ -94,7 +94,8 @@ export default {
         slidesPerView: this.options.slidesPerView === undefined ? 0 : this.options.slidesPerView,
         $parent: this.judgeParentSlider(this),
         route: false,
-        lastPage: this.options.currentPage || 0
+        lastPage: this.options.currentPage || 0,
+        e: undefined
       }
     }
   },
@@ -319,7 +320,7 @@ export default {
   beforeDestroy () {
     this.options.autoplay && this.clock().stop(this)
     if (this.options.preventDocumentMove === true) {
-      document.removeEventListener('touchmove', this.preventDefault())
+      document.removeEventListener('touchmove', this.preventDefault)
     }
     document.removeEventListener('visibilitychange', this.visibilitychange, false)
     window.removeEventListener('resize', this.resize)
@@ -693,7 +694,9 @@ export default {
     },
     // 阻止页面滚动
     preventDefault (e) {
-      e.preventDefault()
+      let event = e || this.s_data.e
+      this.s_data.e = event
+      event && event.preventDefault()
     },
     // 无限循环中transitionEnd
     onTransitionEnd (e) {
