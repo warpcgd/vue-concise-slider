@@ -278,6 +278,7 @@ export default {
     this.$emit('init', this.data)
     // 定制事件
     this.$on('slideTo', (num) => {
+      this.data.direction = 'slideTo'
       this.slide(num, 'slideTo')
     })
     this.$on('slideNext', () => {
@@ -486,6 +487,7 @@ export default {
           return false
           // tap
         } else if (deltaTime < 100 && Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
+          this.data.direction = 'click'
           this.$emit('tap', this.data)
           this.slide(currentPage, 'click')
           //
@@ -504,6 +506,7 @@ export default {
           this.next()
           return false
         } else if (deltaTime < 100 && Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
+          this.data.direction = 'click'
           this.$emit('tap', this.data)
           this.slide(currentPage, 'click')
         } else {
@@ -520,7 +523,7 @@ export default {
     pre () {
       // debugger
       this.s_data.lastPage = this.data.currentPage
-      this.data.direction = 'left'
+      this.data.direction = this.options.direction === 'vertical' ? 'up' : 'left'
       let sliderLength = this.s_data.sliderLength
       let slidesToScroll = this.options.slidesToScroll || 1
       let $parent = this.s_data.$parent
@@ -549,7 +552,7 @@ export default {
       // this.$emit('slide', this.data)
     },
     next () {
-      this.data.direction = 'right'
+      this.data.direction = this.options.direction === 'vertical' ? 'down' : 'right'
       this.s_data.lastPage = this.data.currentPage
       let sliderLength = this.s_data.sliderLength
       let $parent = this.s_data.$parent
@@ -574,18 +577,19 @@ export default {
         parent.next()
         this.slide()
       } else {
+        this.data.direction = 'rebound'
         this.slide()
       }
-      // this.$emit('update:currentpage', this.data.currentPage)
-      // this.$emit('slide', this.data)
     },
     slide (pagenum, type) {
-      // debugger
       // 执行动画
       this.s_data.animation = true
       // 处理点击事件
       if (type === 'slideTo' && this.s_data.onSlide === true) {
         return false
+      }
+      if ((pagenum || pagenum === 0) && type === undefined) {
+        this.data.direction = 'rebound'
       }
       // 无样式滚动
       if (type === 'animationnone') {
@@ -599,7 +603,10 @@ export default {
       if (pagenum || pagenum === 0) {
         this.data.currentPage = pagenum
       }
-      this.$emit('slide', this.data)
+      // 传递事件
+      if (type !== 'click') {
+        this.$emit('slide', this.data)
+      }
       // fade优化
       if (this.s_data.effect === 'fade') {
         if (!this.pagenums) {
