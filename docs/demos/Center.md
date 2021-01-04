@@ -109,7 +109,8 @@ options: {
   itemAnimation: true,
   centeredSlides: true,
   loopedSlides: 2,
-  slidesToScroll: 1
+  slidesToScroll: 1,
+  loop: true
 }
 ```
   2. Set css

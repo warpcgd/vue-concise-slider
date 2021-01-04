@@ -143,7 +143,6 @@ export default {
       }
     },
     slide (pagenum, type) {
-      this.$emit('slide', this.data)
       sliderAddClass.call(this, pagenum, type)
       // 执行动画
       this.config.animation = true
@@ -160,6 +159,7 @@ export default {
       if (this.config.effect === 'fade') {
         sliderFade.methods.slide.call(this, pagenum, type)
       }
+      this.$emit('slide', this.data)
     },
     // 阻止页面滚动
     preventDefault (e) {
