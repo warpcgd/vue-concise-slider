@@ -28,7 +28,9 @@ export default function () {
         children[currentPage + loopedSlides].addCopyActive()
       }
       let lastPage = currentPage < 0 ? sliderLength + currentPage : 0 + currentPage - sliderLength
-      realChildren[lastPage].addActive()
+      if (realChildren[lastPage]) {
+        realChildren[lastPage].addActive()
+      }
     }
   }
   if (this.data.currentPage < 0 || this.data.currentPage >= this.config.sliderLength) {
