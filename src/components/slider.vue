@@ -71,6 +71,11 @@ export default {
       }
     }
   },
+  activated(){
+      if(this.temporaryData.transitionEnding){
+          this.onTransitionEnd ()
+      }
+  },
   mounted () {
     this.config.pageWidth = this.$el.offsetWidth
     this.config.pageHeight = this.$el.offsetHeight
