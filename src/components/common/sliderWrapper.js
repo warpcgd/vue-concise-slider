@@ -1,7 +1,8 @@
-function deepClone (vnodes, createElement) {
-  function cloneVNode (vnode) {
+function deepClone(vnodes, createElement) {
+  function cloneVNode(vnode) {
     let RndNums = RndNum(5)
-    const clonedChildren = vnode.children && vnode.children.map(vnode => cloneVNode(vnode))
+    const clonedChildren =
+      vnode.children && vnode.children.map((vnode) => cloneVNode(vnode))
     const cloned = createElement(vnode.tag, vnode.data, clonedChildren)
     cloned.text = vnode.text
     cloned.isComment = vnode.isComment
@@ -12,14 +13,15 @@ function deepClone (vnodes, createElement) {
     cloned.context = vnode.context
     cloned.ns = vnode.ns
     cloned.isStatic = vnode.isStatic
-    cloned.key = vnodes.key || vnodes.key === 0 ? vnodes.key + '-cppy' : RndNums + '-copy'
+    cloned.key =
+      vnodes.key || vnodes.key === 0 ? vnodes.key + "-cppy" : RndNums + "-copy"
     return cloned
   }
   const clonedVNodes = cloneVNode(vnodes)
   return clonedVNodes
 }
-function RndNum (n) {
-  var rnd = ''
+function RndNum(n) {
+  var rnd = ""
   for (var i = 0; i < n; i++) {
     rnd += Math.floor(Math.random() * 10)
   }
@@ -27,31 +29,38 @@ function RndNum (n) {
 }
 export default {
   methods: {
-    renderDom ($el) {
+    renderDom($el) {
       if (this.$parent) {
         this.$parent.renderDom($el)
       }
     },
-    onItemTransitionEnd (e) {
+    onItemTransitionEnd(e) {
       if (this.$parent) {
         this.$parent.onItemTransitionEnd(e)
       }
-    }
+    },
   },
-  render (h) {
+  render(h) {
     let slots = this.$slots.default
     if (!slots) {
-      return ''
+      return ""
     }
     // debugger
     let loopedSlides = this.$parent.config.loopedSlides
     let copeBefore = []
     let copeAfter = []
-    if (this.$parent.config.loop && this.$parent.config.effect !== 'fade' && this.$parent.config.effect !== 'coverflow') {
+    if (
+      this.$parent.config.loop &&
+      this.$parent.config.effect !== "fade" &&
+      this.$parent.config.effect !== "coverflow"
+    ) {
       // let slotsFilter = deepClone(slots, h)
       // debugger
       let slotsFilter = slots.filter((item) => {
-        return item.componentOptions ? item.componentOptions.tag === 'slideritem' : false
+        return item.componentOptions
+          ? item.componentOptions.tag === "slideritem" ||
+              item.componentOptions.tag === "SliderItem"
+          : false
       })
       if (slotsFilter && slotsFilter.length >= 2) {
         let length = slotsFilter ? slotsFilter.length : 0
@@ -67,12 +76,16 @@ export default {
         }
       }
     }
-    return h('div', {
-      class: {
-        'slider-wrapper': true,
-        'slider-fade': this.$parent.config.effect === 'fade'
+    return h(
+      "div",
+      {
+        class: {
+          "slider-wrapper": true,
+          "slider-fade": this.$parent.config.effect === "fade",
+        },
+        scopedSlots: this.$scopedSlots,
       },
-      scopedSlots: this.$scopedSlots
-    }, [...copeBefore, ...slots, ...copeAfter])
-  }
+      [...copeBefore, ...slots, ...copeAfter]
+    )
+  },
 }
