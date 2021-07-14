@@ -1,4 +1,4 @@
-export default function () {
+export default function() {
   if (this.config.sliderLength) {
     // let sliderItem = slideDom.getElementsByClassName('slider-item')
     // let sliderActiveCopy = slideDom.getElementsByClassName('slider-active-copy')
@@ -8,14 +8,18 @@ export default function () {
     let currentPage = this.data.currentPage
     let realChildren = children.filter((item) => {
       let isCloned = item.$vnode.isCloned
-      return item.$options._componentTag === 'slideritem' && !isCloned
+      return (
+        (item.$options._componentTag === "slideritem" ||
+          item.$options._componentTag === "SliderItem") &&
+        !isCloned
+      )
     })
-    children.forEach(element => {
+    children.forEach((element) => {
       element.removeActive()
       element.removeCopyActive()
     })
     // 取消嵌套轮播active标签
-    if (this.config.effect === 'nest') {
+    if (this.config.effect === "nest") {
       return
     }
     // debugger
@@ -27,13 +31,19 @@ export default function () {
       if (children[currentPage + loopedSlides]) {
         children[currentPage + loopedSlides].addCopyActive()
       }
-      let lastPage = currentPage < 0 ? sliderLength + currentPage : 0 + currentPage - sliderLength
+      let lastPage =
+        currentPage < 0
+          ? sliderLength + currentPage
+          : 0 + currentPage - sliderLength
       if (realChildren[lastPage]) {
         realChildren[lastPage].addActive()
       }
     }
   }
-  if (this.data.currentPage < 0 || this.data.currentPage >= this.config.sliderLength) {
+  if (
+    this.data.currentPage < 0 ||
+    this.data.currentPage >= this.config.sliderLength
+  ) {
     return false
   }
 }
