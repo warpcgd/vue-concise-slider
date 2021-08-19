@@ -30,4 +30,3 @@ new Vue(slidercoverFlow) // eslint-disable-line
 new Vue(sliderrenderPagination) // eslint-disable-line
 new Vue(sliderCenter) // eslint-disable-line
 new Vue(slidernest) // eslint-disable-line
-

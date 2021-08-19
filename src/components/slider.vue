@@ -46,32 +46,41 @@ export default {
     options: {
       type: Object,
       // 对象或数组且一定会从一个工厂函数返回默认值
-      default: function () {
+      default: function() {
         return {}
-      }
-    }
+      },
+    },
   },
   name: 'slider',
-  mixins: [sliderDom, sliderMove, sliderClock, sliderEvent, sliderComputed, sliderBasic, sliderCoverflow, sliderFade],
-  data () {
+  mixins: [
+    sliderDom,
+    sliderMove,
+    sliderClock,
+    sliderEvent,
+    sliderComputed,
+    sliderBasic,
+    sliderCoverflow,
+    sliderFade,
+  ],
+  data() {
     return {
-      data: {
-      },
+      data: {},
       config: {
         pageWidth: 0,
         pageHeight: 0,
         loading: false,
+        sliderLength: 0,
         effect: this.options.effect || 'slide',
         resize: this.options.resize === undefined ? true : this.options.resize,
         containerClass: {
           'swiper-container-vertical': false,
           'swiper-container-horizontal': true,
-          'swiper-container-cursorGrab': this.options.grabCursor || false
-        }
-      }
+          'swiper-container-cursorGrab': this.options.grabCursor || false,
+        },
+      },
     }
   },
-  mounted () {
+  mounted() {
     this.config.pageWidth = this.$el.offsetWidth
     this.config.pageHeight = this.$el.offsetHeight
     // 设定垂直轮播class
@@ -80,11 +89,15 @@ export default {
     } else {
       this.config.containerClass['swiper-container-horizontal'] = true
     }
-    document.removeEventListener('visibilitychange', this.visibilitychange, false)
+    document.removeEventListener(
+      'visibilitychange',
+      this.visibilitychange,
+      false
+    )
     window.removeEventListener('resize', this.resize)
   },
   methods: {
-    visibilitychange () {
+    visibilitychange() {
       let that = this
       if (document.hidden) {
         that.options.autoplay && that.clock().stop(that)
@@ -92,32 +105,35 @@ export default {
         that.options.autoplay && that.clock().begin(that)
       }
     },
-    resize () {
+    resize() {
       this.s_data.pageWidth = this.$el.offsetWidth
       this.s_data.pageHeight = this.$el.offsetHeight
       // 修复循环切换bug
-      if (this.data.currentPage >= this.s_data.sliderLength && this.options.loop) {
+      if (
+        this.data.currentPage >= this.s_data.sliderLength &&
+        this.options.loop
+      ) {
         this.slide(0, 'animationnone')
         return false
       }
       this.slide(this.data.currentPage, 'animationnone')
     },
-    swipeStart (e) {
+    swipeStart(e) {
       sliderMove.methods.swipeStart.call(this, e)
     },
-    swipeMove (e) {
+    swipeMove(e) {
       sliderMove.methods.swipeMove.call(this, e)
       if (this.config.effect === 'slide' || this.config.effect === 'nest') {
         sliderBasic.methods.swipeMove.call(this, e)
       }
     },
-    swipeEnd (e) {
+    swipeEnd(e) {
       sliderMove.methods.swipeEnd.call(this, e)
     },
-    swipeOut (e) {
+    swipeOut(e) {
       sliderMove.methods.swipeOut.call(this, e)
     },
-    pre () {
+    pre() {
       // debugger
       this.data.direction = 'left'
       if (this.config.effect === 'slide' || this.config.effect === 'nest') {
@@ -130,7 +146,7 @@ export default {
         sliderFade.methods.pre.call(this)
       }
     },
-    next () {
+    next() {
       this.data.direction = 'right'
       if (this.config.effect === 'slide' || this.config.effect === 'nest') {
         sliderBasic.methods.next.call(this)
@@ -142,7 +158,7 @@ export default {
         sliderFade.methods.next.call(this)
       }
     },
-    slide (pagenum, type) {
+    slide(pagenum, type) {
       sliderAddClass.call(this, pagenum, type)
       // 执行动画
       this.config.animation = true
@@ -162,14 +178,15 @@ export default {
       this.$emit('slide', this.data)
     },
     // 阻止页面滚动
-    preventDefault (e) {
+    preventDefault(e) {
       e.preventDefault()
-    }
+    },
   },
   components: {
     sliderWrapper,
-    renderpagination: { // eslint-disable-line
-      render: function (createElement) {
+    renderpagination: {
+      // eslint-disable-line
+      render: function(createElement) {
         let index = this.index
         let render = this.options.renderPagination
         return render.call(this, createElement, index)
@@ -178,15 +195,15 @@ export default {
       props: {
         index: {
           type: Number,
-          required: true
+          required: true,
         },
         options: {
           type: Object,
-          required: true
-        }
-      }
-    }
-  }
+          required: true,
+        },
+      },
+    },
+  },
 }
 </script>
 
@@ -319,7 +336,8 @@ export default {
   display: block;
   margin: 5px 0;
 }
-.swiper-container-vertical .slider-pagination-bullet-active ,.swiper-container-horizontal .slider-pagination-bullet-active{
+.swiper-container-vertical .slider-pagination-bullet-active,
+.swiper-container-horizontal .slider-pagination-bullet-active {
   background: #fff none repeat scroll 0 0;
   opacity: 1;
 }
@@ -329,7 +347,7 @@ export default {
   transform: translateY(-50%);
   z-index: 999;
   width: 100%;
-  text-align: center
+  text-align: center;
 }
 .swiper-container-cursorGrab {
   cursor: grab;

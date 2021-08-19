@@ -1,8 +1,8 @@
 <style scoped>
-.sliderButton{
+.sliderButton {
   text-align: center;
 }
-.sliderButton button{
+.sliderButton button {
   display: inline-block;
   background: #fff;
   border-radius: 3px;
@@ -15,16 +15,16 @@
   margin-top: 10px;
 }
 .slider-item {
-  transform:scale(0.8);
+  transform: scale(0.8);
   transition-timing-function: ease;
   transition-duration: 300ms;
 }
 .slider-item.slider-active {
-  transform:scale(1.0);
+  transform: scale(1);
   z-index: 999;
 }
 .slider-item.slider-active-copy {
-  transform:scale(1.0);
+  transform: scale(1);
   z-index: 999;
 }
 </style>
@@ -60,7 +60,7 @@ import slider from '../components/slider'
 import slideritem from '../components/slider_item'
 export default {
   el: '#sliderCenter',
-  data () {
+  data() {
     return {
       someList: [],
       options: {
@@ -73,113 +73,113 @@ export default {
         thresholdTime: 300, // 滑动时间阈值判定
         loopedSlides: 2, // 多级滚动时，需要添加前后遍历数
         slidesToScroll: 1, // 需要滚动页面的数量
-        loop: true // 无限循环
+        loop: true, // 无限循环
         // autoplay: 1000 // 自动播放:时间[ms]
-      }
+      },
     }
   },
   components: {
     slider,
-    slideritem
+    slideritem,
   },
-  mounted () {
+  mounted() {
     let that = this
-    setTimeout(function () {
+    setTimeout(function() {
       that.someList = [
         {
           html: 'slide1',
           style: {
-            'background': '#1bbc9b',
-            'width': '600px'
-          }
+            background: '#1bbc9b',
+            width: '600px',
+          },
         },
         {
           html: 'slide2',
           style: {
-            'background': '#4bbfc3',
-            'width': '600px'
-          }
+            background: '#4bbfc3',
+            width: '600px',
+          },
         },
         {
           html: 'slide3',
           style: {
-            'background': '#7baabe',
-            'width': '600px'
-          }
+            background: '#7baabe',
+            width: '600px',
+          },
         },
         {
           html: 'slide4',
           style: {
-            'background': '#1bbc9b',
-            'width': '600px'
-          }
+            background: '#1bbc9b',
+            width: '600px',
+          },
         },
         {
           html: 'slide5',
           style: {
-            'background': '#4bbfc3',
-            'width': '600px'
-          }
+            background: '#4bbfc3',
+            width: '600px',
+          },
         },
         {
           html: 'slide6',
           style: {
-            'background': '#7baabe',
-            'width': '600px'
-          }
-        }
+            background: '#7baabe',
+            width: '600px',
+          },
+        },
       ]
     }, 2000)
   },
   methods: {
-    turnTo (num) {
+    turnTo(num) {
       // 传递事件 vue 2.0 传递事件修改了，好的写法应该直接写在空vue类中
       this.$refs.slider.$emit('slideTo', num)
     },
-    slideNext () {
+    slideNext() {
       this.$refs.slider.$emit('slideNext')
       // slider.$emit('slideNext')
     },
-    slidePre () {
+    slidePre() {
       this.$refs.slider.$emit('slidePre')
       // slider.$emit('slidePre')
     },
-    autoplayStart () {
+    autoplayStart() {
       this.$refs.slider.$emit('autoplayStart')
       // slider.$emit('slidePre')
     },
-    autoplayStop () {
+    autoplayStop() {
       this.$refs.slider.$emit('autoplayStop')
       // slider.$emit('slidePre')
     },
-    appendslider () {
+    appendslider() {
       this.someList.push({
         html: 'slidernew',
         style: {
           background: '#333',
           color: '#fff',
-          width: '600px'
-        }
+          width: '600px',
+        },
       })
     },
-    loadingShow () {
+    loadingShow() {
       this.$refs.slider.$emit('loadingShow')
       // slider.$emit('slidePre')
     },
-    loadingHide () {
+    loadingHide() {
       this.$refs.slider.$emit('loadingHide')
       // slider.$emit('slidePre')
     },
     // 监听事件发生了变化,需要指向一个子组件实例
-    slide (data) {
+    slide(data) {
       console.log(data)
     },
-    onTap (data) {
+    onTap(data) {
       console.log(data)
     },
-    onInit (data) {
+    onInit(data) {
       console.log(data)
-    }
-  }
+    },
+  },
 }
 </script>

@@ -1,31 +1,34 @@
 const path = require('path')
 const webpack = require('webpack')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const resolve = dir => path.join(__dirname, '..', dir)
+const resolve = (dir) => path.join(__dirname, '..', dir)
 module.exports = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   devtool: process.env.NODE_ENV === 'production' ? '' : 'inline-source-map',
-  devServer: { // 检测代码变化并自动重新编译并自动刷新浏览器
-    contentBase: path.resolve(__dirname, 'dist'), // 设置静态资源的根目录
-    hot: true
+  devServer: {
+    // 检测代码变化并自动重新编译并自动刷新浏览器
+    // contentBase: path.resolve(__dirname, 'dist'), // 设置静态资源的根目录
+    hot: true,
+    // writeToDisk: false
   },
   entry: {
     module: './src/exportModule.js',
-    build: './src/main.js'
+    build: './src/main.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
     library: 'vueConciseSlider',
     libraryTarget: 'umd',
-    umdNamedDefine: true
+    umdNamedDefine: true,
   },
   resolve: {
-    extensions: ['.js', '.vue', '.scss']
+    extensions: ['.js', '.vue', '.scss'],
   },
   externals: {
-    vue: 'Vue'
+    vue: 'Vue',
   },
   module: {
     // 加载器
@@ -36,36 +39,37 @@ module.exports = {
         enforce: 'pre',
         include: [resolve('src')],
         options: {
-          formatter: require('eslint-friendly-formatter')
-        }
+          formatter: require('eslint-friendly-formatter'),
+        },
       },
       // 解析.vue文件
       {
         test: /.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
       },
       // 转化ES6的语法
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
       // 编译css并自动添加css前缀
       {
         test: /\.css$/,
-        use: [ // 应用于模块的 loader 使用列表
+        use: [
+          // 应用于模块的 loader 使用列表
           'style-loader',
-          'css-loader'
-        ]
+          'css-loader',
+        ],
       },
       // html模板编译
-      { test: /\.(html|tpl)$/, loader: 'html-loader' }
-    ]
+      { test: /\.(html|tpl)$/, loader: 'html-loader' },
+    ],
   },
   plugins: [
     // new webpack.optimize.UglifyJsPlugin(),
     new VueLoaderPlugin(),
-    new BundleAnalyzerPlugin(),
-    new webpack.HotModuleReplacementPlugin()
-  ]
+    // new BundleAnalyzerPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+  ],
 }

@@ -14,14 +14,15 @@ function deepClone(vnodes, createElement) {
     cloned.ns = vnode.ns
     cloned.isStatic = vnode.isStatic
     cloned.key =
-      vnodes.key || vnodes.key === 0 ? vnodes.key + "-cppy" : RndNums + "-copy"
+      vnodes.key || vnodes.key === 0 ? vnodes.key + '-copy' : RndNums + '-copy'
     return cloned
   }
   const clonedVNodes = cloneVNode(vnodes)
   return clonedVNodes
 }
+
 function RndNum(n) {
-  var rnd = ""
+  var rnd = ''
   for (var i = 0; i < n; i++) {
     rnd += Math.floor(Math.random() * 10)
   }
@@ -43,25 +44,26 @@ export default {
   render(h) {
     let slots = this.$slots.default
     if (!slots) {
-      return ""
+      return ''
     }
     // debugger
     let loopedSlides = this.$parent.config.loopedSlides
     let copeBefore = []
     let copeAfter = []
+
+    let slotsFilter = slots.filter((item) => {
+      return item.componentOptions
+        ? item.componentOptions.tag === 'slideritem' ||
+            item.componentOptions.tag === 'SliderItem'
+        : false
+    })
+    this.$parent.config.sliderLength = slotsFilter.length || 0
+
     if (
       this.$parent.config.loop &&
-      this.$parent.config.effect !== "fade" &&
-      this.$parent.config.effect !== "coverflow"
+      this.$parent.config.effect !== 'fade' &&
+      this.$parent.config.effect !== 'coverflow'
     ) {
-      // let slotsFilter = deepClone(slots, h)
-      // debugger
-      let slotsFilter = slots.filter((item) => {
-        return item.componentOptions
-          ? item.componentOptions.tag === "slideritem" ||
-              item.componentOptions.tag === "SliderItem"
-          : false
-      })
       if (slotsFilter && slotsFilter.length >= 2) {
         let length = slotsFilter ? slotsFilter.length : 0
         for (let j = 0; j < length; j++) {
@@ -77,11 +79,11 @@ export default {
       }
     }
     return h(
-      "div",
+      'div',
       {
         class: {
-          "slider-wrapper": true,
-          "slider-fade": this.$parent.config.effect === "fade",
+          'slider-wrapper': true,
+          'slider-fade': this.$parent.config.effect === 'fade',
         },
         scopedSlots: this.$scopedSlots,
       },
