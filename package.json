@@ -1,6 +1,6 @@
 {
   "name": "vue-concise-slider",
-  "version": "4.1.8",
+  "version": "4.2.0",
   "repository": {
     "type": "git",
     "url": "git@github.com/warpcgd/vue-concise-slider.git"
@@ -8,7 +8,7 @@
   "description": "vue-slider,A simple sliding component,has easy configuration,support self-adaption / fullscreen / button / page,and is compatible with mobile and PC terminal",
   "author": "lixichen <warpcgd@qq.com>",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack && webpack-dev-server --open",
+    "dev": "cross-env NODE_ENV=development webpack && webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack -p",
     "analyz": "npm_config_report=true npm run build",
     "docs:dev": "vuepress dev docs",

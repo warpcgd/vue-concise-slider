@@ -1,11 +1,11 @@
 export default {
   name: 'sliderComputed',
-  mounted () {
+  mounted() {
     let that = this
     // 初始化事件
     this.$emit('init', this.data)
     // 定制事件
-    this.$on('slideTo', (num) => {
+    this.$on('slideTo', num => {
       this.slide(num)
     })
     this.$on('slideNext', () => {
@@ -14,7 +14,7 @@ export default {
     this.$on('slidePre', () => {
       this.pre()
     })
-    this.$on('autoplayStart', (autoplay) => {
+    this.$on('autoplayStart', autoplay => {
       this.options.autoplay = autoplay || this.options.autoplay || 1000
       this.clock().begin(that)
     })
@@ -39,7 +39,7 @@ export default {
     // 解决页面切换报错bug
     document.addEventListener('visibilitychange', this.visibilitychange, false)
   },
-  beforeDestroy () {
+  beforeDestroy() {
     this.options.autoplay && this.clock().stop(this)
     if (this.options.preventDocumentMove === true) {
       document.removeEventListener('touchmove', this.preventDefault())
@@ -49,7 +49,7 @@ export default {
   },
   watch: {
     // 解决route跳转问题
-    '$route': function () {
+    $route: function() {
       let that = this
       if (that.route) {
         let currentPage = that.data.currentPage
@@ -71,7 +71,7 @@ export default {
     }
   },
   methods: {
-    visibilitychange () {
+    visibilitychange() {
       let that = this
       if (document.hidden) {
         that.options.autoplay && that.clock().stop(that)
@@ -79,7 +79,7 @@ export default {
         that.options.autoplay && that.clock().begin(that)
       }
     },
-    resize () {
+    resize() {
       this.config.pageWidth = this.$el.offsetWidth
       this.config.pageHeight = this.$el.offsetHeight
       // 修复循环切换bug
@@ -89,12 +89,12 @@ export default {
       }
       this.slide(this.data.currentPage, 'animationnone')
     },
-    onItemTransitionEnd (e) {
+    onItemTransitionEnd(e) {
       if (e.target !== e.currentTarget) {
         return
       }
       var that = this
-      setTimeout(function () {
+      setTimeout(function() {
         that.config.itemTransitionEnding = false
       }, 0)
     }

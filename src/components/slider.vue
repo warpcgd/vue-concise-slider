@@ -48,8 +48,8 @@ export default {
       // 对象或数组且一定会从一个工厂函数返回默认值
       default: function() {
         return {}
-      },
-    },
+      }
+    }
   },
   name: 'slider',
   mixins: [
@@ -60,7 +60,7 @@ export default {
     sliderComputed,
     sliderBasic,
     sliderCoverflow,
-    sliderFade,
+    sliderFade
   ],
   data() {
     return {
@@ -75,9 +75,9 @@ export default {
         containerClass: {
           'swiper-container-vertical': false,
           'swiper-container-horizontal': true,
-          'swiper-container-cursorGrab': this.options.grabCursor || false,
-        },
-      },
+          'swiper-container-cursorGrab': this.options.grabCursor || false
+        }
+      }
     }
   },
   mounted() {
@@ -89,11 +89,7 @@ export default {
     } else {
       this.config.containerClass['swiper-container-horizontal'] = true
     }
-    document.removeEventListener(
-      'visibilitychange',
-      this.visibilitychange,
-      false
-    )
+    document.removeEventListener('visibilitychange', this.visibilitychange, false)
     window.removeEventListener('resize', this.resize)
   },
   methods: {
@@ -109,10 +105,7 @@ export default {
       this.s_data.pageWidth = this.$el.offsetWidth
       this.s_data.pageHeight = this.$el.offsetHeight
       // 修复循环切换bug
-      if (
-        this.data.currentPage >= this.s_data.sliderLength &&
-        this.options.loop
-      ) {
+      if (this.data.currentPage >= this.s_data.sliderLength && this.options.loop) {
         this.slide(0, 'animationnone')
         return false
       }
@@ -180,7 +173,7 @@ export default {
     // 阻止页面滚动
     preventDefault(e) {
       e.preventDefault()
-    },
+    }
   },
   components: {
     sliderWrapper,
@@ -195,15 +188,15 @@ export default {
       props: {
         index: {
           type: Number,
-          required: true,
+          required: true
         },
         options: {
           type: Object,
-          required: true,
-        },
-      },
-    },
-  },
+          required: true
+        }
+      }
+    }
+  }
 }
 </script>
 

@@ -1,13 +1,15 @@
 export default {
   name: 'sliderComputed',
   computed: {
-    styleobj () {
+    styleobj() {
       let style = {}
-      style['transform'] = 'translate3D(' + this.data.poswidth + 'px' + ',' + this.data.posheight + 'px' + ',0)'
+      style['transform'] =
+        'translate3D(' + this.data.poswidth + 'px' + ',' + this.data.posheight + 'px' + ',0)'
       style['transitionTimingFunction'] = this.options.timingFunction || 'ease'
       style['-webkitTransitionTimingFunction'] = this.options.timingFunction || 'ease'
       style['transitionDuration'] = (this.config.animation ? this.options.speed || 300 : 0) + 'ms'
-      style['-webkitTransitionDuration'] = (this.config.animation ? this.options.speed || 300 : 0) + 'ms'
+      style['-webkitTransitionDuration'] =
+        (this.config.animation ? this.options.speed || 300 : 0) + 'ms'
       if (this.config.effect === 'fade') {
         return {}
       }
@@ -16,7 +18,7 @@ export default {
       }
       return style
     },
-    currentWidth () {
+    currentWidth() {
       if (this.config.sliderLength === 0) {
         return 0
       }
@@ -33,7 +35,9 @@ export default {
       // let srollbar = false
       if (this.options.loop) {
         if (loopedSlides) {
-          lastPage = lastPage + (loopedSlides <= this.config.sliderLength ? loopedSlides : this.config.sliderLength)
+          lastPage =
+            lastPage +
+            (loopedSlides <= this.config.sliderLength ? loopedSlides : this.config.sliderLength)
         } else {
           lastPage = lastPage + 1
         }
@@ -45,7 +49,7 @@ export default {
       }
       // 获取slideritem子集
       for (let item in this.$el.children) {
-        if (/slider-touch/ig.test(this.$el.children[item].className)) {
+        if (/slider-touch/gi.test(this.$el.children[item].className)) {
           $slider = this.$el.children[item]
         }
       }
@@ -53,9 +57,15 @@ export default {
       let $sliderChildren = $slider.children[0].children
       let offsetLeft = $sliderChildren[lastPage] ? $sliderChildren[lastPage].offsetLeft : 0
       // 居中滚动
-      let offsetWidth = $sliderChildren[lastPage] ? $sliderChildren[lastPage].offsetWidth : 0
-      let slidesPerView = this.options.slidesPerView
+      let offsetWidth = $sliderChildren[lastPage]
+        ? $sliderChildren[lastPage].offsetWidth
+        : $sliderChildren[this.data.currentPage]
+          ? $sliderChildren[this.data.currentPage].offsetWidth
+          : 0
+
+      let slidesPerView = this.config.slidesPerView
       let sliderLength = this.config.sliderLength
+
       if (this.options.centeredSlides) {
         if (slidesPerView) {
           let currentPage = this.data.currentPage
@@ -82,7 +92,7 @@ export default {
       }
       return offsetLeft + pageWidth - pageWidth
     },
-    currentHeight () {
+    currentHeight() {
       let sliderLength = this.config.sliderLength
       let currentPage = this.data.currentPage
       let posheight = 0
@@ -103,7 +113,7 @@ export default {
       }
       // 获取slideritem子集
       for (let item in this.$el.children) {
-        if (/slider-touch/ig.test(this.$el.children[item].className)) {
+        if (/slider-touch/gi.test(this.$el.children[item].className)) {
           $slider = this.$el.children[item]
         }
       }
@@ -119,7 +129,7 @@ export default {
       }
       return posheight + pageWidth - pageWidth
     },
-    classObject () {
+    classObject() {
       let obj = {}
       switch (this.options.effect) {
         case 'fade':

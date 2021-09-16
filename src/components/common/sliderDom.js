@@ -5,14 +5,14 @@ export default {
       // 对象或数组且一定会从一个工厂函数返回默认值
       default: function() {
         return {}
-      },
-    },
+      }
+    }
   },
   name: 'sliderDom',
   data() {
     return {
       data: {
-        currentPage: this.options.currentPage || 0,
+        currentPage: this.options.currentPage || 0
       },
       config: {
         pageWidth: '',
@@ -21,11 +21,8 @@ export default {
         sliderIndex: 0,
         loop: this.options.loop,
         loopedSlides: this.options.loopedSlides || 1,
-        pagination:
-          this.options.pagination === undefined
-            ? true
-            : this.options.pagination,
-      },
+        pagination: this.options.pagination === undefined ? true : this.options.pagination
+      }
     }
   },
   methods: {
@@ -52,6 +49,6 @@ export default {
           that.slide(that.data.currentPage, 'animationnone')
         })
       }, 0)
-    },
-  },
+    }
+  }
 }

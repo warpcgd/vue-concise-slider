@@ -3,13 +3,13 @@ export default {
     options: {
       type: Object,
       // 对象或数组且一定会从一个工厂函数返回默认值
-      default: function () {
+      default: function() {
         return {}
       }
     }
   },
   name: 'sliderMove',
-  data () {
+  data() {
     return {
       data: {
         poswidth: 0,
@@ -31,7 +31,7 @@ export default {
     }
   },
   methods: {
-    swipeStart (e) {
+    swipeStart(e) {
       let that = this
       if (this.config.freeze) {
         return
@@ -74,7 +74,7 @@ export default {
         this.data.end.y = e.clientY
       }
     },
-    swipeMove (e) {
+    swipeMove(e) {
       if (this.config.tracking) {
         if (e.type === 'touchmove') {
           this.data.end.x = e.targetTouches[0].clientX
@@ -93,17 +93,17 @@ export default {
         // 处理嵌套滚动
         if (this.config.direction === 'vertical' && deltaX > deltaY) {
           console.log(this.config.direction)
-            console.log('1')
-            return false
-        } 
+          console.log('1')
+          return false
+        }
         if (this.config.direction === 'horizontal' && deltaX < deltaY) {
-            console.log(this.config.direction)
-            console.log('2')
-            return false
+          console.log(this.config.direction)
+          console.log('2')
+          return false
         }
       }
     },
-    swipeEnd (e) {
+    swipeEnd(e) {
       this.config.tracking = false
       let now = new Date().getTime()
       let deltaTime = now - this.data.start.t
@@ -114,7 +114,7 @@ export default {
       // 自动滚动重启
       if (this.options.autoplay) {
         let that = this
-        setTimeout(function () {
+        setTimeout(function() {
           that.clock().begin(that)
         }, this.options.autoplay)
       }
@@ -122,18 +122,28 @@ export default {
       if (this.options.preventDocumentMove === true) {
         document.removeEventListener('touchmove', this.preventDefault(e))
       }
+
       if (deltaTime > this.config.thresholdTime || deltaTime < 100) {
         this.slide(currentPage)
         return false
       }
-      if ((Math.abs(deltaX) < thresholdDistance || Math.abs(deltaY) > thresholdDistance) && this.config.direction !== 'vertical') {
+
+      if (
+        (Math.abs(deltaX) < thresholdDistance || Math.abs(deltaX) < Math.abs(deltaY)) &&
+        this.config.direction !== 'vertical'
+      ) {
         this.slide(currentPage)
         return false
       }
-      if ((Math.abs(deltaX) > thresholdDistance || Math.abs(deltaY) < thresholdDistance) && this.config.direction === 'vertical') {
+
+      if (
+        (Math.abs(deltaY) < thresholdDistance || Math.abs(deltaY) < Math.abs(deltaX)) &&
+        this.config.direction === 'vertical'
+      ) {
         this.slide(currentPage)
         return false
       }
+
       if (this.config.direction !== 'vertical') {
         if (deltaX > thresholdDistance) {
           // swipe right
@@ -148,6 +158,7 @@ export default {
           return false
         }
       }
+
       if (this.config.direction === 'vertical') {
         if (deltaY > thresholdDistance) {
           // swipe bottom
@@ -163,17 +174,20 @@ export default {
         }
       }
     },
-    swipeOut (e) {
+    swipeOut(e) {
       if (this.$el === e.target && this.config.tracking) {
         this.swipeEnd(e)
       }
     },
-    onTransitionEnd (e, type) {
-      if (!this.options.loop || (this.data.currentPage > 0 && this.data.currentPage < this.config.sliderLength)) {
+    onTransitionEnd(e, type) {
+      if (
+        !this.options.loop ||
+        (this.data.currentPage > 0 && this.data.currentPage < this.config.sliderLength)
+      ) {
         return
       }
       let that = this
-      setTimeout(function () {
+      setTimeout(function() {
         let currentPage = that.data.currentPage
         let sliderLength = that.config.sliderLength
         that.config.transitionEnding = false
@@ -184,12 +198,12 @@ export default {
         }
       }, 0)
     },
-    onItemTransitionEnd (e) {
+    onItemTransitionEnd(e) {
       if (e.target !== e.currentTarget) {
         return
       }
       var that = this
-      setTimeout(function () {
+      setTimeout(function() {
         that.config.itemTransitionEnding = false
       }, 0)
     }

@@ -46,17 +46,16 @@ export default {
     options: {
       type: Object,
       // 对象或数组且一定会从一个工厂函数返回默认值
-      default: function () {
+      default: function() {
         return {}
       }
     }
   },
   name: 'sliderCoverFlow',
   mixins: [sliderDom, sliderMove, sliderClock, sliderEvent, sliderComputed, sliderCoverflow],
-  data () {
+  data() {
     return {
-      data: {
-      },
+      data: {},
       config: {
         pageWidth: 0,
         pageHeight: 0,
@@ -71,7 +70,7 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     this.config.pageWidth = this.$el.offsetWidth
     this.config.pageHeight = this.$el.offsetHeight
     // 设定垂直轮播class
@@ -82,22 +81,22 @@ export default {
     }
   },
   methods: {
-    swipeStart (e) {
+    swipeStart(e) {
       sliderMove.methods.swipeStart.call(this, e)
     },
-    swipeMove (e) {
+    swipeMove(e) {
       sliderMove.methods.swipeMove.call(this, e)
       // if (this.config.effect === 'slide' || this.config.effect === 'nest') {
       //   sliderBasic.methods.swipeMove.call(this, e)
       // }
     },
-    swipeEnd (e) {
+    swipeEnd(e) {
       sliderMove.methods.swipeEnd.call(this, e)
     },
-    swipeOut (e) {
+    swipeOut(e) {
       sliderMove.methods.swipeOut.call(this, e)
     },
-    pre () {
+    pre() {
       this.data.direction = 'left'
       // if (this.config.effect === 'slide' || this.config.effect === 'nest') {
       //   sliderBasic.methods.pre.call(this)
@@ -109,7 +108,7 @@ export default {
       //   sliderFade.methods.pre.call(this)
       // }
     },
-    next () {
+    next() {
       this.data.direction = 'right'
       // if (this.config.effect === 'slide' || this.config.effect === 'nest') {
       //   sliderBasic.methods.next.call(this)
@@ -121,7 +120,7 @@ export default {
       //   sliderFade.methods.next.call(this)
       // }
     },
-    slide (pagenum, type) {
+    slide(pagenum, type) {
       this.$emit('slide', this.data)
       sliderAddClass.call(this, pagenum, type)
       // 执行动画
@@ -141,14 +140,15 @@ export default {
       // }
     },
     // 阻止页面滚动
-    preventDefault (e) {
+    preventDefault(e) {
       e.preventDefault()
     }
   },
   components: {
     sliderWrapper,
-    renderpagination: { // eslint-disable-line
-      render: function (createElement) {
+    renderpagination: {
+      // eslint-disable-line
+      render: function(createElement) {
         let index = this.index
         let render = this.options.renderPagination
         return render.call(this, createElement, index)
@@ -298,7 +298,8 @@ export default {
   display: block;
   margin: 5px 0;
 }
-.swiper-container-vertical .slider-pagination-bullet-active ,.swiper-container-horizontal .slider-pagination-bullet-active{
+.swiper-container-vertical .slider-pagination-bullet-active,
+.swiper-container-horizontal .slider-pagination-bullet-active {
   background: #fff none repeat scroll 0 0;
   opacity: 1;
 }
@@ -308,7 +309,7 @@ export default {
   transform: translateY(-50%);
   z-index: 999;
   width: 100%;
-  text-align: center
+  text-align: center;
 }
 .swiper-container-cursorGrab {
   cursor: grab;
