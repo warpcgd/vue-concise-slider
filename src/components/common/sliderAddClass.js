@@ -22,7 +22,6 @@ export default function() {
     if (this.config.effect === 'nest') {
       return
     }
-    // debugger
     if (realChildren[currentPage]) {
       realChildren[currentPage].addActive()
     }
