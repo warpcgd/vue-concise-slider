@@ -92,13 +92,9 @@ export default {
         }
         // 处理嵌套滚动
         if (this.config.direction === 'vertical' && deltaX > deltaY) {
-          console.log(this.config.direction)
-          console.log('1')
           return false
         }
         if (this.config.direction === 'horizontal' && deltaX < deltaY) {
-          console.log(this.config.direction)
-          console.log('2')
           return false
         }
       }
