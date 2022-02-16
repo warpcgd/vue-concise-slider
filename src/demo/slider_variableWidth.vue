@@ -1,8 +1,8 @@
 <style>
-.sliderButton{
+.sliderButton {
   text-align: center;
 }
-.sliderButton button{
+.sliderButton button {
   display: inline-block;
   background: #fff;
   border-radius: 3px;
@@ -19,7 +19,7 @@
   <div>
     <div style="width:70%;margin:20px auto;height:400px">
       <slider ref="slider" :options="options" @slide='slide' @tap='onTap' @init='onInit'>
-        <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">{{item.html}}</slideritem>
+        <slideritem v-for="(item,index) in someList" :key="index" :style="item.style" v-html="item.html"></slideritem>
         <div slot="loading">
           <div class="loadingDot">
             <i></i>
@@ -47,7 +47,7 @@ import slider from '../components/slider'
 import slideritem from '../components/slider_item'
 export default {
   el: '#slidervariableWidth',
-  data () {
+  data() {
     return {
       someList: [],
       options: {
@@ -61,31 +61,32 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     let that = this
-    setTimeout(function () {
+    setTimeout(function() {
       that.someList = [
         {
-          html: 'slide1',
+          html:
+            '<ul style="margin: auto;height: 100%;overflow: auto;width: 100%"><li>123123123123</li><li>123123123123</li><li>123123123123</li><li>123123123123</li><li>123123123123</li><li>123123123123</li><li>123123123123</li><li>123123123123</li><li>123123123123</li><li>123123123123</li><li>123123123123</li><li>123123123123</li><li>123123123123</li><li>123123123123</li><li>123123123123</li><li>123123123123</li></ul>',
           style: {
-            'background': '#1bbc9b',
-            'width': '80%',
+            background: '#1bbc9b',
+            width: '80%',
             'margin-right': '20px'
           }
         },
         {
           html: 'slide2',
           style: {
-            'background': '#4bbfc3',
-            'width': '60%',
+            background: '#4bbfc3',
+            width: '60%',
             'margin-right': '20px'
           }
         },
         {
           html: 'slide3',
           style: {
-            'background': '#7baabe',
-            'width': '40%',
+            background: '#7baabe',
+            width: '40%',
             'margin-right': '20px'
           }
         }
@@ -97,27 +98,27 @@ export default {
     slideritem
   },
   methods: {
-    turnTo (num) {
+    turnTo(num) {
       // 传递事件 vue 2.0 传递事件修改了，好的写法应该直接写在空vue类中
       this.$refs.slider.$emit('slideTo', num)
     },
-    slideNext () {
+    slideNext() {
       this.$refs.slider.$emit('slideNext')
       // slider.$emit('slideNext')
     },
-    slidePre () {
+    slidePre() {
       this.$refs.slider.$emit('slidePre')
       // slider.$emit('slidePre')
     },
-    autoplayStart () {
+    autoplayStart() {
       this.$refs.slider.$emit('autoplayStart')
       // slider.$emit('slidePre')
     },
-    autoplayStop () {
+    autoplayStop() {
       this.$refs.slider.$emit('autoplayStop')
       // slider.$emit('slidePre')
     },
-    appendslider () {
+    appendslider() {
       this.someList.push({
         html: 'slidernew',
         style: {
@@ -126,22 +127,22 @@ export default {
         }
       })
     },
-    loadingShow () {
+    loadingShow() {
       this.$refs.slider.$emit('loadingShow')
       // slider.$emit('slidePre')
     },
-    loadingHide () {
+    loadingHide() {
       this.$refs.slider.$emit('loadingHide')
       // slider.$emit('slidePre')
     },
     // 监听事件发生了变化,需要指向一个子组件实例
-    slide (data) {
+    slide(data) {
       console.log(data)
     },
-    onTap (data) {
+    onTap(data) {
       console.log(data)
     },
-    onInit (data) {
+    onInit(data) {
       console.log(data)
     }
   }

@@ -85,10 +85,19 @@ export default {
         }
         let deltaX = Math.abs(this.data.end.x - this.data.start.x)
         let deltaY = Math.abs(this.data.end.y - this.data.start.y)
+        console.log('deltaX', deltaX)
+        console.log('deltaY', deltaY)
         if (deltaX >= deltaY && this.config.direction !== 'vertical') {
           e.preventDefault()
-        } else if (deltaX <= deltaY && this.config.direction === 'vertical') {
+        }
+        if (deltaX < deltaY && this.config.direction !== 'vertical') {
+          this.config.tracking = false
+        }
+        if (deltaX <= deltaY && this.config.direction === 'vertical') {
           e.preventDefault()
+        }
+        if (5 * deltaX > deltaY && this.config.direction === 'vertical') {
+          this.config.tracking = false
         }
         // 处理嵌套滚动
         if (this.config.direction === 'vertical' && deltaX > deltaY) {
@@ -97,7 +106,9 @@ export default {
         if (this.config.direction === 'horizontal' && deltaX < deltaY) {
           return false
         }
+        return true
       }
+      return false
     },
     swipeEnd(e) {
       this.config.tracking = false

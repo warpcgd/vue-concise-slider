@@ -115,8 +115,8 @@ export default {
       sliderMove.methods.swipeStart.call(this, e)
     },
     swipeMove(e) {
-      sliderMove.methods.swipeMove.call(this, e)
-      if (this.config.effect === 'slide' || this.config.effect === 'nest') {
+      const res = sliderMove.methods.swipeMove.call(this, e)
+      if ((this.config.effect === 'slide' || this.config.effect === 'nest') && res) {
         sliderBasic.methods.swipeMove.call(this, e)
       }
     },
